@@ -1,0 +1,62 @@
+separator=false
+separator_block_width=5
+border_top=0
+border_left=0
+border_right=0
+border_bottom=4
+
+[music]
+label= 
+command=$HOME/scripts/playing.py --layout t-A
+interval=5
+
+[updates]
+command=$HOME/scripts/updates.sh
+interval=20000
+signal=3
+urgent=true
+
+[volume]
+label=  
+command=~/scripts/volume
+interval=5
+signal=1
+markup=pango
+border=#cc241d
+
+[bandwidth]
+command=~/scripts/bandwidth
+interval=5
+border=#d65d0e
+
+[memory]
+label= 
+command=~/scripts/memory
+interval=30
+border=#d79921
+
+[disk]
+label= 
+command=~/scripts/disk
+interval=30
+border=#b16286
+
+[wireless]
+label=   
+command=[[ -z "$(iwgetid -r)" ]] || echo "$(iwgetid -r) "
+interval=2
+border=#98971a
+
+[cpu]
+label= 
+command=~/scripts/cpu_usage
+interval=15
+border=#458588
+
+[time]
+label=  
+command=echo "`date +'%a %d %b'` <b>`date +'%T'`</b> "; [[ -z "${BLOCK_BUTTON}" ]] || gsimplecal &
+interval=1
+markup=pango
+border=#928374
+separator_block_width=0
