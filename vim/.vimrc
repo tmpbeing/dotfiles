@@ -1,4 +1,3 @@
-runtime! archlinux.vim
 syntax on
 filetype plugin indent on
 filetype on
@@ -14,13 +13,6 @@ execute pathogen#infect()
 execute pathogen#helptags()
 let g:airline_powerline_fonts = 1
 
-" Promptline setup
-let g:promptline_preset = {
-		\'a'    : [ '$USER' ],
-		\'b'    : [ promptline#slices#cwd() ],
-		\'c'    : [ promptline#slices#vcs_branch() ],
-		\'warn' : [ promptline#slices#last_exit_code() ]}
-
 " Syntastic options
 let g:syntastic_cpp_compiler = 'gcc'
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++ -Wall -Werror -Wextra'
@@ -29,7 +21,7 @@ let g:syntastic_enable_signs=1
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_remove_include_errors = 1
 let g:syntastic_c_remove_include_errors = 1
-let g:syntastic_c_include_dirs = ['../../../include', '../../include','../include','./include']
+let g:syntastic_c_include_dirs = ['../../../include', '../../include','../include','./include','./includes','../includes','../../includes','../../../includes']
 
 " Nerd commenter
 let g:NERDSpaceDelims = 1
@@ -39,21 +31,20 @@ let g:NERDTrimTrailingWhitespace = 1
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 let g:expand_region_text_objects = {
-		\ 'iW'  :1,
 		\ 'i"'  :1,
 		\ 'i''' :1,
 		\ 'ip'  :1,
+		\ 'iB'  :1,
+		\ 'ib'  :1,
+		\ 'i['  :1,
 		\ }
 call expand_region#custom_text_objects({
 	\ "\/\\n\\n\<CR>" : 1,
 	\ })
 
 " Theme settings
-"let g:gruvbox_contrast_dark='medium'
-"colorscheme gruvbox
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-chalk
-"set background=dark
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
@@ -100,8 +91,17 @@ set ttimeoutlen=10
 map j gj
 map k gk
 
+" Avoid backup files in working directory
+set backupdir=~/.vim/tmp,.
+set directory=~/.vim/tmp,.
+
+" Persistent undo across sessions
+set undofile
+set undodir=~/.vim/tmp,.
+
+
 " Cross-terminal paste
-set clipboard=unnamed
+set clipboard=unnamedplus
 :noremap <F2> :set paste! nopaste?<CR>
 
 nnoremap <F3> :NumbersToggle<CR>
