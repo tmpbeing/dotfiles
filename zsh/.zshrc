@@ -6,7 +6,7 @@
 #    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/14 13:32:43 by mplanell          #+#    #+#              #
-#    Updated: 2016/12/17 15:21:46 by mplanell         ###   ########.fr        #
+#    Updated: 2016/12/19 21:17:47 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,13 +72,10 @@ bindkey -v
 
 ## Sources
 
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-
 # Powerline prompt
 source ~/.shell_prompt.sh
 # Fix colors
-#source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
+source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
 # Fixing keybindings
 source "$HOME/.zsh/keybindings.zsh"
 # Adding clipcopy and clippaste
