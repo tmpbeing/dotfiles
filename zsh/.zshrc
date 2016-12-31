@@ -6,7 +6,7 @@
 #    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/14 13:32:43 by mplanell          #+#    #+#              #
-#    Updated: 2016/12/31 02:08:30 by mplanell         ###   ########.fr        #
+#    Updated: 2016/12/31 15:06:40 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,16 @@ case $- in
 	  *) return ;;
 esac
 
-## Exports
+##### Options ######
+
+setopt AUTO_CD
+setopt CORRECT
+
+# Keybinds
+# Vi mode
+bindkey -v
+
+##### Exports ######
 
 # 42 Header variable
 export MAIL42=mplanell@student.42.fr
@@ -24,8 +33,18 @@ export USER42=mplanell
 
 # Other
 export EDITOR="vim"
+export PAGER="less"
 
-## Aliases
+# Colors for man pages
+export LESS_TERMCAP_mb=$'\e[0;36m'
+export LESS_TERMCAP_md=$'\e[0;31m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[0;34;32m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[0;34m'
+
+##### Aliases ######
 
 # Convenience
 alias c='clear'
@@ -38,9 +57,22 @@ alias ifconfig="ip -s -c -h a"
 alias flux="systemctl --user start xfluxd"
 42() { cd ~/Code/42/"$@" }
 alias grep="grep --color=auto"
-alias zshconfig="vim ~/.zshrc"
-alias vimconfig="vim ~/.vimrc"
-alias i3config="vim ~/.config/i3/config"
+
+conf() {
+	case $1 in
+		i3)				vim ~/.config/i3/config ;;
+		zsh)			vim ~/.zshrc && source ~/.zshrc ;;
+		vim)			vim ~/.vimrc ;;
+		xinit)			vim ~/.xinit ;;
+		xresources)		vim ~/.Xresources ;;
+		ranger)			vim ~/.config/ranger/rc.conf ;;
+		pacman)			sudo vim /etc/pacman.conf ;;
+		zathura)		vim ~/.config/zathura/zathurarc ;;
+		dunst)			vim ~/.config/dunst/dunstrc ;;
+		comptom)		vim ~/.config/compton/compton.conf ;;
+		*)			echo "Unknown application $1" ;;
+	esac
+}
 
 #GCC call
 comp() { gcc -o "${1%.*}" "$1" -Wall -Wextra -Werror }
@@ -67,11 +99,7 @@ alias gontfs='cd ~/../windows'
 # Git alias
 alias upl='git add -all && git commit && git push'
 
-# Keybinds
-# Vi mode
-bindkey -v
-
-## Sources
+##### Sources #####
 
 # Powerline prompt
 source ~/.shell_prompt.sh
