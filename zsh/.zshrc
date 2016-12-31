@@ -6,7 +6,7 @@
 #    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/14 13:32:43 by mplanell          #+#    #+#              #
-#    Updated: 2016/12/19 21:17:47 by mplanell         ###   ########.fr        #
+#    Updated: 2016/12/31 02:08:30 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ alias flux="systemctl --user start xfluxd"
 alias grep="grep --color=auto"
 alias zshconfig="vim ~/.zshrc"
 alias vimconfig="vim ~/.vimrc"
+alias i3config="vim ~/.config/i3/config"
 
 #GCC call
 comp() { gcc -o "${1%.*}" "$1" -Wall -Wextra -Werror }

@@ -289,7 +289,6 @@ exec_always --no-startup-id feh --bg-fill $HOME/.config/wallpapers/firecrackers.
 exec_always --no-startup-id compton --config $HOME/.config/compton/compton.conf -b
 
 exec --no-startup-id dunst
-exec --no-startup-id caprine
 exec --no-startup-id discord-canary
 exec --no-startup-id xrdb -load ~/.Xresources
 
