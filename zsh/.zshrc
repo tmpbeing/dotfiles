@@ -6,7 +6,7 @@
 #    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/14 13:32:43 by mplanell          #+#    #+#              #
-#    Updated: 2016/12/31 15:06:40 by mplanell         ###   ########.fr        #
+#    Updated: 2017/01/01 22:31:22 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,8 @@ conf() {
 		zathura)		vim ~/.config/zathura/zathurarc ;;
 		dunst)			vim ~/.config/dunst/dunstrc ;;
 		comptom)		vim ~/.config/compton/compton.conf ;;
+		termite)		vim ~/.config/termite/config ;;
+		i3blocks)		vim ~/.config/i3blocks/config ;;
 		*)			echo "Unknown application $1" ;;
 	esac
 }
@@ -101,15 +103,13 @@ alias upl='git add -all && git commit && git push'
 
 ##### Sources #####
 
-# Powerline prompt
-source ~/.shell_prompt.sh
-# Fix colors
-source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
+# Prompt
+source "$HOME/.config/.shell_prompt.sh"
 # Fixing keybindings
-source "$HOME/.zsh/keybindings.zsh"
+source "$HOME/.config/zsh/keybindings.zsh"
 # Adding clipcopy and clippaste
-source "$HOME/.zsh/clipboard.zsh"
+source "$HOME/.config/zsh/clipboard.zsh"
 # Directories shortcuts
-source "$HOME/.zsh/directories.zsh"
+source "$HOME/.config/zsh/directories.zsh"
 # Syntax highlighting
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

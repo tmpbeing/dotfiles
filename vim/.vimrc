@@ -1,25 +1,13 @@
 runtime! archlinux.vim
-syntax on
 filetype plugin indent on
 filetype on
 filetype plugin on
+set nocompatible "Vim, not vi
 
-"
-"
-" Addons settings
-"
-"
+" Addons settings {{{
 
 execute pathogen#infect()
 execute pathogen#helptags()
-let g:airline_powerline_fonts = 1
-
-" Promptline setup
-let g:promptline_preset = {
-		\'a'    : [ '$USER' ],
-		\'b'    : [ promptline#slices#cwd() ],
-		\'c'    : [ promptline#slices#vcs_branch() ],
-		\'warn' : [ promptline#slices#last_exit_code() ]}
 
 " Syntastic options
 let g:syntastic_cpp_compiler = 'gcc'
@@ -34,6 +22,43 @@ let g:syntastic_c_include_dirs = ['../../../includes', '../../includes','../incl
 " Nerd commenter
 let g:NERDSpaceDelims = 1
 let g:NERDTrimTrailingWhitespace = 1
+
+" Promptline
+let g:promptline_preset = {
+		\'a'    : [ '$USER' ],
+		\'b'    : [ promptline#slices#cwd() ],
+		\'c'    : [ promptline#slices#vcs_branch() ],
+		\'warn' : [ promptline#slices#last_exit_code() ]}
+let g:promptline_symbols = {
+		\'left' : '',
+		\'dir_sep' : '',}
+
+" Lightline
+let g:lightline = {
+		\ 'colorscheme': 'Mashup',
+		\ 'active': {
+		\   'left': [ [ 'mode', 'paste' ], [ 'filename' ], ],
+		\   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+		\ },
+		\'component': {
+		\ 'readonly': '%{&readonly?"":""}',
+		\ },
+		\ 'component_expand': {
+		\   'syntastic': 'SyntasticStatuslineFlag',
+		\ },
+		\ 'component_type': {
+		\   'syntastic': 'error',
+		\ },
+		\ }
+
+augroup AutoSyntastic
+  autocmd!
+  autocmd BufWritePost *.c,*.cpp call s:syntastic()
+augroup END
+function! s:syntastic()
+  SyntasticCheck
+  call lightline#update()
+endfunction
 
 " Select expanding regions through spamming v
 vmap v <Plug>(expand_region_expand)
@@ -50,48 +75,69 @@ call expand_region#custom_text_objects({
 	\ "\/\\n\\n\<CR>" : 1,
 	\ })
 
-" Theme settings
-colorscheme gruvbox
-set background=dark
-let g:gruvbox_contrast_dark = 'hard'
-hi CursorLine cterm=bold ctermbg=234
-let g:gruvbox_number_columnt = 'bg4'
-let g:gruvbox_improved_warnings = 1
+" }}}
 
+" Colorscheme & Statusline settings {{{
+
+colorscheme treia
+set background=dark
+hi CursorLine cterm=bold ctermbg=234
+"set t_Co=256
 set laststatus=2
 
-"
-"
-" General stuff
-"
-"
+" }}}
 
-set autoindent
-set cursorline
-set noswapfile
-set wildignore=*.o,*~,*.pyc
-set showmatch
-set backspace=indent,eol,start
-set nocompatible
-set number
-set cc=80
+" UI Config {{{
+
+syntax on "Shows syntax
+set cursorline "Highlight current line
+set showmatch "Shows matching braces
+set backspace=indent,eol,start "More powerful backspace
+set number "Show line numbers
+set cc=80 "Highlights column 80
 set whichwrap+=<,>,h,l,[,]
-set nofoldenable
+set nofoldenable "No folders cause they suck
 "set list listchars=tab:»·,trail:·
-set list listchars=tab:▸\ ,trail:·,nbsp:¬
+set list listchars=tab:▸\ ,trail:·,nbsp:¬ "Characters for tabs and trailing whitespaces
+"set autoindent "Required by smartindent
+set smartindent "Smarter indentation especially for C files
+set noswapfile "Doesn't keep swap files
+set wildignore=*.o,*~,*.pyc "Ignore these files (executables)
 autocmd BufRead,BufNewFile * syn match parens /[\[\](){}]/ | hi parens ctermfg=208
 
-" Tab settings
+"}}}
+
+
+" Space & Tabs {{{
+
 set smarttab
 set tabstop=4
 set shiftwidth=4
 
-" Search settings
+"}}}
+
+" Search settings {{{
+
 set ignorecase
 set smartcase
 set hlsearch
 set scrolloff=8
 set sidescrolloff=10
+
+" }}}
+
+" Split Layouts{{{
+
+""specify different areas of the screen
+set splitbelow
+set splitright
+""split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+"}}}
 
 " Escape delay
 set timeoutlen=1000
@@ -137,6 +183,9 @@ nnoremap Y  y$
 
 " Save with Leader + w
 nnoremap <Leader>w :w<CR>
+
+" remote trailing whitespaces
+nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
 " Unbind the cursor keys in insert, normal and visual modes.
 for prefix in ['i', 'n', 'v']

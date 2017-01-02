@@ -1,4 +1,16 @@
 # vim:filetype=i3
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    config                                             :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2016/09/23 15:35:35 by mplanell          #+#    #+#              #
+#    Updated: 2016/12/31 15:53:41 by mplanell         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 set $mod Mod1
 
 ## Colors
@@ -21,8 +33,8 @@ set_from_resource $darkgrey    color8  #000000
 
 # Use custom colors for black
 
-set $black       #282828
-set $darkblack   #1d2021
+set $black       #202020
+set $darkblack   #171717
 set $transparent #00000000
 
 ## Font
@@ -57,7 +69,7 @@ workspace $ws10 output HDMI-0
 
 #Gaps
 
-set $default_gaps_inner 5
+set $default_gaps_inner 10
 set $default_gaps_outer 2
 gaps inner $default_gaps_inner
 
@@ -70,13 +82,11 @@ workspace $ws10 gaps outer 0
 
 # Borders
 
-#                       BORDER      BACKGROUND  TEXT        INDICATOR   CHILD_BORDER
-client.focused          $darkgreen  $black      $darkwhite  $darkblack  $darkblue
-client.unfocused        $darkgreen  $black      $white      $darkblack  $darkblack
-client.focused_inactive $darkblack  $black      $white      $darkblack  $darkblack
-client.urgent           $darkred    $darkred    $black      $darkred    $darkred
-client.background		$black
-
+#                       BORDER      BACKGROUND  TEXT        INDICATOR
+client.focused          $darkblack  $black      $magenta    $darkblack
+client.unfocused        $black      $black      $white      $darkblack
+client.focused_inactive $black      $black      $white      $darkblack
+client.urgent           $black      $black      $red        $darkblack
 
 ##Keybindings
 
@@ -203,7 +213,6 @@ set $mode_power power
 bindsym $mod+Control+l mode "$mode_power"
 mode "$mode_power" {
 	bindsym l mode "default", exec --no-startup-id $HOME/.config/i3/i3exit lock
-	bindsym l mode "default", exec --no-startup-id $HOME/.config/i3/i3exit lock
     bindsym e mode "default", exec --no-startup-id $HOME/.config/i3/i3exit logout
     bindsym s mode "default", exec --no-startup-id $HOME/.config/i3/i3exit suspend
     bindsym h mode "default", exec --no-startup-id $HOME/.config/i3/i3exit hibernate
@@ -227,18 +236,18 @@ bar {
     bindsym button4 nop
     bindsym button5 nop
     tray_output none
-    tray_padding 0
+    tray_padding 6
     height 26
     colors {
         statusline         $white
-        background         $transparent
+        background         $darkblack
         separator          $transparent
 
 #                          BORDER       BACKGROUND   TEXT
-        focused_workspace  $transparent $transparent $white
-        inactive_workspace $transparent $transparent $darkgrey
-        active_workspace   $transparent $transparent $darkgrey
-        urgent_workspace   $black       $darkred     $transparent
+        focused_workspace  $darkblack   $darkblack   $white
+        inactive_workspace $darkblack   $darkblack   $darkgrey
+        active_workspace   $darkblack   $darkblack   $darkgrey
+        urgent_workspace   $black       $darkred     $darkblack
         binding_mode       $black       $darkred     $transparent
     }
 }
@@ -263,8 +272,10 @@ floating_modifier $mod
 assign [class="(?i)thunderbird"]                      $ws9
 assign [class="(?i)firefox"]                          $ws10
 assign [class="(?i)chromium"]                         $ws1
+assign [class="(?i)vimperator2]                       $ws1
 assign [class="(?i)caprine"]                          $ws3
 assign [class="(?i)discord"]                          $ws3
+assign [class="(?i)slack"]                            $ws3
 assign [class="(?i)Google Play Music Desktop Player"] $ws5
 
 ## Floating stuff
@@ -278,7 +289,7 @@ for_window [window_type="menu"] floating enable
 
 
 ## Required, value change border size
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 3
 
 ## Autostart
 
@@ -290,6 +301,7 @@ exec_always --no-startup-id compton --config $HOME/.config/compton/compton.conf 
 
 exec --no-startup-id dunst
 exec --no-startup-id discord-canary
+exec --no-startup-id slack
 exec --no-startup-id xrdb -load ~/.Xresources
 
 ## Program specific settings
