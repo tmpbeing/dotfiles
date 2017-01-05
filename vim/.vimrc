@@ -49,6 +49,8 @@ let g:lightline = {
 		\ 'component_type': {
 		\   'syntastic': 'error',
 		\ },
+		\ 'separator': { 'left': '▓▒░', 'right': '░▒▓' },
+		\ 'subseparator': { 'left': '▒', 'right': '░' }
 		\ }
 
 augroup AutoSyntastic
@@ -96,13 +98,13 @@ set backspace=indent,eol,start "More powerful backspace
 set number "Show line numbers
 set cc=80 "Highlights column 80
 set whichwrap+=<,>,h,l,[,]
-set nofoldenable "No folders cause they suck
+"set nofoldenable "No folders cause they suck
 "set list listchars=tab:»·,trail:·
 set list listchars=tab:▸\ ,trail:·,nbsp:¬ "Characters for tabs and trailing whitespaces
-"set autoindent "Required by smartindent
 set smartindent "Smarter indentation especially for C files
 set noswapfile "Doesn't keep swap files
 set wildignore=*.o,*~,*.pyc "Ignore these files (executables)
+set wildmenu "Completion for commands
 autocmd BufRead,BufNewFile * syn match parens /[\[\](){}]/ | hi parens ctermfg=208
 
 "}}}
@@ -118,6 +120,7 @@ set shiftwidth=4
 
 " Search settings {{{
 
+set incsearch
 set ignorecase
 set smartcase
 set hlsearch

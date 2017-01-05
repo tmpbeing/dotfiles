@@ -6,7 +6,7 @@
 #    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/14 13:32:43 by mplanell          #+#    #+#              #
-#    Updated: 2017/01/01 22:31:22 by mplanell         ###   ########.fr        #
+#    Updated: 2017/01/03 20:45:08 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,9 @@ alias ifconfig="ip -s -c -h a"
 alias flux="systemctl --user start xfluxd"
 42() { cd ~/Code/42/"$@" }
 alias grep="grep --color=auto"
+alias gcc42="gcc -Wall -Wextra -Werror"
+alias 3d="toilet -t -f 3d"
+alias gay3d="toilet -t -f 3d -F gay"
 
 conf() {
 	case $1 in

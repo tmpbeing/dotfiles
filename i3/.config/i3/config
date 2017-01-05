@@ -69,7 +69,7 @@ workspace $ws10 output HDMI-0
 
 #Gaps
 
-set $default_gaps_inner 10
+set $default_gaps_inner 5
 set $default_gaps_outer 2
 gaps inner $default_gaps_inner
 
@@ -83,7 +83,7 @@ workspace $ws10 gaps outer 0
 # Borders
 
 #                       BORDER      BACKGROUND  TEXT        INDICATOR
-client.focused          $darkblack  $black      $magenta    $darkblack
+client.focused          $darkred    $darkred    $magenta    $darkred
 client.unfocused        $black      $black      $white      $darkblack
 client.focused_inactive $black      $black      $white      $darkblack
 client.urgent           $black      $black      $red        $darkblack
@@ -272,7 +272,6 @@ floating_modifier $mod
 assign [class="(?i)thunderbird"]                      $ws9
 assign [class="(?i)firefox"]                          $ws10
 assign [class="(?i)chromium"]                         $ws1
-assign [class="(?i)vimperator2]                       $ws1
 assign [class="(?i)caprine"]                          $ws3
 assign [class="(?i)discord"]                          $ws3
 assign [class="(?i)slack"]                            $ws3
@@ -289,7 +288,7 @@ for_window [window_type="menu"] floating enable
 
 
 ## Required, value change border size
-for_window [class="^.*"] border pixel 3
+for_window [class="^.*"] border pixel 2
 
 ## Autostart
 
