@@ -2,7 +2,7 @@
 
 lock() {
     #  killall compton
-    $HOME/scripts/lock.sh
+    $HOME/.config/scripts/lock.sh
     #  compton -b
 }
 

@@ -7,37 +7,37 @@ border_bottom=2
 
 [music]
 label= 
-command=$HOME/scripts/playing.py --layout t-A
+command=$HOME/.config/scripts/playing.py --layout t-A
 interval=5
 
 [updates]
-command=$HOME/scripts/updates.sh
+command=$HOME/.config/scripts/updates.sh
 interval=20000
 signal=3
 urgent=true
 
 [volume]
 label=  
-command=~/scripts/volume
+command=~/.config/scripts/volume
 interval=1
 signal=1
 markup=pango
 border=#bf3f34
 
 [bandwidth]
-command=~/scripts/bandwidth
+command=~/.config/scripts/bandwidth
 interval=5
 border=#ff6c5f
 
 [memory]
 label= 
-command=~/scripts/memory
+command=~/.config/scripts/memory
 interval=30
 border=#bf7a29
 
 [disk]
 label= 
-command=~/scripts/disk
+command=~/.config/scripts/disk
 interval=30
 border=#75507b
 
@@ -49,7 +49,7 @@ border=#707d22
 
 [cpu]
 label= 
-command=~/scripts/cpu_usage
+command=~/.config/scripts/cpu_usage
 interval=15
 border=#627a92
 
