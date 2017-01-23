@@ -2,6 +2,8 @@ search vim
 search gvim
 delete
 open_with dD
-
 open_with 
 rename keys.jpg
+find 
+find ty
+

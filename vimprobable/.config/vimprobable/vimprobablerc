@@ -1,7 +1,0 @@
-set homepage=https://duckduckgo.com
-set scrollbars=false
-set fontsize=12
-set monofontsize=10
-set monofont="Hack"
-set useragent="Vimprobable2 (X11; U; Unix; en-US) AppleWebKit/531.2+ Compatible (Safari)"
-set completioncase=false

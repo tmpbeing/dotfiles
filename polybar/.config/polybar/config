@@ -1,0 +1,160 @@
+; vim:ft=dosini
+;Conf by treia
+;https://www.github.com/treia
+
+[colors]
+background = #171717
+foreground = #b2a191
+red = #bf3f34
+lightred = #ff6c5f
+yellow = #bf7a29
+magenta = #75507b
+green = #707d22
+blue = #627a92
+black = #202020
+white = #e8d0c3
+darkgrey = #404040
+darkwhite = #b2a191
+
+[global/wm]
+margin-bottom = 5
+margin-top = 5
+
+[bar/main]
+monitor = DVI-1
+monitor-strict = false
+override-redirect = true
+
+bottom = false
+
+width = 100%
+height = 26
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+font-0 = Hack:size10
+font-1 = FontAwesome:size10
+
+modules-left = xwindow
+modules-center = i3
+modules-right = cpu volume datealt
+
+dim-value = 1.0
+
+[bar/secondary]
+monitor = HDMI-0
+monitor-strict = false
+override-redirect = true
+
+bottom = false
+
+width = 100%
+height = 26
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+font-0 = Hack:size10
+font-1 = FontAwesome10
+
+modules-left = xwindow
+modules-center = i3
+modules-right = pkg cpu volume datealt
+
+dim-value = 1.0
+
+
+[module/cpu]
+type = internal/cpu
+interval = 1
+
+format = <label> <ramp-load>
+label =   %percentage%
+format-underline = ${colors.red}
+
+ramp-load-0 = ▁
+ramp-load-1 = ▂
+ramp-load-2 = ▃
+ramp-load-3 = ▄
+ramp-load-4 = ▅
+ramp-load-5 = ▆
+ramp-load-6 = ▇
+ramp-load-7 = █
+
+[module/date]
+type = internal/date
+interval = 1.0
+
+date = %a %d %b
+time = %T
+
+date-alt = %x
+time-alt = %X - %Z
+
+format =  <label>
+label = %date% %time%
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:40:...%
+
+[module/i3]
+type = internal/i3
+pin-workspaces = true
+strip-wsnumbers = true
+enable-click = true
+enable-scroll = false
+
+format = <label-state> <label-mode>
+
+label-mode-foreground = ${colors.background}
+label-mode-padding = 1
+
+label-focused-foreground = ${colors.white}
+label-focused-background = ${colors.background}
+label-focused-padding = 1
+
+label-unfocused-padding = 1
+
+label-urgent-background = ${colors.red}
+label-urgent-foreground = ${colors.background}
+label-urgent-padding = 1
+
+label-visible-padding = 1
+
+[module/pkg]
+type = custom/script
+interval = 5000
+format = <label>
+format-background = ${colors.red}
+format-foreground = ${colors.background}
+exec = /home/snoop/.config/scripts/pkg.sh
+exec-if = "ping -q -w 2 -c 1 176.34.135.167 > /dev/null"
+
+[module/volume]
+type = internal/volume
+format-volume = <ramp-volume> <label-volume>
+master-mixer = Master
+label-muted =  muted
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+format-volume-underline = ${colors.red}
+format-volume-padding = 2
+mapping = true
+
+[module/datealt]
+type = internal/date
+interval = 2
+ 
+date = "  %d.%m.%Y"
+date-alt = "  %A, %d. %B"
+ 
+time = "%H:%M"
+time-alt = "%H:%M:%S"
+ 
+format-underline = ${colors.foreground}
+format-padding = 2
+label = "%date% | %time%"

@@ -272,6 +272,7 @@ floating_modifier $mod
 assign [class="(?i)thunderbird"]                      $ws9
 assign [class="(?i)firefox"]                          $ws10
 assign [class="(?i)chromium"]                         $ws1
+assign [class="(?i)qutebrowser"]                      $ws1
 assign [class="(?i)caprine"]                          $ws3
 assign [class="(?i)discord"]                          $ws3
 assign [class="(?i)slack"]                            $ws3

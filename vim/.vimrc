@@ -175,6 +175,9 @@ let mapleader = "\<Space>"
 " Toggles numbers (switch from static to relative)
 nnoremap <F3> :NumbersToggle<CR>
 
+" Toggle tabs and trailing spaces display
+nmap <silent> <F5> :set list!<CR>
+
 " Toggle NERDTree
 map <Leader>l :NERDTreeToggle<CR>
 
