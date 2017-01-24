@@ -3,18 +3,19 @@
 ! ------------------------------------------------------------------------------
 
 ! General
-rofi.font:                tewi 8
-rofi.opacity:             95
+rofi.modi:                run
+rofi.font:                Input Mono 10
+rofi.opacity:             100
 rofi.fake-transparency:   true
-rofi.hide-scrollbar:      true
+rofi.hide-scrollbar:      false
 
 
 ! Layout
-rofi.width:              25
-rofi.column:             4
+rofi.width:              50
+rofi.column:             1
 rofi.location:           0
-rofi.lines:              8
-rofi.padding:            50
+rofi.lines:              10
+rofi.padding:            20
 rofi.sidebar-mode:       false
 rofi.fullscreen:         false
 
@@ -23,8 +24,8 @@ rofi.fullscreen:         false
 ! ------------------------------------------------------------------------------
 rofi.color-enabled:      true
 ! State                  'bg'     'fg'     'bgalt'  'hlbg'   'hlfg'
-rofi.color-normal:       #171717, #b2a191, #202020, #75507b, #171717
-rofi.color-active:       #171717, #4c544f, #202020, #4c544f, #171717
-rofi.color-urgent:       #171717, #442216, #202020, #442216, #171717
+rofi.color-normal:       #282828, #ebdbb2, #202020, #ebdbb2, #282828
+rofi.color-active:       #282828, #ebdbb2, #202020, #ebdbb2, #282828
+rofi.color-urgent:       #282828, #ebdbb2, #202020, #ebdbb2, #282828
 !                        'bg'     'bc'
-rofi.color-window:       #171717, #202020
+rofi.color-window:       #282828, #282828

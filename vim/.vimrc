@@ -35,7 +35,7 @@ let g:promptline_symbols = {
 
 " Lightline
 let g:lightline = {
-		\ 'colorscheme': 'Mashup',
+		\ 'colorscheme': 'gruvbox',
 		\ 'active': {
 		\   'left': [ [ 'mode', 'paste' ], [ 'filename' ], ],
 		\   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
@@ -81,9 +81,13 @@ call expand_region#custom_text_objects({
 
 " Colorscheme & Statusline settings {{{
 
-colorscheme treia
+colorscheme gruvbox
 set background=dark
 hi CursorLine cterm=bold ctermbg=234
+let g:gruvbox_termcolors = 256
+let g:gruvbox_contrast_dark ='hard'
+let g:gruvbox_improved_warnings = 1
+let g:gruvbox_italic = 1
 "set t_Co=256
 set laststatus=2
 
@@ -106,6 +110,7 @@ set noswapfile "Doesn't keep swap files
 set wildignore=*.o,*~,*.pyc "Ignore these files (executables)
 set wildmenu "Completion for commands
 autocmd BufRead,BufNewFile * syn match parens /[\[\](){}]/ | hi parens ctermfg=208
+set clipboard=unnamed "Cross-terminal paste
 
 "}}}
 
@@ -131,24 +136,22 @@ set sidescrolloff=10
 
 " Split Layouts{{{
 
-""specify different areas of the screen
+" Specify different areas of the screen
 set splitbelow
 set splitright
-""split navigations
+" Split navigations
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-"}}}
+" }}}
 
+" Misc {{{
+"
 " Escape delay
 set timeoutlen=1000
 set ttimeoutlen=10
-
-" Treats long lines as break lines
-map j gj
-map k gk
 
 " Avoid backup files in working directory
 set backupdir=~/.vim/tmp,.
@@ -158,14 +161,13 @@ set directory=~/.vim/tmp,.
 set undofile
 set undodir=~/.vim/tmp,.
 
-" Cross-terminal paste
-set clipboard=unnamed
+" }}}
 
-"
-"
-" Mapping
-"
-"
+" Mapping {{{
+
+" Treats long lines as break lines
+map j gj
+map k gk
 
 " Set Space as Leader
 let mapleader = "\<Space>"
@@ -199,3 +201,5 @@ for prefix in ['i', 'n', 'v']
 		exe prefix . "noremap " . key . " <Nop>"
 	endfor
 endfor
+
+" }}}

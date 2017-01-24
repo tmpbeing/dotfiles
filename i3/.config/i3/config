@@ -10,6 +10,7 @@
 #    Updated: 2016/12/31 15:53:41 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+# Lots of it stolen from https://github.com/Airblader/dotfiles-manjaro
 
 set $mod Mod1
 
@@ -33,8 +34,8 @@ set_from_resource $darkgrey    color8  #000000
 
 # Use custom colors for black
 
-set $black       #202020
-set $darkblack   #171717
+set $black       #282828
+set $darkblack   #1d2021
 set $transparent #00000000
 
 ## Font
@@ -82,11 +83,12 @@ workspace $ws10 gaps outer 0
 
 # Borders
 
-#                       BORDER      BACKGROUND  TEXT        INDICATOR
-client.focused          $darkred    $darkred    $magenta    $darkred
-client.unfocused        $black      $black      $white      $darkblack
-client.focused_inactive $black      $black      $white      $darkblack
-client.urgent           $black      $black      $red        $darkblack
+#                       BORDER      BACKGROUND  TEXT        INDICATOR   CHILD_BORDER
+client.focused          $darkgreen  $black      $darkwhite  $darkblack  $darkblue
+client.unfocused        $darkgreen  $black      $white      $darkblack  $darkblack
+client.focused_inactive $darkblack  $black      $white      $darkblack  $darkblack
+client.urgent           $darkred    $darkred    $black      $darkred    $darkred
+client.background		$black
 
 ##Keybindings
 
@@ -248,7 +250,7 @@ bar {
         inactive_workspace $darkblack   $darkblack   $darkgrey
         active_workspace   $darkblack   $darkblack   $darkgrey
         urgent_workspace   $black       $darkred     $darkblack
-        binding_mode       $black       $darkred     $transparent
+        binding_mode       $black       $darkred     $darkblack
     }
 }
 

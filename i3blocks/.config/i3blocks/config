@@ -12,7 +12,7 @@ interval=5
 
 [updates]
 command=$HOME/.config/scripts/updates.sh
-interval=20000
+interval=10000
 signal=3
 urgent=true
 
@@ -22,41 +22,41 @@ command=~/.config/scripts/volume
 interval=1
 signal=1
 markup=pango
-border=#bf3f34
+border=#cc241d
 
 [bandwidth]
 command=~/.config/scripts/bandwidth
 interval=5
-border=#ff6c5f
+border=#d65d0e
 
 [memory]
 label= 
 command=~/.config/scripts/memory
 interval=30
-border=#bf7a29
+border=#d79921
 
 [disk]
 label= 
 command=~/.config/scripts/disk
 interval=30
-border=#75507b
+border=#b16286
 
 [wireless]
 label=   
 command=[[ -z "$(iwgetid -r)" ]] || echo "$(iwgetid -r) "
 interval=2
-border=#707d22
+border=#98971a
 
 [cpu]
 label= 
 command=~/.config/scripts/cpu_usage
 interval=15
-border=#627a92
+border=#458588
 
 [time]
 label=  
 command=echo "`date +'%a %d %b'` <b>`date +'%T'`</b> "; [[ -z "${BLOCK_BUTTON}" ]] || gsimplecal &
 interval=1
 markup=pango
-border=#b2a191
+border=#928374
 separator_block_width=0

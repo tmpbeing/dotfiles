@@ -6,7 +6,7 @@
 #    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/14 13:32:43 by mplanell          #+#    #+#              #
-#    Updated: 2017/01/06 21:58:43 by mplanell         ###   ########.fr        #
+#    Updated: 2017/01/24 17:38:06 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,7 @@ conf() {
 		comptom)		vim ~/.config/compton/compton.conf ;;
 		termite)		vim ~/.config/termite/config ;;
 		i3blocks)		vim ~/.config/i3blocks/config ;;
+		rofi)			vim ~/.config/rofi/config ;;
 		*)			echo "Unknown application $1" ;;
 	esac
 }
@@ -106,6 +107,8 @@ alias upl='git add -all && git commit && git push'
 
 ##### Sources #####
 
+# Fix Colors
+source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
 # Prompt
 source "$HOME/.config/.shell_prompt.sh"
 # Fixing keybindings

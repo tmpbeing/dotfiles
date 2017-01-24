@@ -8,4 +8,4 @@ Xft.hintstyle: hintfull
 Xft.lcdfilter: lcddefault
 
 ! Colors
-#include "/home/snoop/.config/colors/mashup"
+#include "/home/snoop/.config/colors/gruvbox-dark"
