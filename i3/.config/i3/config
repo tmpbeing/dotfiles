@@ -39,7 +39,7 @@ set $transparent #00000000
 
 ## Font
 
-font pango:Hack, FontAwesome 12
+font pango:Input Mono, FontAwesome 12
 
 ##Setting up workspaces and gaps
 
@@ -230,7 +230,7 @@ bar {
     status_command i3blocks
     i3bar_command i3bar -t
     position top
-    font pango:Hack, FontAwesome 10
+    font pango:Input Mono, FontAwesome 10
     strip_workspace_numbers yes
     separator_symbol "■"
     bindsym button4 nop

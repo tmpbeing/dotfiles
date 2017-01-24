@@ -38,7 +38,7 @@ font-1 = FontAwesome:size10
 
 modules-left = xwindow
 modules-center = i3
-modules-right = cpu volume datealt
+modules-right =
 
 dim-value = 1.0
 
@@ -60,7 +60,7 @@ font-1 = FontAwesome10
 
 modules-left = xwindow
 modules-center = i3
-modules-right = pkg cpu volume datealt
+modules-right =
 
 dim-value = 1.0
 

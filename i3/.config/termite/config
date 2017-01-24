@@ -1,5 +1,5 @@
 [options]
-font = Hack 10
+font = Input Mono 10
 browser = chromium
 clickable_url = false
 dynamic_title = true
