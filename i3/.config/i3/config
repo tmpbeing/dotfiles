@@ -40,7 +40,7 @@ set $transparent #00000000
 
 ## Font
 
-font pango:Input Mono, FontAwesome 12
+font pango:Input Mono, FontAwesome 10
 
 ##Setting up workspaces and gaps
 
@@ -209,6 +209,51 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+# Resize gaps
+set $mode_gaps gaps
+set $mode_gaps_outer outer gaps
+set $mode_gaps_inner inner gaps
+bindsym $mod+Shift+g mode "$mode_gaps"
+mode "$mode_gaps" {
+    bindsym o      mode "$mode_gaps_outer"
+    bindsym i      mode "$mode_gaps_inner"
+
+    bindsym 0      mode "default", exec --no-startup-id i3-msg "gaps inner current set 0" && i3-msg "gaps outer current set 0"
+    bindsym d      mode "default", exec --no-startup-id i3-msg "gaps inner current set $default_gaps_inner" && i3-msg "gaps outer current set $default_gaps_outer"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_inner" {
+    bindsym plus  gaps inner current plus 5
+    bindsym minus gaps inner current minus 5
+    bindsym 0     mode "default", gaps inner current set 0
+    bindsym d     mode "default", gaps inner current set $default_gaps_inner
+
+    bindsym Shift+plus  gaps inner all plus 5
+    bindsym Shift+minus gaps inner all minus 5
+    bindsym Shift+0     mode "default", gaps inner all set 0
+    bindsym Shift+d     mode "default", gaps inner all set $default_gaps_inner
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_outer" {
+    bindsym plus  gaps outer current plus 5
+    bindsym minus gaps outer current minus 5
+    bindsym 0     mode "default", gaps outer current set 0
+    bindsym d     mode "default", gaps outer current set $default_gaps_outer
+
+    bindsym Shift+plus  gaps outer all plus 5
+    bindsym Shift+minus gaps outer all minus 5
+    bindsym Shift+0     mode "default", gaps outer all set 0
+    bindsym Shift+d     mode "default", gaps outer all set $default_gaps_outer
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
 ##Shutdown and stuff
 
 set $mode_power power
@@ -296,7 +341,7 @@ for_window [class="^.*"] border pixel 2
 ## Autostart
 
 # Wallpaper
-exec_always --no-startup-id feh --bg-fill $HOME/.config/wallpapers/firecrackers.jpg
+exec_always --no-startup-id feh --bg-fill /home/snoop/.config/wallpapers/sundown.png
 
 # Compton
 exec_always --no-startup-id compton --config $HOME/.config/compton/compton.conf -b

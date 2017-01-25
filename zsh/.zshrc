@@ -6,7 +6,7 @@
 #    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/14 13:32:43 by mplanell          #+#    #+#              #
-#    Updated: 2017/01/24 17:38:06 by mplanell         ###   ########.fr        #
+#    Updated: 2017/01/25 16:36:10 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ alias grep="grep --color=auto"
 alias gcc42="gcc -Wall -Wextra -Werror"
 alias 3d="toilet -t -f 3d"
 alias gay3d="toilet -t -f 3d -F gay"
+alias weather="curl wttr.in/paris"
 
 conf() {
 	case $1 in
