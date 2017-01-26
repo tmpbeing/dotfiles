@@ -6,7 +6,7 @@
 #    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/14 13:32:43 by mplanell          #+#    #+#              #
-#    Updated: 2017/01/25 16:36:10 by mplanell         ###   ########.fr        #
+#    Updated: 2017/01/26 20:02:57 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,14 @@ esac
 
 ##### Options ######
 
-setopt AUTO_CD
-setopt CORRECT
+setopt AUTO_CD #If invalid command is a directory name, cd to that directory
+setopt CORRECT #Enables command correction
+setopt NO_CLOBBER #Disables overwriting existing files with > (use >! instead)
+setopt SHARE_HISTORY #All terminal sessions share the same history
+setopt EXTENDED_HISTORY #Save timestamps as well
+setopt HIST_IGNORE_DUPS #Do not enter immediate duplicates into history
+setopt HIST_IGNORE_ALL_DUPS #Remove older instance if duplicate is added
+setopt HIST_IGNORE_SPACE #History ignores commands starting with a space
 
 # Keybinds
 # Vi mode
@@ -34,15 +40,16 @@ export USER42=mplanell
 # Other
 export EDITOR="vim"
 export PAGER="less"
+export MANPAGER='less -s -M +Gg'
 
 # Colors for man pages
-export LESS_TERMCAP_mb=$'\e[0;36m'
-export LESS_TERMCAP_md=$'\e[0;31m'
-export LESS_TERMCAP_me=$'\e[0m'
-export LESS_TERMCAP_se=$'\e[0m'
-export LESS_TERMCAP_so=$'\e[0;34;32m'
-export LESS_TERMCAP_ue=$'\e[0m'
-export LESS_TERMCAP_us=$'\e[0;34m'
+export LESS_TERMCAP_mb=$'\E[1;31m'    # Begins blinking.
+export LESS_TERMCAP_md=$'\E[1;31m'    # Begins bold.
+export LESS_TERMCAP_me=$'\E[0m'       # Ends mode.
+export LESS_TERMCAP_se=$'\E[0m'       # Ends standout-mode.
+export LESS_TERMCAP_so=$'\E[7m'       # Begins standout-mode.
+export LESS_TERMCAP_ue=$'\E[0m'       # Ends underline.
+export LESS_TERMCAP_us=$'\E[1;32m'    # Begins underline.
 
 ##### Aliases ######
 
@@ -61,6 +68,14 @@ alias gcc42="gcc -Wall -Wextra -Werror"
 alias 3d="toilet -t -f 3d"
 alias gay3d="toilet -t -f 3d -F gay"
 alias weather="curl wttr.in/paris"
+alias history-stat="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
+alias get='wget --continue --progress=bar --timestamping'
+alias chmod='chmod --preserve-root -v'
+alias chown='chown --preserve-root -v'
+
+mkcd() {
+  [[ -n ${1} ]] && mkdir -p ${1} && builtin cd ${1}
+}
 
 conf() {
 	case $1 in
@@ -93,6 +108,10 @@ alias l='ls -la --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color
 alias ls='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
 alias ll='ls -l --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
 alias la='ls -la --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
+alias lm='l | ${PAGER}'
+alias lr='l -R'
+alias lrm='l -R | ${PAGER}'
+alias lt='l -tr'
 
 # Push and pop directories on directory stack
 alias pu='pushd'
@@ -103,10 +122,8 @@ ntfs() { sudo mount -t ntfs-3g /dev/"$@" /home/windows }
 alias untfs='sudo umount /home/windows'
 alias gontfs='cd ~/../windows'
 
-# Git alias
-alias upl='git add -all && git commit && git push'
-
 ##### Sources #####
+
 
 # Fix Colors
 source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
@@ -118,5 +135,7 @@ source "$HOME/.config/zsh/keybindings.zsh"
 source "$HOME/.config/zsh/clipboard.zsh"
 # Directories shortcuts
 source "$HOME/.config/zsh/directories.zsh"
+# Git Aliases
+source "$HOME/.config/zsh/git.zsh"
 # Syntax highlighting
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
