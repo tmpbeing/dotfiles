@@ -1,0 +1,15 @@
+BufTabLineActive	buftabline.txt	/*BufTabLineActive*
+BufTabLineCurrent	buftabline.txt	/*BufTabLineCurrent*
+BufTabLineFill	buftabline.txt	/*BufTabLineFill*
+BufTabLineHidden	buftabline.txt	/*BufTabLineHidden*
+buftabline	buftabline.txt	/*buftabline*
+buftabline-colors	buftabline.txt	/*buftabline-colors*
+buftabline-config	buftabline.txt	/*buftabline-config*
+buftabline-intro	buftabline.txt	/*buftabline-intro*
+buftabline-mappings	buftabline.txt	/*buftabline-mappings*
+buftabline-source	buftabline.txt	/*buftabline-source*
+buftabline.txt	buftabline.txt	/*buftabline.txt*
+g:buftabline_indicators	buftabline.txt	/*g:buftabline_indicators*
+g:buftabline_numbers	buftabline.txt	/*g:buftabline_numbers*
+g:buftabline_separators	buftabline.txt	/*g:buftabline_separators*
+g:buftabline_show	buftabline.txt	/*g:buftabline_show*

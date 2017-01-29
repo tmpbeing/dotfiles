@@ -49,8 +49,10 @@ let g:lightline = {
 		\ 'component_type': {
 		\   'syntastic': 'error',
 		\ },
-		\ 'separator': { 'left': '▓▒░', 'right': '░▒▓' },
-		\ 'subseparator': { 'left': '▒', 'right': '░' }
+		\ 'separator': { 'left': '▓▒░', 'right': '░▒▓' 
+		\ },
+		\ 'subseparator': { 'left': '▒', 'right': '░' 
+		\ }
 		\ }
 
 augroup AutoSyntastic
@@ -78,7 +80,6 @@ call expand_region#custom_text_objects({
 	\ })
 
 " }}}
-
 " Colorscheme & Statusline settings {{{
 
 colorscheme gruvbox
@@ -92,7 +93,6 @@ let g:gruvbox_italic = 1
 set laststatus=2
 
 " }}}
-
 " UI Config {{{
 
 syntax on "Shows syntax
@@ -102,7 +102,8 @@ set backspace=indent,eol,start "More powerful backspace
 set number "Show line numbers
 set cc=80 "Highlights column 80
 set whichwrap+=<,>,h,l,[,]
-"set nofoldenable "No folders cause they suck
+"set nofoldenable "No folders
+set foldmethod=marker
 "set list listchars=tab:»·,trail:·
 set list listchars=tab:▸\ ,trail:·,nbsp:¬ "Characters for tabs and trailing whitespaces
 set smartindent "Smarter indentation especially for C files
@@ -113,8 +114,6 @@ autocmd BufRead,BufNewFile * syn match parens /[\[\](){}]/ | hi parens ctermfg=2
 set clipboard=unnamed "Cross-terminal paste
 
 "}}}
-
-
 " Space & Tabs {{{
 
 set smarttab
@@ -122,7 +121,6 @@ set tabstop=4
 set shiftwidth=4
 
 "}}}
-
 " Search settings {{{
 
 set incsearch
@@ -133,7 +131,6 @@ set scrolloff=8
 set sidescrolloff=10
 
 " }}}
-
 " Split Layouts{{{
 
 " Specify different areas of the screen
@@ -146,7 +143,6 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " }}}
-
 " Misc {{{
 "
 " Escape delay
@@ -162,7 +158,6 @@ set undofile
 set undodir=~/.vim/tmp,.
 
 " }}}
-
 " Mapping {{{
 
 " Treats long lines as break lines
@@ -201,5 +196,8 @@ for prefix in ['i', 'n', 'v']
 		exe prefix . "noremap " . key . " <Nop>"
 	endfor
 endfor
+
+nnoremap <Left> :bprev<CR>
+nnoremap <Right> :bnext<CR>
 
 " }}}

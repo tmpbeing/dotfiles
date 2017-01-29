@@ -6,7 +6,7 @@
 #    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/14 13:32:43 by mplanell          #+#    #+#              #
-#    Updated: 2017/01/26 20:02:57 by mplanell         ###   ########.fr        #
+#    Updated: 2017/01/29 15:45:03 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,7 @@ alias history-stat="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r 
 alias get='wget --continue --progress=bar --timestamping'
 alias chmod='chmod --preserve-root -v'
 alias chown='chown --preserve-root -v'
+alias leaks='valgrind --leak-check=full'
 
 mkcd() {
   [[ -n ${1} ]] && mkdir -p ${1} && builtin cd ${1}
