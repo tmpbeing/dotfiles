@@ -89,6 +89,8 @@ let g:ctrlp_custom_ignore = {
 	\ 'file': '\v\.(exe|so|dll)$',
 	\ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
 	\ }
+let g:ctrlp_switch_buffer = 'Et'
+let g:ctrlp_cmd = 'CtrlPMixed'
 
 " }}}
 " Colorscheme & Statusline settings {{{
