@@ -6,7 +6,7 @@
 #    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/14 13:32:43 by mplanell          #+#    #+#              #
-#    Updated: 2017/01/29 15:45:03 by mplanell         ###   ########.fr        #
+#    Updated: 2017/02/04 16:52:49 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,6 +73,8 @@ alias get='wget --continue --progress=bar --timestamping'
 alias chmod='chmod --preserve-root -v'
 alias chown='chown --preserve-root -v'
 alias leaks='valgrind --leak-check=full'
+alias gasm='gcc -Os -S'
+alias cow='fortune | cowsay'
 
 mkcd() {
   [[ -n ${1} ]] && mkdir -p ${1} && builtin cd ${1}

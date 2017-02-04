@@ -212,8 +212,8 @@ for prefix in ['i', 'n', 'v']
 endfor
 
 " Move through buffers with arrow keys
-nnoremap <Left> :bprev<CR>
-nnoremap <Right> :bnext<CR>
+nnoremap <Left> :bprev!<CR>
+nnoremap <Right> :bnext!<CR>
 
 " Move lines up and down with [e and ]e
 function! s:Move(cmd, count, map) abort
