@@ -6,7 +6,7 @@
 #    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/14 13:32:43 by mplanell          #+#    #+#              #
-#    Updated: 2017/02/04 16:52:49 by mplanell         ###   ########.fr        #
+#    Updated: 2017/02/10 15:44:07 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,7 @@ alias chown='chown --preserve-root -v'
 alias leaks='valgrind --leak-check=full'
 alias gasm='gcc -Os -S'
 alias cow='fortune | cowsay'
+alias vimch='vim *[.c/.h]'
 
 mkcd() {
   [[ -n ${1} ]] && mkdir -p ${1} && builtin cd ${1}
@@ -127,7 +128,6 @@ alias gontfs='cd ~/../windows'
 
 ##### Sources #####
 
-
 # Fix Colors
 source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
 # Prompt
@@ -142,3 +142,5 @@ source "$HOME/.config/zsh/directories.zsh"
 source "$HOME/.config/zsh/git.zsh"
 # Syntax highlighting
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+cow
