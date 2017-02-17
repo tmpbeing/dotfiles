@@ -6,7 +6,7 @@
 #    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/14 13:32:43 by mplanell          #+#    #+#              #
-#    Updated: 2017/02/10 15:44:07 by mplanell         ###   ########.fr        #
+#    Updated: 2017/02/16 20:25:16 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,8 @@ bindkey -v
 # 42 Header variable
 export MAIL42=mplanell@student.42.fr
 export USER42=mplanell
+export MAIL=mplanell@student.42.fr
+export USER=mplanell
 
 # Other
 export EDITOR="vim"
@@ -54,6 +56,7 @@ export LESS_TERMCAP_us=$'\E[1;32m'    # Begins underline.
 ##### Aliases ######
 
 # Convenience
+alias vim='nvim'
 alias c='clear'
 alias h='history'
 alias update='pacaur -Syu'
@@ -83,9 +86,10 @@ mkcd() {
 
 conf() {
 	case $1 in
-		i3)				vim ~/.config/i3/config ;;
+		i3)			vim ~/.config/i3/config ;;
 		zsh)			vim ~/.zshrc && source ~/.zshrc ;;
 		vim)			vim ~/.vimrc ;;
+		nvim)			vim ~/.config/nvim/init.vim ;;
 		xinit)			vim ~/.xinit ;;
 		xresources)		vim ~/.Xresources ;;
 		ranger)			vim ~/.config/ranger/rc.conf ;;

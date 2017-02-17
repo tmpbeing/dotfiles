@@ -1,14 +1,65 @@
-runtime! archlinux.vim
-filetype plugin indent on
-filetype on
-filetype plugin on
-set nocompatible "Vim, not vi
+" **************************************************************************** "
+"                                                                              "
+"                                                         :::      ::::::::    "
+"    init.vim                                           :+:      :+:    :+:    "
+"                                                     +:+ +:+         +:+      "
+"    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         "
+"                                                 +#+#+#+#+#+   +#+            "
+"    Created: 2017/02/14 18:26:34 by mplanell          #+#    #+#              "
+"    Updated: 2017/02/17 02:31:39 by mplanell         ###   ########.fr        "
+"                                                                              "
+" **************************************************************************** "
 
+" Load plugins {{{
+
+call plug#begin('~/.config/nvim/plugged')
+
+" Interface
+Plug 'ap/vim-buftabline'
+Plug 'myusuf3/numbers.vim'
+Plug 'itchyny/lightline.vim'
+
+" File Browsing
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tacahiroy/ctrlp-funky'
+Plug 'treia/nerdcommenter-42-edition'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+
+" Utilies
+Plug 'vim-syntastic/syntastic'
+Plug 'terryma/vim-expand-region'
+Plug 'Raimondi/delimitMate'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'sickill/vim-pasta'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-markdown', { 'for': 'markdown' }
+
+" Git
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+
+" Completion/Snippets
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'Shougo/neosnippet'
+"Plug 'Shougo/neosnippet-snippets'
+Plug 'zchee/deoplete-clang'
+Plug 'zchee/deoplete-zsh'
+Plug 'Shougo/neco-vim'
+Plug 'Shougo/neco-syntax'
+Plug 'Shougo/neoinclude.vim'
+
+" Colorscheme
+Plug 'morhetz/gruvbox'
+Plug 'joshdick/onedark.vim'
+
+" Misc
+Plug 'pandark/42header.vim'
+
+call plug#end()
+
+" }}}
 " Addons settings {{{
-
-execute pathogen#infect()
-execute pathogen#helptags()
-
 " Syntastic options
 let g:syntastic_cpp_compiler = 'gcc'
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++ -Wall -Werror -Wextra'
@@ -23,15 +74,20 @@ let g:syntastic_c_include_dirs = ['../../../includes', '../../includes','../incl
 let g:NERDSpaceDelims = 1
 let g:NERDTrimTrailingWhitespace = 1
 
-" Promptline
-let g:promptline_preset = {
-		\'a'    : [ '$USER' ],
-		\'b'    : [ promptline#slices#cwd() ],
-		\'c'    : [ promptline#slices#vcs_branch() ],
-		\'warn' : [ promptline#slices#last_exit_code() ]}
-let g:promptline_symbols = {
-		\'left' : '',
-		\'dir_sep' : '',}
+" Nerdtree
+let NERDTreeShowHidden=1
+let NERDTreeDirArrowExpandable = '▷'
+let NERDTreeDirArrowCollapsible = '▼'
+
+" " Promptline
+" let g:promptline_preset = {
+		" \'a'    : [ '$USER' ],
+		" \'b'    : [ promptline#slices#cwd() ],
+		" \'c'    : [ promptline#slices#vcs_branch() ],
+		" \'warn' : [ promptline#slices#last_exit_code() ]}
+" let g:promptline_symbols = {
+		" \'left' : '',
+		" \'dir_sep' : '',}
 
 " Lightline
 let g:lightline = {
@@ -92,6 +148,15 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_switch_buffer = 'Et'
 let g:ctrlp_cmd = 'CtrlPMixed'
 
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
+let g:deoplete#sources#clang#clang_header = '/usr/include/clang'
+
+" Neosnippets
+" imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+
 " }}}
 " Colorscheme & Statusline settings {{{
 
@@ -99,47 +164,41 @@ colorscheme gruvbox
 set background=dark
 hi CursorLine cterm=bold ctermbg=234
 let g:gruvbox_termcolors = 256
-"let g:gruvbox_contrast_dark ='hard'
+let g:gruvbox_contrast_dark ='hard'
 let g:gruvbox_improved_warnings = 1
 let g:gruvbox_italic = 1
 "set t_Co=256
-set laststatus=2
 
 " }}}
 " UI Config {{{
 
-syntax on "Shows syntax
 set cursorline "Highlight current line
 set showmatch "Shows matching braces
-set backspace=indent,eol,start "More powerful backspace
 set number "show line numbers
+set hidden "hides new buffers if necessary
 set cc=80 "Highlights column 80
 set whichwrap+=<,>,h,l,[,]
-"set nofoldenable "No folders
 set foldmethod=marker
-"set list listchars=tab:»·,trail:·
 set list listchars=tab:▸\ ,trail:·,nbsp:¬ "Characters for tabs and trailing whitespaces
 set smartindent "Smarter indentation especially for C files
 set noswapfile "Doesn't keep swap files
 set wildignore=*.o,*~,*.pyc "Ignore these files (executables)
-set wildmenu "Completion for commands
 autocmd BufRead,BufNewFile * syn match parens /[\[\](){}]/ | hi parens ctermfg=208
 set clipboard=unnamed "Cross-terminal paste
+set icm=nosplit
+set so=7 "set 7 lines to the cursors when moving vertical
 
-"}}}
+" }}}
 " Space & Tabs {{{
 
-set smarttab
 set tabstop=4
 set shiftwidth=4
 
 "}}}
 " Search settings {{{
 
-set incsearch
 set ignorecase
 set smartcase
-set hlsearch
 set scrolloff=8
 set sidescrolloff=10
 
@@ -157,18 +216,10 @@ nnoremap <C-H> <C-W><C-H>
 
 " }}}
 " Misc {{{
-"
+
 " Escape delay
 set timeoutlen=1000
 set ttimeoutlen=10
-
-" Avoid backup files in working directory
-set backupdir=~/.vim/tmp,.
-set directory=~/.vim/tmp,.
-
-" Persistent undo across sessions
-set undofile
-set undodir=~/.vim/tmp,.
 
 " }}}
 " Mapping {{{
@@ -180,11 +231,14 @@ map k gk
 " Set Space as Leader
 let mapleader = "\<Space>"
 
-" Paste mode
-:noremap <F2> :set paste! nopaste?<CR>
-
 " Toggles numbers (switch from static to relative)
 nnoremap <F3> :NumbersToggle<CR>
+
+" 42 School Header
+nmap <f4> :Fortytwoheader<CR>
+
+" Find functions with CtrlP
+nnoremap <Leader>fu :CtrlPFunky<Cr>
 
 " Toggle tabs and trailing spaces display
 nmap <silent> <F5> :set list!<CR>
@@ -207,6 +261,10 @@ nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 " Search for word under the cursor
 nnoremap <leader>/ "fyiw :/<c-r>f<cr>
 
+" Scroll the viewport faster
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
+
 " Unbind the cursor keys in insert, normal and visual modes.
 for prefix in ['i', 'n', 'v']
 	for key in ['<Up>', '<Down>', '<Left>', '<Right>']
@@ -218,43 +276,7 @@ endfor
 nnoremap <Left> :bprev!<CR>
 nnoremap <Right> :bnext!<CR>
 
-" Scroll the viewport faster
-nnoremap <C-e> 3<C-e>
-nnoremap <C-y> 3<C-y>
-
-" Move lines up and down with [e and ]e
-function! s:Move(cmd, count, map) abort
-  normal! m`
-  silent! exe 'move'.a:cmd.a:count
-  norm! ``
-  silent! call repeat#set("\<Plug>unimpairedMove".a:map, a:count)
-endfunction
-
-function! s:MoveSelectionUp(count) abort
-  normal! m`
-  silent! exe "'<,'>move'<--".a:count
-  norm! ``
-  silent! call repeat#set("\<Plug>unimpairedMoveSelectionUp", a:count)
-endfunction
-
-function! s:MoveSelectionDown(count) abort
-  normal! m`
-  exe "'<,'>move'>+".a:count
-  norm! ``
-  silent! call repeat#set("\<Plug>unimpairedMoveSelectionDown", a:count)
-endfunction
-
-nnoremap <silent> <Plug>unimpairedMoveUp            :<C-U>call <SID>Move('--',v:count1,'Up')<CR>
-nnoremap <silent> <Plug>unimpairedMoveDown          :<C-U>call <SID>Move('+',v:count1,'Down')<CR>
-noremap  <silent> <Plug>unimpairedMoveSelectionUp   :<C-U>call <SID>MoveSelectionUp(v:count1)<CR>
-noremap  <silent> <Plug>unimpairedMoveSelectionDown :<C-U>call <SID>MoveSelectionDown(v:count1)<CR>
-
-nmap [e <Plug>unimpairedMoveUp
-nmap ]e <Plug>unimpairedMoveDown
-xmap [e <Plug>unimpairedMoveSelectionUp
-xmap ]e <Plug>unimpairedMoveSelectionDown
-
-" Unbind Ex mode cause I'm a scrub
+" Unbind Ex Mode
 :map Q <Nop>
 
 " }}}
