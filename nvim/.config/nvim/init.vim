@@ -6,7 +6,7 @@
 "    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         "
 "                                                 +#+#+#+#+#+   +#+            "
 "    Created: 2017/02/14 18:26:34 by mplanell          #+#    #+#              "
-"    Updated: 2017/02/19 13:56:49 by mplanell         ###   ########.fr        "
+"    Updated: 2017/02/20 14:50:39 by mplanell         ###   ########.fr        "
 "                                                                              "
 " **************************************************************************** "
 
@@ -55,7 +55,8 @@ Plug 'morhetz/gruvbox'
 Plug 'joshdick/onedark.vim'
 
 " Misc
-Plug 'pandark/42header.vim'
+Plug 'Treia/42header.vim'
+Plug 'PotatoesMaster/i3-vim-syntax'
 
 call plug#end()
 
@@ -247,7 +248,7 @@ let mapleader = "\<Space>"
 nnoremap <F3> :NumbersToggle<CR>
 
 " 42 School Header
-nmap <f4> :Fortytwoheader<CR>
+nmap <f4> :FortyTwoHeader<CR>
 
 " Find functions with CtrlP
 nnoremap <Leader>fu :CtrlPFunky<Cr>

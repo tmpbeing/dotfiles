@@ -36,6 +36,7 @@ set_from_resource $darkgrey    color8  #000000
 
 set $black       #282828
 set $darkblack   #1d2021
+set $lightblack  #3C3836
 set $transparent #00000000
 
 ## Font
@@ -70,8 +71,8 @@ workspace $ws10 output HDMI-0
 
 #Gaps
 
-set $default_gaps_inner 5
-set $default_gaps_outer 2
+set $default_gaps_inner 10
+set $default_gaps_outer 10
 gaps inner $default_gaps_inner
 
 workspace $ws1 gaps inner 0
@@ -85,8 +86,8 @@ workspace $ws10 gaps outer 0
 
 #                       BORDER      BACKGROUND  TEXT        INDICATOR   CHILD_BORDER
 client.focused          $darkgreen  $black      $darkwhite  $darkblack  $darkblue
-client.unfocused        $darkgreen  $black      $white      $darkblack  $darkblack
-client.focused_inactive $darkblack  $black      $white      $darkblack  $darkblack
+client.unfocused        $lightblack $black      $white      $darkblack  $darkblack
+client.focused_inactive $lightblack $black      $white      $darkblack  $darkblack
 client.urgent           $darkred    $darkred    $black      $darkred    $darkred
 client.background		$black
 
@@ -280,14 +281,14 @@ bar {
     status_command i3blocks
     i3bar_command i3bar -t
     position top
-    font pango:Input Mono, FontAwesome 10
+    font pango:Input Mono, FontAwesome 9
     strip_workspace_numbers yes
     separator_symbol "■"
     bindsym button4 nop
     bindsym button5 nop
     tray_output none
     tray_padding 6
-    height 26
+    height 24
     colors {
         statusline         $white
         background         $darkblack
@@ -344,7 +345,7 @@ for_window [class="^.*"] border pixel 2
 ## Autostart
 
 # Wallpaper
-exec_always --no-startup-id feh --bg-fill /home/snoop/.config/wallpapers/sundown.png
+exec_always --no-startup-id feh --bg-fill /home/snoop/.config/wallpapers/bath.jpg
 
 # Compton
 exec_always --no-startup-id compton --config $HOME/.config/compton/compton.conf -b
