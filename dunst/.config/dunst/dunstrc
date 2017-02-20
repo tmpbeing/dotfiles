@@ -31,7 +31,7 @@
     show_indicators = yes
     line_height = 0
     separator_height = 2
-    padding = *
+    padding = 8
     horizontal_padding = 12
     separator_color = frame
     startup_notification = false
