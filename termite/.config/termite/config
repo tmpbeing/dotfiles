@@ -12,7 +12,9 @@ allow_bold=true
 
 
 [colors]
-background = #282828
+
+# Gruvbox
+background = #262626
 foreground = #ebdbb2
 color0  = #282828
 color8  = #928374

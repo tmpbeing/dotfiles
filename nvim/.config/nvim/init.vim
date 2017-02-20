@@ -6,7 +6,7 @@
 "    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         "
 "                                                 +#+#+#+#+#+   +#+            "
 "    Created: 2017/02/14 18:26:34 by mplanell          #+#    #+#              "
-"    Updated: 2017/02/17 02:31:39 by mplanell         ###   ########.fr        "
+"    Updated: 2017/02/19 13:56:49 by mplanell         ###   ########.fr        "
 "                                                                              "
 " **************************************************************************** "
 
@@ -32,8 +32,9 @@ Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'sickill/vim-pasta'
-Plug 'sheerun/vim-polyglot'
+"Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-markdown', { 'for': 'markdown' }
+Plug 'brooth/far.vim'
 
 " Git
 Plug 'airblade/vim-gitgutter'
@@ -79,6 +80,8 @@ let NERDTreeShowHidden=1
 let NERDTreeDirArrowExpandable = '▷'
 let NERDTreeDirArrowCollapsible = '▼'
 
+" Far
+let g:far#source= 'agnvim'
 " " Promptline
 " let g:promptline_preset = {
 		" \'a'    : [ '$USER' ],
@@ -147,6 +150,7 @@ let g:ctrlp_custom_ignore = {
 	\ }
 let g:ctrlp_switch_buffer = 'Et'
 let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
@@ -157,17 +161,20 @@ let g:deoplete#sources#clang#clang_header = '/usr/include/clang'
 " imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 " let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 
+" 42 Header
+autocmd FileType make let b:fortytwoheader_delimiters=['#', '#', '*']
 " }}}
 " Colorscheme & Statusline settings {{{
 
-colorscheme gruvbox
+colorscheme gruvbox 
 set background=dark
 hi CursorLine cterm=bold ctermbg=234
-let g:gruvbox_termcolors = 256
-let g:gruvbox_contrast_dark ='hard'
+"let g:gruvbox_termcolors = 256
+let g:gruvbox_contrast_dark ='medium'
 let g:gruvbox_improved_warnings = 1
 let g:gruvbox_italic = 1
 "set t_Co=256
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 " }}}
 " UI Config {{{
@@ -216,6 +223,11 @@ nnoremap <C-H> <C-W><C-H>
 
 " }}}
 " Misc {{{
+
+" Filetype
+filetype on
+filetype plugin on
+filetype plugin indent on
 
 " Escape delay
 set timeoutlen=1000
@@ -275,6 +287,9 @@ endfor
 " Move through buffers with arrow keys
 nnoremap <Left> :bprev!<CR>
 nnoremap <Right> :bnext!<CR>
+
+"" <Leader>q Closes the current buffer
+nnoremap <silent> <Leader>q :Bclose<CR>
 
 " Unbind Ex Mode
 :map Q <Nop>

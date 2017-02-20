@@ -128,6 +128,9 @@ bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
+# For terminal launch
+bindsym $mod+Shift+w split h; layout tabbed
+
 # Toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 

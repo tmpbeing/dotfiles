@@ -6,7 +6,7 @@
 #    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/14 13:32:43 by mplanell          #+#    #+#              #
-#    Updated: 2017/02/16 20:25:16 by mplanell         ###   ########.fr        #
+#    Updated: 2017/02/19 13:47:11 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ setopt EXTENDED_HISTORY #Save timestamps as well
 setopt HIST_IGNORE_DUPS #Do not enter immediate duplicates into history
 setopt HIST_IGNORE_ALL_DUPS #Remove older instance if duplicate is added
 setopt HIST_IGNORE_SPACE #History ignores commands starting with a space
+setopt PUSHD_IGNORE_DUPS #Do not push duplicates into the directory stack
+setopt AUTO_PUSHD #Automatically add pwd to directory stack
 
 # Keybinds
 # Vi mode
@@ -43,6 +45,7 @@ export USER=mplanell
 export EDITOR="vim"
 export PAGER="less"
 export MANPAGER='less -s -M +Gg'
+export REPORTTIME=10 # Display how long all tasks over 10 seconds take
 
 # Colors for man pages
 export LESS_TERMCAP_mb=$'\E[1;31m'    # Begins blinking.
@@ -96,7 +99,7 @@ conf() {
 		pacman)			sudo vim /etc/pacman.conf ;;
 		zathura)		vim ~/.config/zathura/zathurarc ;;
 		dunst)			vim ~/.config/dunst/dunstrc ;;
-		comptom)		vim ~/.config/compton/compton.conf ;;
+		compton)		vim ~/.config/compton/compton.conf ;;
 		termite)		vim ~/.config/termite/config ;;
 		i3blocks)		vim ~/.config/i3blocks/config ;;
 		rofi)			vim ~/.config/rofi/config ;;
