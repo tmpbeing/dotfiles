@@ -6,7 +6,7 @@
 "    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         "
 "                                                 +#+#+#+#+#+   +#+            "
 "    Created: 2017/02/14 18:26:34 by mplanell          #+#    #+#              "
-"    Updated: 2017/02/20 14:50:39 by mplanell         ###   ########.fr        "
+"    Updated: 2017/02/21 19:30:37 by mplanell         ###   ########.fr        "
 "                                                                              "
 " **************************************************************************** "
 
@@ -80,9 +80,14 @@ let g:NERDTrimTrailingWhitespace = 1
 let NERDTreeShowHidden=1
 let NERDTreeDirArrowExpandable = '▷'
 let NERDTreeDirArrowCollapsible = '▼'
+" Toggle NerdTree
+map <Leader>l :NERDTreeToggle<CR>
+" Open NerdTree
+map <Leader>L :NERDTree<CR>
 
 " Far
 let g:far#source= 'agnvim'
+
 " " Promptline
 " let g:promptline_preset = {
 		" \'a'    : [ '$USER' ],
@@ -152,11 +157,16 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_switch_buffer = 'Et'
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+" Find functions with CtrlP
+nnoremap <Leader>fu :CtrlPFunky<Cr>
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
 let g:deoplete#sources#clang#clang_header = '/usr/include/clang'
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif " Autoclose scratch window
+" deoplete tab-complete
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " Neosnippets
 " imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -164,6 +174,11 @@ let g:deoplete#sources#clang#clang_header = '/usr/include/clang'
 
 " 42 Header
 autocmd FileType make let b:fortytwoheader_delimiters=['#', '#', '*']
+nmap <f4> :FortyTwoHeader<CR>
+
+" Toggles numbers (switch from static to relative)
+nnoremap <F3> :NumbersToggle<CR>
+
 " }}}
 " Colorscheme & Statusline settings {{{
 
@@ -237,30 +252,33 @@ set ttimeoutlen=10
 " }}}
 " Mapping {{{
 
+" Set Space as Leader
+let mapleader = "\<Space>"
+
 " Treats long lines as break lines
 map j gj
 map k gk
 
-" Set Space as Leader
-let mapleader = "\<Space>"
+" Saner command-line history
+cnoremap <c-n>  <down>
+cnoremap <c-p>  <up>
 
-" Toggles numbers (switch from static to relative)
-nnoremap <F3> :NumbersToggle<CR>
+" Redraws screen, clears highlight, refresh syntax highlight
+nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 
-" 42 School Header
-nmap <f4> :FortyTwoHeader<CR>
+" Move line up or down
+nnoremap [e  :<c-u>execute 'move -1-'. v:count1<cr>
+nnoremap ]e  :<c-u>execute 'move +'. v:count1<cr>
 
-" Find functions with CtrlP
-nnoremap <Leader>fu :CtrlPFunky<Cr>
+" Open a macro in command line in order to modify it
+nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
+
+" Don't lose selection when using > or <
+xnoremap <  <gv
+xnoremap >  >gv
 
 " Toggle tabs and trailing spaces display
 nmap <silent> <F5> :set list!<CR>
-
-" Toggle NERDTree
-map <Leader>l :NERDTreeToggle<CR>
-
-" Open NERDTree
-map <Leader>L :NERDTree<CR>
 
 " Copy from cursor to the end of the line
 nnoremap Y  y$
