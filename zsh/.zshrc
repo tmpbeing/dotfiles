@@ -6,7 +6,7 @@
 #    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/14 13:32:43 by mplanell          #+#    #+#              #
-#    Updated: 2017/02/19 13:47:11 by mplanell         ###   ########.fr        #
+#    Updated: 2017/02/26 18:32:44 by snoop            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,6 @@ setopt HIST_IGNORE_ALL_DUPS #Remove older instance if duplicate is added
 setopt HIST_IGNORE_SPACE #History ignores commands starting with a space
 setopt PUSHD_IGNORE_DUPS #Do not push duplicates into the directory stack
 setopt AUTO_PUSHD #Automatically add pwd to directory stack
-
-# Keybinds
 # Vi mode
 bindkey -v
 
@@ -38,8 +36,6 @@ bindkey -v
 # 42 Header variable
 export MAIL42=mplanell@student.42.fr
 export USER42=mplanell
-export MAIL=mplanell@student.42.fr
-export USER=mplanell
 
 # Other
 export EDITOR="vim"

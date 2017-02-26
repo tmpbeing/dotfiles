@@ -6,7 +6,7 @@
 "    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         "
 "                                                 +#+#+#+#+#+   +#+            "
 "    Created: 2017/02/14 18:26:34 by mplanell          #+#    #+#              "
-"    Updated: 2017/02/21 19:30:37 by mplanell         ###   ########.fr        "
+"    Updated: 2017/02/26 18:44:09 by mplanell         ###   ########.fr        "
 "                                                                              "
 " **************************************************************************** "
 
@@ -35,6 +35,7 @@ Plug 'sickill/vim-pasta'
 "Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 Plug 'brooth/far.vim'
+Plug 'kassio/neoterm'
 
 " Git
 Plug 'airblade/vim-gitgutter'
@@ -57,11 +58,16 @@ Plug 'joshdick/onedark.vim'
 " Misc
 Plug 'Treia/42header.vim'
 Plug 'PotatoesMaster/i3-vim-syntax'
+Plug 'junegunn/goyo.vim'
 
 call plug#end()
 
 " }}}
 " Addons settings {{{
+
+" Set Space as Leader
+let mapleader = "\<Space>"
+
 " Syntastic options
 let g:syntastic_cpp_compiler = 'gcc'
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++ -Wall -Werror -Wextra'
@@ -172,6 +178,12 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 " let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 
+" Neoterm
+let g:neoterm_size=20
+let g:neoterm_autoinsert=0
+let g:neoterm_keep_term_open=0
+nnoremap <silent> <leader>tm :T make<CR>
+
 " 42 Header
 autocmd FileType make let b:fortytwoheader_delimiters=['#', '#', '*']
 nmap <f4> :FortyTwoHeader<CR>
@@ -249,22 +261,33 @@ filetype plugin indent on
 set timeoutlen=1000
 set ttimeoutlen=10
 
+" Avoid backup files in working directory
+set backupdir=~/.vim/tmp,.
+set directory=~/.vim/tmp,.
+
+" Persistent undo across sessions
+set undofile
+set undodir=~/.vim/tmp,.
+
 " }}}
 " Mapping {{{
-
-" Set Space as Leader
-let mapleader = "\<Space>"
 
 " Treats long lines as break lines
 map j gj
 map k gk
+
+" Open a new buffer separately
+nmap <leader>n :enew<cr>
+
+" Detect filetype of current buffer
+nmap <leader>ft :filetype detect<cr>
 
 " Saner command-line history
 cnoremap <c-n>  <down>
 cnoremap <c-p>  <up>
 
 " Redraws screen, clears highlight, refresh syntax highlight
-nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
+nnoremap <leader>r :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 
 " Move line up or down
 nnoremap [e  :<c-u>execute 'move -1-'. v:count1<cr>
