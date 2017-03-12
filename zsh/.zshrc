@@ -6,7 +6,7 @@
 #    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/14 13:32:43 by mplanell          #+#    #+#              #
-#    Updated: 2017/02/26 18:32:44 by snoop            ###   ########.fr        #
+#    Updated: 2017/03/12 11:46:58 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,6 +78,8 @@ alias leaks='valgrind --leak-check=full'
 alias gasm='gcc -Os -S'
 alias cow='fortune | cowsay'
 alias vimch='vim *[.c/.h]'
+alias gdb='gdbgui'
+alias 42fc='sh ~/Code/42/42FileChecker/42FileChecker.sh'
 
 mkcd() {
   [[ -n ${1} ]] && mkdir -p ${1} && builtin cd ${1}

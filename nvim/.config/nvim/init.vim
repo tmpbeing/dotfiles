@@ -6,7 +6,7 @@
 "    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         "
 "                                                 +#+#+#+#+#+   +#+            "
 "    Created: 2017/02/14 18:26:34 by mplanell          #+#    #+#              "
-"    Updated: 2017/02/26 18:44:09 by mplanell         ###   ########.fr        "
+"    Updated: 2017/03/09 21:27:07 by mplanell         ###   ########.fr        "
 "                                                                              "
 " **************************************************************************** "
 
@@ -154,15 +154,10 @@ call expand_region#custom_text_objects({
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_custom_ignore = {
-	\ 'dir':  '\v[\/]\.(git|hg|svn)$',
-	\ 'file': '\v\.(exe|so|dll)$',
-	\ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
-	\ }
 let g:ctrlp_switch_buffer = 'Et'
 let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" -Q --ignore "*.o"'
+
 " Find functions with CtrlP
 nnoremap <Leader>fu :CtrlPFunky<Cr>
 
@@ -172,7 +167,7 @@ let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
 let g:deoplete#sources#clang#clang_header = '/usr/include/clang'
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif " Autoclose scratch window
 " deoplete tab-complete
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " Neosnippets
 " imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -183,6 +178,20 @@ let g:neoterm_size=20
 let g:neoterm_autoinsert=0
 let g:neoterm_keep_term_open=0
 nnoremap <silent> <leader>tm :T make<CR>
+
+" BufTabLine
+let g:buftabline_indicators=1
+let g:buftabline_numbers=2
+nmap <leader>1 <Plug>BufTabLine.Go(1)
+nmap <leader>2 <Plug>BufTabLine.Go(2)
+nmap <leader>3 <Plug>BufTabLine.Go(3)
+nmap <leader>4 <Plug>BufTabLine.Go(4)
+nmap <leader>5 <Plug>BufTabLine.Go(5)
+nmap <leader>6 <Plug>BufTabLine.Go(6)
+nmap <leader>7 <Plug>BufTabLine.Go(7)
+nmap <leader>8 <Plug>BufTabLine.Go(8)
+nmap <leader>9 <Plug>BufTabLine.Go(9)
+nmap <leader>0 <Plug>BufTabLine.Go(10)
 
 " 42 Header
 autocmd FileType make let b:fortytwoheader_delimiters=['#', '#', '*']
@@ -217,7 +226,7 @@ set foldmethod=marker
 set list listchars=tab:▸\ ,trail:·,nbsp:¬ "Characters for tabs and trailing whitespaces
 set smartindent "Smarter indentation especially for C files
 set noswapfile "Doesn't keep swap files
-set wildignore=*.o,*~,*.pyc "Ignore these files (executables)
+set wildignore+=*.o,*~,*.pyc "Ignore these files (executables)
 autocmd BufRead,BufNewFile * syn match parens /[\[\](){}]/ | hi parens ctermfg=208
 set clipboard=unnamed "Cross-terminal paste
 set icm=nosplit
