@@ -6,7 +6,7 @@
 #    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/23 15:35:35 by mplanell          #+#    #+#              #
-#    Updated: 2017/02/26 18:56:38 by mplanell         ###   ########.fr        #
+#    Updated: 2017/03/15 18:51:40 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Lots of it stolen from https://github.com/Airblader/dotfiles-manjaro
@@ -340,7 +340,7 @@ for_window [window_type="menu"] floating enable
 
 
 ## Required, value change border size
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 3
 
 ## Autostart
 

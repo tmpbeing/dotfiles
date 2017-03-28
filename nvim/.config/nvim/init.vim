@@ -6,7 +6,7 @@
 "    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         "
 "                                                 +#+#+#+#+#+   +#+            "
 "    Created: 2017/02/14 18:26:34 by mplanell          #+#    #+#              "
-"    Updated: 2017/03/09 21:27:07 by mplanell         ###   ########.fr        "
+"    Updated: 2017/03/26 12:57:54 by mplanell         ###   ########.fr        "
 "                                                                              "
 " **************************************************************************** "
 
@@ -59,6 +59,7 @@ Plug 'joshdick/onedark.vim'
 Plug 'Treia/42header.vim'
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'junegunn/goyo.vim'
+Plug 'machakann/vim-highlightedyank'
 
 call plug#end()
 
@@ -345,4 +346,6 @@ nnoremap <silent> <Leader>q :Bclose<CR>
 " Unbind Ex Mode
 :map Q <Nop>
 
+" Save as sudo with w!!
+cmap w!! w !sudo tee > /dev/null %
 " }}}
