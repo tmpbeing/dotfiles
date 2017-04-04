@@ -6,7 +6,7 @@
 #    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/23 15:35:35 by mplanell          #+#    #+#              #
-#    Updated: 2017/03/15 18:51:40 by mplanell         ###   ########.fr        #
+#    Updated: 2017/04/04 21:06:04 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Lots of it stolen from https://github.com/Airblader/dotfiles-manjaro
@@ -351,8 +351,8 @@ exec_always --no-startup-id feh --bg-fill /home/snoop/.config/wallpapers/bath.jp
 exec_always --no-startup-id compton --config $HOME/.config/compton/compton.conf -b
 
 exec --no-startup-id dunst
-exec --no-startup-id discord
-exec --no-startup-id slack
+# exec --no-startup-id discord
+# exec --no-startup-id slack
 exec --no-startup-id xrdb -load ~/.Xresources
 
 ## Program specific settings

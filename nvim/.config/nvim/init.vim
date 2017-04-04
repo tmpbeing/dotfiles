@@ -6,7 +6,7 @@
 "    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         "
 "                                                 +#+#+#+#+#+   +#+            "
 "    Created: 2017/02/14 18:26:34 by mplanell          #+#    #+#              "
-"    Updated: 2017/03/26 12:57:54 by mplanell         ###   ########.fr        "
+"    Updated: 2017/04/04 10:27:55 by mplanell         ###   ########.fr        "
 "                                                                              "
 " **************************************************************************** "
 
@@ -348,4 +348,13 @@ nnoremap <silent> <Leader>q :Bclose<CR>
 
 " Save as sudo with w!!
 cmap w!! w !sudo tee > /dev/null %
+
+" Upper/lower word
+nmap <leader>u mQviwU`Q
+nmap <leader>l mQviwu`Q
+
+" Upper/lower first char of word
+nmap <leader>U mQgewvU`Q
+nmap <leader>L mQgewvu`Q
+
 " }}}
