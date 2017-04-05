@@ -6,7 +6,7 @@
 "    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         "
 "                                                 +#+#+#+#+#+   +#+            "
 "    Created: 2017/02/14 18:26:34 by mplanell          #+#    #+#              "
-"    Updated: 2017/04/04 10:27:55 by mplanell         ###   ########.fr        "
+"    Updated: 2017/04/05 12:43:34 by mplanell         ###   ########.fr        "
 "                                                                              "
 " **************************************************************************** "
 
@@ -14,15 +14,16 @@
 
 call plug#begin('~/.config/nvim/plugged')
 
-" Interface
+" Interface / Display
 Plug 'ap/vim-buftabline'
 Plug 'myusuf3/numbers.vim'
 Plug 'itchyny/lightline.vim'
+Plug 'Shougo/unite.vim'
 
 " File Browsing
+Plug 'Shougo/vimfiler'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
-Plug 'treia/nerdcommenter-42-edition'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " Utilies
@@ -36,6 +37,7 @@ Plug 'sickill/vim-pasta'
 Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 Plug 'brooth/far.vim'
 Plug 'kassio/neoterm'
+Plug 'treia/nerdcommenter-42-edition'
 
 " Git
 Plug 'airblade/vim-gitgutter'
@@ -50,6 +52,8 @@ Plug 'zchee/deoplete-zsh'
 Plug 'Shougo/neco-vim'
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neoinclude.vim'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " Colorscheme
 Plug 'morhetz/gruvbox'
@@ -94,6 +98,10 @@ map <Leader>L :NERDTree<CR>
 
 " Far
 let g:far#source= 'agnvim'
+
+" Vimfiler
+let g:vimfiler_as_default_explorer = 1
+map <Leader>f :VimFiler<CR>
 
 " " Promptline
 " let g:promptline_preset = {
@@ -174,9 +182,14 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif " Autoc
 " imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 " let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 
+ " Ultisnips
+let g:UltiSnipsExpandTrigger="<c-s>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
 " Neoterm
 let g:neoterm_size=20
-let g:neoterm_autoinsert=0
+let g:neoterm_autoinsert=5
 let g:neoterm_keep_term_open=0
 nnoremap <silent> <leader>tm :T make<CR>
 
