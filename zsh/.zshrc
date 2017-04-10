@@ -6,7 +6,7 @@
 #    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/14 13:32:43 by mplanell          #+#    #+#              #
-#    Updated: 2017/03/12 11:46:58 by mplanell         ###   ########.fr        #
+#    Updated: 2017/04/10 02:33:57 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,6 +101,7 @@ conf() {
 		termite)		vim ~/.config/termite/config ;;
 		i3blocks)		vim ~/.config/i3blocks/config ;;
 		rofi)			vim ~/.config/rofi/config ;;
+		polybar)		vim ~/.config/polybar/config ;;
 		*)			echo "Unknown application $1" ;;
 	esac
 }

@@ -3,97 +3,99 @@
 ;https://www.github.com/treia
 
 [colors]
-background = #171717
-foreground = #b2a191
-red = #bf3f34
-lightred = #ff6c5f
-yellow = #bf7a29
-magenta = #75507b
-green = #707d22
-blue = #627a92
-black = #202020
-white = #e8d0c3
-darkgrey = #404040
-darkwhite = #b2a191
+background = #262626
+foreground = #ebdbb2
+red = #cc241d
+lightred = #d65d0e
+yellow = #d79921
+magenta = #b16286
+green = #98971a
+blue = #458588
+darkblack = #1d2021
+darkgrey = #928374
+darkwhite = #a89984
+lightblack = #3c3836
 
 [global/wm]
-margin-bottom = 5
-margin-top = 5
+margin-bottom = 100
+margin-top = 100
 
 [bar/main]
-monitor = DVI-1
+monitor = DisplayPort-0
 monitor-strict = false
-override-redirect = true
-
+override-redirect = false
 bottom = false
 
 width = 100%
-height = 26
+height = 24
+radius = 1
+underline-size = 2
+
+; module-margin-left = 2
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-font-0 = Hack:size10
-font-1 = FontAwesome:size10
+font-0 = ypn envypn:size=15;2
+font-1 = Material Icons:pixelsize=10;3
+font-2 = FontAwesome:pixelsize=10;2
 
-modules-left = xwindow
+modules-left = date pkg mpd
 modules-center = i3
-modules-right =
+modules-right = memory filesystem pavolume cpu network powermenu
 
 dim-value = 1.0
 
 [bar/secondary]
-monitor = HDMI-0
+monitor = DVI-1
 monitor-strict = false
-override-redirect = true
-
+override-redirect = false
 bottom = false
 
 width = 100%
-height = 26
+height = 24
+radius = 3
+underline-size = 2
+
+; module-margin-left = 2
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-font-0 = Hack:size10
-font-1 = FontAwesome10
+font-0 = ypn envypn:size=15;2
+font-1 = Material Icons:pixelsize=10;3
+font-2 = FontAwesome:pixelsize=10;2
 
-modules-left = xwindow
+modules-left = date pkg mpd
 modules-center = i3
-modules-right =
+modules-right = memory filesystem pavolume cpu network powermenu
 
 dim-value = 1.0
 
-
 [module/cpu]
 type = internal/cpu
-interval = 1
+interval = 5
 
-format = <label> <ramp-load>
-label =   %percentage%
-format-underline = ${colors.red}
-
-ramp-load-0 = ▁
-ramp-load-1 = ▂
-ramp-load-2 = ▃
-ramp-load-3 = ▄
-ramp-load-4 = ▅
-ramp-load-5 = ▆
-ramp-load-6 = ▇
-ramp-load-7 = █
+format = <label>
+label-underline = ${colors.blue}
+label =  %percentage%%
+label-margin-left = 2
+; format-underline  = #FF8ec07c
 
 [module/date]
 type = internal/date
-interval = 1.0
+interval = 1
 
-date = %a %d %b
-time = %T
+date =  %a %d %b
+time =  %T
 
-date-alt = %x
-time-alt = %X - %Z
+date-alt =  %x
+time-alt =  %X
 
-format =  <label>
+format = <label>
 label = %date% %time%
+format-padding = 1
+format-background = ${colors.lightblack}
 
 [module/xwindow]
 type = internal/xwindow
@@ -108,53 +110,142 @@ enable-scroll = false
 
 format = <label-state> <label-mode>
 
-label-mode-foreground = ${colors.background}
-label-mode-padding = 1
+label-mode-padding = 2
+label-mode-background = ${colors.blue}
 
-label-focused-foreground = ${colors.white}
+label-focused-foreground = ${colors.foreground}
 label-focused-background = ${colors.background}
-label-focused-padding = 1
+label-focused-padding = 0
 
-label-unfocused-padding = 1
+label-unfocused-padding = 0
+label-unfocused-foreground = ${colors.darkgrey}
 
-label-urgent-background = ${colors.red}
-label-urgent-foreground = ${colors.background}
-label-urgent-padding = 1
+label-urgent-foreground = ${colors.red}
+label-urgent-padding = 0
 
-label-visible-padding = 1
+label-visible-padding = 0
 
 [module/pkg]
 type = custom/script
-interval = 5000
-format = <label>
+interval = 10
 format-background = ${colors.red}
 format-foreground = ${colors.background}
-exec = /home/snoop/.config/scripts/pkg.sh
-exec-if = "ping -q -w 2 -c 1 176.34.135.167 > /dev/null"
-
-[module/volume]
-type = internal/volume
-format-volume = <ramp-volume> <label-volume>
-master-mixer = Master
-label-muted =  muted
-
-ramp-volume-0 = 
-ramp-volume-1 = 
-ramp-volume-2 = 
-format-volume-underline = ${colors.red}
-format-volume-padding = 2
-mapping = true
+exec = /home/snoop/.config/scripts/updates.sh
+; exec-if = "ping -q -w 2 -c 1 176.34.135.167 > /dev/null"
 
 [module/datealt]
 type = internal/date
 interval = 2
- 
+
 date = "  %d.%m.%Y"
 date-alt = "  %A, %d. %B"
- 
+
 time = "%H:%M"
 time-alt = "%H:%M:%S"
- 
+
 format-underline = ${colors.foreground}
 format-padding = 2
 label = "%date% | %time%"
+
+[module/powermenu]
+type = custom/menu
+
+label-open = 
+label-open-margin-left = 2
+label-close = cancel
+label-close-margin-left = 2
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+menu-0-2 = lock
+menu-0-2-exec = menu-open-3
+menu-0-0-padding = 1
+menu-0-1-padding = 1
+menu-0-2-padding = 1
+
+menu-1-0 = reboot?  
+menu-1-0-exec = reboot
+menu-1-0-padding = 1
+
+menu-2-0 = power off?  
+menu-2-0-exec = poweroff
+menu-2-0-padding = 1
+
+menu-3-0 = lock?  
+menu-3-0-exec = ~/.config/scripts/lock.sh
+menu-3-0-padding = 1
+
+label-open-padding = 1
+label-open-background = ${colors.red}
+label-close-background = ${colors.red}
+
+[module/redshift]
+type = custom/script
+interval = 5
+exec = ~/.config/polybar/redshift.sh
+
+[module/pavolume]
+type = custom/script
+interval = 1
+label = %output%
+label-margin-left = 2
+label-underline = ${colors.magenta}
+exec = ~/.config/polybar/pavolume.sh
+click-right = exec pavucontrol
+click-left = ~/.config/polybar/pavolume.sh --togmute
+scroll-up = ~/.config/polybar/pavolume.sh --up
+scroll-down = ~/.config/polybar/pavolume.sh --down
+
+[module/network]
+type = internal/network
+interface = wlp10s0
+interval = 3
+
+ping-interval = 3
+format-connected = <label-connected>
+label-connected =  %essid% | %upspeed%  %downspeed%
+label-connected-underline = ${colors.green}
+label-connected-margin-left = 2
+format-disconnected = <label-disconnected>
+label-disconnected = 
+label-disconnected-underline = ${colors.red}
+label-disconnected-margin-left = 2
+
+[module/filesystem]
+type=internal/fs
+
+mount-0 = /home
+interval = 30
+fixed-values = false
+format-mounted = <label-mounted>
+label-mounted =  %free%
+label-mounted-margin-left = 2
+label-mounted-underline = ${colors.yellow}
+
+[module/memory]
+type = internal/memory
+interval = 2
+format = <label>
+label =  %gb_used%/%gb_free%
+label-margin-left = 2
+label-underline = ${colors.lightred}
+
+[module/mpd]
+type = internal/mpd
+host = 127.0.0.1
+port = 6600
+interval = 2
+format-online = <icon-prev> <icon-seekb> <toggle> <icon-seekf> <icon-next>  <icon-repeatone> <icon-repeat> <icon-random>  <label-time> <label-song>
+format-online-margin = 1
+label-song =  %artist% - %title%
+icon-play = 
+icon-pause = 
+icon-prev = 
+icon-next = 
+icon-seekb = 
+icon-seekf = 
+icon-random = 
+icon-repeat = 
+icon-repeatone = 

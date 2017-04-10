@@ -6,7 +6,7 @@
 "    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         "
 "                                                 +#+#+#+#+#+   +#+            "
 "    Created: 2017/02/14 18:26:34 by mplanell          #+#    #+#              "
-"    Updated: 2017/04/05 12:43:34 by mplanell         ###   ########.fr        "
+"    Updated: 2017/04/09 00:51:16 by mplanell         ###   ########.fr        "
 "                                                                              "
 " **************************************************************************** "
 
@@ -27,7 +27,8 @@ Plug 'tacahiroy/ctrlp-funky'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " Utilies
-Plug 'vim-syntastic/syntastic'
+" Plug 'vim-syntastic/syntastic'
+Plug 'w0rp/ale'
 Plug 'terryma/vim-expand-region'
 Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-surround'
@@ -73,15 +74,19 @@ call plug#end()
 " Set Space as Leader
 let mapleader = "\<Space>"
 
-" Syntastic options
-let g:syntastic_cpp_compiler = 'gcc'
-let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++ -Wall -Werror -Wextra'
-let g:syntastic_check_on_open=1
-let g:syntastic_enable_signs=1
-let g:syntastic_cpp_check_header = 1
-let g:syntastic_cpp_remove_include_errors = 1
-let g:syntastic_c_remove_include_errors = 1
-let g:syntastic_c_include_dirs = ['../../../includes', '../../includes','../includes','./includes''../../../include', '../../include','../include','./include']
+" " Syntastic options
+" let g:syntastic_cpp_compiler = 'gcc'
+" let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++ -Wall -Werror -Wextra'
+" let g:syntastic_check_on_open=1
+" let g:syntastic_enable_signs=1
+" let g:syntastic_cpp_check_header = 1
+" let g:syntastic_cpp_remove_include_errors = 1
+" let g:syntastic_c_remove_include_errors = 1
+" let g:syntastic_c_include_dirs = ['../../../includes', '../../includes','../includes','./includes''../../../include', '../../include','../include','./include']
+
+" Ale
+let g:ale_c_gcc_options = '-Wall -Werror -Wextra'
+let g:ale_c_clang_options = '-Wall -Werror -Wextra'
 
 " Nerd commenter
 let g:NERDSpaceDelims = 1
@@ -118,31 +123,16 @@ let g:lightline = {
 		\ 'colorscheme': 'gruvbox',
 		\ 'active': {
 		\   'left': [ [ 'mode', 'paste' ], [ 'filename' ], ],
-		\   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+		\   'right': [ [ 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
 		\ },
 		\'component': {
 		\ 'readonly': '%{&readonly?"":""}',
-		\ },
-		\ 'component_expand': {
-		\   'syntastic': 'SyntasticStatuslineFlag',
-		\ },
-		\ 'component_type': {
-		\   'syntastic': 'error',
 		\ },
 		\ 'separator': { 'left': '▓▒░', 'right': '░▒▓' 
 		\ },
 		\ 'subseparator': { 'left': '▒', 'right': '░' 
 		\ }
 		\ }
-
-augroup AutoSyntastic
-  autocmd!
-  autocmd BufWritePost *.c,*.cpp call s:syntastic()
-augroup END
-function! s:syntastic()
-  SyntasticCheck
-  call lightline#update()
-endfunction
 
 " Select expanding regions through spamming v
 vmap v <Plug>(expand_region_expand)

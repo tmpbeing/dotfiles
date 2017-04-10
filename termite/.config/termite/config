@@ -1,6 +1,7 @@
 [options]
 font = ypn envypn 13
 #font = Input Mono 9
+#font = lucy tewi 8
 browser = chromium
 clickable_url = false
 dynamic_title = true

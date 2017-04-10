@@ -6,7 +6,7 @@
 #    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/23 15:35:35 by mplanell          #+#    #+#              #
-#    Updated: 2017/04/04 21:06:04 by mplanell         ###   ########.fr        #
+#    Updated: 2017/04/10 02:30:46 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Lots of it stolen from https://github.com/Airblader/dotfiles-manjaro
@@ -58,16 +58,16 @@ set $ws9  "9:  "
 set $ws10 "10:  "
 
 # Assigning workspaces to screens
-workspace $ws1 output HDMI-0
-workspace $ws2 output DVI-1
-workspace $ws3 output HDMI-0
-workspace $ws4 output DVI-1
-workspace $ws5 output HDMI-0
-workspace $ws6 output DVI-1
-workspace $ws7 output HDMI-0
-workspace $ws8 output DVI-1
-workspace $ws9 output HDMI-0
-workspace $ws10 output HDMI-0
+workspace $ws1 output DVI-1
+workspace $ws2 output DisplayPort-0
+workspace $ws3 output DVI-1
+workspace $ws4 output DisplayPort-0
+workspace $ws5 output DVI-1
+workspace $ws6 output DisplayPort-0
+workspace $ws7 output DVI-1
+workspace $ws8 output DisplayPort-0
+workspace $ws9 output DVI-1
+workspace $ws10 output DVI-1
 
 #Gaps
 
@@ -277,31 +277,30 @@ mode "$mode_power" {
 
 ## Bar
 
-bar {
-    status_command i3blocks
-    i3bar_command i3bar -t
-    position top
-    font pango:Input Mono, FontAwesome 9
-    strip_workspace_numbers yes
-    separator_symbol "■"
-    bindsym button4 nop
-    bindsym button5 nop
-    tray_output none
-    tray_padding 6
-    height 24
-    colors {
-        statusline         $white
-        background         $darkblack
-        separator          $transparent
+# bar { status_command i3blocks
+    # i3bar_command i3bar -t
+    # position top
+    # font pango:ypn envypn, FontAwesome 9
+    # strip_workspace_numbers yes
+    # separator_symbol "■"
+    # bindsym button4 nop
+    # bindsym button5 nop
+    # tray_output none
+    # tray_padding 6
+    # height 24
+    # colors {
+        # statusline         $white
+        # background         $darkblack
+        # separator          $transparent
 
-#                          BORDER       BACKGROUND   TEXT
-        focused_workspace  $darkblack   $darkblack   $white
-        inactive_workspace $darkblack   $darkblack   $darkgrey
-        active_workspace   $darkblack   $darkblack   $darkgrey
-        urgent_workspace   $black       $darkred     $darkblack
-        binding_mode       $black       $darkred     $darkblack
-    }
-}
+# #                          BORDER       BACKGROUND   TEXT
+        # focused_workspace  $darkblack   $darkblack   $white
+        # inactive_workspace $darkblack   $darkblack   $darkgrey
+        # active_workspace   $darkblack   $darkblack   $darkgrey
+        # urgent_workspace   $black       $darkred     $darkblack
+        # binding_mode       $black       $darkred     $darkblack
+    # }
+# }
 
 ## Options
 
@@ -341,6 +340,7 @@ for_window [window_type="menu"] floating enable
 
 ## Required, value change border size
 for_window [class="^.*"] border pixel 3
+#for_window [class=".*"] title_format "<span font='envypn 8'> ➤ %title</span>"
 
 ## Autostart
 
@@ -350,10 +350,15 @@ exec_always --no-startup-id feh --bg-fill /home/snoop/.config/wallpapers/bath.jp
 # Compton
 exec_always --no-startup-id compton --config $HOME/.config/compton/compton.conf -b
 
+#Bars
+exec_always --no-startup-id polybar -r main
+exec_always --no-startup-id polybar -r secondary
+
 exec --no-startup-id dunst
-# exec --no-startup-id discord
-# exec --no-startup-id slack
+exec --no-startup-id discord
+exec --no-startup-id slack
 exec --no-startup-id xrdb -load ~/.Xresources
+exec --no-startup-id i3-msg '$ws5; exec termite -e ncmpcpp; $ws1'
 
 ## Program specific settings
 for_window [class="(?i)Google Play Music Desktop Player"] border pixel 0
