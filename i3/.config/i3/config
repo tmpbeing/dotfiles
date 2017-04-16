@@ -6,7 +6,7 @@
 #    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/23 15:35:35 by mplanell          #+#    #+#              #
-#    Updated: 2017/04/10 02:30:46 by mplanell         ###   ########.fr        #
+#    Updated: 2017/04/15 20:29:54 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Lots of it stolen from https://github.com/Airblader/dotfiles-manjaro
@@ -155,9 +155,16 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # Volume Control
-bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer -q sset Master 3%+
-bindsym XF86AudioLowerVolume exec --no-startup-id "amixer -q sset Master 3%-
-bindsym XF86AudioMute exec --no-startup-id "amixer -q sset Master toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-mute 2 false ; pactl set-sink-volume 2 + 5%"
+bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-mute 2 false ; pactl set-sink-volume 2 + 5%"
+bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute 2 toggle"
+
+# Media player controls
+bindsym XF86AudioPlay exec --no-startup-id mpc toggle
+bindsym XF86AudioPause exec --no-startup-id mpc toggle
+bindsym XF86AudioNext exec --no-startup-id mpc next
+bindsym XF86AudioPrev exec --no-startup-id mpc prev
+bindsym XF86AudioStop exec --no-startup-id mpc stop
 
 # Switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -277,29 +284,30 @@ mode "$mode_power" {
 
 ## Bar
 
-# bar { status_command i3blocks
-    # i3bar_command i3bar -t
-    # position top
-    # font pango:ypn envypn, FontAwesome 9
-    # strip_workspace_numbers yes
-    # separator_symbol "■"
-    # bindsym button4 nop
-    # bindsym button5 nop
-    # tray_output none
-    # tray_padding 6
-    # height 24
-    # colors {
-        # statusline         $white
-        # background         $darkblack
-        # separator          $transparent
+# bar {
+	# status_command i3blocks
+	# i3bar_command i3bar -t
+	# position top
+	# font pango:ypn envypn, FontAwesome 9
+	# strip_workspace_numbers yes
+	# separator_symbol "■"
+	# bindsym button4 nop
+	# bindsym button5 nop
+	# tray_output none
+	# tray_padding 6
+	# height 24
+	# colors {
+		# statusline         $white
+		# background         $darkblack
+		# separator          $transparent
 
 # #                          BORDER       BACKGROUND   TEXT
-        # focused_workspace  $darkblack   $darkblack   $white
-        # inactive_workspace $darkblack   $darkblack   $darkgrey
-        # active_workspace   $darkblack   $darkblack   $darkgrey
-        # urgent_workspace   $black       $darkred     $darkblack
-        # binding_mode       $black       $darkred     $darkblack
-    # }
+		# focused_workspace  $darkblack   $darkblack   $white
+		# inactive_workspace $darkblack   $darkblack   $darkgrey
+		# active_workspace   $darkblack   $darkblack   $darkgrey
+		# urgent_workspace   $black       $darkred     $darkblack
+		# binding_mode       $black       $darkred     $darkblack
+	# }
 # }
 
 ## Options
@@ -351,8 +359,8 @@ exec_always --no-startup-id feh --bg-fill /home/snoop/.config/wallpapers/bath.jp
 exec_always --no-startup-id compton --config $HOME/.config/compton/compton.conf -b
 
 #Bars
-exec_always --no-startup-id polybar -r main
-exec_always --no-startup-id polybar -r secondary
+exec --no-startup-id polybar -r main
+exec --no-startup-id polybar -r secondary
 
 exec --no-startup-id dunst
 exec --no-startup-id discord

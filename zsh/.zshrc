@@ -6,7 +6,7 @@
 #    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/14 13:32:43 by mplanell          #+#    #+#              #
-#    Updated: 2017/04/10 02:33:57 by mplanell         ###   ########.fr        #
+#    Updated: 2017/04/15 19:14:33 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,7 @@ alias cow='fortune | cowsay'
 alias vimch='vim *[.c/.h]'
 alias gdb='gdbgui'
 alias 42fc='sh ~/Code/42/42FileChecker/42FileChecker.sh'
+alias fixscreen='xrandr --output DVI-1 --auto'
 
 mkcd() {
   [[ -n ${1} ]] && mkdir -p ${1} && builtin cd ${1}
@@ -114,10 +115,10 @@ compc() { gcc -c -o "${1%.*}" "$1" -Wall -Wextra -Werror }
 pdf() { zathura --fork "$1" }
 
 # List directory contents
-alias l='ls -la --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
+alias l='ls -la'
 alias ls='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
-alias ll='ls -l --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
-alias la='ls -la --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
+alias ll='ls -l'
+alias la='ls -la'
 alias lm='l | ${PAGER}'
 alias lr='l -R'
 alias lrm='l -R | ${PAGER}'
