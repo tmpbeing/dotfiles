@@ -1,7 +1,6 @@
 [options]
-font = ypn envypn 13
-#font = Input Mono 9
-#font = lucy tewi 8
+#font = Meslo LG S for Powerline 9
+font = Hack 9
 browser = chromium
 clickable_url = false
 dynamic_title = true
@@ -16,7 +15,7 @@ mouse_autohide = true
 [colors]
 
 # Gruvbox
-background = #262626
+background = #282828
 foreground = #ebdbb2
 color0  = #282828
 color8  = #928374

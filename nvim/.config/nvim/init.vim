@@ -6,7 +6,7 @@
 "    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         "
 "                                                 +#+#+#+#+#+   +#+            "
 "    Created: 2017/02/14 18:26:34 by mplanell          #+#    #+#              "
-"    Updated: 2017/04/15 11:19:09 by mplanell         ###   ########.fr        "
+"    Updated: 2017/04/17 12:14:12 by mplanell         ###   ########.fr        "
 "                                                                              "
 " **************************************************************************** "
 
@@ -36,6 +36,7 @@ Plug 'tpope/vim-repeat'
 Plug 'sickill/vim-pasta'
 "Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-markdown', { 'for': 'markdown' }
+Plug 'jtratner/vim-flavored-markdown', { 'for': 'markdown' }
 Plug 'brooth/far.vim'
 Plug 'kassio/neoterm'
 Plug 'treia/nerdcommenter-42-edition'
@@ -59,7 +60,6 @@ Plug 'honza/vim-snippets'
 
 " Colorscheme
 Plug 'morhetz/gruvbox'
-Plug 'joshdick/onedark.vim'
 
 " Misc
 Plug 'Treia/42header.vim'
@@ -88,6 +88,7 @@ let mapleader = "\<Space>"
 " Ale
 let g:ale_c_gcc_options = '-Wall -Werror -Wextra'
 let g:ale_c_clang_options = '-Wall -Werror -Wextra'
+let g:ale_lint_on_text_changed = 'never'
 
 " Nerd commenter
 let g:NERDSpaceDelims = 1
