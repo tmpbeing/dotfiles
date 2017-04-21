@@ -6,7 +6,7 @@
 #    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/23 15:35:35 by mplanell          #+#    #+#              #
-#    Updated: 2017/04/15 20:29:54 by mplanell         ###   ########.fr        #
+#    Updated: 2017/04/21 16:06:49 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Lots of it stolen from https://github.com/Airblader/dotfiles-manjaro
@@ -363,8 +363,6 @@ exec --no-startup-id polybar -r main
 exec --no-startup-id polybar -r secondary
 
 exec --no-startup-id dunst
-exec --no-startup-id discord
-exec --no-startup-id slack
 exec --no-startup-id xrdb -load ~/.Xresources
 exec --no-startup-id i3-msg '$ws5; exec termite -e ncmpcpp; $ws1'
 

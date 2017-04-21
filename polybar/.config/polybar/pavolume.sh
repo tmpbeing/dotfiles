@@ -10,6 +10,7 @@ tmpfile='/tmp/pasink.tmp'
 autosync='yes'
 
 active_sink=`pacmd list-sinks |awk '/* index:/{print $3}'`
+#active_sink='2'
 limit=$(expr 100 - ${inc})
 maxlimit=$(expr ${maxvol} - ${inc})
 
