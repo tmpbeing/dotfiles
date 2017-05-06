@@ -6,7 +6,7 @@
 #    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/14 13:32:43 by mplanell          #+#    #+#              #
-#    Updated: 2017/04/15 19:14:33 by mplanell         ###   ########.fr        #
+#    Updated: 2017/05/06 22:08:31 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -133,12 +133,44 @@ ntfs() { sudo mount -t ntfs-3g /dev/"$@" /home/windows }
 alias untfs='sudo umount /home/windows'
 alias gontfs='cd ~/../windows'
 
+##### Prompt #####
+
+POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR="▓▒░"
+POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR="░▒▓"
+POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR="▓▒░"
+POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR="░▒▓"
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status virtualenv dir_writable)
+POWERLEVEL9K_STATUS_VERBOSE=true
+POWERLEVEL9K_STATUS_OK_IN_NON_VERBOSE=false
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=5
+POWERLEVEL9K_MODE='awesome-fontconfig'
+POWERLEVEL9K_CONTEXT_TEMPLATE="%n"
+POWERLEVEL9K_VCS_GIT_BITBUCKET_ICON=''
+POWERLEVEL9K_VCS_GIT_GITHUB_ICON=''
+POWERLEVEL9K_VCS_GIT_GITLAB_ICON=''
+POWERLEVEL9K_VCS_GIT_ICON=''
+POWERLEVEL9K_HOME_ICON=''
+POWERLEVEL9K_HOME_SUB_ICON=''
+POWERLEVEL9K_FOLDER_ICON=''
+POWERLEVEL9K_LOCK_ICON=''
+POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_BACKGROUND='5'
+POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_FOREGROUND='0'
+POWERLEVEL9K_STATUS_ERROR_BACKGROUND='11'
+POWERLEVEL9K_STATUS_ERROR_FOREGROUND='0'
+POWERLEVEL9K_OK_ICON=''
+POWERLEVEL9K_DIR_HOME_FOREGROUND="%b0"
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="%b0"
+POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="%b0"
+
 ##### Sources #####
 
 # Fix Colors
 source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
 # Prompt
-source "$HOME/.config/.shell_prompt.sh"
+source ~/.config/powerlevel9k/powerlevel9k.zsh-theme
+#source "$HOME/.config/.shell_prompt.sh"
 # Fixing keybindings
 source "$HOME/.config/zsh/keybindings.zsh"
 # Adding clipcopy and clippaste

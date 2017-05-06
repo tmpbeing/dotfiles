@@ -6,7 +6,7 @@
 "    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         "
 "                                                 +#+#+#+#+#+   +#+            "
 "    Created: 2017/02/14 18:26:34 by mplanell          #+#    #+#              "
-"    Updated: 2017/04/21 16:42:14 by mplanell         ###   ########.fr        "
+"    Updated: 2017/05/06 22:14:06 by mplanell         ###   ########.fr        "
 "                                                                              "
 " **************************************************************************** "
 
@@ -19,6 +19,7 @@ Plug 'ap/vim-buftabline'
 Plug 'myusuf3/numbers.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'Shougo/unite.vim'
+Plug 'mhinz/vim-startify'
 
 " File Browsing
 Plug 'Shougo/vimfiler'
@@ -34,7 +35,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'sickill/vim-pasta'
-"Plug 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 Plug 'jtratner/vim-flavored-markdown', { 'for': 'markdown' }
 Plug 'brooth/far.vim'
@@ -54,7 +55,7 @@ Plug 'zchee/deoplete-clang'
 Plug 'zchee/deoplete-zsh'
 Plug 'Shougo/neco-vim'
 Plug 'Shougo/neco-syntax'
-"Plug 'Shougo/neoinclude.vim'
+Plug 'Shougo/neoinclude.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
@@ -206,6 +207,32 @@ nmap <f4> :FortyTwoHeader<CR>
 " Toggles numbers (switch from static to relative)
 nnoremap <F3> :NumbersToggle<CR>
 
+" Startify
+let g:startify_list_order = [
+	\ ['   Files:'], 'files',
+	\ ['   This Directory:'], 'dir',
+	\ ['   Sessions:'], 'sessions',
+	\ ['   Bookmarks:'], 'bookmarks',
+	\ ['   Commands:'], 'commands',
+	\ ]
+let g:startify_custom_header = [
+	\ '                    (_)        .       .                                     .',
+	\ '     .        ____.--^.',
+	\ '      .      /:  /    |                               +           .         .',
+	\ "            /:  `--=--'   .                                                .",
+	\ '           /: __[\==`-.___          *           .',
+	\ '          /__|\ _~~~~~~   ~~--..__            .             .',
+	\ '          \   \|::::|-----.....___|~--.                                 .',
+	\ '           \ _\_~~~~~-----:|:::______//---...___',
+	\ '       .   [\  \  __  --     \       ~  \_      ~~~===------==-...____',
+	\ '           [============================================================-',
+	\ "           /         __/__   --  /__    --       /____....----''''~~~~      .",
+	\ "     *    /  /   ==           ____....=---='''~~~~ .",
+	\ "         /____....--=-''':~~~~                      .                .",
+	\ '                        .                                   .           .',
+	\ '                             .                      .             +',
+	\ '           .     +              .'
+	\ ]
 " }}}
 " Colorscheme & Statusline settings {{{
 
