@@ -6,7 +6,7 @@
 "    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         "
 "                                                 +#+#+#+#+#+   +#+            "
 "    Created: 2017/02/14 18:26:34 by mplanell          #+#    #+#              "
-"    Updated: 2017/05/06 22:14:06 by mplanell         ###   ########.fr        "
+"    Updated: 2017/05/17 21:08:08 by mplanell         ###   ########.fr        "
 "                                                                              "
 " **************************************************************************** "
 
@@ -24,11 +24,9 @@ Plug 'mhinz/vim-startify'
 " File Browsing
 Plug 'Shougo/vimfiler'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tacahiroy/ctrlp-funky'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " Utilies
-" Plug 'vim-syntastic/syntastic'
 Plug 'w0rp/ale'
 Plug 'terryma/vim-expand-region'
 Plug 'Raimondi/delimitMate'
@@ -49,8 +47,6 @@ Plug 'gregsexton/gitv'
 
 " Completion/Snippets
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"Plug 'Shougo/neosnippet'
-"Plug 'Shougo/neosnippet-snippets'
 Plug 'zchee/deoplete-clang'
 Plug 'zchee/deoplete-zsh'
 Plug 'Shougo/neco-vim'
@@ -66,7 +62,6 @@ Plug 'morhetz/gruvbox'
 Plug 'Treia/42header.vim'
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'junegunn/goyo.vim'
-Plug 'machakann/vim-highlightedyank'
 
 call plug#end()
 
@@ -159,9 +154,6 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_switch_buffer = 'Et'
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" -Q --ignore "*.o"'
-
-" Find functions with CtrlP
-nnoremap <Leader>fu :CtrlPFunky<Cr>
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
