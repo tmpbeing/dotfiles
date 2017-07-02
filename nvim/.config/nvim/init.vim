@@ -6,7 +6,7 @@
 "    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         "
 "                                                 +#+#+#+#+#+   +#+            "
 "    Created: 2017/02/14 18:26:34 by mplanell          #+#    #+#              "
-"    Updated: 2017/05/17 21:08:08 by mplanell         ###   ########.fr        "
+"    Updated: 2017/06/13 18:28:00 by mplanell         ###   ########.fr        "
 "                                                                              "
 " **************************************************************************** "
 
@@ -25,6 +25,7 @@ Plug 'mhinz/vim-startify'
 Plug 'Shougo/vimfiler'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'jlanzarotta/bufexplorer'
 
 " Utilies
 Plug 'w0rp/ale'
@@ -62,6 +63,7 @@ Plug 'morhetz/gruvbox'
 Plug 'Treia/42header.vim'
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'junegunn/goyo.vim'
+Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
@@ -100,7 +102,7 @@ map <Leader>l :NERDTreeToggle<CR>
 map <Leader>L :NERDTree<CR>
 
 " Far
-let g:far#source= 'agnvim'
+let g:far#source= 'vimgrep'
 
 " Vimfiler
 let g:vimfiler_as_default_explorer = 1
@@ -198,6 +200,9 @@ nmap <f4> :FortyTwoHeader<CR>
 
 " Toggles numbers (switch from static to relative)
 nnoremap <F3> :NumbersToggle<CR>
+
+" vimwiki/vimwiki
+let g:vimwiki_list = [{'path': '~/Stuff/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
 
 " Startify
 let g:startify_list_order = [

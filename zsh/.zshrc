@@ -6,7 +6,7 @@
 #    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/08/14 13:32:43 by mplanell          #+#    #+#              #
-#    Updated: 2017/05/09 18:58:46 by mplanell         ###   ########.fr        #
+#    Updated: 2017/06/28 17:03:00 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,19 +38,27 @@ export MAIL42=mplanell@student.42.fr
 export USER42=mplanell
 
 # Other
+# export TZ=Europe/Paris
 export EDITOR="vim"
 export PAGER="less"
 export MANPAGER='less -s -M +Gg'
 export REPORTTIME=10 # Display how long all tasks over 10 seconds take
 
 # Colors for man pages
-export LESS_TERMCAP_mb=$'\E[1;31m'    # Begins blinking.
-export LESS_TERMCAP_md=$'\E[1;31m'    # Begins bold.
-export LESS_TERMCAP_me=$'\E[0m'       # Ends mode.
-export LESS_TERMCAP_se=$'\E[0m'       # Ends standout-mode.
-export LESS_TERMCAP_so=$'\E[7m'       # Begins standout-mode.
-export LESS_TERMCAP_ue=$'\E[0m'       # Ends underline.
-export LESS_TERMCAP_us=$'\E[1;32m'    # Begins underline.
+# export LESS_TERMCAP_mb=$'\E[1;31m'    # Begins blinking.
+# export LESS_TERMCAP_md=$'\E[1;31m'    # Begins bold.
+# export LESS_TERMCAP_me=$'\E[0m'       # Ends mode.
+# export LESS_TERMCAP_se=$'\E[0m'       # Ends standout-mode.
+# export LESS_TERMCAP_so=$'\E[7m'       # Begins standout-mode.
+# export LESS_TERMCAP_ue=$'\E[0m'       # Ends underline.
+# export LESS_TERMCAP_us=$'\E[1;32m'    # Begins underline.
+export LESS_TERMCAP_mb=$'\e[0;31m'
+export LESS_TERMCAP_md=$'\e[0;34m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[0;34;36m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[0;35m'
 
 ##### Aliases ######
 
@@ -92,7 +100,7 @@ conf() {
 		zsh)			vim ~/.zshrc && source ~/.zshrc ;;
 		vim)			vim ~/.vimrc ;;
 		nvim)			vim ~/.config/nvim/init.vim ;;
-		xinit)			vim ~/.xinit ;;
+		xinit)			vim ~/.xinitrc ;;
 		xresources)		vim ~/.Xresources ;;
 		ranger)			vim ~/.config/ranger/rc.conf ;;
 		pacman)			sudo vim /etc/pacman.conf ;;
