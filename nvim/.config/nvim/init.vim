@@ -6,7 +6,7 @@
 "    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         "
 "                                                 +#+#+#+#+#+   +#+            "
 "    Created: 2017/02/14 18:26:34 by mplanell          #+#    #+#              "
-"    Updated: 2017/06/13 18:28:00 by mplanell         ###   ########.fr        "
+"    Updated: 2017/07/30 09:20:02 by marvin           ###   ########.fr        "
 "                                                                              "
 " **************************************************************************** "
 
@@ -73,16 +73,6 @@ call plug#end()
 " Set Space as Leader
 let mapleader = "\<Space>"
 
-" " Syntastic options
-" let g:syntastic_cpp_compiler = 'gcc'
-" let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++ -Wall -Werror -Wextra'
-" let g:syntastic_check_on_open=1
-" let g:syntastic_enable_signs=1
-" let g:syntastic_cpp_check_header = 1
-" let g:syntastic_cpp_remove_include_errors = 1
-" let g:syntastic_c_remove_include_errors = 1
-" let g:syntastic_c_include_dirs = ['../../../includes', '../../includes','../includes','./includes''../../../include', '../../include','../include','./include']
-
 " Ale
 let g:ale_c_gcc_options = '-Wall -Werror -Wextra'
 let g:ale_c_clang_options = '-Wall -Werror -Wextra'
@@ -107,16 +97,6 @@ let g:far#source= 'vimgrep'
 " Vimfiler
 let g:vimfiler_as_default_explorer = 1
 map <Leader>f :VimFiler<CR>
-
-" " Promptline
-" let g:promptline_preset = {
-		" \'a'    : [ '$USER' ],
-		" \'b'    : [ promptline#slices#cwd() ],
-		" \'c'    : [ promptline#slices#vcs_branch() ],
-		" \'warn' : [ promptline#slices#last_exit_code() ]}
-" let g:promptline_symbols = {
-		" \'left' : '',
-		" \'dir_sep' : '',}
 
 " Lightline
 let g:lightline = {
@@ -234,6 +214,7 @@ let g:startify_custom_header = [
 " Colorscheme & Statusline settings {{{
 
 colorscheme gruvbox 
+" colorscheme monokai
 set background=dark
 hi CursorLine cterm=bold ctermbg=234
 "let g:gruvbox_termcolors = 256
@@ -258,7 +239,7 @@ set smartindent "Smarter indentation especially for C files
 set noswapfile "Doesn't keep swap files
 set wildignore+=*.o,*~,*.pyc "Ignore these files (executables)
 autocmd BufRead,BufNewFile * syn match parens /[\[\](){}]/ | hi parens ctermfg=208
-set clipboard=unnamed "Cross-terminal paste
+set clipboard=unnamedplus "Cross-terminal paste
 set icm=nosplit
 set so=7 "set 7 lines to the cursors when moving vertical
 

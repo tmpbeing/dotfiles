@@ -3,16 +3,18 @@
 #                                                         :::      ::::::::    #
 #    config                                             :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
+#    By: marvin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/09/23 15:35:35 by mplanell          #+#    #+#              #
-#    Updated: 2017/07/02 20:45:00 by mplanell         ###   ########.fr        #
+#    Created: 2017/07/29 13:50:30 by marvin            #+#    #+#              #
+#    Updated: 2017/08/01 01:49:46 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-# Lots of it stolen from https://github.com/Airblader/dotfiles-manjaro
-# vim:filetype=i3
 
-set $mod Mod1
+set $mod Mod4
+
+## Font
+
+font pango:Terminus 10
 
 ## Colors
 
@@ -39,50 +41,32 @@ set $darkblack   #1d2021
 set $lightblack  #3C3836
 set $transparent #00000000
 
-## Font
+## Workspaces
 
-font pango:Input Mono, FontAwesome 10
+set $ws1  "1:MAIN"
+set $ws2  "2:WEB"
+set $ws3  "3:CODE"
+set $ws4  "4:CHAT"
+set $ws5  "5:MEDIA"
+set $ws6  "6:TERM"
+set $ws7  "7:DOCS"
+set $ws8  "8:RANDOM"
+set $ws9  "9:MAIL"
+set $ws10 "10:TRASH"
 
-##Setting up workspaces and gaps
-
-# Set workspaces
-set $ws1  "1:  "
-set $ws2  "2:  "
-set $ws3  "3:  "
-set $ws4  "4:  "
-set $ws5  "5:  "
-set $ws6  "6:  "
-set $ws7  "7:  "
-set $ws8  "8:  "
-set $ws9  "9:  "
-set $ws10 "10:  "
-
-# Assigning workspaces to screens
-workspace $ws1 output DVI-1
-workspace $ws2 output DisplayPort-0
-workspace $ws3 output DVI-1
-workspace $ws4 output DisplayPort-0
-workspace $ws5 output DVI-1
-workspace $ws6 output DisplayPort-0
-workspace $ws7 output DVI-1
-workspace $ws8 output DisplayPort-0
-workspace $ws9 output DVI-1
-workspace $ws10 output DVI-1
-
-#Gaps
+## Gaps
 
 set $default_gaps_inner 10
-set $default_gaps_outer 20
+set $default_gaps_outer 5
 gaps inner $default_gaps_inner
+gaps outer $default_gaps_outer
 
-workspace $ws1 gaps inner 0
-workspace $ws1 gaps outer 0
-workspace $ws9 gaps inner 0
-workspace $ws9 gaps outer 0
+workspace $ws2 gaps inner 0
+workspace $ws2 gaps outer 0
 workspace $ws10 gaps inner 0
 workspace $ws10 gaps outer 0
 
-# Borders
+## Borders
 
 #                       BORDER      BACKGROUND  TEXT        INDICATOR   CHILD_BORDER
 client.focused          $darkblue   $black      $darkwhite  $darkblack  $darkblue
@@ -91,7 +75,9 @@ client.focused_inactive $lightblack $black      $white      $darkblack  $lightbl
 client.urgent           $darkred    $darkred    $black      $darkred    $darkred
 client.background		$black
 
-##Keybindings
+## Keybindings
+
+floating_modifier $mod
 
 # Start a terminal
 bindsym $mod+Return exec --no-startup-id termite
@@ -101,44 +87,54 @@ bindsym $mod+Shift+q kill
 
 # Start rofi (a program launcher)
 bindsym $mod+d exec --no-startup-id rofi -show run
+#bindsym $mod+d exec dmenu_run
 
-# Change focus
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+# alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# Move window
-bindsym $mod+Shift+Left move left 35px
-bindsym $mod+Shift+Down move down 35px
-bindsym $mod+Shift+Up move up 35px
-bindsym $mod+Shift+Right move right 35px
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
 
-# Split in horizontal orientation
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
 bindsym $mod+h split h
 
-# Split in vertical orientation
+# split in vertical orientation
 bindsym $mod+v split v
 
-# Enter fullscreen mode for the focused container
+# enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 bindsym $mod+g fullscreen global
 
-# Change container layout (stacked, tabbed, toggle split)
+# change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-# For terminal launch
-bindsym $mod+Shift+w split h; layout tabbed
-
-# Toggle tiling / floating
+# toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
-# Change focus between tiling / floating windows
+# change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# Focus the parent container
+# focus the parent container
 bindsym $mod+a focus parent
 
 # Focus the child container
@@ -154,19 +150,7 @@ bindsym --release Print exec --no-startup-id "maim -p 0 -c 0.96,0.5,0.09 $HOME/P
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
-# Volume Control
-bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-mute 2 false ; pactl set-sink-volume 2 + 5%"
-bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-mute 2 false ; pactl set-sink-volume 2 + 5%"
-bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute 2 toggle"
-
-# Media player controls
-bindsym XF86AudioPlay exec --no-startup-id mpc toggle
-bindsym XF86AudioPause exec --no-startup-id mpc toggle
-bindsym XF86AudioNext exec --no-startup-id mpc next
-bindsym XF86AudioPrev exec --no-startup-id mpc prev
-bindsym XF86AudioStop exec --no-startup-id mpc stop
-
-# Switch to workspace
+# switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
@@ -180,137 +164,99 @@ bindsym $mod+0 workspace $ws10
 bindsym $mod+Tab workspace back_and_forth
 workspace_auto_back_and_forth yes
 
-# Move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
 
-# Reload the configuration file
+# reload the configuration file
 bindsym $mod+Shift+c reload
-# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# Exit i3 (logs you out of your X session)
+# exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-# Resize window (you can also use the mouse for that)
-mode "resize" {
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+# resize window (you can also use the mouse for that)
+mode "RESIZE" {
+		bindsym j resize shrink width 10 px or 10 ppt
+		bindsym k resize grow height 10 px or 10 ppt
+		bindsym l resize shrink height 10 px or 10 ppt
+		bindsym semicolon resize grow width 10 px or 10 ppt
 
-        bindsym Shift+Left resize shrink width 5 px or 5 ppt
-        bindsym Shift+Down resize grow height 5 px or 5 ppt
-        bindsym Shift+Up resize shrink height 5 px or 5 ppt
-        bindsym Shift+Right resize grow width 5 px or 5 ppt
+		bindsym Left resize shrink width 10 px or 10 ppt
+		bindsym Down resize grow height 10 px or 10 ppt
+		bindsym Up resize shrink height 10 px or 10 ppt
+		bindsym Right resize grow width 10 px or 10 ppt
 
+		bindsym Shift+Left resize shrink width 5 px or 5 ppt
+		bindsym Shift+Down resize grow height 5 px or 5 ppt
+		bindsym Shift+Up resize shrink height 5 px or 5 ppt
+		bindsym Shift+Right resize grow width 5 px or 5 ppt
 
 		bindsym 1 mode "default", resize set 1000 600
-    	bindsym 2 mode "default", resize set 1500 600
-    	bindsym 3 mode "default", resize set 1200 1000
+		bindsym 2 mode "default", resize set 1500 600
+		bindsym 3 mode "default", resize set 1200 1000
 		bindsym Return mode "default"
 		bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
 
 # Resize gaps
-set $mode_gaps gaps
+set $mode_gaps GAPS
 set $mode_gaps_outer outer gaps
 set $mode_gaps_inner inner gaps
 bindsym $mod+Shift+g mode "$mode_gaps"
 mode "$mode_gaps" {
-    bindsym o      mode "$mode_gaps_outer"
-    bindsym i      mode "$mode_gaps_inner"
+	bindsym o      mode "$mode_gaps_outer"
+	bindsym i      mode "$mode_gaps_inner"
 
-    bindsym 0      mode "default", exec --no-startup-id i3-msg "gaps inner current set 0" && i3-msg "gaps outer current set 0"
-    bindsym d      mode "default", exec --no-startup-id i3-msg "gaps inner current set $default_gaps_inner" && i3-msg "gaps outer current set $default_gaps_outer"
+	bindsym 0      mode "default", exec --no-startup-id i3-msg "gaps inner current set 0" && i3-msg "gaps outer current set 0"
+	bindsym d      mode "default", exec --no-startup-id i3-msg "gaps inner current set $default_gaps_inner" && i3-msg "gaps outer current set $default_gaps_outer"
 
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
 }
 
 mode "$mode_gaps_inner" {
-    bindsym plus  gaps inner current plus 5
-    bindsym minus gaps inner current minus 5
-    bindsym 0     mode "default", gaps inner current set 0
-    bindsym d     mode "default", gaps inner current set $default_gaps_inner
+	bindsym plus  gaps inner current plus 5
+	bindsym minus gaps inner current minus 5
+	bindsym 0     mode "default", gaps inner current set 0
+	bindsym d     mode "default", gaps inner current set $default_gaps_inner
 
-    bindsym Shift+plus  gaps inner all plus 5
-    bindsym Shift+minus gaps inner all minus 5
-    bindsym Shift+0     mode "default", gaps inner all set 0
-    bindsym Shift+d     mode "default", gaps inner all set $default_gaps_inner
+	bindsym Shift+plus  gaps inner all plus 5
+	bindsym Shift+minus gaps inner all minus 5
+	bindsym Shift+0     mode "default", gaps inner all set 0
+	bindsym Shift+d     mode "default", gaps inner all set $default_gaps_inner
 
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
 }
 
 mode "$mode_gaps_outer" {
-    bindsym plus  gaps outer current plus 5
-    bindsym minus gaps outer current minus 5
-    bindsym 0     mode "default", gaps outer current set 0
-    bindsym d     mode "default", gaps outer current set $default_gaps_outer
+	bindsym plus  gaps outer current plus 5
+	bindsym minus gaps outer current minus 5
+	bindsym 0     mode "default", gaps outer current set 0
+	bindsym d     mode "default", gaps outer current set $default_gaps_outer
 
-    bindsym Shift+plus  gaps outer all plus 5
-    bindsym Shift+minus gaps outer all minus 5
-    bindsym Shift+0     mode "default", gaps outer all set 0
-    bindsym Shift+d     mode "default", gaps outer all set $default_gaps_outer
+	bindsym Shift+plus  gaps outer all plus 5
+	bindsym Shift+minus gaps outer all minus 5
+	bindsym Shift+0     mode "default", gaps outer all set 0
+	bindsym Shift+d     mode "default", gaps outer all set $default_gaps_outer
 
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-##Shutdown and stuff
-
-set $mode_power power
-bindsym $mod+Control+l mode "$mode_power"
-mode "$mode_power" {
-	bindsym l mode "default", exec --no-startup-id $HOME/.config/i3/i3exit lock
-    bindsym e mode "default", exec --no-startup-id $HOME/.config/i3/i3exit logout
-    bindsym s mode "default", exec --no-startup-id $HOME/.config/i3/i3exit suspend
-    bindsym h mode "default", exec --no-startup-id $HOME/.config/i3/i3exit hibernate
-    bindsym r mode "default", exec --no-startup-id $HOME/.config/i3/i3exit reboot
-    bindsym p mode "default", exec --no-startup-id $HOME/.config/i3/i3exit shutdown
-
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
 }
 
-
-## Bar
-
-# bar {
-	# status_command i3blocks
-	# i3bar_command i3bar -t
-	# position top
-	# font pango:ypn envypn, FontAwesome 9
-	# strip_workspace_numbers yes
-	# separator_symbol "■"
-	# bindsym button4 nop
-	# bindsym button5 nop
-	# tray_output none
-	# tray_padding 6
-	# height 24
-	# colors {
-		# statusline         $white
-		# background         $darkblack
-		# separator          $transparent
-
-# #                          BORDER       BACKGROUND   TEXT
-		# focused_workspace  $darkblack   $darkblack   $white
-		# inactive_workspace $darkblack   $darkblack   $darkgrey
-		# active_workspace   $darkblack   $darkblack   $darkgrey
-		# urgent_workspace   $black       $darkred     $darkblack
-		# binding_mode       $black       $darkred     $darkblack
-	# }
-# }
-
-## Options
+#bar {
+#       status_command i3status
+#}
 
 # Disable borders when there's only one window in a workspace
 hide_edge_borders both
@@ -326,14 +272,13 @@ floating_maximum_size -1 x -1
 floating_modifier $mod
 
 ## Assign
-
 assign [class="(?i)thunderbird"]                      $ws9
 assign [class="(?i)firefox"]                          $ws10
-assign [class="(?i)chromium"]                         $ws1
-assign [class="(?i)qutebrowser"]                      $ws1
-assign [class="(?i)caprine"]                          $ws3
-assign [class="(?i)discord"]                          $ws3
-assign [class="(?i)slack"]                            $ws3
+assign [class="(?i)google-chrome-stable"]             $ws2
+assign [class="(?i)qutebrowser"]                      $ws2
+assign [class="(?i)caprine"]                          $ws4
+assign [class="(?i)discord"]                          $ws4
+assign [class="(?i)slack"]                            $ws4
 assign [class="(?i)Google Play Music Desktop Player"] $ws5
 
 ## Floating stuff
@@ -348,24 +293,22 @@ for_window [window_type="menu"] floating enable
 
 ## Required, value change border size
 for_window [class="^.*"] border pixel 3
-#for_window [class=".*"] title_format "<span font='envypn 8'> ➤ %title</span>"
 
 ## Autostart
 
 # Wallpaper
-exec_always --no-startup-id feh --bg-fill /home/snoop/.config/wallpapers/bath.jpg
+exec_always --no-startup-id feh --bg-fill /home/snoop/.config/wallpapers/darksouls.jpg
 
 # Compton
 exec_always --no-startup-id compton --config $HOME/.config/compton/compton.conf -b
 
 #Bars
-exec --no-startup-id polybar -r main
-exec --no-startup-id polybar -r secondary
+exec_always --no-startup-id /home/snoop/.config/i3/polybar-handler
 
 exec --no-startup-id dunst
 exec --no-startup-id xrdb -load ~/.Xresources
-exec --no-startup-id slack
-exec --no-startup-id discord
+# exec --no-startup-id slack
+# exec --no-startup-id discord
 
 ## Program specific settings
 for_window [class="(?i)Google Play Music Desktop Player"] border pixel 0
