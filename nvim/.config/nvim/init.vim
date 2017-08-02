@@ -6,7 +6,7 @@
 "    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         "
 "                                                 +#+#+#+#+#+   +#+            "
 "    Created: 2017/02/14 18:26:34 by mplanell          #+#    #+#              "
-"    Updated: 2017/07/30 09:20:02 by marvin           ###   ########.fr        "
+"    Updated: 2017/08/02 06:37:16 by mplanell         ###   ########.fr        "
 "                                                                              "
 " **************************************************************************** "
 
@@ -17,7 +17,6 @@ call plug#begin('~/.config/nvim/plugged')
 " Interface / Display
 Plug 'ap/vim-buftabline'
 Plug 'myusuf3/numbers.vim'
-Plug 'itchyny/lightline.vim'
 Plug 'Shougo/unite.vim'
 Plug 'mhinz/vim-startify'
 
@@ -88,7 +87,7 @@ let NERDTreeDirArrowExpandable = '▷'
 let NERDTreeDirArrowCollapsible = '▼'
 " Toggle NerdTree
 map <Leader>l :NERDTreeToggle<CR>
-" Open NerdTree
+" open NerdTree
 map <Leader>L :NERDTree<CR>
 
 " Far
@@ -97,22 +96,6 @@ let g:far#source= 'vimgrep'
 " Vimfiler
 let g:vimfiler_as_default_explorer = 1
 map <Leader>f :VimFiler<CR>
-
-" Lightline
-let g:lightline = {
-		\ 'colorscheme': 'gruvbox',
-		\ 'active': {
-		\   'left': [ [ 'mode', 'paste' ], [ 'filename' ], ],
-		\   'right': [ [ 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
-		\ },
-		\'component': {
-		\ 'readonly': '%{&readonly?"":""}',
-		\ },
-		\ 'separator': { 'left': '▓▒░', 'right': '░▒▓' 
-		\ },
-		\ 'subseparator': { 'left': '▒', 'right': '░' 
-		\ }
-		\ }
 
 " Select expanding regions through spamming v
 vmap v <Plug>(expand_region_expand)
@@ -162,7 +145,7 @@ nnoremap <silent> <leader>tm :T make<CR>
 
 " BufTabLine
 let g:buftabline_indicators=1
-let g:buftabline_numbers=2
+" let g:buftabline_numbers=2
 nmap <leader>1 <Plug>BufTabLine.Go(1)
 nmap <leader>2 <Plug>BufTabLine.Go(2)
 nmap <leader>3 <Plug>BufTabLine.Go(3)
@@ -213,16 +196,31 @@ let g:startify_custom_header = [
 " }}}
 " Colorscheme & Statusline settings {{{
 
-colorscheme gruvbox 
-" colorscheme monokai
+colorscheme gruvbox
 set background=dark
-hi CursorLine cterm=bold ctermbg=234
-"let g:gruvbox_termcolors = 256
 let g:gruvbox_contrast_dark ='medium'
 let g:gruvbox_improved_warnings = 1
 let g:gruvbox_italic = 1
-"set t_Co=256
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+hi VertSplit ctermfg=238 ctermbg=235
+hi StatusLine ctermfg=235 ctermbg=245
+hi StatusLineNC ctermfg=235 ctermbg=237
+hi CursorLine cterm=bold ctermbg=234
+hi clear SignColumn
+hi SignColumn ctermbg=235
+hi GitGutterAdd ctermbg=235 ctermfg=245
+hi GitGutterChange ctermbg=235 ctermfg=245
+hi GitGutterDelete ctermbg=235 ctermfg=245
+hi GitGutterChangeDelete ctermbg=235 ctermfg=245
+hi ALEErrorSign ctermfg=1 ctermbg=235
+hi ALEWarningSign ctermfg=11 ctermbg=235
+hi EndOfBuffer ctermfg=237 ctermbg=235
+hi BufTabLineActive ctermfg=245 ctermbg=235
+hi BufTabLineCurrent ctermfg=245 ctermbg=235
+hi BufTabLineHidden ctermfg=239 ctermbg=235
+hi ColorColumn ctermbg=236
+
+set statusline=%=%P\ %f\ %m
 
 " }}}
 " UI Config {{{
