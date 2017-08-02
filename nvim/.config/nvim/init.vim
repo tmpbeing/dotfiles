@@ -6,7 +6,7 @@
 "    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         "
 "                                                 +#+#+#+#+#+   +#+            "
 "    Created: 2017/02/14 18:26:34 by mplanell          #+#    #+#              "
-"    Updated: 2017/08/02 06:37:16 by mplanell         ###   ########.fr        "
+"    Updated: 2017/08/02 09:42:10 by mplanell         ###   ########.fr        "
 "                                                                              "
 " **************************************************************************** "
 
@@ -221,6 +221,7 @@ hi BufTabLineHidden ctermfg=239 ctermbg=235
 hi ColorColumn ctermbg=236
 
 set statusline=%=%P\ %f\ %m
+set showmode
 
 " }}}
 " UI Config {{{
