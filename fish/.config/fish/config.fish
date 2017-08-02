@@ -4,6 +4,8 @@ source ~/.local/share/icons-in-terminal/icons.fish
 set fish_greeting ""
 set fish_home ~/.config/fish
 set PAGER less
+set EDITOR nvim
+set GIT_EDITOR nvim
 
 source $fish_home/environment.fish
 # THEME PURE #
