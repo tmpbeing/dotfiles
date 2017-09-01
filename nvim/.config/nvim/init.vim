@@ -6,7 +6,7 @@
 "    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         "
 "                                                 +#+#+#+#+#+   +#+            "
 "    Created: 2017/02/14 18:26:34 by mplanell          #+#    #+#              "
-"    Updated: 2017/08/02 09:42:10 by mplanell         ###   ########.fr        "
+"    Updated: 2017/09/01 16:45:57 by mplanell         ###   ########.fr        "
 "                                                                              "
 " **************************************************************************** "
 
@@ -21,10 +21,11 @@ Plug 'Shougo/unite.vim'
 Plug 'mhinz/vim-startify'
 
 " File Browsing
-Plug 'Shougo/vimfiler'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'jlanzarotta/bufexplorer'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'majutsushi/tagbar'
 
 " Utilies
 Plug 'w0rp/ale'
@@ -32,12 +33,10 @@ Plug 'terryma/vim-expand-region'
 Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'sickill/vim-pasta'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 Plug 'jtratner/vim-flavored-markdown', { 'for': 'markdown' }
 Plug 'brooth/far.vim'
-Plug 'kassio/neoterm'
 Plug 'treia/nerdcommenter-42-edition'
 
 " Git
@@ -48,7 +47,6 @@ Plug 'gregsexton/gitv'
 " Completion/Snippets
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-clang'
-Plug 'zchee/deoplete-zsh'
 Plug 'Shougo/neco-vim'
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neoinclude.vim'
@@ -61,7 +59,6 @@ Plug 'morhetz/gruvbox'
 " Misc
 Plug 'Treia/42header.vim'
 Plug 'PotatoesMaster/i3-vim-syntax'
-Plug 'junegunn/goyo.vim'
 Plug 'vimwiki/vimwiki'
 
 call plug#end()
@@ -85,17 +82,14 @@ let g:NERDTrimTrailingWhitespace = 1
 let NERDTreeShowHidden=1
 let NERDTreeDirArrowExpandable = '▷'
 let NERDTreeDirArrowCollapsible = '▼'
+
 " Toggle NerdTree
-map <Leader>l :NERDTreeToggle<CR>
+map <Leader>t :NERDTreeToggle<CR>
 " open NerdTree
-map <Leader>L :NERDTree<CR>
+map <Leader>T :NERDTree<CR>
 
 " Far
 let g:far#source= 'vimgrep'
-
-" Vimfiler
-let g:vimfiler_as_default_explorer = 1
-map <Leader>f :VimFiler<CR>
 
 " Select expanding regions through spamming v
 vmap v <Plug>(expand_region_expand)
@@ -112,27 +106,20 @@ call expand_region#custom_text_objects({
 	\ "\/\\n\\n\<CR>" : 1,
 	\ })
 
-" Ctrl-P
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_switch_buffer = 'Et'
-let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" -Q --ignore "*.o"'
+" FZF
+nnoremap <c-p> :Files<CR>
+nnoremap <Leader>p :Files ~/<CR>
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
 let g:deoplete#sources#clang#clang_header = '/usr/include/clang'
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif " Autoclose scratch window
-" deoplete tab-complete
-" inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
-" Neosnippets
-" imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-" let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+" Tagbar
+nmap <F8> :TagbarToggle<CR>
 
- " Ultisnips
+" Ultisnips
 let g:UltiSnipsExpandTrigger="<c-s>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
@@ -212,7 +199,7 @@ hi GitGutterAdd ctermbg=235 ctermfg=245
 hi GitGutterChange ctermbg=235 ctermfg=245
 hi GitGutterDelete ctermbg=235 ctermfg=245
 hi GitGutterChangeDelete ctermbg=235 ctermfg=245
-hi ALEErrorSign ctermfg=1 ctermbg=235
+hi ALEErrorSign ctermfg=9 ctermbg=235
 hi ALEWarningSign ctermfg=11 ctermbg=235
 hi EndOfBuffer ctermfg=237 ctermbg=235
 hi BufTabLineActive ctermfg=245 ctermbg=235

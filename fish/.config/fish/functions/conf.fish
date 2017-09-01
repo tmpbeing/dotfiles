@@ -27,6 +27,8 @@ function conf
 				vim ~/.config/ranger/rc.conf
 			case fish
 				vim ~/.config/fish/config.fish
+			case tmux
+				vim ~/.tmux.conf
 		end
 	else
 		return 1
