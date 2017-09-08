@@ -6,7 +6,7 @@
 "    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         "
 "                                                 +#+#+#+#+#+   +#+            "
 "    Created: 2017/02/14 18:26:34 by mplanell          #+#    #+#              "
-"    Updated: 2017/09/01 16:45:57 by mplanell         ###   ########.fr        "
+"    Updated: 2017/09/08 16:02:05 by mplanell         ###   ########.fr        "
 "                                                                              "
 " **************************************************************************** "
 
@@ -38,6 +38,7 @@ Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 Plug 'jtratner/vim-flavored-markdown', { 'for': 'markdown' }
 Plug 'brooth/far.vim'
 Plug 'treia/nerdcommenter-42-edition'
+Plug 'godlygeek/tabular'
 
 " Git
 Plug 'airblade/vim-gitgutter'
