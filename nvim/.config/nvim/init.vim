@@ -6,7 +6,7 @@
 "    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         "
 "                                                 +#+#+#+#+#+   +#+            "
 "    Created: 2017/02/14 18:26:34 by mplanell          #+#    #+#              "
-"    Updated: 2017/09/08 16:02:05 by mplanell         ###   ########.fr        "
+"    Updated: 2017/10/26 20:16:09 by mplanell         ###   ########.fr        "
 "                                                                              "
 " **************************************************************************** "
 
@@ -28,7 +28,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 
 " Utilies
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
+Plug 'vim-syntastic/syntastic'
 Plug 'terryma/vim-expand-region'
 Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-surround'
@@ -70,10 +71,20 @@ call plug#end()
 " Set Space as Leader
 let mapleader = "\<Space>"
 
+" " Syntastic
+let g:syntastic_cpp_compiler = 'gcc'
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++ -Wall -Werror -Wextra'
+let g:syntastic_check_on_open=1
+let g:syntastic_enable_signs=1
+let g:syntastic_cpp_check_header = 1
+let g:syntastic_cpp_remove_include_errors = 1
+let g:syntastic_c_remove_include_errors = 1
+let g:syntastic_c_include_dirs = ['../../../includes', '../../includes','../includes','./includes''../../../include', '../../include','../include','./include', './libft/includes', '../libft/includes', '../../libft/includes', '../../../libft/includes', './libft/include', '../libft/include', '../../libft/include', '../../../libft/include']
+
 " Ale
-let g:ale_c_gcc_options = '-Wall -Werror -Wextra'
-let g:ale_c_clang_options = '-Wall -Werror -Wextra'
-let g:ale_lint_on_text_changed = 'never'
+" let g:ale_c_gcc_options = '-Wall -Werror -Wextra'
+" let g:ale_c_clang_options = '-Wall -Werror -Wextra'
+" let g:ale_lint_on_text_changed = 'never'
 
 " Nerd commenter
 let g:NERDSpaceDelims = 1
@@ -200,8 +211,10 @@ hi GitGutterAdd ctermbg=235 ctermfg=245
 hi GitGutterChange ctermbg=235 ctermfg=245
 hi GitGutterDelete ctermbg=235 ctermfg=245
 hi GitGutterChangeDelete ctermbg=235 ctermfg=245
-hi ALEErrorSign ctermfg=9 ctermbg=235
-hi ALEWarningSign ctermfg=11 ctermbg=235
+hi SyntasticErrorSign ctermfg=9 ctermbg=235
+hi SyntasticWarningSign ctermfg=11 ctermbg=235
+" hi ALEErrorSign ctermfg=9 ctermbg=235
+" hi ALEWarningSign ctermfg=11 ctermbg=235
 hi EndOfBuffer ctermfg=237 ctermbg=235
 hi BufTabLineActive ctermfg=245 ctermbg=235
 hi BufTabLineCurrent ctermfg=245 ctermbg=235
@@ -278,6 +291,8 @@ set undodir=~/.vim/tmp,.
 
 " }}}
 " Mapping {{{
+
+inoremap jk <Esc>
 
 " Treats long lines as break lines
 map j gj
