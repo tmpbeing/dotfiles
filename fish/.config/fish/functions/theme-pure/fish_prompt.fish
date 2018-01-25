@@ -11,7 +11,7 @@ set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
 
 # Symbols
 
-__pure_set_default pure_symbol_prompt ""
+__pure_set_default pure_symbol_prompt "❯"
 __pure_set_default pure_symbol_git_down_arrow "⇣"
 __pure_set_default pure_symbol_git_up_arrow "⇡"
 __pure_set_default pure_symbol_git_dirty "*"

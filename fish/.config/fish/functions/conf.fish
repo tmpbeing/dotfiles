@@ -29,6 +29,8 @@ function conf
 				vim ~/.config/fish/config.fish
 			case tmux
 				vim ~/.tmux.conf
+			case emacs
+				vim ~/.emacs.d/init.el
 		end
 	else
 		return 1

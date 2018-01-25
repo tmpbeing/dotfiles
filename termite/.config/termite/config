@@ -1,5 +1,5 @@
 [options]
-font = GohuFont 11
+font = PragmataPro for Powerline 12
 browser = chromium
 clickable_url = false
 dynamic_title = true
