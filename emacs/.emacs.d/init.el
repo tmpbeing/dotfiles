@@ -6,7 +6,7 @@
 ;    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2017/12/06 19:27:38 by mplanell          #+#    #+#              ;
-;    Updated: 2018/01/24 21:00:42 by mplanell         ###   ########.fr        ;
+;    Updated: 2018/01/26 04:25:11 by mplanell         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
@@ -14,13 +14,13 @@
 
 (setq package-enable-at-startup nil)
 (setq package-archives '(("org"       . "http://orgmode.org/elpa/")
-                         ("gnu"       . "http://elpa.gnu.org/packages/")
-                         ("melpa"     . "https://melpa.org/packages/")))
+						 ("gnu"       . "http://elpa.gnu.org/packages/")
+						 ("melpa"     . "https://melpa.org/packages/")))
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
-    (package-refresh-contents)
-    (package-install 'use-package))
+	(package-refresh-contents)
+	(package-install 'use-package))
 
 (require 'use-package)
 
@@ -103,35 +103,82 @@
 (use-package column-enforce-mode
 	:ensure t
 	:diminish
+	:hook
+	(prog-mode . column-enforce-mode)
 	:config
 	(setq column-enforce-column 80)
-	(add-hook 'prog-mode-hook 'column-enforce-mode)
 	)
 
 ;;; Counsel
 (use-package counsel
 	:after ivy
 	:ensure t
+	:config
+	(setq counsel-find-file-at-point t)
 	)
 
+;;; Diff-hl (~= git-gutter)
+(use-package diff-hl
+	:ensure t
+	:hook
+	(((prog-mode vc-dir-mode) . turn-on-diff-hl-mode)
+	(dired-mode . diff-hl-dired-mode-unless-remote))
+	)
 ;;; Diminish for the :diminish support in use-package
 (use-package diminish
 	:ensure t
 	)
 
-;;; Doom-themes, best themes on the market
+;;; Doom-themes, best themes on the market with some custom faces
 (use-package doom-themes
 	:ensure t
 	:config
 	(load-theme 'doom-one t)
+	(custom-theme-set-faces
+		'doom-one
+		`(org-level-1 ((t (:height 1.0 :weight bold   :slant normal :foreground "#aa88ff" :background "#21272d" :underline nil :box (:line-width 4 :color "#21272d" :style nil)))))
+		`(org-level-2 ((t (:height 1.0 :weight bold   :slant normal :foreground "#88aaff" :background "#21272d" :underline nil :box (:line-width 4 :color "#21272d" :style nil)))))
+		`(org-level-3 ((t (:height 1.0 :weight normal :slant normal :foreground "#88ffff" :underline nil)))) ;; cyan
+		`(org-level-4 ((t (:height 1.0 :weight normal :slant normal :foreground "#66ffaa" :underline nil)))) ;; sea-green
+		`(org-level-5 ((t (:height 1.0 :weight normal :slant normal :foreground "#ffff66" :underline nil)))) ;; yellow
+		`(org-level-6 ((t (:height 1.0 :weight normal :slant normal :foreground "#ffaa00" :underline nil)))) ;; orange
+		`(org-level-7 ((t (:height 1.0 :weight normal :slant normal :foreground "#ff6666" :underline nil)))) ;; red
+		`(org-level-8 ((t (:height 1.0 :weight normal :slant normal :foreground "#ff66aa" :underline nil)))) ;; pink
+		`(avy-lead-face ((t (:foreground "#ffaf00"))))
+		`(avy-lead-face-0 ((t (:foreground "#5fd7ff"))))
+		`(avy-lead-face-1 ((t (:foreground "#66ffaa"))))
+		`(avy-lead-face-2 ((t (:foreground "#ff6666")))))
 	)
 (use-package solaire-mode
 	:ensure t
 	:after doom-themes
+	:hook
+	(after-change-major-mode . turn-on-solaire-mode)
 	:config
-	(add-hook 'after-change-major-mode-hook #'turn-on-solaire-mode)
 	(solaire-mode-swap-bg)
 	)
+
+;;; Evil, vim in emacs
+(use-package evil
+	:ensure t
+	:config
+	(evil-mode 1)
+	)
+
+;;; Evil-nerd-commenter, port of vim nerd-comment
+(use-package evil-nerd-commenter
+	:ensure t
+	:commands
+	(evilnc-comment-or-uncomment-lines
+		evilnc-comment-or-uncomment-paragraphs)
+	)
+
+;;; Git-gutter
+; (use-package git-gutter
+	; :ensure t
+	; :config
+	; (global-git-gutter-mode 1)
+	; )
 
 ;;; Ivy, the completion framework
 (use-package ivy
@@ -144,6 +191,9 @@
 			ivy-height 12)
 	:config
 	(ivy-mode 1)
+	(eval-after-load "ivy"
+		`(progn
+			(define-key ivy-minibuffer-map (kbd "<escape>") 'minibuffer-keyboard-quit)))
 	)
 
 ;;; Neotree, a nerdtree equivalent for emacs with all-the-icons for doom theme
@@ -159,13 +209,23 @@
 	:ensure t
 	)
 
+;;; nlinum-relative for relative line numbering
+(use-package nlinum-relative
+	:ensure t
+	:hook
+	(prog-mode . nlinum-relative-mode)
+	:config
+	(setq nlinum-relative-current-symbol "")
+	(nlinum-relative-setup-evil)
+	)
+
 ;;; Powerline
 (use-package powerline
 	:ensure t
 	:config
 	(powerline-center-evil-theme)
 	(setq powerline-default-separator nil
-		  powerline-height 24)
+		  powerline-height 30)
 	)
 (use-package airline-themes
 	:after powerline
@@ -185,11 +245,21 @@
 	:diminish
 	)
 
+;;; Undo-tree (required by evil)
+(use-package undo-tree
+	:ensure t
+	:diminish
+	:init
+	(setq undo-tree-visualizer-timestamps t
+		undo-tree-visualizer-diff t)
+	)
+
 ;;; Whitespace mode (this is built-in)
 (use-package whitespace
 	:diminish
+	:hook
+	(prog-mode . whitespace-mode)
 	:config
-	(add-hook 'prog-mode-hook 'whitespace-mode)
 	(setq whitespace-style '(face tabs tab-mark))
 	)
 
