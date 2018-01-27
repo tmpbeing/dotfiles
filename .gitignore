@@ -10,3 +10,5 @@ emacs/.emacs.d/elpa/
 emacs/.emacs.d/.custom.el
 emacs/.emacs.d/recentf
 emacs/.emacs.d/var/
+emacs/.emacs.d/history
+emacs/.emacs.d/places

@@ -6,7 +6,7 @@
 ;    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2017/12/06 19:27:38 by mplanell          #+#    #+#              ;
-;    Updated: 2018/01/26 04:25:11 by mplanell         ###   ########.fr        ;
+;    Updated: 2018/01/27 14:29:10 by mplanell         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
@@ -124,10 +124,26 @@
 	(((prog-mode vc-dir-mode) . turn-on-diff-hl-mode)
 	(dired-mode . diff-hl-dired-mode-unless-remote))
 	)
+
 ;;; Diminish for the :diminish support in use-package
 (use-package diminish
 	:ensure t
 	)
+
+;;; Dired
+(use-package dired
+	:defer t
+	:hook
+	(dired-mode . dired-hide-details-mode)
+	:init
+	(setq dired-auto-revert-buffer t
+		  auto-revert-verbose nil)
+	)
+
+;;; Dired-subtree
+(use-package dired-subtree
+	:ensure t
+	:after dired)
 
 ;;; Doom-themes, best themes on the market with some custom faces
 (use-package doom-themes
@@ -161,8 +177,27 @@
 ;;; Evil, vim in emacs
 (use-package evil
 	:ensure t
+	:init
+	(setq evil-want-integration nil
+		  evil-move-cursor-back nil)
 	:config
 	(evil-mode 1)
+	)
+
+;;; Evil-collection, a set of keybindings for lots of plugins (gonna make my own bindings instead)
+; (use-package evil-collection
+	; :ensure t
+	; :after evil
+	; :config
+	; (evil-collection-init)
+	; )
+
+;;; Evil-matchit, jump to matched tag with %
+(use-package evil-matchit
+	:ensure t
+	:after evil
+	:config
+	(global-evil-matchit-mode 1)
 	)
 
 ;;; Evil-nerd-commenter, port of vim nerd-comment
@@ -173,12 +208,21 @@
 		evilnc-comment-or-uncomment-paragraphs)
 	)
 
-;;; Git-gutter
-; (use-package git-gutter
-	; :ensure t
-	; :config
-	; (global-git-gutter-mode 1)
-	; )
+;;; Evil-surround, port of vim-surround
+(use-package evil-surround
+	:ensure t
+	:after evil
+	:config
+	(global-evil-surround-mode 1)
+	)
+
+;;; Evil-visualstar (* and # to search selection forward/backward)
+(use-package evil-visualstar
+	:ensure t
+	:after evil
+	:config
+	(global-evil-visualstar-mode 1)
+	)
 
 ;;; Ivy, the completion framework
 (use-package ivy
@@ -236,6 +280,28 @@
 		airline-utf-glyph-linenumber #xe0a1
 		airline-utf-glyph-readonly #xe0a2
 		airline-utf-glyph-branch #xe0a0)
+	)
+
+;;; Recentf
+(use-package recentf
+	:init
+	(setq recentf-max-menu-items 25)
+	:config
+	(recentf-mode 1)
+	)
+
+;;; Savehist (save minibuffer history)
+(use-package savehist
+  :init
+  (setq savehist-autosave-interval 150)
+  :config
+  (savehist-mode)
+  )
+
+;;; Saveplace, save last position in the file
+(use-package saveplace
+	:config
+	(save-place-mode)
 	)
 
 ;;; Swiper

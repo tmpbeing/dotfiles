@@ -6,7 +6,7 @@
 ;    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/01/19 01:59:40 by mplanell          #+#    #+#              ;
-;    Updated: 2018/01/26 01:21:33 by mplanell         ###   ########.fr        ;
+;    Updated: 2018/01/27 20:06:57 by mplanell         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
@@ -14,6 +14,8 @@
 	:ensure t
 	:config
 	;(general-define-key "<escape>" 'keyboard-escape-quit)
+	
+	;; Global binds ;;
 	(general-define-key "M-x" 'counsel-M-x)
 	(general-define-key
 		:states '(normal visual insert emacs)
@@ -52,7 +54,43 @@
 		;; h ;;
 		"h"		'(header-insert :which-key "42header")
 
+		;; o ;;
+		"o"		'(:ignore t :which-key "org")
+		"oa"	'(org-agenda :which-key "agenda")
+		"oc"	'(org-capture :which-key "capture")
+
 		;; s ;;
 		"s"		'swiper
+		)
+
+	;; Dired keybindings ;;
+	(general-define-key
+		:states '(emacs normal)
+		:keymaps 'dired-mode-map
+		"RET"	'dired-find-file
+		"TAB"	'dired-subtree-toggle
+		"<backtab>" 'dired-subtree-cycle
+		"/"		'swiper
+		"B"		'dired-do-bytecompile
+		"C"		'dired-do-copy
+		"d"		'dired-flag-file-deletion
+		"D"		'dired-do-delete
+		"F"		'find-name-dired
+		"gg"	'evil-goto-first-line
+		"G"		'evil-goto-line
+		"h"		'left-char
+		"j"		'dired-next-line
+		"k"		'dired-previous-line
+		"l"		'right-char
+		"L"		'dired-do-load
+		"m"		'dired-mark
+		"O"		'dired-omit-mode
+		"q"		'quit-window
+		"R"		'dired-do-rename
+		"t"		'dired-toggle-marks
+		"u"		'dired-unmark
+		"U"		'dired-unmark-all-files
+		"x"		'dired-do-flagged-delete
+		"+"		'dired-create-directory
 		)
 	)
