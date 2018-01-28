@@ -6,7 +6,7 @@
 ;    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2017/12/06 19:27:38 by mplanell          #+#    #+#              ;
-;    Updated: 2018/01/27 14:29:10 by mplanell         ###   ########.fr        ;
+;    Updated: 2018/01/28 03:43:56 by mplanell         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
@@ -70,6 +70,7 @@
 
 (setq sentence-end-double-space nil) ; Sentences end with a dot and a space
 (defalias 'yes-or-no-p 'y-or-n-p) ; no more typing out y.e.s.
+(show-paren-mode) ; show matching parenthesis
 
 ;;; utf-8 everywhere
 (set-language-environment 'utf-8)
@@ -107,6 +108,55 @@
 	(prog-mode . column-enforce-mode)
 	:config
 	(setq column-enforce-column 80)
+	)
+
+;;; Company for auto-completion
+(use-package company
+	:ensure t
+	:diminish
+	:init
+	(setq company-idle-delay 0.2
+		  company-tooltip-limit 15
+		  company-minimum-prefix-length 2
+		  company-dabbrev-downcase nil
+		  company-dabbrev-ignore-case nil)
+	:config
+	(global-company-mode)
+	(add-hook 'evil-insert-state-exit-hook 'company-abort)
+	(setq company-backends
+		'((company-files
+			company-keywords
+			company-capf
+			;company-yasnippet
+			)
+		(company-abbrev company-dabbrev)
+	))
+	(dolist (hook '(c-mode-hook
+					c++-mode-hook
+					objc-mode-hook
+					))
+		(add-hook hook
+			(lambda()
+				(make-local-variable 'company-backends)
+				(setq company-backends (copy-tree company-backends))
+				(setf (car company-backends)
+					(append '(company-gtags company-clang)
+					(car company-backends)))
+			))
+	)
+	)
+
+;;; Company quickhelp (tooltip documentation)
+(use-package company-quickhelp
+	:ensure t
+	:after pos-tip
+	:init
+	(set-face-attribute 'tooltip nil :background "#303030" :foreground "#c6c6c6")
+	:config
+	(company-quickhelp-mode)
+	)
+(use-package pos-tip
+	:ensure t
 	)
 
 ;;; Counsel

@@ -6,7 +6,7 @@
 ;    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2018/01/19 01:59:47 by mplanell          #+#    #+#              ;
-;    Updated: 2018/01/26 17:38:00 by mplanell         ###   ########.fr        ;
+;    Updated: 2018/01/27 23:54:41 by mplanell         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
@@ -22,15 +22,18 @@
 	(doom-themes-org-config)
 	(setq org-directory "/home/snoop/org"
 		org-default-notes-file (concat org-directory "/notes.org")
-		org-agenda-start-on-weekday 1)
+		org-agenda-start-on-weekday 1
+		org-todo-keywords '((sequence "☞ TODO(t)" "☛ NEXT(n)" "⚑ WAITING(w@)" "|" "✔ DONE(d!)" "✘ CANCELED(c@)")))
 	)
 
 ;;; Prettier bullets
 (use-package org-bullets
 	:ensure t
 	:after org
+	:hook
+	(org-mode . org-bullets-mode)
 	:init
-	(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+	(setq org-bullets-bullet-list '("◉" "◎" "⚫" "○" "►" "◇"))
 	)
 
 ;;; Evil bindings
