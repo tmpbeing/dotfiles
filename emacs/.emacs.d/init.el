@@ -6,7 +6,7 @@
 ;    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         ;
 ;                                                 +#+#+#+#+#+   +#+            ;
 ;    Created: 2017/12/06 19:27:38 by mplanell          #+#    #+#              ;
-;    Updated: 2018/01/28 03:43:56 by mplanell         ###   ########.fr        ;
+;    Updated: 2018/01/29 04:00:13 by mplanell         ###   ########.fr        ;
 ;                                                                              ;
 ; **************************************************************************** ;
 
@@ -90,6 +90,16 @@
 	:load-path "./local/42header/"
 	)
 
+;;; ace-window
+(use-package ace-window
+	:ensure t
+	:init
+	(setq aw-dispatch-always t
+			aw-swap-invert t)
+	:config
+	(set-face-attribute 'aw-leading-char-face nil :foreground "deep sky blue" :weight 'bold :height 3.0)
+	)
+
 ;;; Avy : allows to move around in visible text (~= easymotion)
 (use-package avy
 	:ensure t
@@ -127,23 +137,32 @@
 		'((company-files
 			company-keywords
 			company-capf
+			company-clang
+			company-gtags
 			;company-yasnippet
 			)
 		(company-abbrev company-dabbrev)
 	))
-	(dolist (hook '(c-mode-hook
-					c++-mode-hook
-					objc-mode-hook
-					))
-		(add-hook hook
-			(lambda()
-				(make-local-variable 'company-backends)
-				(setq company-backends (copy-tree company-backends))
-				(setf (car company-backends)
-					(append '(company-gtags company-clang)
-					(car company-backends)))
-			))
+	; (dolist (hook '(c-mode-hook
+					; c++-mode-hook
+					; objc-mode-hook
+					; ))
+		; (add-hook hook
+			; (lambda()
+				; (make-local-variable 'company-backends)
+				; (setq company-backends (copy-tree company-backends))
+				; (setf (car company-backends)
+					; (append '(company-gtags company-clang)
+					; (car company-backends)))
+			; ))
+	; )
 	)
+(use-package company-c-headers
+	:ensure t
+	:after company
+	:config
+	(add-to-list 'company-backends 'company-c-headers)
+	(setq company-c-headers-path-user '("." ".." "../include" "../includes" "../../include" "../../includes" "../../../include" "../../../includes" "./include" "./includes" "./libft/include" "./libft/includes" "../libft/include" "../libft/includes" "../../libft/include" "../../libft/includes" "../../../libft/include" "../../../libft/includes"))
 	)
 
 ;;; Company quickhelp (tooltip documentation)
@@ -173,6 +192,9 @@
 	:hook
 	(((prog-mode vc-dir-mode) . turn-on-diff-hl-mode)
 	(dired-mode . diff-hl-dired-mode-unless-remote))
+	:config
+	(setq diff-hl-margin-mode t
+		  diff-hl-margin-side 'right)
 	)
 
 ;;; Diminish for the :diminish support in use-package
@@ -214,6 +236,14 @@
 		`(avy-lead-face-0 ((t (:foreground "#5fd7ff"))))
 		`(avy-lead-face-1 ((t (:foreground "#66ffaa"))))
 		`(avy-lead-face-2 ((t (:foreground "#ff6666")))))
+		`(dired-subtree-depth-1-face ((t (:background "#23272e"))))
+		`(dired-subtree-depth-2-face ((t (:background "#363d47"))))
+		`(dired-subtree-depth-3-face ((t (:background "#4a5261"))))
+		`(dired-subtree-depth-4-face ((t (:background "#5d687a"))))
+		`(dired-subtree-depth-5-face ((t (:background "#717d94"))))
+		`(dired-subtree-depth-6-face ((t (:background "#8493ad"))))
+		'(flyspell-duplicate ((t (:underline "yellow" :weight bold))))
+		'(flyspell-incorrect ((t (:underline "yellow" :weight bold))))
 	)
 (use-package solaire-mode
 	:ensure t
@@ -233,14 +263,6 @@
 	:config
 	(evil-mode 1)
 	)
-
-;;; Evil-collection, a set of keybindings for lots of plugins (gonna make my own bindings instead)
-; (use-package evil-collection
-	; :ensure t
-	; :after evil
-	; :config
-	; (evil-collection-init)
-	; )
 
 ;;; Evil-matchit, jump to matched tag with %
 (use-package evil-matchit
@@ -274,6 +296,37 @@
 	(global-evil-visualstar-mode 1)
 	)
 
+;;; Flycheck
+(use-package flycheck
+	:ensure t
+	:diminish
+	:config
+	(setq flycheck-clang-args "-Wall -Wextra -Werror")
+	(global-flycheck-mode)
+	)
+
+;;; Hydra
+(use-package hydra
+	:ensure t
+	)
+
+;;; Ibuffer (advanced buffer menu)
+(use-package ibuffer
+	:init
+	(setq ibuffer-use-header-line t
+		  ibuffer-use-other-window t)
+	(add-hook 'ibuffer-mode-hook (lambda () (ibuffer-auto-mode 1)))
+	)
+(use-package ibuffer-vc
+	:ensure t
+	:init
+	(add-hook 'ibuffer-hook
+	(lambda ()
+		(ibuffer-vc-set-filter-groups-by-vc-root)
+			(unless (eq ibuffer-sorting-mode 'alphabetic)
+				(ibuffer-do-sort-by-alphabetic))))
+	)
+
 ;;; Ivy, the completion framework
 (use-package ivy
 	:ensure t
@@ -290,6 +343,23 @@
 			(define-key ivy-minibuffer-map (kbd "<escape>") 'minibuffer-keyboard-quit)))
 	)
 
+;;; Magit, version-control
+(use-package magit
+	:ensure t
+	:defer t
+	)
+(use-package evil-magit
+	:ensure t
+	:after magit evil
+	)
+(use-package ediff
+	:ensure t
+	:init
+	(setq ediff-split-window-function 'split-window-horizontally)
+	)
+(use-package evil-ediff
+	:ensure t)
+
 ;;; Neotree, a nerdtree equivalent for emacs with all-the-icons for doom theme
 (use-package neotree
 	:ensure t
@@ -298,6 +368,7 @@
 	(setq neo-smart-open t
 		  neo-show-hidden-files t)
 	(doom-themes-neotree-config)
+	(add-to-list 'evil-emacs-state-modes 'neotree-mode)
 	)
 (use-package all-the-icons
 	:ensure t
@@ -326,10 +397,47 @@
 	:ensure t
 	:config
 	(load-theme 'airline-doom-one t)
-	(setq airline-shortened-directory-length 25
+	(setq airline-shortened-directory-length 20
 		airline-utf-glyph-linenumber #xe0a1
 		airline-utf-glyph-readonly #xe0a2
 		airline-utf-glyph-branch #xe0a0)
+	)
+; (use-package doom-modeline
+  ; :defer t
+  ; :load-path "~/.emacs.d/local"
+  ; :preface
+  ; (defun load-doom-modeline (frame)
+    ; (select-frame frame)
+    ; (require 'doom-modeline)
+    ; (remove-hook 'after-make-frame-functions 'load-doom-modeline))
+  ; :init
+  ; (if (daemonp)
+      ; (add-hook 'after-make-frame-functions #'load-doom-modeline)
+    ; (require 'doom-modeline))
+
+  ; (with-eval-after-load 'doom-modeline
+    ; (defadvice doom-buffer-path (around ignore-remote first activate)
+      ; (if (file-remote-p default-directory)
+		  ; (if buffer-file-name
+			  ; (setq ad-return-value (file-name-nondirectory (buffer-file-name)))
+			; (setq ad-return-value "%b"))
+		; ad-do-it)))
+
+  ; (unless (file-exists-p "~/.emacs.d/local/doom-modeline.elc")
+		; (byte-compile-file "~/.emacs.d/local/doom-modeline.el")))
+
+;;; Projectile (project browser)
+(use-package projectile
+	:ensure t
+	:commands (projectile-switch-project
+				projectile-load-known-projects
+				projectile-find-file)
+	:init
+	(setq projectile-completion-system 'ivy
+			projectile-switch-project-action 'projectile-find-file
+			projectile-require-project-root t)
+	:config
+	(projectile-global-mode)
 	)
 
 ;;; Recentf
