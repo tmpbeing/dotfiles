@@ -29,13 +29,26 @@
       - [[#company][Company]]
       - [[#ivy][Ivy]]
     - [[#features][Features]]
+      - [[#42-header][42 Header]]
       - [[#evil][Evil]]
       - [[#jump][Jump]]
       - [[#syntax-checker][Syntax-checker]]
+      - [[#version-control][Version control]]
+    - [[#keybindings][Keybindings]]
+      - [[#hydra][Hydra]]
       - [[#which-key][Which-key]]
+    - [[#tools][Tools]]
+      - [[#dired][Dired]]
+      - [[#make][Make]]
+      - [[#neotree][Neotree]]
+      - [[#projectile][Projectile]]
+      - [[#rgb][RGB]]
+      - [[#term][Term]]
+    - [[#ui-1][UI]]
+      - [[#doom-modeline][Doom-modeline]]
 
 ** About this file
-This is Marc Planelles's personal Emacs configuration.
+This is Marc Planelles's personal Emacs configuration. A lot of the credit goes to [[https://github.com/hlissner][hlissner]] and his great doom-emacs config.
 ** Variables
 *** Font
 #+BEGIN_SRC emacs-lisp
@@ -330,15 +343,12 @@ Shows documentation in the tooltip
     (set-face-attribute 'tooltip nil :background "#303030" :foreground "#c6c6c6")
     :config
     (setq company-quickhelp-delay nil)
-    (company-quickhelp-mode)
-    )
-
+    (company-quickhelp-mode))
 #+END_SRC
 
-pos-tip is a company-quickhelp dependancy
+pos-tip is a company-quickhelp dependancy and flycheck-postip
 #+BEGIN_SRC emacs-lisp
-  (use-package pos-tip
-    )
+  (use-package pos-tip)
 #+END_SRC
 
 ***** Company-statistics
@@ -411,6 +421,14 @@ Improved M-X
 
 ***** ☞ TODO Add Ivy-hydra
 *** Features
+**** 42 Header
+Inserts the header for 42 school
+#+BEGIN_SRC emacs-lisp
+  (use-package 42header
+    :load-path (concat my/local-dir "42header/")
+    :commands (header-insert header-update))
+#+END_SRC
+
 **** Evil
 ***** Evil
 Install evil and activate evil-mode
@@ -552,11 +570,103 @@ Use dumb-jump to jump to definition
 ***** ☞ TODO Maybe add ivy-xref
 **** Syntax-checker
 Using flycheck to check syntax
-#+BEGIN_SRC
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck
+    :demand t
+    :diminish
+    :config
+    (setq flycheck-clang-args "-Wall -Wextra -Werror"
+          flycheck-check-syntax-automatically '(save mode-enabled)) ;; show errors on save
+    (global-flycheck-mode)
 
+    (eval-after-load 'evil
+      ;; Flycheck buffer closes on ESC in normal mode, this is from DOOM
+      (defun +syntax-checkers|flycheck-buffer ()
+        (when flycheck-mode
+          (ignore-errors (flycheck-buffer)) nil))
+      (add-hook '+evil-esc-hook #'+syntax-checkers|flycheck-buffer t)))
+#+END_SRC
+
+Flycheck-pos-tip offers flycheck error in a popup
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck-pos-tip
+    :after flycheck
+    :config
+    (setq flycheck-pos-tip-timeout 10
+          flycheck-display-errors-delay 0.5)
+    (flycheck-pos-tip-mode))
 #+END_SRC
 
 ***** ☞ TODO When Emacs 26 comes out might have to get rid of it
+**** Version control
+***** Evil-magit
+Better evil integration with evil-magit
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-magit
+      :after magit evil)
+#+END_SRC
+
+***** Gitconfig-mode/Gitignore-mode
+Additional modes for gitconfig and gitignore files
+#+BEGIN_SRC emacs-lisp
+  (use-package gitconfig-mode
+    :mode "/\\.?git/?config$"
+    :mode "/\\.gitmodules$")
+
+  (use-package gitignore-mode
+    :mode "/\\.gitignore$")
+#+END_SRC
+
+***** Git-gutter-fringe
+Show diff in fringe
+#+BEGIN_SRC emacs-lisp
+  (use-package git-gutter-fringe
+    :commands git-gutter-mode
+    :init
+    (defun +version-control|git-gutter-maybe ()
+      "Enable `git-gutter-mode' in non-remote buffers."
+      (when (and (buffer-file-name)
+                 (not (file-remote-p (buffer-file-name))))
+        (git-gutter-mode +1)))
+    (add-hook! (text-mode prog-mode conf-mode) #'+version-control|git-gutter-maybe)
+    :config
+    ;; Update git-gutter on focus (in case I was using git externally)
+    (add-hook 'focus-in-hook #'git-gutter:update-all-windows)
+
+    (after! evil
+      (defun +version-control|update-git-gutter ()
+        "Refresh git-gutter on ESC. Return nil to prevent shadowing other
+  `+evil-esc-hook' hooks."
+        (when git-gutter-mode
+          (ignore (git-gutter))))
+      (add-hook '+evil-esc-hook #'+version-control|update-git-gutter t))
+
+      ;; Update git-gutter on focus (in case I was using git externally)
+      (add-hook 'focus-in-hook #'git-gutter:update-all-windows))
+#+END_SRC
+***** Git-timemachine
+Browse versions of a file
+#+BEGIN_SRC emacs-lisp
+  (use-package git-timemachine
+    :commands (git-timemachine git-timemachine-toggle)
+    :config
+    (require 'magit-blame)
+
+    ;; Force evil to rehash keybindings for the current state
+    (add-hook 'git-timemachine-mode-hook #'evil-force-normal-state))
+#+END_SRC
+***** Magit
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+    :commands (magit-status magit-blame magit-log-buffer-file magit-file-popup magit-log-all))
+#+END_SRC
+
+*** Keybindings
+**** Hydra
+#+BEGIN_SRC emacs-lisp
+  (use-package hydra
+    :demand t)
+#+END_SRC
 **** Which-key
 Show keypress options
 #+BEGIN_SRC emacs-lisp
@@ -571,4 +681,169 @@ Show keypress options
     (set-face-attribute 'which-key-local-map-description-face nil :weight 'bold)
     (which-key-mode 1)
     (which-key-setup-side-window-bottom))
+#+END_SRC
+*** Tools
+**** Dired
+***** Dired
+Modify some dired settings
+#+BEGIN_SRC emacs-lisp
+  (setq dired-auto-revert-buffer t
+        auto-revert-verbose nil
+        dired-recursive-copies 'always
+        dired-recursive-deletes 'tops))
+
+  (defun +dired|sort-directories-first ()
+    "List directories first in dired buffers."
+    (save-excursion
+      (let (buffer-read-only)
+        (forward-line 2) ;; beyond dir. header
+        (sort-regexp-fields t "^.*$" "[ ]*." (point) (point-max))))
+    (and (featurep 'xemacs)
+         (fboundp 'dired-insert-set-properties)
+         (dired-insert-set-properties (point-min) (point-max)))
+    (set-buffer-modified-p nil))
+  (add-hook 'dired-after-readin-hook #'+dired|sort-directories-first)
+
+  ;; Automatically create missing directories when creating new files
+  (defun +dired|create-non-existent-directory ()
+    (let ((parent-directory (file-name-directory buffer-file-name)))
+      (when (and (not (file-exists-p parent-directory))
+                 (y-or-n-p (format "Directory `%s' does not exist! Create it?" parent-directory)))
+        (make-directory parent-directory t))))
+  (push #'+dired|create-non-existent-directory find-file-not-found-functions)
+#+END_SRC
+
+***** Dired-subtree
+Add subtrees to dired
+#+BEGIN_SRC emacs-lisp
+  (use-package dired-subtree
+    :after dired)
+#+END_SRC
+
+***** Dired-k
+Better highlighting in dired buffers
+#+BEGIN_SRC emacs-lisp
+  (use-package dired-k
+    :after dired
+    :config
+    (setq dired-k-style 'git)
+
+    (defun +dired*dired-k-highlight (orig-fn &rest args)
+      "Butt out if the requested directory is remote (i.e. through tramp)."
+      (unless (file-remote-p default-directory)
+        (apply orig-fn args)))
+    (advice-add #'dired-k--highlight :around #'+dired*dired-k-highlight)
+
+    (add-hook 'dired-initial-position-hook #'dired-k)
+    (add-hook 'dired-after-readin-hook #'dired-k-no-revert))
+#+END_SRC
+
+**** Make
+Install make-executor
+#+BEGIN_SRC emacs-lisp
+  (use-package makefile-executor)
+#+END_SRC
+
+Function to run make on current project
+#+BEGIN_SRC emacs-lisp
+  (defun +make/run ()
+    "Run a make task in the current project."
+    (interactive)
+    (require 'makefile-executor)
+    (let* ((buffer-file (or buffer-file-name default-directory))
+           (makefile-dir (locate-dominating-file buffer-file "Makefile")))
+      (unless makefile-dir
+        (user-error "No makefile found in this project."))
+      (let ((default-directory makefile-dir))
+        (makefile-executor-execute-target
+  (expand-file-name "Makefile")))))
+#+END_SRC
+
+**** Neotree
+#+BEGIN_SRC emacs-lisp
+  (use-package neotree
+    :commands (neotree neotree-show neotree-toggle
+                       neotree-dir neotree-find)
+    :init
+    (setq neo-smart-open t
+          neo-show-hidden-files t
+          neo-hidden-regexp-list
+          '(;; vcs folders
+            "^\\.\\(git\\|hg\\|svn\\)$"
+            ;; compiled files
+            "\\.\\(pyc\\|o\\|elc\\|lock\\|css.map\\)$"
+            ;; generated files, caches or local pkgs
+            "^\\(node_modules\\|vendor\\|.\\(project\\|cask\\|yardoc\\|sass-cache\\)\\)$"
+            ;; org-mode folders
+            "^\\.\\(sync\\|export\\|attach\\)$"
+            "~$"
+            "^#.*#$"))
+    (doom-themes-neotree-config)
+    (add-to-list 'evil-emacs-state-modes 'neotree-mode)
+
+    (when (bound-and-true-p winner-mode)
+      (push neo-buffer-name winner-boring-buffers)))
+
+#+END_SRC
+
+**** Projectile
+Move around a project
+#+BEGIN_SRC emacs-lisp
+  (use-package projectile
+    :demand t
+    :init
+    (setq projectile-completion-system 'ivy
+          projectile-switch-project-action 'projectile-find-file
+          projectile-require-project-root t
+          projectile-globally-ignored-file-suffixes '(".elc" ".pyc" ".o" ".class")
+          projectile-enable-caching t
+          projectile-cache-file (concat my/cache-dir "projectile.cache")
+          projectile-globally-ignored-files '(".DS_Store" "Icon" "TAGS"))
+    (add-hook 'my/post-init-hook #'projectile-mode))
+#+END_SRC
+
+**** RGB
+***** Rainbow-mode
+Show colors on color values in the buffer
+#+BEGIN_SRC emacs-lisp
+  (use-package rainbow-mode
+    :commands rainbow-mode
+    :init
+    (add-hook 'css-mode #'rainbow-mode)
+    (add-hook 'sass-mode #'rainbow-mode))
+#+END_SRC
+
+***** Kurecolor
+Change color values under cursor
+#+BEGIN_SRC emacs-lisp
+  (use-package kurecolor
+    :after rainbow-mode
+    :config
+    (defhydra hydra-kurecolor (:color pink :hint nil)
+      "
+  Inc/Dec      _w_/_W_ brightness      _d_/_D_ saturation      _e_/_E_ hue    "
+      ("w" kurecolor-decrease-brightness-by-step)
+      ("W" kurecolor-increase-brightness-by-step)
+      ("d" kurecolor-decrease-saturation-by-step)
+      ("D" kurecolor-increase-saturation-by-step)
+      ("e" kurecolor-decrease-hue-by-step)
+      ("E" kurecolor-increase-hue-by-step)
+      ("q" nil "cancel" :color blue)))
+#+END_SRC
+
+**** Term
+Install multi-term
+#+BEGIN_SRC emacs-lisp
+  (use-package multi-term
+    :commands (multi-term multi-term-next multi-term-prev)
+    :config
+    (setq multi-term-program (getenv "SHELL")
+          multi-term-switch-after-close 'PREVIOUS))
+#+END_SRC
+
+*** UI
+**** Doom-modeline
+#+BEGIN_SRC emacs-lisp
+  (use-package doom-modeline
+    :load-path (concat my/local-dir "doom-modeline.el")
 #+END_SRC
