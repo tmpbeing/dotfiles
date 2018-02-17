@@ -1,0 +1,574 @@
+#+TITLE: MY EMACS CONFIG
+#+AUTHOR: MARC PLANELLES
+#+PROPERTY: header-args :tangle yes
+
+* Configuration
+:PROPERTIES:
+:VISIBILITY: children
+:END:
+** Table of Contents :TOC_4_GH:
+- [[#configuration][Configuration]]
+  - [[#about-this-file][About this file]]
+  - [[#variables][Variables]]
+    - [[#font][Font]]
+    - [[#leader-key][Leader key]]
+    - [[#directories][Directories]]
+    - [[#hooks][Hooks]]
+  - [[#emacs-initialization][Emacs Initialization]]
+    - [[#initialization-settings][Initialization Settings]]
+    - [[#initialize-and-add-package-sources][Initialize and Add Package Sources]]
+  - [[#general-configuration][General Configuration]]
+    - [[#utf-8][UTF-8]]
+    - [[#temp-files][Temp files]]
+    - [[#ui][UI]]
+    - [[#font-1][Font]]
+    - [[#editor][Editor]]
+    - [[#mac-specifics][Mac specifics]]
+  - [[#modules][Modules]]
+    - [[#completion][Completion]]
+      - [[#company][Company]]
+      - [[#ivy][Ivy]]
+    - [[#features][Features]]
+      - [[#evil][Evil]]
+      - [[#jump][Jump]]
+      - [[#syntax-checker][Syntax-checker]]
+      - [[#which-key][Which-key]]
+
+** About this file
+This is Marc Planelles's personal Emacs configuration.
+** Variables
+*** Font
+#+BEGIN_SRC emacs-lisp
+  (defvar my/font (font-spec :family "PragamataPro for Powerline" :size 12))
+#+END_SRC
+
+*** Leader key
+#+BEGIN_SRC emacs-lisp
+  (defvar my/leader-key "SPC"
+    "My leader prefix key")
+#+END_SRC
+
+*** Directories
+#+BEGIN_SRC emacs-lisp
+  (defvar my/emacs-dir (file-truename user-emacs-directory)
+    "The path to this emacs.d directory")
+  (defvar my/local-dir (concat my/emacs-dir "local/")
+    "Where I keep local files")
+  (defvar my/cache-dir (concat my/emacs-dir "cache/")
+    "Directory for volatile storage")
+  (defvar my/package-dir (concat my/emacs-dir "packages/")
+    "This is where package.el and QUELPA packages are kept")
+#+END_SRC
+
+*** Hooks
+#+BEGIN_SRC emacs-lisp
+  (defvar my/init-hook nil
+    "A list of hooks run during initialization")
+  (defvar my/post-init-hook nil
+    "A list of hooks run after initialization and after my/init-hook")
+#+END_SRC
+
+** Emacs Initialization
+*** Initialization Settings
+Modifying garbage collector threshold during startup to decrease load time. Resetting it after with a hook to avoid freezes.
+#+BEGIN_SRC emacs-lisp
+  (eval-and-compile
+    (setq gc-cons threshold 402653184
+          gc-cons percentage 0.6))
+
+  (add-hook 'my/post-init-hook #'(lambda () (setq gc-cons-threshold 16777216
+                                                  gc-cons-percentage 0.1)))
+#+END_SRC
+*** Initialize and Add Package Sources
+Let's keep all packages in the package-dir.
+#+BEGIN_SRC emacs-lisp
+  (eval-and-compile
+    (setq package-user-dir (expand-file-name "elpa" my/package-dir)))
+#+END_SRC
+
+Let use-package take care of the package initialization.
+#+BEGIN_SRC emacs-lisp
+  (setq load-prefer-newer noninteractive
+        package--init-file-ensured t
+        package-enable-at-startup nil)
+#+END_SRC
+
+Set load path so we don't have to call package-initialize at runtime.
+#+BEGIN_SRC emacs-lisp
+  (eval-and-compile
+    (setq load-path (append load-path (directory-files package-user-dir t "^[^.]" t))))
+#+END_SRC
+
+Add archives to package.el and initialize and ensure use-package is installed.
+#+BEGIN_SRC emacs-lisp
+  (eval-when-compile
+    (require 'package)
+
+    (setq package-archives '(("org"       . "http://orgmode.org/elpa/")
+                             ("gnu"       . "http://elpa.gnu.org/packages/")
+                             ("melpa"     . "https://melpa.org/packages/")))
+
+    (package-initialize)
+    (unless (package-installed-p 'use-package)
+      (package-refresh-contents)
+      (package-install 'use-package))
+    (require 'use-package)
+    (setq use-package-always-ensure t
+          use-package-always-defer t
+          use-package-verbose t)
+#+END_SRC
+** General Configuration
+*** UTF-8
+UTF-8 everywhere
+#+BEGIN_SRC emacs-lisp
+  (when (fboundp 'set-charset-priority)
+    (set-charset-priority 'unicode))
+  (set-language-environment 'utf-8)
+  (setq locale-coding-system   'utf-8)
+  (prefer-coding-system        'utf-8)
+  (setq default-file-name-coding-system 'utf-8)
+  (set-terminal-coding-system  'utf-8)
+  (set-keyboard-coding-system  'utf-8)
+  (set-selection-coding-system 'utf-8)
+  (setq-default buffer-file-coding-system 'utf-8)
+#+END_SRC
+
+*** Temp files
+Enable backup in cache folder
+#+BEGIN_SRC emacs-lisp
+  (setq version-control t
+        delete-old-versions t
+        backup-by-copying t
+        kept-new-versions 4
+        kept-old-versions 2
+        backup-directory-alist '(("." . (concat my/cache-dir "backups/"))))
+#+END_SRC
+
+Autosaves in cache
+#+BEGIN_SRC emacs-lisp
+  (setq auto-save-file-name-transforms '((".*" (concat my/cache-dir "autosave/") t)))
+#+END_SRC
+
+History
+#+BEGIN_SRC emacs-lisp
+  (setq savehist-file (concat my/cache-dir "savehist")
+        history-length 500
+        savehist-save-minibuffer-history t
+        savehist-autosave-interval 150
+        save-place-file (concat my/cache-dir "saveplace))
+
+  (savehist-mode)
+  (save-place-mode)
+#+END_SRC
+
+We don't want customisation in our init.el
+#+BEGIN_SRC emacs-lisp
+  (setq-default custom-file (expand-file-name ".custom.el" user-emacs-directory))
+  (when (file-exists-p custom-file)
+    (load custom-file))
+#+END_SRC
+
+*** UI
+Disable a lot of annoying/space-taking UI stuff
+#+BEGIN_SRC emacs-lisp
+  (menu-bar-mode 0)
+  (tool-bar-mode 0)
+  (blink-cursor-mode 0)
+  (scroll-bar-mode 0)
+  (tooltip-mode 0)
+#+END_SRC
+
+Replace yes or no by y or n
+#+BEGIN_SRC emacs-lisp
+  (defalias 'yes-or-no-p 'y-or-n-p) ; no more typing out y.e.s.
+#+END_SRC
+
+Some options
+#+BEGIN_SRC emacs-lisp
+  (setq-default
+   cursor-in-non-selected-windows nil ; hide cursors in other windows
+   mouse-yank-at-point t              ; middle-click paste at point, not at click
+   use-dialog-box nil                 ; avoid GUI
+   )
+#+END_SRC
+
+Disable startup-message
+#+BEGIN_SRC emacs-lisp
+  (setq inhibit-startup-message t
+        initial-scratch-message "") ;Start emacs on a empty scratch buffer
+#+END_SRC
+
+*** Font
+#+BEGIN_SRC emacs-lisp
+  (set-face-attribute 'default nil :font my/font)
+#+END_SRC
+
+*** Editor
+Some options
+#+BEGIN_SRC emacs-lisp
+  (setq-default
+   vc-follow-symlinks t
+   fill-column 80
+   word-wrap t
+   sentence-end-double-space nil
+   scroll-preserve-screen-position t
+   require-final-newline t
+   indent-tabs-mode nil
+   tab-always-indent t
+   tab-width 4
+   tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))
+
+  (show-paren-mode)
+#+END_SRC
+
+Remove trailing whitespaces on save. Do not remove trailing lines
+#+BEGIN_SRC emacs-lisp
+  (setq delete-trailing-lines nil)
+    (add-hook 'before-save-hook 'delete-trailing-whitespace)
+#+END_SRC
+
+Windows placement history with ~C-c <Left>~ and ~C-c <Right>~
+#+BEGIN_SRC emacs-lisp
+  (winner-mode)
+#+END_SRC
+
+*** Mac specifics
+#+BEGIN_SRC emacs-lisp
+  (if IS-MAC
+    (setq mac-command-modifier 'meta
+          mac-option-modifier  'alt
+          ;; sane trackpad/mouse scroll settings
+          mac-redisplay-dont-reset-vscroll t
+          mac-mouse-wheel-smooth-scroll nil
+          mouse-wheel-scroll-amount '(5 ((shift) . 2))  ; one line at a time
+          mouse-wheel-progressive-speed nil             ; don't accelerate scrolling
+          ;; Curse Lion and its sudden but inevitable fullscreen mode!
+          ;; NOTE Meaningless to railwaycat's emacs-mac build
+          ns-use-native-fullscreen nil
+          ;; Don't open files from the workspace in a new frame
+          ns-pop-up-frames nil)
+
+    (cond ((display-graphic-p)
+           ;; A known problem with GUI Emacs on MacOS: it runs in an isolated
+           ;; environment, so envvars will be wrong. That includes the PATH
+           ;; Emacs picks up. `exec-path-from-shell' fixes this. This is slow
+           ;; and benefits greatly from compilation.
+           (setq exec-path
+                 (or (eval-when-compile
+                       (when (require 'exec-path-from-shell nil t)
+                         (setq exec-path-from-shell-check-startup-files nil
+                               exec-path-from-shell-arguments (delete "-i" exec-path-from-shell-arguments))
+                         (nconc exec-path-from-shell-variables '("GOPATH" "GOROOT" "PYTHONPATH"))
+                         (exec-path-from-shell-initialize)
+                         exec-path))
+                     exec-path)))
+          (t
+           (when (require 'osx-clipboard nil t)
+             (osx-clipboard-mode +1)))))
+#+END_SRC
+** Modules
+*** Completion
+**** Company
+***** Company
+Company with YouCompleteMe behavior
+#+BEGIN_SRC emacs-lisp
+  (use-package company
+    :commands (company-mode global-company-mode company-complete
+  company-complete-common company-manual-begin company-grab-line)
+    :diminish
+    :init
+    (setq company-idle-delay 0.1
+          company-tooltip-limit 15
+          company-minimum-prefix-length 2
+          company-dabbrev-downcase nil
+          company-dabbrev-ignore-case nil
+          company-dabbrev-code-other-buffers t)
+    (company-tng-configure-default)
+    :config
+    (global-company-mode)
+    (add-hook 'evil-insert-state-exit-hook 'company-abort)
+    (setq company-backends
+        '((company-files
+            company-keywords
+            company-capf
+            company-clang
+            company-gtags
+            ;company-yasnippet
+            )
+        (company-abbrev company-dabbrev)
+    ))
+    ; (dolist (hook '(c-mode-hook
+                    ; c++-mode-hook
+                    ; objc-mode-hook
+                    ; ))
+        ; (add-hook hook
+            ; (lambda()
+                ; (make-local-variable 'company-backends)
+                ; (setq company-backends (copy-tree company-backends))
+                ; (setf (car company-backends)
+                    ; (append '(company-gtags company-clang)
+                    ; (car company-backends)))
+            ; ))
+    ; )
+    )
+#+END_SRC
+***** Company-c-headers
+#+BEGIN_SRC emacs-lisp
+(use-package company-c-headers
+    :after company
+    :config
+    (add-to-list 'company-backends 'company-c-headers)
+    (setq company-c-headers-path-user '("." ".." "../include" "../includes" "../../include" "../../includes" "../../../include" "../../../includes" "./include" "./includes" "./libft/include" "./libft/includes" "../libft/include" "../libft/includes" "../../libft/include" "../../libft/includes" "../../../libft/include" "../../../libft/includes"))
+    )
+#+END_SRC
+***** Company-quickhelp
+Shows documentation in the tooltip
+#+BEGIN_SRC emacs-lisp
+  (use-package company-quickhelp
+    :after pos-tip
+    :init
+    (set-face-attribute 'tooltip nil :background "#303030" :foreground "#c6c6c6")
+    :config
+    (setq company-quickhelp-delay nil)
+    (company-quickhelp-mode)
+    )
+
+#+END_SRC
+
+pos-tip is a company-quickhelp dependancy
+#+BEGIN_SRC emacs-lisp
+  (use-package pos-tip
+    )
+#+END_SRC
+
+***** Company-statistics
+Keep company completion statistics to improve sorting
+#+BEGIN_SRC emacs-lisp
+  (use-package company-statistics
+    :after company
+    :diminish
+    :config
+    (setq company-statistics-file (concat my/cache-dir "company-stats-cache.el"))
+    (company-statistics-mode)
+#+END_SRC
+
+**** Ivy
+***** Ivy
+Ivy, the generic completion frontend
+#+BEGIN_SRC emacs-lisp
+  (use-package ivy
+    :demand t
+    :diminish
+    :init
+    (add-hook 'my/post-init-hook #'ivy-mode)
+    :config
+    (setq ivy-use-virtual-buffers t
+            ivy-count-format "%d/%d "
+            ivy-display-style 'fancy
+            ivy-height 12
+            ivy-wrap t
+            ivy-fixed-height-minibuffer t
+            projectile-completion-system 'ivy
+            ivy-initial-inputs-alist nil
+            ivy-format-function #'ivy-format-function-line)
+    (eval-after-load "ivy"
+        `(progn
+            (define-key ivy-minibuffer-map (kbd "<escape>") 'minibuffer-keyboard-quit))))
+#+END_SRC
+
+***** Counsel
+Counsel, collection of Ivy-enhanced versions of common Emacs commands
+#+BEGIN_SRC emacs-lisp
+  (use-package counsel
+    :demand t
+    :config
+    (require 'counsel-projectile)
+    (setq counsel-find-file-at-point t))
+#+END_SRC
+
+Counsel-projectile provides more integration of counsel into projectile
+#+BEGIN_SRC emacs-lisp
+  (use-package counsel-projectile)
+#+END_SRC
+
+***** Swiper
+Swiper, an alternative to isearch making use of ivy
+#+BEGIN_SRC emacs-lisp
+  (use-package swiper
+    :commands (swiper swiper-all)
+    :diminish)
+#+END_SRC
+
+***** Smex
+Improved M-X
+#+BEGIN_SRC emacs-lisp
+  (use-package smex
+    :commands (smex smex-major-mode-commands)
+    :config
+    (setq smex-save-file (concat my/cache-dir "/smex-items"))
+    (smex-initialize))
+#+END_SRC
+
+***** ☞ TODO Add Ivy-hydra
+*** Features
+**** Evil
+***** Evil
+Install evil and activate evil-mode
+#+BEGIN_SRC emacs-lisp
+  (use-package evil
+    :init
+    (setq evil-want-integration nil
+          evil-move-cursor-back nil
+          evil-want-C-i-jump nil
+          evil-mag
+    :config
+  ;; --- evil hacks -------------------------
+    (defvar +evil-esc-hook '(t)
+      "A hook run after ESC is pressed in normal mode (invoked by
+  `evil-force-normal-state'). If any hook returns non-nil, all hooks after it are
+  ignored.")
+
+    (defun +evil*attach-escape-hook ()
+      "Run the `+evil-esc-hook'."
+      (cond ((minibuffer-window-active-p (minibuffer-window)) ;; quit the minibuffer if open.
+             (abort-recursive-edit))
+            ((evil-ex-hl-active-p 'evil-ex-search)
+             ;; disable ex search buffer highlights.
+             (evil-ex-nohighlight))
+            (t
+             ;; Run all escape hooks. If any returns non-nil, then stop there.
+             (run-hook-with-args-until-success '+evil-esc-hook))))
+    (advice-add #'evil-force-normal-state :after #'+evil*attach-escape-hook)
+
+    (defun +evil*restore-normal-state-on-windmove (orig-fn &rest args)
+      "If in anything but normal or motion mode when moving to another window,
+  restore normal mode. This prevents insert state from bleeding into other modes
+  across windows."
+      (unless (memq evil-state '(normal motion emacs))
+        (evil-normal-state +1))
+      (apply orig-fn args))
+    (advice-add #'windmove-do-window-select :around #'+evil*restore-normal-state-on-windmove)
+
+    (evil-mode))
+#+END_SRC
+
+Also installing undo-tree, required by evil
+#+BEGIN_SRC emacs-lisp
+  (use-package undo-tree
+    :demand t
+    :diminish
+    :init
+    (setq undo-tree-visualizer-timestamps t
+          undo-tree-visualizer-diff t
+          undo-tree-history-directory-alist
+          (list (cons "." (.concat my/cache-dir "undo-tree-hist/"))))
+    :config
+    (global-undo-tree-mode)
+    )
+#+END_SRC
+***** Evil-args
+Motions and text objects for delimited arguments in Evil, using 'a'
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-args
+    :after evil
+    :commands (evil-inner-arg evil-outer-arg
+                      evil-forward-arg evil-backward-arg
+                      evil-jump-out-args))
+#+END_SRC
+
+***** Evil-commentary
+Emacs version of vim-commentary
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-commentary
+    :commands (evil-commentary evil-commentary-yank evil-commentary-line)
+    :config (evil-commentary-mode))
+#+END_SRC
+
+***** Evil-escape
+Use key-sequence to escape from everything
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-escape
+    :commands evil-escape-mode
+    :init
+    (setq-default evil-escape-key-sequence "jk")
+    (add-hook 'my/post-init-hook #'evil-escape-mode))
+#+END_SRC
+***** Evil-matchit
+Evil-matchit allows to jump to a matched tag with %
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-matchit
+      :after evil
+      :config
+      (global-evil-matchit-mode 1))
+#+END_SRC
+
+***** Evil-surround
+Evil-surround, port of vim-surround
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-surround
+      :after evil
+      :config
+      (global-evil-surround-mode 1))
+#+END_SRC
+
+Evil-visualstar (* and # to search selection forward/backward)
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-visualstar
+      :after evil
+      :config
+      (global-evil-visualstar-mode 1))
+#+END_SRC
+
+***** Evil-textobj-anyblock
+Treat code blocks as text object using 'b'
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-textobj-anyblock
+    :commands (evil-textobj-anyblock-inner-block evil-textobj-anyblock-a-block))
+#+END_SRC
+
+***** Evil-visualstar
+Allows to search forward/backward with */#
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-visualstar
+    :after evil
+    :config
+    (global-evil-visualstar-mode)
+    )
+#+END_SRC
+**** Jump
+Use dumb-jump to jump to definition
+#+BEGIN_SRC emacs-lisp
+  (use-package dumb-jump
+    :commands (dumb-jump-go dumb-jump-quick-look dumb-jump-go-other-window
+               dumb-jump-back dumb-jump-result-follow)
+    :config
+    (setq dumb-jump-default-project my/emacs-dir
+          dumb-jump-aggressive nil
+          dumb-jump-use-visible-window nil
+          dumb-jump-selector 'ivy))
+#+END_SRC
+
+***** ☞ TODO Add hydra for dumb-jump from [[https://github.com/jacktasia/dumb-jump][the github]]
+***** ☞ TODO Maybe add ivy-xref
+**** Syntax-checker
+Using flycheck to check syntax
+#+BEGIN_SRC
+
+#+END_SRC
+
+***** ☞ TODO When Emacs 26 comes out might have to get rid of it
+**** Which-key
+Show keypress options
+#+BEGIN_SRC emacs-lisp
+  (use-package which-key
+    :demand t
+    :diminish
+    :init
+    (setq which-key-idle-delay 0.1
+          which-key-add-column-padding 1
+          enable-recursive-minibuffers t)
+    :config
+    (set-face-attribute 'which-key-local-map-description-face nil :weight 'bold)
+    (which-key-mode 1)
+    (which-key-setup-side-window-bottom))
+#+END_SRC
