@@ -1,7 +1,7 @@
 #+TITLE: MY EMACS CONFIG
 #+AUTHOR: MARC PLANELLES
 #+PROPERTY: header-args :tangle yes
- w
+
 * Configuration
 :PROPERTIES:
 :VISIBILITY: children
@@ -1072,7 +1072,7 @@ Pretty icons
 #+BEGIN_SRC emacs-lisp
 (use-package hl-line
   :config
-  (global-gl-line-mode))
+  (global-hl-line-mode))
 #+END_SRC
 **** hl-todo
 Highlight todos in comments
@@ -1093,9 +1093,9 @@ Show line numbers
     (prog-mode . nlinum-relative-mode)
     :config
     (setq nlinum-relative-current-symbol "")
-    (nlinum-relative-setup-evil)
-    )
+    (nlinum-relative-setup-evil))
 #+END_SRC
+
 **** Powerline
 ***** Powerline
 Better and prettier modeline
@@ -1411,7 +1411,7 @@ k
           ("K" hydra-move-splitter-up)
           ("L" hydra-move-splitter-right)
 
-          ("q" nil)))
+          ("q" nil))
 #+END_SRC
 
 ** Post-init
