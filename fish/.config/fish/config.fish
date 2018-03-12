@@ -14,5 +14,6 @@ set -g man_standout -b brblack
 set -g man_underline -u brgreen
 
 source $fish_home/environment.fish
+source $fish_home/init.fish
 # THEME PURE #
 set fish_function_path /home/snoop/.config/fish/functions/theme-pure $fish_function_path
