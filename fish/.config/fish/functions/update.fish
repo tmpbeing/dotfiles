@@ -1,4 +1,4 @@
 function update
-	pacaur -Syu $argv
+	trizen -Syu $argv
 end
 
