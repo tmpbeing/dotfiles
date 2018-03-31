@@ -1,5 +1,6 @@
 vim/.vim/tmp/
 nvim/.config/nvim/plugged/
+nvim/.config/nvim/tmp/
 nvim/.config/nvim/.netrwhist
 ranger/.config/ranger/history
 ranger/.config/ranger/bookmarks
