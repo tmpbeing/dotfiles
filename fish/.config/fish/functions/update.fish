@@ -1,4 +1,4 @@
 function update
-	trizen -Syu $argv
+	yay -Syu $argv
 end
 

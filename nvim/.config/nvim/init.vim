@@ -6,7 +6,7 @@
 "    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         "
 "                                                 +#+#+#+#+#+   +#+            "
 "    Created: 2017/02/14 18:26:34 by mplanell          #+#    #+#              "
-"    Updated: 2018/03/31 13:38:10 by mplanell         ###   ########.fr        "
+"    Updated: 2018/04/01 13:07:00 by mplanell         ###   ########.fr        "
 "                                                                              "
 " **************************************************************************** "
 
@@ -282,12 +282,12 @@ set timeoutlen=1000
 set ttimeoutlen=10
 
 " Avoid backup files in working directory
-set backupdir=~/.config/nvim/tmp,.
-set directory=~/.config/nvim/tmp,.
+set backupdir=~/.vim/tmp,.
+set directory=~/.vim/tmp,.
 
 " Persistent undo across sessions
 set undofile
-set undodir=~/.config/nvim/tmp,.
+set undodir=~/.vim/tmp,.
 
 " }}}
 " Mapping {{{

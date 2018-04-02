@@ -1,6 +1,4 @@
 # Icons-in-terminal
-source ~/.local/share/icons-in-terminal/icons.fish
-
 set fish_greeting ""
 set fish_home ~/.config/fish
 set PAGER less

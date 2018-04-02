@@ -1,5 +1,5 @@
 [options]
-font = PragmataPro for Powerline 12
+font = Roboto Mono for Powerline 12
 browser = chromium
 clickable_url = false
 dynamic_title = true
