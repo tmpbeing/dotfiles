@@ -6,13 +6,13 @@
 #    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/23 15:35:35 by mplanell          #+#    #+#              #
-#    Updated: 2017/07/02 20:45:00 by mplanell         ###   ########.fr        #
+#    Updated: 2018/02/17 11:49:01 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # Lots of it stolen from https://github.com/Airblader/dotfiles-manjaro
 # vim:filetype=i3
 
-set $mod Mod1
+set $mod Mod4
 
 ## Colors
 
@@ -46,10 +46,10 @@ font pango:Input Mono, FontAwesome 10
 ##Setting up workspaces and gaps
 
 # Set workspaces
-set $ws1  "1:  "
-set $ws2  "2:  "
-set $ws3  "3:  "
-set $ws4  "4:  "
+set $ws1  "1:  "
+set $ws2  "2:  "
+set $ws3  "3:  "
+set $ws4  "4:  "
 set $ws5  "5:  "
 set $ws6  "6:  "
 set $ws7  "7:  "
@@ -58,10 +58,10 @@ set $ws9  "9:  "
 set $ws10 "10:  "
 
 # Assigning workspaces to screens
-workspace $ws1 output DVI-1
-workspace $ws2 output DisplayPort-0
-workspace $ws3 output DVI-1
-workspace $ws4 output DisplayPort-0
+workspace $ws1 output DisplayPort-0
+workspace $ws2 output DVI-1
+workspace $ws3 output DisplayPort-0
+workspace $ws4 output DVI-1
 workspace $ws5 output DVI-1
 workspace $ws6 output DisplayPort-0
 workspace $ws7 output DVI-1
@@ -75,8 +75,8 @@ set $default_gaps_inner 10
 set $default_gaps_outer 20
 gaps inner $default_gaps_inner
 
-workspace $ws1 gaps inner 0
-workspace $ws1 gaps outer 0
+workspace $ws2 gaps inner 0
+workspace $ws2 gaps outer 0
 workspace $ws9 gaps inner 0
 workspace $ws9 gaps outer 0
 workspace $ws10 gaps inner 0
@@ -328,12 +328,12 @@ floating_modifier $mod
 ## Assign
 
 assign [class="(?i)thunderbird"]                      $ws9
-assign [class="(?i)firefox"]                          $ws10
-assign [class="(?i)chromium"]                         $ws1
-assign [class="(?i)qutebrowser"]                      $ws1
-assign [class="(?i)caprine"]                          $ws3
-assign [class="(?i)discord"]                          $ws3
-assign [class="(?i)slack"]                            $ws3
+assign [class="(?i)firefox"]                          $ws2
+assign [class="(?i)chromium"]                         $ws10
+assign [class="(?i)qutebrowser"]                      $ws2
+assign [class="(?i)caprine"]                          $ws4
+assign [class="(?i)discord"]                          $ws4
+assign [class="(?i)slack"]                            $ws4
 assign [class="(?i)Google Play Music Desktop Player"] $ws5
 
 ## Floating stuff
@@ -364,8 +364,8 @@ exec --no-startup-id polybar -r secondary
 
 exec --no-startup-id dunst
 exec --no-startup-id xrdb -load ~/.Xresources
-exec --no-startup-id slack
-exec --no-startup-id discord
+# exec --no-startup-id slack
+# exec --no-startup-id discord
 
 ## Program specific settings
 for_window [class="(?i)Google Play Music Desktop Player"] border pixel 0

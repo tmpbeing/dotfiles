@@ -33,6 +33,7 @@ function conf
 				vim ~/.emacs.d/init.el
 		end
 	else
+		echo -e '$argv config file not found\n'
 		return 1
 	end
 end

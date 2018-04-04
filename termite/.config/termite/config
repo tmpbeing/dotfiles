@@ -1,7 +1,5 @@
 [options]
-#font = TamzenForPowerline 11
-font = xos4 Terminus 10
-#font = Dina 8
+font = Roboto Mono for Powerline 11
 browser = chromium
 clickable_url = false
 dynamic_title = true

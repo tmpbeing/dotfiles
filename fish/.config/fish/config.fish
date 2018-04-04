@@ -1,12 +1,11 @@
 # Icons-in-terminal
-source ~/.local/share/icons-in-terminal/icons.fish
 
 set fish_greeting ""
 set fish_home ~/.config/fish
 set PAGER less
 set EDITOR nvim
 set GIT_EDITOR nvim
-# Colored Man Pages
+set -x FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --glob "!.git/*"'
 set -x MANPAGER "less -m -g +Gg"
 set -g man_blink -o brmagenta
 set -g man_bold -o brred

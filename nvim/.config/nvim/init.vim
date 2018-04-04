@@ -233,7 +233,7 @@ let g:startify_custom_header = [
 " }}}
 " Colorscheme & Statusline settings {{{
 
-colorscheme gruvbox 
+colorscheme gruvbox
 set background=dark
 hi CursorLine cterm=bold ctermbg=234
 "let g:gruvbox_termcolors = 256

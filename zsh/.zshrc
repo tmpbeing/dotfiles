@@ -177,7 +177,7 @@ POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="%b0"
 # Fix Colors
 source "$HOME/.vim/bundle/gruvbox/gruvbox_256palette.sh"
 # Prompt
-source ~/.config/powerlevel9k/powerlevel9k.zsh-theme
+#source ~/.config/powerlevel9k/powerlevel9k.zsh-theme
 #source "$HOME/.config/.shell_prompt.sh"
 # Fixing keybindings
 source "$HOME/.config/zsh/keybindings.zsh"
@@ -188,6 +188,6 @@ source "$HOME/.config/zsh/directories.zsh"
 # Git Aliases
 source "$HOME/.config/zsh/git.zsh"
 # Syntax highlighting
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 cow
