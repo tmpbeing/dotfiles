@@ -31,9 +31,10 @@ function conf
 				vim ~/.tmux.conf
 			case emacs
 				vim ~/.emacs.d/init.el
+			case task
+				vim ~/.config/taskrc
 		end
 	else
 		return 1
 	end
 end
-
