@@ -6,7 +6,7 @@
 #    By: marvin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/29 13:50:30 by marvin            #+#    #+#              #
-#    Updated: 2018/04/02 16:54:09 by mplanell         ###   ########.fr        #
+#    Updated: 2018/04/09 16:55:42 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,26 +89,24 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id rofi -show run
 #bindsym $mod+d exec dmenu_run
 
+# move workspace
+bindsym $mod+Shift+Up move workspace to output up
+bindsym $mod+Shift+Down move workspace to outdown down
+
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+b split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -248,6 +246,10 @@ mode "$mode_gaps_outer" {
 	bindsym Escape mode "default"
 }
 
+# Brightness keys
+bindsym XF86MonBrightnessDown exec brightnessctl s 40-
+bindsym XF86MonBrightnessUp exec brightnessctl s +40
+
 #bar {
 #       status_command i3status
 #}
@@ -274,6 +276,7 @@ assign [class="(?i)caprine"]                          $ws4
 assign [class="(?i)discord"]                          $ws4
 assign [class="(?i)slack"]                            $ws4
 assign [class="(?i)Google Play Music Desktop Player"] $ws5
+assign [class="(?i)emacs"]                            $ws3
 
 ## Floating stuff
 for_window [window_role="pop-up"] floating enable
@@ -291,7 +294,7 @@ for_window [class="^.*"] border pixel 3
 ## Autostart
 
 # Wallpaper
-exec_always --no-startup-id feh --bg-fill /home/snoop/.config/wallpapers/totoro.jpg
+exec_always --no-startup-id feh --bg-scale /home/snoop/.config/wallpapers/totoro.jpg
 
 # Compton
 exec_always --no-startup-id compton --config $HOME/.config/compton/compton.conf -b

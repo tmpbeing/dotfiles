@@ -13,3 +13,5 @@ emacs/.emacs.d/recentf
 emacs/.emacs.d/var/
 emacs/.emacs.d/history
 emacs/.emacs.d/places
+fish/.config/fish/fishd.Castor
+fish/.config/fish/fishd.copernicus
