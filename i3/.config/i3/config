@@ -6,7 +6,7 @@
 #    By: marvin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/29 13:50:30 by marvin            #+#    #+#              #
-#    Updated: 2018/04/09 16:55:42 by mplanell         ###   ########.fr        #
+#    Updated: 2018/04/12 19:08:47 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -277,6 +277,7 @@ assign [class="(?i)discord"]                          $ws4
 assign [class="(?i)slack"]                            $ws4
 assign [class="(?i)Google Play Music Desktop Player"] $ws5
 assign [class="(?i)emacs"]                            $ws3
+assign [class="(?i)qbittorrent"]                      $ws10
 
 ## Floating stuff
 for_window [window_role="pop-up"] floating enable

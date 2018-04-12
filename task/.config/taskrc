@@ -11,7 +11,7 @@
 # Use the command 'task show' to see all defaults and overrides
 
 # Files
-data.location=~/.task
+data.location=~/.config/task
 
 # Color theme (uncomment one to use)
 #include /usr/share/doc/task/rc/light-16.theme
@@ -29,6 +29,18 @@ include /usr/share/doc/task/rc/dark-16.theme
 #include /usr/share/doc/task/rc/solarized-light-256.theme
 #include /usr/share/doc/task/rc/no-color.theme
 
+# Remove warning about taskrc and taskdata
+# By default verbose is set to yes. Here we instead list every kind of verbose except header
+verbose=blank,footnote,label,new-id,affected,edit,special,project,sync,unwait
+
 context.work=project:work
 context.personal=project.not:work project.not:fun -fun
 context.fun=project:fun or +fun
+
+# Synchronize with inthe.am
+taskd.certificate=~/.config/task/private.certificate.pem
+taskd.key=~/.config/task/private.key.pem
+taskd.ca=~/.config/task/ca.cert.pem
+taskd.server=taskwarrior.inthe.am:53589
+taskd.credentials=inthe_am/mplanelles/60a11c4c-d317-4858-a4b8-1683eae28c27
+taskd.trust=ignore hostname

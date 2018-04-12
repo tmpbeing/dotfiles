@@ -43,6 +43,36 @@ modules-left = i3 volume
 modules-center =
 modules-right = cpu memory wired battery date
 
+[bar/bigscreen]
+monitor = HDMI-1
+width = 100%
+height = 22
+offset-x = 0
+offset-y = 0
+
+overline-size = 1
+overline-color = ${colors.purple}
+underline-size = 1
+underline-color = #00f
+
+border-bottom-size = 2
+border-bottom-color = #333
+
+padding-left = 3
+padding-right = 3
+module-margin-left = 1
+module-margin-right = 1
+
+background = ${colors.background-alt}
+foreground = ${colors.foreground}
+
+font-0 = "Source Code Pro:size=8;1"
+font-1 = "Font Awesome:size=8;1"
+
+modules-left = i3 volume
+modules-center =
+modules-right = cpu memory wired battery date
+
 [module/i3]
 type = internal/i3
 pin-workspaces = true
