@@ -1,4 +1,4 @@
 function update
-	yay -Syu $argv
+	yay -Syu --combinedupgrade $argv
 end
 

@@ -33,6 +33,8 @@ function conf
 				vim ~/.emacs.d/init.el
 			case task
 				vim ~/.config/taskrc
+			case alacritty
+				vim ~/.config/alacritty/alacritty.yml
 		end
 	else
 		return 1

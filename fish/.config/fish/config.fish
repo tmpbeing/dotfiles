@@ -1,4 +1,3 @@
-# Icons-in-terminal
 set fish_greeting ""
 set fish_home ~/.config/fish
 set PAGER less
@@ -10,6 +9,8 @@ set -g man_blink -o brmagenta
 set -g man_bold -o brred
 set -g man_standout -b brblack
 set -g man_underline -u brgreen
+
+set -x GOPATH $HOME/code/go
 
 source $fish_home/environment.fish
 source $fish_home/init.fish
