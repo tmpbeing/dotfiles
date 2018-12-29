@@ -8,6 +8,7 @@ rofi.font:                ypn envypn 11
 rofi.opacity:             100
 rofi.fake-transparency:   true
 rofi.hide-scrollbar:      false
+rofi.ssh-command:         {terminal} -e "{ssh-client} {host}"
 
 
 ! Layout

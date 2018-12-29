@@ -5,6 +5,6 @@ if pgrep -x polybar &>/dev/null ; then
 fi
 EXTERNAL_MONITOR_STATUS=$( cat /sys/class/drm/card0-HDMI-A-1/status )
 if [ $EXTERNAL_MONITOR_STATUS == "connected" ]; then
-	polybar -r bigscreen &o
+	polybar -r bigscreen &
 fi
 polybar -r bar &

@@ -6,7 +6,7 @@
 #    By: marvin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/29 13:50:30 by marvin            #+#    #+#              #
-#    Updated: 2018/04/12 19:08:47 by mplanell         ###   ########.fr        #
+#    Updated: 2018/12/19 18:51:06 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,18 +80,21 @@ client.background		$black
 floating_modifier $mod
 
 # Start a terminal
-bindsym $mod+Return exec --no-startup-id termite
+bindsym $mod+Return exec --no-startup-id alacritty
 
 # Kill focused window
 bindsym $mod+Shift+q kill
 
 # Start rofi (a program launcher)
-bindsym $mod+d exec --no-startup-id rofi -show run
-#bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec --no-startup-id rofi -modi "run#ssh#window" -show run
+bindsym $mod+Shift+d exec --no-startup-id rofi -modi "run#ssh#window" -show ssh
+bindsym $mod+Shift+w exec --no-startup-id rofi -modi "run#ssh#window" -show window
 
 # move workspace
 bindsym $mod+Shift+Up move workspace to output up
 bindsym $mod+Shift+Down move workspace to outdown down
+bindsym $mod+Shift+Left move workspace to output left
+bindsym $mod+Shift+Right move workspace to output right
 
 # change focus
 bindsym $mod+h focus left
@@ -135,8 +138,12 @@ bindsym $mod+Shift+a focus child
 # Switch floating window to sticky mode
 bindsym $mod+Shift+s sticky toggle
 
-# Screenshot
-bindsym --release Print exec --no-startup-id "maim -p 0 -c 0.96,0.5,0.09 $HOME/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png"
+# Screenshot everything
+bindsym Print exec --no-startup-id shutter -f
+# Capture selection
+bindsym $mod+Print exec --no-startup-id shutter -s
+# Make shutter window float
+for_window [class="Shutter" instance="shutter"] floating enable
 
 # Scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -275,7 +282,9 @@ assign [class="(?i)qutebrowser"]                      $ws2
 assign [class="(?i)caprine"]                          $ws4
 assign [class="(?i)discord"]                          $ws4
 assign [class="(?i)slack"]                            $ws4
+assign [class="(?i)ripcord"]                          $ws4
 assign [class="(?i)Google Play Music Desktop Player"] $ws5
+assign [class="(?i)spotify"]                          $ws5
 assign [class="(?i)emacs"]                            $ws3
 assign [class="(?i)qbittorrent"]                      $ws10
 
@@ -288,6 +297,8 @@ for_window [window_role="Preferences"] floating enable
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 
+## Fix some of intellij window
+for_window [class="^jetbrains-.+"][window_type=dialog] focus
 
 ## Required, value change border size
 for_window [class="^.*"] border pixel 3
@@ -295,7 +306,7 @@ for_window [class="^.*"] border pixel 3
 ## Autostart
 
 # Wallpaper
-exec_always --no-startup-id feh --bg-scale /home/snoop/.config/wallpapers/totoro.jpg
+exec_always --no-startup-id feh --bg-scale /home/snoop/.config/wallpapers/thomas_cole/savage_state.jpg
 
 # Compton
 exec_always --no-startup-id compton --config $HOME/.config/compton/compton.conf -b
@@ -306,9 +317,7 @@ exec_always --no-startup-id /home/snoop/.config/i3/polybar-handler
 exec --no-startup-id dunst
 exec --no-startup-id xrdb -load ~/.Xresources
 exec --no-startup-id redshift
-exec --no-startup-id discord
-exec --no-startup-id slack
-# exec --no-startup-id discord
+exec --no-startup-id ripcord
 
 ## Program specific settings
 for_window [class="(?i)Google Play Music Desktop Player"] border pixel 0
