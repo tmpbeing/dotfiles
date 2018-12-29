@@ -1,5 +1,6 @@
 [options]
-font = Roboto Mono for Powerline 12
+#font = Input Mono Narrow 12
+font = Liberation Mono for Powerline 12
 browser = chromium
 clickable_url = false
 dynamic_title = true
