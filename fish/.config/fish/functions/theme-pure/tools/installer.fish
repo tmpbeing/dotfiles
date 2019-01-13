@@ -25,7 +25,7 @@ function pure::check_git_is_available
     printf "\tChecking for git availability"
     command --search git >/dev/null 2>&1; or begin;
         printf "%sError: git is not installed%s" "$color_error" "$color_normal"
-        exit 1
+        return 1
     end
 end
 
@@ -33,14 +33,14 @@ function pure::fetch_source
     printf "\tFetching theme's source"
     env git clone --depth=1 --quiet https://github.com/rafaelrinaldi/theme-pure.git $PURE_INSTALL_DIR; or begin;
         printf "%sError: git clone of theme-pure repo failed%s" "$color_error" "$color_normal"
-        exit 1
+        return 1
     end
 end
 
 function pure::backup_existing_theme
-    printf "\tBackuping existing theme\n"
-    set -l old_prompt $FISH_CONFIG_DIR/functions/fish_prompt.fish
-    set -l backup_prompt $old_prompt.ignore
+    printf "\tBackuping existing theme"
+    set --local old_prompt $FISH_CONFIG_DIR/functions/fish_prompt.fish
+    set --local backup_prompt $old_prompt.ignore
     if test -f "$old_prompt"
         mv "$old_prompt" "$backup_prompt"
         printf "\t\tPrevious config saved to: %s%s%s." "$color_white" "$backup_prompt" "$color_normal"
@@ -49,19 +49,19 @@ end
 
 function pure::enable_autoloading
     printf "\tEnabling autoloading for pure's functions on shell init"
-    set -l marker "# THEME PURE #"
     touch "$FISH_CONFIG_DIR/config.fish"
     if not test (grep "$THEME_PURE" $FISH_CONFIG_DIR/config.fish 2>&1 >/dev/null)
-        echo "$marker" >> $FISH_CONFIG_DIR/config.fish
-        echo "set fish_function_path $PURE_INSTALL_DIR" '$fish_function_path' >> $FISH_CONFIG_DIR/config.fish
+        echo "# THEME PURE #" >> $FISH_CONFIG_DIR/config.fish
+        echo "set fish_function_path $PURE_INSTALL_DIR/functions/" '$fish_function_path' >> $FISH_CONFIG_DIR/config.fish
+        echo "source $PURE_INSTALL_DIR/conf.d/pure.fish" >> $FISH_CONFIG_DIR/config.fish
     end
     ln -sf $PURE_INSTALL_DIR/fish_prompt.fish $FISH_CONFIG_DIR/functions/
 end
 
 function pure::enable_theme
     printf "\tEnabling theme"
-    set fish_function_path $PURE_INSTALL_DIR $fish_function_path
-    source $FISH_CONFIG_DIR/functions/fish_prompt.fish
+    set fish_function_path $PURE_INSTALL_DIR/functions/ $fish_function_path
+    source $FISH_CONFIG_DIR/config.fish
 end
 
 function pure::clean_after_install
