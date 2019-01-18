@@ -50,6 +50,7 @@
 
        :editor
       ;parinfer          ; turn lisp into python, sort of
+       multiple-cursors
        rotate-text       ; cycle region at point between text candidates
 
        :emacs
@@ -63,6 +64,8 @@
        vc                ; version-control and Emacs, sitting in a tree
 
        :tools
+       ansible
+       docker
        editorconfig      ; let someone else argue about tabs vs spaces
       ;ein               ; tame Jupyter notebooks with emacs
        gist              ; interacting with github gists
@@ -73,6 +76,7 @@
        pdf               ; pdf enhancements
        prodigy           ; FIXME managing external services & code builders
        rgb               ; creating color strings
+      ;terraform
       ;tmux              ; an API for interacting with tmux
        upload            ; map local to remote projects via ssh/ftp
       ;wakatime
@@ -94,7 +98,7 @@
        (haskell +intero) ; a language that's lazier than I am
       ;hy                ; readability of scheme w/ speed of python
       ;(java +meghanada) ; the poster child for carpal tunnel syndrome
-      ;javascript        ; all(hope(abandon(ye(who(enter(here))))))
+       javascript        ; all(hope(abandon(ye(who(enter(here))))))
       ;julia             ; a better, faster MATLAB
       ;latex             ; writing papers in Emacs has never been so fun
       ;ledger            ; an accounting system in Emacs
@@ -150,5 +154,4 @@
        ;; a Spacemacs-inspired keybinding scheme, a custom yasnippet library,
        ;; and additional ex commands for evil-mode. Use it as a reference for
        ;; your own modules.
-       (default +bindings +snippets +evil-commands))
-
+       (default +bindings +snippets +evil-commands +smartparens))
