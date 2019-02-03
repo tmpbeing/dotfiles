@@ -6,7 +6,7 @@
 "    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         "
 "                                                 +#+#+#+#+#+   +#+            "
 "    Created: 2017/02/14 18:26:34 by mplanell          #+#    #+#              "
-"    Updated: 2018/04/01 13:07:00 by mplanell         ###   ########.fr        "
+"    Updated: 2019/02/03 11:03:50 by mplanell         ###   ########.fr        "
 "                                                                              "
 " **************************************************************************** "
 
@@ -57,6 +57,7 @@ Plug 'honza/vim-snippets'
 
 " Colorscheme
 Plug 'morhetz/gruvbox'
+Plug 'ayu-theme/ayu-vim'
 
 " Misc
 Plug 'Treia/42header.vim'
@@ -195,11 +196,13 @@ let g:startify_custom_header = [
 " }}}
 " Colorscheme & Statusline settings {{{
 
-colorscheme gruvbox
-set background=dark
-let g:gruvbox_contrast_dark ='medium'
-let g:gruvbox_improved_warnings = 1
-let g:gruvbox_italic = 1
+colorscheme ayu
+let ayucolor="dark"
+set termguicolors
+" set background=dark
+" let g:gruvbox_contrast_dark ='medium'
+" let g:gruvbox_improved_warnings = 1
+" let g:gruvbox_italic = 1
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 hi VertSplit ctermfg=238 ctermbg=235
 hi StatusLine ctermfg=235 ctermbg=245
