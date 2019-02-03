@@ -8,10 +8,10 @@
 
 ;; UI
 (setq
-  doom-font (font-spec :family "Liberation Mono for Powerline" :size 14)
+  doom-font (font-spec :family "SF Mono" :size 14)
   doom-unicode-font (font-spec :family "DejaVu Sans" :size 14)
-  doom-big-font (font-spec :family "Liberation Mono for Powerline" :size 20)
-  doom-theme 'doom-tomorrow-night
+  doom-big-font (font-spec :family "SF Mono" :size 20)
+  doom-theme 'doom-ayu-dark
   +doom-modeline-buffer-file-name-style 'truncate-upto-project
   scroll-conservatively 0
   show-trailing-whitespace t

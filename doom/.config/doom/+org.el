@@ -3,8 +3,6 @@
 (def-package! ob-http
   :after org)
 
-(setq +todo-file "~/org/todo.org")
-
 (after! org
   (map! :map evil-org-mode-map
         :localleader
@@ -15,6 +13,8 @@
         :desc "Filter" :nve "f" #'org-match-sparse-tree
         :desc "Tag heading" :nve "t" #'org-set-tags-command)
   (setq org-bullets-bullet-list '("#"))
+  (setq org-ellipsis " ▼ ")
+  ;; (setq org-ellipsis " ⤵")
 
   (set-popup-rule! "^\\Org Agenda"
     :size 15
@@ -24,8 +24,9 @@
     '((transient))))
 
 (map! :leader
-      :desc "Open todo file" :nvm "O" #'+open-todo-file
       (:prefix "o"
-        :desc "Org Agenda" :nvm "a" #'org-agenda-list))
+        :desc "Org Agenda" :nvm "a" #'org-agenda-list)
+      (:when (featurep! :completion helm)
+        "X" #'helm-org-capture-templates))
 
 ;;; +org.el ends here

@@ -19,12 +19,12 @@
        (company          ; the ultimate code completion backend
         +auto            ; as-you-type code completion
         +childframe)
-      ;(helm             ; the *other* search engine for love and life
+       (helm)             ; the *other* search engine for love and life
       ; +fuzzy)          ; enable fuzzy search backend for helm
       ;ido               ; the other *other* search engine...
-       (ivy              ; a search engine for love and life
-        +fuzzy           ; enable fuzzy search backend for ivy
-        +childframe)
+      ;(ivy)             ; a search engine for love and life
+      ; +fuzzy           ; enable fuzzy search backend for ivy
+      ; +childframe)
 
        :ui
        doom              ; what makes DOOM look the way it does
@@ -51,10 +51,11 @@
        :editor
       ;parinfer          ; turn lisp into python, sort of
        multiple-cursors
+       format
        rotate-text       ; cycle region at point between text candidates
 
        :emacs
-       dired             ; making dired pretty [functional]
+       (dired +ranger)   ; making dired pretty [functional]
        ediff             ; comparing files in Emacs
        electric          ; smarter, keyword-based electric-indent
        eshell            ; a consistent, cross-platform shell (WIP)
@@ -137,9 +138,9 @@
       ;irc               ; how neckbeards socialize
        (rss +org)        ; emacs as an RSS reader
       ;twitter           ; twitter client https://twitter.com/vnought
-       (write            ; emacs as a word processor (latex + org + markdown)
-        +wordnut         ; wordnet (wn) search
-        +langtool)       ; a proofreader (grammar/style check) for Emacs
+      ;(write            ; emacs as a word processor (latex + org + markdown)
+      ; +wordnut         ; wordnet (wn) search
+      ; +langtool)       ; a proofreader (grammar/style check) for Emacs
 
        :collab
       ;floobits          ; peer programming for a price
