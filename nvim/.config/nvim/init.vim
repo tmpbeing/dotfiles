@@ -6,7 +6,7 @@
 "    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         "
 "                                                 +#+#+#+#+#+   +#+            "
 "    Created: 2017/02/14 18:26:34 by mplanell          #+#    #+#              "
-"    Updated: 2019/02/03 11:03:50 by mplanell         ###   ########.fr        "
+"    Updated: 2019/02/03 23:00:59 by mplanell         ###   ########.fr        "
 "                                                                              "
 " **************************************************************************** "
 
@@ -70,6 +70,7 @@ call plug#end()
 " Addons settings {{{
 
 " Set Space as Leader
+nnoremap <SPACE> <Nop>
 let mapleader = "\<Space>"
 
 " " Syntastic
