@@ -1,4 +1,4 @@
+# Defined in /home/snoop/.config/fish/functions/ls.fish @ line 1
 function ls
-	command ls -h --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F $argv
+	command exa --group-directories-first $argv
 end
-
