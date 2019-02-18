@@ -6,4 +6,7 @@
   "Opens the todo file"
   (find-file +org-capture-todo-file))
 
-(defun )
+(defun +org/open-bookmarks ()
+  (interactive)
+  "Opens the bookmark file"
+  (find-file +org-capture-bookmark-file))
