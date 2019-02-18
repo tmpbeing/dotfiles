@@ -6,7 +6,7 @@
 #    By: marvin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/29 13:50:30 by marvin            #+#    #+#              #
-#    Updated: 2018/12/19 18:51:06 by mplanell         ###   ########.fr        #
+#    Updated: 2019/02/13 23:14:26 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -317,7 +317,6 @@ exec_always --no-startup-id /home/snoop/.config/i3/polybar-handler
 exec --no-startup-id dunst
 exec --no-startup-id xrdb -load ~/.Xresources
 exec --no-startup-id redshift
-exec --no-startup-id ripcord
 
 ## Program specific settings
 for_window [class="(?i)Google Play Music Desktop Player"] border pixel 0
