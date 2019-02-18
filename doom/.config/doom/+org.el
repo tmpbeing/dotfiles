@@ -25,7 +25,8 @@
 
 (map! :leader
       (:prefix "o"
-        :desc "Org Agenda" :nvm "a" #'org-agenda-list)
+        :desc "Org Agenda" :nvm "a" #'org-agenda-list
+        :desc "Org Todo" :nvm "o" #'+org/open-todo-file)
       (:when (featurep! :completion helm)
         "X" #'helm-org-capture-templates))
 

@@ -4,4 +4,6 @@
 (defun +org/open-todo-file ()
   (interactive)
   "Opens the todo file"
-  (find-file +todo-file))
+  (find-file +org-capture-todo-file))
+
+(defun )
