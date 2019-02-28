@@ -14,7 +14,7 @@
   doom-theme 'doom-ayu-dark
   scroll-conservatively 0
   show-trailing-whitespace t
-  which-key-idle-delay 0.2)
+  which-key-idle-delay 0.4)
 
 ;;
 ;; Keybindings
