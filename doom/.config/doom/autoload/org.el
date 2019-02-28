@@ -2,11 +2,12 @@
 
 ;;;###autoload
 (defun +org/open-todo-file ()
-  (interactive)
   "Opens the todo file"
+  (interactive)
   (find-file +org-capture-todo-file))
 
+;;;###autoload
 (defun +org/open-bookmarks ()
-  (interactive)
   "Opens the bookmark file"
+  (interactive)
   (find-file +org-capture-bookmark-file))
