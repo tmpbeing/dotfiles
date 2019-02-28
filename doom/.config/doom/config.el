@@ -12,6 +12,7 @@
   doom-unicode-font (font-spec :family "DejaVu Sans" :size 14)
   doom-big-font (font-spec :family "SF Mono" :size 18)
   doom-theme 'doom-ayu-dark
+  +modeline-buffer-path-function '+modeline-file-name
   scroll-conservatively 0
   show-trailing-whitespace t
   which-key-idle-delay 0.4)
