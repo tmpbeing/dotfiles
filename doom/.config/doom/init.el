@@ -10,9 +10,6 @@
         +devdocs         ; ...on devdocs.io online
         +docsets)        ; ...or in Dash docsets locally
        snippets          ; my elves. They type so I don't have to
-       spellcheck        ; tasing you for misspelling mispelling
-       (syntax-checker   ; tasing you for every semicolon you forget
-        +childframe)     ; use childframes for error popups (Emacs 26+ only)
        workspaces        ; tab emulation, persistence & separate workspaces
 
        :completion
@@ -49,17 +46,16 @@
        window-select     ; visually switch windows
 
        :editor
+	   fold
+	   (format +onsave)
       ;parinfer          ; turn lisp into python, sort of
        multiple-cursors
-       format
        rotate-text       ; cycle region at point between text candidates
 
        :emacs
        (dired +ranger)   ; making dired pretty [functional]
-       ediff             ; comparing files in Emacs
        electric          ; smarter, keyword-based electric-indent
        eshell            ; a consistent, cross-platform shell (WIP)
-       hideshow          ; basic code-folding support
        imenu             ; an imenu sidebar and searchable code index
        term              ; terminals in Emacs
        vc                ; version-control and Emacs, sitting in a tree
@@ -69,10 +65,13 @@
        docker
        editorconfig      ; let someone else argue about tabs vs spaces
       ;ein               ; tame Jupyter notebooks with emacs
+	   (flycheck +childframe)
+       flyspell
        gist              ; interacting with github gists
+	   lsp
       ;macos             ; MacOS-specific commands
-       make              ; run make tasks from Emacs
        magit             ;
+       make              ; run make tasks from Emacs
       ;password-store    ; password manager for nerds
        pdf               ; pdf enhancements
        prodigy           ; FIXME managing external services & code builders
@@ -80,11 +79,12 @@
       ;terraform
       ;tmux              ; an API for interacting with tmux
        upload            ; map local to remote projects via ssh/ftp
+	   vterm
       ;wakatime
 
        :lang
       ;assembly          ; assembly for fun or debugging
-       (cc +irony +rtags); C/C++/Obj-C madness
+       (cc +lsp); C/C++/Obj-C madness
        clojure           ; java with a lisp
        common-lisp       ; if you've seen one lisp, you've seen them all
       ;crystal           ; ruby at the speed of c
@@ -98,8 +98,8 @@
        go                ; the hipster dialect
        (haskell +intero) ; a language that's lazier than I am
       ;hy                ; readability of scheme w/ speed of python
-      ;(java +meghanada) ; the poster child for carpal tunnel syndrome
-       javascript        ; all(hope(abandon(ye(who(enter(here))))))
+      ;(java +lsp)       ; the poster child for carpal tunnel syndrome
+       (javascript +lsp) ; all(hope(abandon(ye(who(enter(here))))))
       ;julia             ; a better, faster MATLAB
       ;latex             ; writing papers in Emacs has never been so fun
       ;ledger            ; an accounting system in Emacs
@@ -118,12 +118,12 @@
       ;php               ; perl's insecure younger brother
       ;plantuml          ; diagrams for confusing people more
       ;purescript        ; javascript, but functional
-       python            ; beautiful is better than ugly
+       (python +lsp)     ; beautiful is better than ugly
       ;qt                ; the 'cutest' gui framework ever
       ;racket            ; a DSL for DSLs
        rest              ; Emacs as a REST client
       ;ruby              ; 1.step do {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
-       rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+       (rust +lsp)       ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        scala             ; java, but good
        (sh +fish)        ; she sells (ba|z)sh shells on the C xor
       ;solidity          ; do you need a blockchain? No.
