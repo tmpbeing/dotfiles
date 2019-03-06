@@ -18,6 +18,7 @@ and headers with DONE keywords from refile targets"
 
 
 (after! org
+  (add-to-list 'org-modules 'org-habit t)
   (map! :map evil-org-mode-map
         :localleader
         :desc "Create/Edit Todo" :nve "o" #'org-todo
@@ -29,8 +30,6 @@ and headers with DONE keywords from refile targets"
   (setq org-bullets-bullet-list '("#")
         org-ellipsis " ▼ "
         org-refile-target-verify-function '+org/custom-verify-target)
-                                        ;org-refile-use-outline-path t)
-  ;; (setq org-ellipsis " ⤵")
 
   (setq org-capture-templates
         '(("t" "Personal todo" entry

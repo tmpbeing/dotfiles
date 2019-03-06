@@ -46,8 +46,8 @@
        window-select     ; visually switch windows
 
        :editor
-	   fold
-	   (format +onsave)
+       fold
+       (format +onsave)
       ;parinfer          ; turn lisp into python, sort of
        multiple-cursors
        rotate-text       ; cycle region at point between text candidates
@@ -65,10 +65,10 @@
        docker
        editorconfig      ; let someone else argue about tabs vs spaces
       ;ein               ; tame Jupyter notebooks with emacs
-	   (flycheck +childframe)
+       (flycheck +childframe)
        flyspell
        gist              ; interacting with github gists
-	   lsp
+       lsp
       ;macos             ; MacOS-specific commands
        magit             ;
        make              ; run make tasks from Emacs
@@ -79,7 +79,7 @@
       ;terraform
       ;tmux              ; an API for interacting with tmux
        upload            ; map local to remote projects via ssh/ftp
-	   vterm
+       vterm
       ;wakatime
 
        :lang
@@ -155,4 +155,4 @@
        ;; a Spacemacs-inspired keybinding scheme, a custom yasnippet library,
        ;; and additional ex commands for evil-mode. Use it as a reference for
        ;; your own modules.
-       (default +bindings +snippets +evil-commands +smartparens))
+       (default +bindings +evil-commands +smartparens))
