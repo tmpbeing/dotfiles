@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    config                                             :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: mplanell <mplanell@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/07/29 13:50:30 by marvin            #+#    #+#              #
-#    Updated: 2019/02/25 18:35:21 by mplanell         ###   ########.fr        #
+#    Created: 2017/07/29 13:50:30 by mplanell          #+#    #+#              #
+#    Updated: 2019/03/06 14:20:17 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -139,9 +139,9 @@ bindsym $mod+Shift+a focus child
 bindsym $mod+Shift+s sticky toggle
 
 # Screenshot everything
-bindsym Print exec --no-startup-id shutter -f
+bindsym $mod+p exec --no-startup-id shutter -f
 # Capture selection
-bindsym $mod+Print exec --no-startup-id shutter -s
+bindsym $mod+Shift+Print exec --no-startup-id shutter -s
 # Make shutter window float
 for_window [class="Shutter" instance="shutter"] floating enable
 
