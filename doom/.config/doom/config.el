@@ -23,6 +23,11 @@
 (map! :ni "C-;" #'avy-goto-char-timer)
 
 ;;
+;; Evil
+;;
+(evil-ex-define-cmd "W" 'evil-write)
+
+;;
 ;; Languages
 ;;
 
