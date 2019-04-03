@@ -133,34 +133,34 @@ persistent_logging: false
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 
-# Colors (Ayu Dark)
+# Colors (Base16-faded)
 colors:
   # Default colors
   primary:
-    background: '0x0F1419'
-    foreground: '0xE6E1CF'
+    background: '0x2E3440'
+    foreground: '0xFFFFFF'
 
   # Normal colors
   normal:
-    black: '0x01060E'
-    red: '0xEA6C73'
-    green: '0x91B362'
-    yellow: '0xF9AF4F'
-    blue: '0x53BDFA'
-    magenta: '0xFAE994'
-    cyan: '0x90E1C6'
-    white: '0xC7C7C7'
+    black:   '0x2E3440'
+    red:     '0xB77A76'
+    green:   '0xB4BF86'
+    yellow:  '0xCBB079'
+    blue:    '0x83A2BE'
+    magenta: '0x958090'
+    cyan:    '0x7DAEA9'
+    white:   '0xC5C8C6'
 
   # Bright colors
   bright:
-    black: '0x686868'
-    red: '0xF07178'
-    green: '0xC2D94C'
-    yellow: '0xFFB454'
-    blue: '0x59C2FF'
-    magenta: '0xFFEE99'
-    cyan: '0x95E6CB'
-    white: '0xFFFFFF'
+    black:   '0x606778'
+    red:     '0xB77A76'
+    green:   '0xB4BF86'
+    yellow:  '0xCBB079'
+    blue:    '0x83A2BE'
+    magenta: '0x958090'
+    cyan:    '0x7DAEA9'
+    white:   '0xFFFFFF'
 
 # Visual Bell
 #
