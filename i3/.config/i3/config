@@ -6,7 +6,7 @@
 #    By: mplanell <mplanell@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/29 13:50:30 by mplanell          #+#    #+#              #
-#    Updated: 2019/03/06 14:20:17 by mplanell         ###   ########.fr        #
+#    Updated: 2019/03/28 11:00:23 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -141,7 +141,7 @@ bindsym $mod+Shift+s sticky toggle
 # Screenshot everything
 bindsym $mod+p exec --no-startup-id shutter -f
 # Capture selection
-bindsym $mod+Shift+Print exec --no-startup-id shutter -s
+bindsym $mod+Shift+p exec --no-startup-id shutter -s
 # Make shutter window float
 for_window [class="Shutter" instance="shutter"] floating enable
 
