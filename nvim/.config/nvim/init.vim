@@ -6,7 +6,7 @@
 "    By: mplanell <mplanell@student.42.fr>          +#+  +:+       +#+         "
 "                                                 +#+#+#+#+#+   +#+            "
 "    Created: 2017/02/14 18:26:34 by mplanell          #+#    #+#              "
-"    Updated: 2019/02/03 23:00:59 by mplanell         ###   ########.fr        "
+"    Updated: 2019/04/02 11:53:51 by mplanell         ###   ########.fr        "
 "                                                                              "
 " **************************************************************************** "
 
@@ -58,6 +58,7 @@ Plug 'honza/vim-snippets'
 " Colorscheme
 Plug 'morhetz/gruvbox'
 Plug 'ayu-theme/ayu-vim'
+Plug 'aesophor/base16-faded'
 
 " Misc
 Plug 'Treia/42header.vim'
@@ -197,33 +198,34 @@ let g:startify_custom_header = [
 " }}}
 " Colorscheme & Statusline settings {{{
 
-colorscheme ayu
-let ayucolor="dark"
-set termguicolors
+colorscheme base16-faded
+set t_Co=256
+" let ayucolor="dark"
+" set termguicolors
 " set background=dark
 " let g:gruvbox_contrast_dark ='medium'
 " let g:gruvbox_improved_warnings = 1
 " let g:gruvbox_italic = 1
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-hi VertSplit ctermfg=238 ctermbg=235
-hi StatusLine ctermfg=235 ctermbg=245
-hi StatusLineNC ctermfg=235 ctermbg=237
-hi CursorLine cterm=bold ctermbg=234
-hi clear SignColumn
-hi SignColumn ctermbg=235
-hi GitGutterAdd ctermbg=235 ctermfg=245
-hi GitGutterChange ctermbg=235 ctermfg=245
-hi GitGutterDelete ctermbg=235 ctermfg=245
-hi GitGutterChangeDelete ctermbg=235 ctermfg=245
-hi SyntasticErrorSign ctermfg=9 ctermbg=235
-hi SyntasticWarningSign ctermfg=11 ctermbg=235
+" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+" hi VertSplit ctermfg=238 ctermbg=235
+" hi StatusLine ctermfg=235 ctermbg=245
+" hi StatusLineNC ctermfg=235 ctermbg=237
+" hi CursorLine cterm=bold ctermbg=234
+" hi clear SignColumn
+" hi SignColumn ctermbg=235
+" hi GitGutterAdd ctermbg=235 ctermfg=245
+" hi GitGutterChange ctermbg=235 ctermfg=245
+" hi GitGutterDelete ctermbg=235 ctermfg=245
+" hi GitGutterChangeDelete ctermbg=235 ctermfg=245
+" hi SyntasticErrorSign ctermfg=9 ctermbg=235
+" hi SyntasticWarningSign ctermfg=11 ctermbg=235
 " hi ALEErrorSign ctermfg=9 ctermbg=235
 " hi ALEWarningSign ctermfg=11 ctermbg=235
-hi EndOfBuffer ctermfg=237 ctermbg=235
-hi BufTabLineActive ctermfg=245 ctermbg=235
-hi BufTabLineCurrent ctermfg=245 ctermbg=235
-hi BufTabLineHidden ctermfg=239 ctermbg=235
-hi ColorColumn ctermbg=236
+" hi EndOfBuffer ctermfg=237 ctermbg=235
+" hi BufTabLineActive ctermfg=245 ctermbg=235
+" hi BufTabLineCurrent ctermfg=245 ctermbg=235
+" hi BufTabLineHidden ctermfg=239 ctermbg=235
+" hi ColorColumn ctermbg=236
 
 set statusline=%=%P\ %f\ %m
 set showmode
