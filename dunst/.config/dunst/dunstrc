@@ -1,5 +1,5 @@
 [global]
-    font = Source Sans Pro 10
+    font = SF Mono 10
     markup = full
 
     # The format of the message.  Possible variables are:
