@@ -11,7 +11,7 @@
   doom-font (font-spec :family "SF Mono" :size 14)
   doom-unicode-font (font-spec :family "DejaVu Sans" :size 14)
   doom-big-font (font-spec :family "SF Mono" :size 18)
-  doom-theme 'doom-tomorrow-night
+  doom-theme 'doom-base16-faded
   +modeline-buffer-path-function '+modeline-file-name
   scroll-conservatively 0
   show-trailing-whitespace t
