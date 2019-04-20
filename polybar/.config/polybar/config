@@ -1,13 +1,13 @@
 ; vim:ft=dosini
 
 [colors]
-background-alt = #222
-background     = #161616
-foreground     = #ebdbb2
-foreground-alt = #55
-purple         = #b16286
-orange         = #fabd2f
-blue           = #66d9ef
+background-alt = #2E3440
+background     = #242933
+foreground     = #C5C8C6
+foreground-alt = #FFFFFF
+purple         = #958090
+orange         = #C19578
+blue           = #83A2BE
 
 [global/wm]
 margin-top = 0
