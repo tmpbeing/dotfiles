@@ -17,6 +17,10 @@
   show-trailing-whitespace t
   which-key-idle-delay 0.4)
 
+;; Show the . and .. in dired-mode
+(after! dired
+  (remove-hook 'dired-mode-hook #'dired-omit-mode))
+
 ;;
 ;; Keybindings
 ;;
