@@ -3,6 +3,9 @@
 (def-package! ob-http
   :after org)
 
+(def-package! org-pomodoro
+  :after org)
+
 (defun +org/custom-verify-target ()
   "Exclude bookmarks (headers with a link in bookmarks.org)
 and headers with DONE keywords from refile targets"
