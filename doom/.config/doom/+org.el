@@ -1,10 +1,20 @@
 ;;; +org.el -*- lexical-binding: t; -*-
 
+(defvar +org-gong-sound
+  (concat doom-private-dir "resources/gong.wav"))
+
+(defvar +org-bell-sound
+  (concat doom-private-dir "resources/prayer-bell.wav"))
+
 (def-package! ob-http
   :after org)
 
 (def-package! org-pomodoro
-  :after org)
+  :after org
+  :config
+  (setq org-pomodoro-finished-sound +org-gong-sound
+        org-pomodoro-short-break-sound +org-bell-sound
+        org-pomodoro-long-break-sound +org-bell-sound))
 
 (defun +org/custom-verify-target ()
   "Exclude bookmarks (headers with a link in bookmarks.org)
