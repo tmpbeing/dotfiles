@@ -4,7 +4,7 @@
 (defun +org/open-todo-file ()
   "Opens the todo file"
   (interactive)
-  (find-file +org-capture-todo-file))
+  (find-file (concat org-directory +org-capture-todo-file))
 
 ;;;###autoload
 (defun +org/open-bookmarks ()
