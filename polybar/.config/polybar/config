@@ -37,11 +37,12 @@ background = ${colors.background-alt}
 foreground = ${colors.foreground}
 
 font-0 = "Overpass Mono:size=8;1"
-font-1 = "Font Awesome:size=8;1"
+font-1 = "Pomicons:size=8;1"
+font-2 = "Font Awesome:size=8;1"
 
 modules-left = i3 volume
 modules-center =
-modules-right = cpu memory wired battery date
+modules-right = pomodoro cpu memory wired battery date
 
 [bar/bigscreen]
 monitor = HDMI1
@@ -67,11 +68,12 @@ background = ${colors.background-alt}
 foreground = ${colors.foreground}
 
 font-0 = "Overpass Mono:size=8;1"
-font-1 = "Font Awesome:size=8;1"
+font-1 = "Pomicons:size=10;3"
+font-2 = "Font Awesome:size=8;1"
 
 modules-left = i3 volume
 modules-center =
-modules-right = cpu memory wired battery date
+modules-right = pomodoro cpu memory wired battery date
 
 [module/i3]
 type = internal/i3
@@ -172,3 +174,8 @@ date = "%a %d %b"
 label = %time%, %date%
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground}
+
+[module/pomodoro]
+type = custom/script
+exec = /home/snoop/.config/scripts/org-pomodoro.sh
+interval = 5
