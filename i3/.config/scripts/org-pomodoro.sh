@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 OUTPUT_STYLE_FILE="/tmp/pomodoro-polybar-output-style"
 
 # If the file doesn't exist, default to SIMPLE output style
@@ -12,8 +11,8 @@ else
 fi
 
 # Colors have to be hardcoded. See : https://github.com/polybar/polybar/wiki/Formatting#format-tags
-set_pomodoro_icon() {
-    STATE=$1
+set_state_and_pomodoro_icon() {
+    export STATE=$(emacsclient --eval '(if (org-pomodoro-active-p) org-pomodoro-state -1)' 2>&1)
     case "$STATE" in
         ":pomodoro")
             ICON="%{F#B77A76}\ue003";;
@@ -26,21 +25,48 @@ set_pomodoro_icon() {
     esac
 }
 
+set_remaining_time() {
+    export TIME_REMAINING=$(emacsclient --eval '(org-pomodoro-format-seconds)')
+    TIME_REMAINING="${TIME_REMAINING%\"}" # Bash trick to remove leading and trailing quotes
+    TIME_REMAINING="${TIME_REMAINING#\"}"
+}
+
+set_task_at_hand() {
+    export TASK_AT_HAND=$(emacsclient --eval '(org-no-properties org-clock-current-task)')
+    TASK_AT_HAND="${TASK_AT_HAND%\"}" # Bash trick to remove leading and trailing quotes
+    TASK_AT_HAND="${TASK_AT_HAND#\"}"
+}
+
 # Print corresponding pomodoro icon and exit
 print_pomodoro_state_simple() {
-    export STATE=$(emacsclient --eval '(if (org-pomodoro-active-p) org-pomodoro-state -1)' 2>&1)
-    set_pomodoro_icon $STATE
+    set_state_and_pomodoro_icon
     echo -e "$ICON"
     exit
 }
 
 # Print pomodoro icon and time remaining
 print_pomodoro_state_long() {
-    export STATE=$(emacsclient --eval '(if (org-pomodoro-active-p) org-pomodoro-state -1)' 2>&1)
-    set_pomodoro_icon $STATE
-    if [ $STATE=":pomodoro" -o $STATE=":short-break" -o $STATE=":long-break" ]; then
-        echo -e "$ICON KEK"
-    else # Pomodoro not running, nothing else to print
+    set_state_and_pomodoro_icon
+    if [ $STATE = ":pomodoro" -o $STATE = ":short-break" -o $STATE = ":long-break" ]; then
+        set_remaining_time
+        echo -e "$ICON $TIME_REMAINING"
+    else # Org-pomodoro not running, nothing else to print
+        echo -e "$ICON"
+        exit
+    fi
+    exit
+}
+
+print_pomodoro_state_full() {
+    set_state_and_pomodoro_icon
+    if [ $STATE = ":pomodoro" ]; then
+        set_remaining_time
+        set_task_at_hand
+        echo -e "$ICON $TIME_REMAINING $TASK_AT_HAND"
+    elif [ $STATE = ":short-break" -o $STATE = ":long-break" ]; then #No current task to print
+        set_remaining_time
+        echo -e "$ICON $TIME_REMAINING"
+    else # Org-pomodoro not running, nothing else to print
         echo -e "$ICON"
         exit
     fi
@@ -54,7 +80,7 @@ update() {
         "LONG")
             print_pomodoro_state_long;;
         *)
-            print_pomodoro_state_simple;;
+            print_pomodoro_state_full;;
     esac
 }
 
@@ -73,5 +99,7 @@ if [ "$1" == "toggle" ]; then
             NEW_OUTPUT_STYLE="SIMPLE";;
     esac
     echo $NEW_OUTPUT_STYLE > /tmp/pomodoro-polybar-output-style
-    update $NEW_OUTPUT_STYLE
+    # For now echoing the output on click does not update the bar so this would be pointless
+    # Keep an eye on : https://github.com/polybar/polybar/issues/720
+    # update $NEW_OUTPUT_STYLE
 fi
