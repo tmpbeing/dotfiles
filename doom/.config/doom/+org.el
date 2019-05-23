@@ -32,14 +32,6 @@ and headers with DONE keywords from refile targets"
 
 (after! org
   (add-to-list 'org-modules 'org-habit t)
-  (map! :map evil-org-mode-map
-        :localleader
-        :desc "Create/Edit Todo" :nve "o" #'org-todo
-        :desc "Schedule" :nve "s" #'org-schedule
-        :desc "Deadline" :nve "d" #'org-deadline
-        :desc "Refile" :nve "r" #'org-refile
-        :desc "Filter" :nve "f" #'org-match-sparse-tree
-        :desc "Tag heading" :nve "t" #'org-set-tags-command)
   (setq org-bullets-bullet-list '("#")
         org-ellipsis " ▼ "
         org-refile-target-verify-function '+org/custom-verify-target)
