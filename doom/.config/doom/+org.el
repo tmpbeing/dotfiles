@@ -66,7 +66,16 @@ and headers with DONE keywords from refile targets"
     :quit t
     :select t
     :parameters
-    '((transient))))
+    '((transient)))
+
+  (add-hook 'org-clock-in-hook #'save-buffer)
+  (add-hook 'org-clock-out-hook #'save-buffer)
+
+  (map! :map org-mode-map
+        :localleader
+        "p" #'org-pomodoro
+        (:prefix ("c" . "clock")
+          "r" #'org-clock-report)))
 
 (map! :leader
       (:prefix "n"
