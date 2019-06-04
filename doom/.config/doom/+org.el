@@ -20,7 +20,7 @@
   "Exclude bookmarks (headers with a link in bookmarks.org)
 and headers with DONE keywords from refile targets"
   (not (or (member (nth 2 (org-heading-components)) org-done-keywords)
-           (when (equal buffer-file-name (expand-file-name "bookmarks.org" +org-dir))
+           (when (equal buffer-file-name (expand-file-name "bookmarks.org" org-directory))
              (when (string-match org-bracket-link-regexp (nth 4 (org-heading-components))) t)))))
 
 (defvar +org-capture-bookmark-file
