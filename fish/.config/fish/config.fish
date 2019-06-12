@@ -1,19 +1,31 @@
 set fish_greeting ""
 set fish_home ~/.config/fish
-set PAGER less
-set EDITOR nvim
-set GIT_EDITOR nvim
+set -x EDITOR nvim
+set -x GIT_EDITOR nvim
+set -x PAGER less
+set -x MAIL42 mplanell@student.42.fr
+set -x USER42 mplanell
+set -x TASKRC $HOME/.config/taskrc
+
 # Colored Man Pages
-set -x MANPAGER "less -m -g +Gg"
+set -x MANPAGER "less -s -M +Gg"
 set -g man_blink -o brmagenta
 set -g man_bold -o brred
 set -g man_standout -b brblack
 set -g man_underline -u brgreen
 
-set -x GOPATH $HOME/code/go
+# Add gem bins to path
+set -U fish_user_paths (ruby -e 'print Gem.user_dir')/bin $fish_user_paths
 
-source $fish_home/environment.fish
-source $fish_home/init.fish
+# Handle ssh agent
+if test -z "$SSH_ENV"
+    set -xg SSH_ENV $HOME/.ssh/environment
+end
+
+if not __ssh_agent_is_started
+    __ssh_agent_start
+end
+
 # THEME PURE #
 set fish_function_path /home/snoop/.config/fish/functions/theme-pure $fish_function_path
 # THEME PURE #

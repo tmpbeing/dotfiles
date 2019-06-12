@@ -15,3 +15,4 @@ emacs/.emacs.d/history
 emacs/.emacs.d/places
 fish/.config/fish/fishd.Castor
 fish/.config/fish/fishd.copernicus
+fish/.config/fish/fish_variables
