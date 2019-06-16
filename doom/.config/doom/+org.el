@@ -16,6 +16,13 @@
         org-pomodoro-short-break-sound +org-bell-sound
         org-pomodoro-long-break-sound +org-bell-sound))
 
+(def-package! ox-jekyll
+  :after org
+  :config
+  (setq org-jekyll-use-src-plugin t
+        ojs-blog-base-url "http://planelles.dev"
+        ojs-blog-dir (expand-file-name "~/code/blog")))
+
 (defun +org/custom-verify-target ()
   "Exclude bookmarks (headers with a link in bookmarks.org)
 and headers with DONE keywords from refile targets"
