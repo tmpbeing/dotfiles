@@ -6,12 +6,12 @@
 
        :completion
        (company           ; the ultimate code completion backend
-         +auto
-         +childframe)
+         +auto)
+       ;;+childframe)
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
-       (ivy               ; a search engine for love and life
-         +childframe)
+       (ivy)              ; a search engine for love and life
+       ;;+childframe)
 
        :ui
        ;;deft              ; notational velocity for Emacs
@@ -69,8 +69,8 @@
        editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
        eval              ; run code, run (also, repls)
-       (flycheck          ; tasing you for every semicolon you forget
-         +childframe)
+       (flycheck)        ; tasing you for every semicolon you forget
+       ;;+childrame)
        flyspell          ; tasing you for misspelling mispelling
        gist              ; interacting with github gists
        (lookup           ; helps you navigate your code and documentation

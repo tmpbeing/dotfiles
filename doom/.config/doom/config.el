@@ -17,12 +17,6 @@
  show-trailing-whitespace t
  which-key-idle-delay 0.4)
 
-(after! ivy-posframe
-  (setq ivy-posframe-parameters
-        `((min-width . 90)
-          (min-height . ,ivy-height)
-          (internal-border-width . 0))))
-
 ;; Show the . and .. in dired-mode
 (after! dired
   (remove-hook 'dired-mode-hook #'dired-omit-mode))
