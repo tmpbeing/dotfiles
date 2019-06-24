@@ -14,17 +14,9 @@ set -g man_bold -o brred
 set -g man_standout -b brblack
 set -g man_underline -u brgreen
 
-# Add gem bins to path
-set -U fish_user_paths (ruby -e 'print Gem.user_dir')/bin $fish_user_paths
-
 # Handle ssh agent
-if test -z "$SSH_ENV"
-    set -xg SSH_ENV $HOME/.ssh/environment
-end
-
-if not __ssh_agent_is_started
-    __ssh_agent_start
-end
+source /home/snoop/.ssh/environment
+fish_ssh_agent
 
 # THEME PURE #
 set fish_function_path /home/snoop/.config/fish/functions/theme-pure $fish_function_path
