@@ -177,6 +177,6 @@ format-prefix-foreground = ${colors.foreground}
 
 [module/pomodoro]
 type = custom/script
-exec = /home/snoop/.config/scripts/org-pomodoro.sh
+exec = /home/snoop/.config/polybar/org-pomodoro.sh
 interval = 5
-click-left = /home/snoop/.config/scripts/org-pomodoro.sh toggle
+click-left = /home/snoop/.config/polybar/org-pomodoro.sh toggle

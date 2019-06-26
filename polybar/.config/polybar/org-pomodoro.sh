@@ -12,7 +12,7 @@ fi
 
 # Colors have to be hardcoded. See : https://github.com/polybar/polybar/wiki/Formatting#format-tags
 set_state_and_pomodoro_icon() {
-    export STATE=$(emacsclient --eval '(if (org-pomodoro-active-p) org-pomodoro-state -1)' 2>&1)
+    STATE=$(emacsclient --eval '(if (org-pomodoro-active-p) org-pomodoro-state -1)' 2>&1)
     case "$STATE" in
         ":pomodoro")
             ICON="%{F#B77A76}\ue003";;
@@ -26,13 +26,13 @@ set_state_and_pomodoro_icon() {
 }
 
 set_remaining_time() {
-    export TIME_REMAINING=$(emacsclient --eval '(org-pomodoro-format-seconds)')
+    TIME_REMAINING=$(emacsclient --eval '(org-pomodoro-format-seconds)')
     TIME_REMAINING="${TIME_REMAINING%\"}" # Bash trick to remove leading and trailing quotes
     TIME_REMAINING="${TIME_REMAINING#\"}"
 }
 
 set_task_at_hand() {
-    export TASK_AT_HAND=$(emacsclient --eval '(org-no-properties org-clock-current-task)')
+    TASK_AT_HAND=$(emacsclient --eval '(org-no-properties org-clock-current-task)')
     TASK_AT_HAND="${TASK_AT_HAND%\"}" # Bash trick to remove leading and trailing quotes
     TASK_AT_HAND="${TASK_AT_HAND#\"}"
 }
