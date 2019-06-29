@@ -18,7 +18,7 @@ function conf
 			case termite
 				vim ~/.config/termite/config
 			case rofi
-				vim ~/.config/rofi/config
+				vim ~/.config/rofi/config.rasi
 			case polybar
 				vim ~/.config/polybar/config
 			case zathura
