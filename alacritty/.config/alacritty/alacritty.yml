@@ -91,19 +91,19 @@ tabspaces: 8
 font:
   # Normal (roman) font face
   normal:
-    family: DejaVu Sans Mono for Powerline
+    family: Hack
     # The `style` can be specified to pick a specific face.
     #style: Normal
 
   # Bold font face
   bold:
-    family: DejaVu Sans Mono for Powerline
+    family: Hack
     # The `style` can be specified to pick a specific face.
     #style: Bold
 
   # Italic font face
   italic:
-    family: DejaVu Sans Mono for Powerline
+    family: Hack
     # The `style` can be specified to pick a specific face.
     #style: Italic
 
