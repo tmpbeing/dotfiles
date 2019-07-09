@@ -26,7 +26,10 @@
 ;;
 ;; Keybindings
 ;;
-(map! :ni "C-;" #'avy-goto-char-timer)
+(map! :ni "C-;" #'avy-goto-char-timer
+      (:map evil-window-map ;; Adding tmux split bindings
+        "\"" #'evil-window-split
+        "%"  #'evil-window-vsplit))
 
 ;;
 ;; Evil
