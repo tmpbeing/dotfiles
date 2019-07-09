@@ -5,9 +5,6 @@
 ;;
 ;; General
 ;;
-(setq
- avy-all-windows t) ;; Allows avy to jump to any window
-
 
 ;; UI
 (setq
