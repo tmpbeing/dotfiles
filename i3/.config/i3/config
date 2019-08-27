@@ -6,7 +6,7 @@
 #    By: mplanell <mplanell@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/07/29 13:50:30 by mplanell          #+#    #+#              #
-#    Updated: 2019/05/04 22:01:34 by mplanell         ###   ########.fr        #
+#    Updated: 2019/07/11 23:04:12 by mplanell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -257,6 +257,13 @@ mode "$mode_gaps_outer" {
 bindsym XF86MonBrightnessDown exec brightnessctl s 40-
 bindsym XF86MonBrightnessUp exec brightnessctl s +40
 
+# Media keys
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioStop exec playerctl stop
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioNext exec playerctl next
+
+
 #bar {
 #       status_command i3status
 #}
@@ -287,6 +294,7 @@ assign [class="(?i)Google Play Music Desktop Player"] $ws5
 assign [class="(?i)spotify"]                          $ws5
 assign [class="(?i)emacs"]                            $ws3
 assign [class="(?i)qbittorrent"]                      $ws10
+assign [class="(?i)^Steam$"]                          $ws8
 
 ## Floating stuff
 for_window [window_role="pop-up"] floating enable
@@ -296,6 +304,17 @@ for_window [window_role="Preferences"] floating enable
 
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
+
+for_window [class="^Steam$" title="^Friends$"] floating enable
+for_window [class="^Steam$" title="Steam - News"] floating enable
+for_window [class="^Steam$" title=".* - Chat"] floating enable
+for_window [class="^Steam$" title="^Settings$"] floating enable
+for_window [class="^Steam$" title=".* - event started"] floating enable
+for_window [class="^Steam$" title=".* CD key"] floating enable
+for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
+for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
+for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
+for_window [title="^Steam Keyboard$"] floating enable
 
 ## Fix some of intellij window
 for_window [class="^jetbrains-.+"][window_type=dialog] focus
