@@ -33,8 +33,8 @@ determine the exact padding."
   "Doom base16-faded theme"
 
   ;; name        default   256       16
-  ((bg         '("#242933" nil       nil            ))
-   (bg-alt     '("#2E3440" nil       nil            ))
+  ((bg         '("#2E3440" nil       nil            ))
+   (bg-alt     '("#242933" nil       nil            ))
    (base0      '("#15181E" "#1C1C1C" "black"        ))
    (base1      '("#2B303B" "#303030" "brightblack"  ))
    (base2      '("#404859" "#4E4E4E" "brightblack"  ))
