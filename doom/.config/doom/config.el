@@ -20,6 +20,9 @@
 ;; Show the . and .. in dired-mode
 (setq dired-omit-files "^\\.?#")
 
+;; Projectile : ignore projects in /tmp/ and ~/.emacs.d/.local/
+(setq projectile-ignored-project-function #'+projectile/ignore-project-p)
+
 ;;
 ;; Keybindings
 ;;
