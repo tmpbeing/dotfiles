@@ -1,5 +1,19 @@
 ;;; +org.el -*- lexical-binding: t; -*-
 
+(defvar +org-gong-sound
+  (concat doom-private-dir "resources/gong.wav")
+  "Sound used by org-pomodoro")
+
+(defvar +org-bell-sound
+  (concat doom-private-dir "resources/prayer-bell.wav")
+  "Sound used by org-pomodoro")
+
+(defvar +org-capture-bookmark-file
+  (expand-file-name "bookmarks.org" org-directory)
+  "The path to my bookmark.
+
+Is relative to 'org-directory', unless it is absolute")
+
 (def-package! ob-http
   :after org)
 
