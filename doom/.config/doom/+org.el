@@ -38,7 +38,6 @@ and headers with DONE keywords from refile targets"
 
 
 (after! org
-  (add-to-list 'org-modules 'org-habit t)
   (setq org-bullets-bullet-list '("#")
         org-ellipsis " ▼ "
         org-refile-target-verify-function '+org/custom-verify-target)
