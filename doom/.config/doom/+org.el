@@ -41,13 +41,13 @@ Is relative to 'org-directory', unless it is absolute")
         org-ellipsis " ▼ "
         org-refile-target-verify-function '+org/custom-verify-target)
 
-  (appendq! org-capture-templates
-            '("b" "Bookmark" entry
+  (appendq! org-capture-templates 
+			'(("b" "Bookmark" entry
               (file+headline +org-capture-bookmark-file "To read/Classify")
               "* [[%x][%?]] %^g" :kill-buffer t)
-            '("z" "Pomodoro" entry ; Used for polybar integration
+            ("z" "Pomodoro" entry ; Used for polybar integration
               (file+headline +org-capture-todo-file "Inbox")
-              "* [ ] %?\n%i\n%a" :prepend t :kill-buffer t))
+              "* [ ] %?\n%i\n%a" :prepend t :kill-buffer t)))
 
 (set-popup-rule! "^\\Org Agenda"
   :size 15
