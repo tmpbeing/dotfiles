@@ -48,7 +48,7 @@ set $ws2  "2:WEB"
 set $ws3  "3:CODE"
 set $ws4  "4:CHAT"
 set $ws5  "5:MEDIA"
-set $ws6  "6:TERM"
+set $ws6  "6:ORG"
 set $ws7  "7:DOCS"
 set $ws8  "8:RANDOM"
 set $ws9  "9:MAIL"
@@ -292,9 +292,10 @@ assign [class="(?i)slack"]                            $ws4
 assign [class="(?i)ripcord"]                          $ws4
 assign [class="(?i)Google Play Music Desktop Player"] $ws5
 assign [class="(?i)spotify"]                          $ws5
-assign [class="(?i)emacs"]                            $ws3
 assign [class="(?i)qbittorrent"]                      $ws10
 assign [class="(?i)^Steam$"]                          $ws8
+assign [title="main-emacs"]                           $ws3
+assign [title="org-emacs"]                            $ws6
 
 ## Floating stuff
 for_window [window_role="pop-up"] floating enable
@@ -304,6 +305,8 @@ for_window [window_role="Preferences"] floating enable
 
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
+
+for_window [title="org-capture"] floating enable
 
 for_window [class="^Steam$" title="^Friends$"] floating enable
 for_window [class="^Steam$" title="Steam - News"] floating enable
