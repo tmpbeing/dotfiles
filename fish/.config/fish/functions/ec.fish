@@ -1,3 +1,3 @@
 function ec
-    emacsclient -nc
+    emacsclient --socket-name=main -nc
 end
