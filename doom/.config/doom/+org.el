@@ -14,7 +14,10 @@
   :config
   (setq org-pomodoro-finished-sound +org-gong-sound
         org-pomodoro-short-break-sound +org-bell-sound
-        org-pomodoro-long-break-sound +org-bell-sound))
+        org-pomodoro-long-break-sound +org-bell-sound)
+  ; Alert is used by org-pomodoro to send notifitications
+  ; This makes it so that it uses send-notify instead of the message buffer
+  (setq alert-default-style 'libnotify))
 
 (def-package! ox-jekyll
   :after org
