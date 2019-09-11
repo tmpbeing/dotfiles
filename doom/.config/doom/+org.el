@@ -1,11 +1,5 @@
 ;;; +org.el -*- lexical-binding: t; -*-
 
-(defvar +org-gong-sound
-  (concat doom-private-dir "resources/gong.wav"))
-
-(defvar +org-bell-sound
-  (concat doom-private-dir "resources/prayer-bell.wav"))
-
 (def-package! ob-http
   :after org)
 
@@ -25,20 +19,6 @@
   (setq org-jekyll-use-src-plugin t
         ojs-blog-base-url "http://planelles.dev"
         ojs-blog-dir (expand-file-name "~/code/blog")))
-
-(defun +org/custom-verify-target ()
-  "Exclude bookmarks (headers with a link in bookmarks.org)
-and headers with DONE keywords from refile targets"
-  (not (or (member (nth 2 (org-heading-components)) org-done-keywords)
-           (when (equal buffer-file-name (expand-file-name "bookmarks.org" org-directory))
-             (when (string-match org-bracket-link-regexp (nth 4 (org-heading-components))) t)))))
-
-(defvar +org-capture-bookmark-file
-  (expand-file-name "bookmarks.org" org-directory)
-  "The path to my bookmark.
-
- Is relative to 'org-directory', unless it is absolute")
-
 
 (after! org
   (setq org-bullets-bullet-list '("#")
