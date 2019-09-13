@@ -41,29 +41,31 @@ Is relative to 'org-directory', unless it is absolute")
         org-ellipsis " ▼ "
         org-refile-target-verify-function '+org/custom-verify-target)
 
-  (appendq! org-capture-templates 
-			'(("b" "Bookmark" entry
-              (file+headline +org-capture-bookmark-file "To read/Classify")
-              "* [[%x][%?]] %^g" :kill-buffer t)
-            ("z" "Pomodoro" entry ; Used for polybar integration
-              (file+headline +org-capture-todo-file "Inbox")
-              "* [ ] %?\n%i\n%a" :prepend t :kill-buffer t)))
+  (appendq! org-capture-templates
+            '(("b" "Bookmark" entry
+               (file+headline +org-capture-bookmark-file "To read/Classify")
+               "* [[%x][%?]] %^g" :kill-buffer t)
+              ("z" "Pomodoro" entry ; Used for polybar integration
+               (file+headline +org-capture-todo-file "Inbox")
+               "* [ ] %?\n%i\n%a" :prepend t :kill-buffer t :pomodoro t)))
 
-(set-popup-rule! "^\\Org Agenda"
-  :size 15
-  :quit t
-  :select t
-  :parameters
-  '((transient)))
+  (add-hook 'org-capture-after-finalize-hook #'+org-pomodoro/start-pomodoro-on-capture)
 
-(add-hook 'org-clock-in-hook #'save-buffer)
-(add-hook 'org-clock-out-hook #'save-buffer)
+  (set-popup-rule! "^\\Org Agenda"
+    :size 15
+    :quit t
+    :select t
+    :parameters
+    '((transient)))
 
-(map! :map org-mode-map
-      :localleader
-      "p" #'org-pomodoro
-      (:prefix ("c" . "clock")
-        "r" #'org-clock-report)))
+  (add-hook 'org-clock-in-hook #'save-buffer)
+  (add-hook 'org-clock-out-hook #'save-buffer)
+
+  (map! :map org-mode-map
+        :localleader
+        "p" #'org-pomodoro
+        (:prefix ("c" . "clock")
+          "r" #'org-clock-report)))
 
 (map! :leader
       (:prefix "n"

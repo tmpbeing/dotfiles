@@ -39,3 +39,18 @@ and headers with DONE keywords from refile targets"
 
   (call-interactively 'org-clock-in-last)
   (org-pomodoro-start :pomodoro))
+
+;;;###autoload
+(defun +org-pomodoro/start-pomodoro-on-capture ()
+  "Starts org-pomodoro upon capture if the pomodoro capture template was used"
+
+  (when (and (not org-note-abort)
+             (equal (org-capture-get :pomodoro) t))
+    (when (and org-pomodoro-last-clock-in
+               org-pomodoro-expiry-time
+               (org-pomodoro-expires-p))
+      (setq org-pomodoro-count 0))
+    (set-buffer (org-capture-get :buffer))
+      (goto-char (org-capture-get :insertion-point))
+      (org-clock-in)
+      (org-pomodoro-start :pomodoro)))

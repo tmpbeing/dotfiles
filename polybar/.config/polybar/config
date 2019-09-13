@@ -179,7 +179,11 @@ format-prefix-foreground = ${colors.foreground}
 type = custom/script
 exec = /home/snoop/.config/polybar/org-pomodoro.sh
 interval = 5
-click-left = /home/snoop/.config/polybar/org-pomodoro.sh toggle
+double-click-left = /home/snoop/.config/polybar/org-pomodoro.sh end-or-restart
+click-middle = /home/snoop/.config/polybar/org-pomodoro.sh kill
+click-right = /home/snoop/.config/polybar/org-pomodoro.sh new
+scroll-up = /home/snoop/.config/polybar/org-pomodoro.sh toggle
+scroll-down = /home/snoop/.config/polybar/org-pomodoro.sh toggle
 
 [module/spotify]
 type = custom/script
