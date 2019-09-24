@@ -162,9 +162,19 @@ determine the exact padding."
 
    ;; org-mode
    (org-hide :foreground hidden)
-   (org-block :background base2)
-   (org-block-begin-line :background base2 :foreground comments)
-   (solaire-org-hide-face :foreground hidden))
+   (solaire-org-hide-face :foreground hidden)
+   (org-level-1 :foreground yellow :bold bold)
+   (org-level-2 :inherit 'org-level-1 :foreground cyan)
+   (org-level-3 :bold bold :foreground green)
+   (org-level-4 :bold bold :foreground violet)
+   (org-level-5 :inherit 'org-level-4)
+   (org-level-6 :inherit 'org-level-4)
+   (org-ellipsis :underline nil :foreground orange)
+   (org-tag :foreground yellow :bold nil)
+   (org-list-dt :foreground yellow)
+   (org-block :background base1)
+   (org-block-begin-line :foreground fg-alt :background base3)
+   (org-drawer :foreground red))
 
 
   ;; --- extra variables ---------------------
