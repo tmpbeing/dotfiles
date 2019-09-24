@@ -17,6 +17,10 @@
  show-trailing-whitespace t
  which-key-idle-delay 0.4)
 
+(setq
+ lsp-ui-sideline-enable nil
+ lsp-enable-symbol-highlighting nil)
+
 ;; Show the . and .. in dired-mode
 (setq dired-omit-files "^\\.?#")
 
