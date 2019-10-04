@@ -47,6 +47,10 @@
 ;; Rust
 (setq company-racer-executable "/home/snoop/.cargo/bin/racer")
 
+;; CPP
+(after! lsp-mode
+  (add-to-list 'lsp-file-watch-ignored "[/\\\\]\\.ccls-cache$"))
+
 ;;
 ;; Modules
 ;;
