@@ -17,6 +17,9 @@ Is relative to 'org-directory', unless it is absolute")
 (use-package! ob-http
   :after org)
 
+(use-package! org-pomodoro
+  :after org)
+
 (after! org-pomodoro
   (setq org-pomodoro-manual-break t
         org-pomodoro-finished-sound +org-gong-sound
