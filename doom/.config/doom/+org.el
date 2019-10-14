@@ -17,17 +17,12 @@ Is relative to 'org-directory', unless it is absolute")
 (def-package! ob-http
   :after org)
 
-(def-package! org-pomodoro
-  :after org
-  :config
+(after! org-pomodoro
   (setq org-pomodoro-manual-break t
         org-pomodoro-finished-sound +org-gong-sound
         org-pomodoro-overtime-sound +org-gong-sound
         org-pomodoro-short-break-sound +org-bell-sound
-        org-pomodoro-long-break-sound +org-bell-sound)
-  ; Alert is used by org-pomodoro to send notifitications
-  ; This makes it so that it uses send-notify instead of the message buffer
-  (setq alert-default-style 'libnotify))
+        org-pomodoro-long-break-sound +org-bell-sound))
 
 (def-package! ox-jekyll
   :after org
@@ -47,7 +42,7 @@ Is relative to 'org-directory', unless it is absolute")
                "* [[%x][%?]] %^g" :kill-buffer t)
               ("z" "Pomodoro" entry ; Used for polybar integration
                (file+headline +org-capture-todo-file "Inbox")
-               "* [ ] %?\n%i\n%a" :prepend t :kill-buffer t :pomodoro t)))
+               "* [ ] %?\n%i\n%a" :prepend t :pomodoro t)))
 
   (add-hook 'org-capture-after-finalize-hook #'+org-pomodoro/start-pomodoro-on-capture)
 

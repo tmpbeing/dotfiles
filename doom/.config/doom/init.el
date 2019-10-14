@@ -123,6 +123,7 @@
        ;;ocaml             ; an objective camel
        (org              ; organize your plain life in plain text
         +pandoc
+        +pomodoro
         +present)         ; Emacs for presentations
        ;;perl              ; write code no one else can comprehend
        ;;php               ; perl's insecure younger brother

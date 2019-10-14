@@ -3,7 +3,6 @@
 
 ;; Org
 (package! ob-http) ;; curl in org-mode literate programming
-(package! org-pomodoro) ;; pomodoro clock directly inside org-mode
 (package! ox-jekyll :recipe (:host github :repo "tmpbeing/ox-jekyll-subtree")) ;; Org-file to jekyll blog
 
 ;; Themes

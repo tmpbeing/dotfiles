@@ -31,6 +31,7 @@ and headers with DONE keywords from refile targets"
   "Starts a new pomodoro on the last clocked-in task. Resets the pomodoro count without prompt when necessary.
 
   This is useful for external scripts as the org-pomodoro function has y-or-n prompts"
+  (require 'org-pomodoro)
   (when (and org-pomodoro-last-clock-in
              org-pomodoro-expiry-time
              (org-pomodoro-expires-p))
@@ -44,6 +45,7 @@ and headers with DONE keywords from refile targets"
 (defun +org-pomodoro/start-pomodoro-on-capture ()
   "Starts org-pomodoro upon capture if the pomodoro capture template was used"
 
+  (require 'org-pomodoro)
   (when (and (not org-note-abort)
              (equal (org-capture-get :pomodoro) t))
     (when (and org-pomodoro-last-clock-in
