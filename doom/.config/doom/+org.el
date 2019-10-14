@@ -14,7 +14,7 @@
 
 Is relative to 'org-directory', unless it is absolute")
 
-(def-package! ob-http
+(use-package! ob-http
   :after org)
 
 (after! org-pomodoro
@@ -24,7 +24,7 @@ Is relative to 'org-directory', unless it is absolute")
         org-pomodoro-short-break-sound +org-bell-sound
         org-pomodoro-long-break-sound +org-bell-sound))
 
-(def-package! ox-jekyll
+(use-package! ox-jekyll
   :after org
   :config
   (setq org-jekyll-use-src-plugin t
