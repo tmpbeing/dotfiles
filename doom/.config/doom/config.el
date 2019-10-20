@@ -44,12 +44,17 @@
 ;; Languages
 ;;
 
-;; Rust
-(setq company-racer-executable "/home/snoop/.cargo/bin/racer")
+;; Cmake
+(after! cmake-mode
+  (setq cmake-tab-width 4))
 
 ;; CPP
 (after! lsp-mode
   (add-to-list 'lsp-file-watch-ignored "[/\\\\]\\.ccls-cache$"))
+
+;; Rust
+(setq company-racer-executable "/home/snoop/.cargo/bin/racer")
+
 
 ;;
 ;; Modules
