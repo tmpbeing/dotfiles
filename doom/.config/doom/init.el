@@ -55,6 +55,7 @@
        ;;+icons          ; colorful icons for dired-mode
         )
        electric          ; smarter, keyword-based electric-indent
+       ibuffer           ; interactive buffer management
        vc                ; version-control and Emacs, sitting in a tree
 
        :term
@@ -69,7 +70,8 @@
        docker
        editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
-       eval              ; run code, run (also, repls)
+       (eval              ; run code, run (also, repls)
+        +overlay)
        (flycheck)        ; tasing you for every semicolon you forget
        ;;+childrame)
        flyspell          ; tasing you for misspelling mispelling
@@ -134,7 +136,7 @@
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        rest              ; Emacs as a REST client
-       ;;ruby              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
+       ruby              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
        (rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
          +lsp)
        ;;scala             ; java, but good
