@@ -35,6 +35,10 @@ function conf
 				vim ~/.config/taskrc
 			case alacritty
 				vim ~/.config/alacritty/alacritty.yml
+			case sway
+				vim ~/.config/sway/config
+			case waybar
+				vim ~/.config/waybar/config
 		end
 	else
 		return 1

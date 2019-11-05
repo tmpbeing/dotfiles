@@ -1,0 +1,91 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: Roboto Mono for Powerline;
+  font-size: 9pt;
+  min-height: 16px;
+}
+
+window#waybar {
+  background-color: #2e3440;
+  color: #c5c8c6;
+  border-bottom: 2px solid #333;
+  transition-property: background-color;
+  transition-duration: 0.5s;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+#workspaces button {
+  border-top: 2px solid transparent;
+  padding-top: 2px;
+  color: #c5c8c6;
+}
+
+#workspaces button.focused {
+  border-top: 2px solid #958090;
+}
+
+#workspaces button.urgent {
+  border-top: 2px solid #b77a76;
+}
+
+#workspaces button:hover {
+  box-shadow: inherit;
+  text-shadow: inherit;
+  background: #242933;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#mpd,
+#custom-spotify,
+#custom-pomodoro {
+  padding: 0 4px;
+  margin: 0 4px;
+  color: #c5c8c6;
+}
+
+#custom-spotify.playing,
+#custom-pomodoro.short-break {
+  color: #958090;
+}
+
+#custom-spotify.paused,
+#custom-pomodoro.long-break {
+  color: #7daea9;
+}
+
+#custom-pomodoro.pomodoro,
+#custom-pomodoro.overtime {
+  color: #b77a76;
+}
+
+#custom-pomodoro {
+  font-family: Roboto Mono for Powerline, Pomicons;
+}
+
+#network.disconnected,
+#cpu.warning,
+#memory.warning,
+#battery.critical {
+  color: #b77a76;
+}
+
+#battery.full,
+#battery.charging {
+  color: #b4bf86;
+  margin: 0 2px;
+}

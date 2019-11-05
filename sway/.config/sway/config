@@ -1,0 +1,300 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    config                                             :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mplanell <mplanell@42.fr>                  +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2017/07/29 13:50:30 by mplanell          #+#    #+#              #
+#    Updated: 2019/09/29 13:39:31 by mplanell         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+set $mod Mod4
+
+## Font
+
+font pango:Terminus 10
+
+## Workspaces
+
+set $ws1  "MAIN"
+set $ws2  "WEB"
+set $ws3  "CODE"
+set $ws4  "CHAT"
+set $ws5  "MEDIA"
+set $ws6  "ORG"
+set $ws7  "DOCS"
+set $ws8  "RANDOM"
+set $ws9  "MAIL"
+set $ws10 "TRASH"
+
+## Gaps
+
+set $default_gaps_inner 10
+set $default_gaps_outer 5
+gaps inner $default_gaps_inner
+gaps outer $default_gaps_outer
+
+workspace $ws2 gaps inner 0
+workspace $ws2 gaps outer 0
+workspace $ws10 gaps inner 0
+workspace $ws10 gaps outer 0
+
+## Keybindings
+
+floating_modifier $mod
+
+# Start a terminal
+bindsym $mod+Return exec --no-startup-id alacritty
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+
+# Start rofi (a program launcher)
+bindsym $mod+d exec --no-startup-id rofi -modi "run#ssh#window" -show run
+bindsym $mod+Shift+d exec --no-startup-id rofi -modi "run#ssh#window" -show ssh
+bindsym $mod+Shift+w exec --no-startup-id rofi -modi "run#ssh#window" -show window
+
+# move workspace
+bindsym $mod+Shift+Up move workspace to output up
+bindsym $mod+Shift+Down move workspace to outdown down
+bindsym $mod+Shift+Left move workspace to output left
+bindsym $mod+Shift+Right move workspace to output right
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# split in horizontal orientation
+bindsym $mod+b split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+bindsym $mod+g fullscreen global
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# Focus the child container
+bindsym $mod+Shift+a focus child
+
+# Switch floating window to sticky mode
+bindsym $mod+Shift+s sticky toggle
+
+# Scratchpad
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+bindsym $mod+Tab workspace back_and_forth
+workspace_auto_back_and_forth yes
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart sway inplace (preserves your layout/session, can be used to upgrade sway)
+bindsym $mod+Shift+r restart
+# exit sway
+bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway?' -b 'Yes, exit sway' 'swaymsg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "RESIZE" {
+		bindsym j resize shrink width 10 px or 10 ppt
+		bindsym k resize grow height 10 px or 10 ppt
+		bindsym l resize shrink height 10 px or 10 ppt
+		bindsym semicolon resize grow width 10 px or 10 ppt
+
+		bindsym Left resize shrink width 10 px or 10 ppt
+		bindsym Down resize grow height 10 px or 10 ppt
+		bindsym Up resize shrink height 10 px or 10 ppt
+		bindsym Right resize grow width 10 px or 10 ppt
+
+		bindsym Shift+Left resize shrink width 5 px or 5 ppt
+		bindsym Shift+Down resize grow height 5 px or 5 ppt
+		bindsym Shift+Up resize shrink height 5 px or 5 ppt
+		bindsym Shift+Right resize grow width 5 px or 5 ppt
+
+		bindsym 1 mode "default", resize set 1000 600
+		bindsym 2 mode "default", resize set 1500 600
+		bindsym 3 mode "default", resize set 1200 1000
+		bindsym Return mode "default"
+		bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Resize gaps
+set $mode_gaps GAPS
+set $mode_gaps_outer outer gaps
+set $mode_gaps_inner inner gaps
+bindsym $mod+Shift+g mode "$mode_gaps"
+mode "$mode_gaps" {
+	bindsym o      mode "$mode_gaps_outer"
+	bindsym i      mode "$mode_gaps_inner"
+
+	bindsym 0      mode "default", exec swaymsg "gaps inner current set 0" && swaymsg "gaps outer current set 0"
+	bindsym d      mode "default", exec swaymsg "gaps inner current set $default_gaps_inner" && swaymsg "gaps outer current set $default_gaps_outer"
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_inner" {
+	bindsym plus  gaps inner current plus 5
+	bindsym minus gaps inner current minus 5
+	bindsym 0     mode "default", gaps inner current set 0
+	bindsym d     mode "default", gaps inner current set $default_gaps_inner
+
+	bindsym Shift+plus  gaps inner all plus 5
+	bindsym Shift+minus gaps inner all minus 5
+	bindsym Shift+0     mode "default", gaps inner all set 0
+	bindsym Shift+d     mode "default", gaps inner all set $default_gaps_inner
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+mode "$mode_gaps_outer" {
+	bindsym plus  gaps outer current plus 5
+	bindsym minus gaps outer current minus 5
+	bindsym 0     mode "default", gaps outer current set 0
+	bindsym d     mode "default", gaps outer current set $default_gaps_outer
+
+	bindsym Shift+plus  gaps outer all plus 5
+	bindsym Shift+minus gaps outer all minus 5
+	bindsym Shift+0     mode "default", gaps outer all set 0
+	bindsym Shift+d     mode "default", gaps outer all set $default_gaps_outer
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+# Brightness keys
+bindsym XF86MonBrightnessDown exec brightnessctl s 40-
+bindsym XF86MonBrightnessUp exec brightnessctl s +40
+
+# Media keys
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioStop exec playerctl stop
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioNext exec playerctl next
+
+
+#bar {
+#       status_command i3status
+#}
+
+# Disable borders when there's only one window in a workspace
+hide_edge_borders both
+
+# Toggles to workspace on urgent call
+focus_on_window_activation urgent
+
+# Floating security
+floating_minimum_size -1 x -1
+floating_maximum_size -1 x -1
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+## Assign
+assign [class="(?i)thunderbird"]                      $ws9
+assign [class="(?i)firefox"]                          $ws2
+assign [class="(?i)google-chrome-stable"]             $ws10
+assign [class="(?i)qutebrowser"]                      $ws2
+assign [class="(?i)caprine"]                          $ws4
+assign [class="(?i)discord"]                          $ws4
+assign [class="(?i)slack"]                            $ws4
+assign [class="(?i)ripcord"]                          $ws4
+assign [class="(?i)Google Play Music Desktop Player"] $ws5
+assign [class="(?i)spotify"]                          $ws5
+assign [class="(?i)qbittorrent"]                      $ws10
+assign [class="(?i)^Steam$"]                          $ws8
+assign [title="main-emacs"]                           $ws3
+
+## Floating stuff
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+
+for_window [title="org-capture"] floating enable
+for_window [title="alacritty-popup"] floating enable
+
+for_window [class="^Steam$" title="^Friends$"] floating enable
+for_window [class="^Steam$" title="Steam - News"] floating enable
+for_window [class="^Steam$" title=".* - Chat"] floating enable
+for_window [class="^Steam$" title="^Settings$"] floating enable
+for_window [class="^Steam$" title=".* - event started"] floating enable
+for_window [class="^Steam$" title=".* CD key"] floating enable
+for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
+for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
+for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
+for_window [title="^Steam Keyboard$"] floating enable
+for_window [title="^Seu4$"] floating enable
+
+## Fix some of intellij window
+for_window [class="^jetbrains-.+"][window_type=dialog] focus
+
+## Required, value change border size
+for_window [class="^.*"] border pixel 3
+
+## Autostart
+
+# Wallpaper
+
+
+#Bars
+exec_always $HOME/.config/waybar/waybar-handler.sh
+
+exec_always dunst
+exec redshift
+
+## Program specific settings
+for_window [class="(?i)Google Play Music Desktop Player"] border pixel 0

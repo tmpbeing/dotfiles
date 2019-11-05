@@ -1,0 +1,93 @@
+{
+  "layer": "bottom",
+  "position": "top",
+  "modules-left": [
+    "sway/workspaces",
+    "sway/mode",
+    "pulseaudio",
+    "custom/spotify"
+  ],
+  "modules-right": [
+    "custom/pomodoro",
+    "cpu",
+    "memory",
+    "network",
+    "battery",
+    "clock"
+  ],
+  "sway/workspaces": {
+    "disable-scroll": true
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "",
+    "format-icons": {
+      "headphones": "",
+      "default": ["", "", ""]
+    },
+    "tooltip": false
+  },
+  "cpu": {
+    "interval": 10,
+    "format": " {}%",
+    "states": {
+      "warning": 80
+    },
+    "tooltip": false,
+    "on-click": "alacritty -d 50 50 -t alacritty-popup -e gotop",
+    "on-click-right": "swaymsg [title=\"alacritty-popup\"] focus && swaymsg kill"
+  },
+  "memory": {
+    "interval": 30,
+    "format": " {}%",
+    "states": {
+      "warning": 80
+    },
+    "tooltip": false,
+    "on-click": "alacritty -d 50 50 -t alacritty-popup -e gotop",
+    "on-click-right": "swaymsg [title=\"alacritty-popup\"] focus && swaymsg kill"
+  },
+  "network": {
+    "interface": "wlp2s0",
+    "interval": 3,
+    "format": "{bandwidthDownBits} - {bandwidthUpBits}",
+    "format-disconnected": "| NO INTERNET |",
+    "tooltip-format": "{essid}  {signalStrength}  {frequency}"
+  },
+  "battery": {
+    "states": {
+      "full": 95,
+      "warning": 20,
+      "critical": 10
+    },
+    "format": "{icon} {capacity}%",
+    "format-full": "{icon}",
+    "format-icons": ["", "", "", "", ""],
+    "tooltip": false
+  },
+  "clock": {
+    "format": "{:%H:%M    %a %d %b}"
+  },
+  "custom/spotify": {
+    "format": "{}",
+    "interval": 5,
+    "return-type": "json",
+    "exec": "$HOME/.config/waybar/spotify.sh",
+    "on-click": "playerctl previous",
+    "on-click-middle": "playerctl play-pause",
+    "on-click-right": "playerctl next",
+    "tooltip": false
+  },
+  "custom/pomodoro": {
+    "format": "{}",
+    "interval": 5,
+    "return-type": "json",
+    "exec": "$HOME/.config/waybar/org-pomodoro.sh",
+    "on-click": "$HOME/.config/waybar/org-pomodoro.sh end-or-restart",
+    "on-click-middle": "$HOME/.config/waybar/org-pomodoro.sh new",
+    "on-click-right": "$HOME/.config/waybar/org-pomodoro.sh kill",
+    "on-scroll-up": "/home/snoop/.config/polybar/org-pomodoro.sh toggle",
+    "on-scroll-down": "/home/snoop/.config/polybar/org-pomodoro.sh toggle",
+    "tooltip": false
+  }
+}
