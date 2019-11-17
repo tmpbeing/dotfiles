@@ -18,6 +18,12 @@ set -g man_underline -u brgreen
 source /home/snoop/.ssh/environment
 fish_ssh_agent
 
+# pyenv
+status --is-interactive; and source (pyenv init -|psub)
+status --is-interactive; and pyenv init - | source
+status --is-interactive; and pyenv virtualenv-init - | source
+
+
 # THEME PURE #
 set fish_function_path /home/snoop/.config/fish/functions/theme-pure $fish_function_path
 # THEME PURE #
