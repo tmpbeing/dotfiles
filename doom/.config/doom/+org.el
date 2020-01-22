@@ -34,6 +34,9 @@ Is relative to 'org-directory', unless it is absolute")
         ojs-blog-base-url "http://planelles.dev"
         ojs-blog-dir (expand-file-name "~/code/blog")))
 
+(use-package! org-trello
+  :after org)
+
 (after! org
   (setq org-bullets-bullet-list '("#")
         org-ellipsis " ▼ "

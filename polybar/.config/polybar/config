@@ -124,7 +124,6 @@ label-connected = %downspeed% - %upspeed%
 format-disconnected = <label-disconnected>
 label-disconnected = | NO INTERNET |
 
-
 [module/battery]
 type = internal/battery
 battery = BAT0

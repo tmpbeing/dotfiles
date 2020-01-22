@@ -10,7 +10,7 @@
 (setq
  doom-font (font-spec :family "SF Mono" :size 14)
  doom-unicode-font (font-spec :family "DejaVu Sans" :size 14)
- doom-big-font (font-spec :family "SF Mono" :size 18)
+ doom-big-font (font-spec :family "SF Mono" :size 24)
  doom-theme 'doom-base16-faded
  +modeline-buffer-path-function '+modeline-file-name
  scroll-conservatively 0
@@ -51,6 +51,9 @@
 ;; CPP
 (after! lsp-mode
   (add-to-list 'lsp-file-watch-ignored "[/\\\\]\\.ccls-cache$"))
+
+;; Python
+(add-hook! 'python-mode-hook sphinx-doc-mode)
 
 ;; Rust
 (setq company-racer-executable "/home/snoop/.cargo/bin/racer")
