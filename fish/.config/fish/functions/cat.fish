@@ -1,3 +1,3 @@
 function cat
-	bat --theme=zenburn $argv
+	bat $argv
 end

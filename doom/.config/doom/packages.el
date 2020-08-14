@@ -4,13 +4,8 @@
 ;; Org
 (package! ob-http) ;; curl in org-mode literate programming
 (package! ox-jekyll :recipe (:host github :repo "tmpbeing/ox-jekyll-subtree")) ;; Org-file to jekyll blog
-(package! org-trello)
-
-;; Python
-(package! sphinx-doc)
-
-;; Themes
-(package! vibrant-ink-theme :recipe (:host github :repo "arkhan/vibrant-ink-theme" :files ("vibrant-ink-theme.el")))
+(package! ob-mermaid) ;; draw diagrams in org-mode with mermaid-js
 
 ;; Misc
-; (package! systemd)
+(package! mermaid-mode :recipe (:host github :repo "shen390s/mermaid-mode")) ;; edit mermaid diagrams
+(package! nov) ;; epub reader

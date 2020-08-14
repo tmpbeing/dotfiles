@@ -6,20 +6,23 @@
 ;; General
 ;;
 
+;; Use internal pin tool
+(setenv "GPG_AGENT_INFO" nil)
+
 ;; UI
 (setq
  doom-font (font-spec :family "SF Mono" :size 14)
  doom-unicode-font (font-spec :family "DejaVu Sans" :size 14)
- doom-big-font (font-spec :family "SF Mono" :size 24)
+ doom-big-font (font-spec :family "SF Mono" :size 20)
  doom-theme 'doom-base16-faded
- +modeline-buffer-path-function '+modeline-file-name
+ doom-gruvbox-dark-variant "hard"
+ doom-modeline-window-width-limit 100
+ doom-modeline-buffer-encoding nil
  scroll-conservatively 0
  show-trailing-whitespace t
  which-key-idle-delay 0.4)
 
-(setq
- lsp-ui-sideline-enable nil
- lsp-enable-symbol-highlighting nil)
+(setq lsp-enable-symbol-highlighting nil)
 
 ;; Show the . and .. in dired-mode
 (setq dired-omit-files "^\\.?#")
@@ -53,11 +56,14 @@
   (add-to-list 'lsp-file-watch-ignored "[/\\\\]\\.ccls-cache$"))
 
 ;; Python
-(add-hook! 'python-mode-hook sphinx-doc-mode)
+(after! lsp-python-ms
+  (set-lsp-priority! 'mspyls 1))
+(setq lsp-python-ms-extra-paths (list "/home/snoop/code/ExtralityDockerAPI/services"))
+;; (setq-hook! 'python-mode-hook flycheck-python-mypy-executable "/usr/bin/mypy")
+;; (setq-hook! 'python-mode-hook flycheck-python-flake8-executable "/usr/bin/flake8")
 
 ;; Rust
 (setq company-racer-executable "/home/snoop/.cargo/bin/racer")
-
 
 ;;
 ;; Modules

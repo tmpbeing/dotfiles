@@ -14,6 +14,9 @@
 
 Is relative to 'org-directory', unless it is absolute")
 
+(after! org
+  (remove-hook 'org-mode-hook #'org-superstar-mode))
+
 (use-package! ob-http
   :after org)
 
@@ -34,11 +37,15 @@ Is relative to 'org-directory', unless it is absolute")
         ojs-blog-base-url "http://planelles.dev"
         ojs-blog-dir (expand-file-name "~/code/blog")))
 
-(use-package! org-trello
-  :after org)
+(use-package! ob-mermaid
+  :after org
+  :init
+  (setq ob-mermaid-cli-path "~/.local/node_modules/.bin/mmdc")
+  )
 
 (after! org
   (setq org-bullets-bullet-list '("#")
+        org-superstar-headline-bullets-list '("#")
         org-ellipsis " ▼ "
         org-refile-target-verify-function '+org/custom-verify-target)
 
