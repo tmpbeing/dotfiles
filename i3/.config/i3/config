@@ -328,7 +328,7 @@ for_window [class="^.*"] border pixel 3
 ## Autostart
 
 # Setup the screens
-exec_always --no-startup-id autorandr --change
+# exec_always --no-startup-id autorandr --change
 
 # Wallpaper
 exec_always --no-startup-id feh --bg-scale /home/snoop/.config/wallpapers/mballs-wide.jpg

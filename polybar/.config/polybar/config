@@ -41,7 +41,7 @@ font-0 = "Overpass Mono:size=8;1"
 font-1 = "Pomicons:size=8;1"
 font-2 = "Font Awesome:size=8;1"
 
-modules-left = i3 dunst volume spotify
+modules-left = ewmh dunst volume spotify
 modules-center =
 modules-right = cpu memory wired battery date
 
@@ -73,9 +73,34 @@ font-0 = "Overpass Mono:size=10;1"
 font-1 = "Pomicons:size=10;3"
 font-2 = "Font Awesome:size=10;1"
 
-modules-left = i3 dunst volume spotify
+modules-left = ewmh dunst volume spotify
 modules-center =
 modules-right = cpu memory wired battery date
+
+[module/ewmh]
+type = internal/xworkspaces
+pin-workspaces = true
+enable-click = true
+enable-scroll = false
+
+label-monitor = %name%
+label-monitor-padding = 1
+
+label-active = %name%
+label-active-overline = $(colors.purple)
+label-active-foreground = #ffffff
+label-active-background = ${colors.background}
+label-active-padding = 1
+
+label-occupied = %name%
+label-occupied-padding = 1
+
+label-urgent = %name%
+label-urgent-foreground = ${colors.purple}
+label-urgent-padding = 1
+
+label-empty = %name%
+label-empty-padding = 1
 
 [module/i3]
 type = internal/i3
