@@ -1,1 +1,1 @@
-/home/snoop/.config/fish/functions/theme-pure/fish_prompt.fish
+/home/snoop/.config/fish/functions/theme-pure/functions/fish_prompt.fish

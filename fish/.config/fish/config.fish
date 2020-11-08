@@ -23,16 +23,10 @@ status --is-interactive; and source (pyenv init -|psub)
 status --is-interactive; and pyenv init - | source
 status --is-interactive; and pyenv virtualenv-init - | source
 
-
-# THEME PURE #
-set fish_function_path /home/snoop/.config/fish/functions/theme-pure $fish_function_path
-# THEME PURE #
-set fish_function_path /home/snoop/.config/fish/functions/theme-pure/functions/ $fish_function_path
-source /home/snoop/.config/fish/functions/theme-pure/conf.d/pure.fish
 # THEME PURE #
 set fish_function_path /home/snoop/.config/fish/functions/theme-pure/functions/ $fish_function_path
 source /home/snoop/.config/fish/functions/theme-pure/conf.d/pure.fish
 
-set pure_color_symbol_success $pure_color_green
-set pure_color_current_folder $pure_color_magenta
-set pure_color_git_branch $pure_color_blue
+set pure_color_symbol_success green
+set pure_color_current_folder magenta
+set pure_color_git_branch yellow
