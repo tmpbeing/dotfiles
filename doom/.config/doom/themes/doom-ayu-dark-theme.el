@@ -166,6 +166,59 @@ determine the exact padding."
    ;; paren match
    ((paren-face-match &override) :background base5)
 
+   ;; helm
+   (helm-action :foreground fg :underline t)
+   (helm-candidate-number :foreground bg :background yellow)
+   (helm-header-line-left-margin :foreground bg :background yellow)
+   (helm-prefarg :foreground green)
+   (helm-separator :foreground red)
+
+   ;; helm buffer
+   (helm-buffer-archive :foreground orange)
+   (helm-buffer-directory :foreground red :background base4)
+   (helm-buffer-not-saved :foreground yellow)
+   (helm-buffer-process :foreground cyan)
+   (helm-buffer-saved-out :foreground error)
+   (helm-buffer-size :foreground dark-cyan)
+
+   ;; helm bookmark
+   (helm-bookmark-addressbook :foreground orange)
+   (helm-bookmark-file :foreground dark-blue)
+   (helm-bookmark-file-not-found :foreground base6)
+   (helm-bookmark-gnus :foreground teal)
+   (helm-bookmark-info :foreground green)
+   (helm-bookmark-man :foreground cyan)
+   (helm-bookmark-w3m :foreground yellow)
+
+   ;; helm commad
+   (helm-m-x-key :foreground orange :underline t)
+
+   ;; helm elisp
+   (helm-lisp-completion-info :foreground red)
+   (helm-lisp-show-completion :background base5)
+
+   ;; helm files
+   (helm-delete-async-message :foreground yellow)
+   (helm-ff-denied :foreground error :background base4)
+   (helm-ff-dotted-symlink-directory :foreground orange :background base5)
+   (helm-ff-invaild-symlink :foreground error :background base4)
+   (helm-ff-pipe :foreground yellow  :background base4)
+   (helm-ff-socket :foreground teal)
+   (helm-ff-suid :foreground fg :background error)
+   (helm-history-remote :foreground red)
+
+   ;; helm locate
+   (helm-locate-finish :foreground green)
+
+   ;; helm mode
+   (helm-mode-prefix :background red :foreground base0)
+
+   ;; helm occur
+   (helm-resume-need-update :background error)
+
+   ;; helm tags
+   (helm-etags-file :foreground yellow :underline t)
+
    ;; ivy
    ((ivy-current-match &override) :background base4)
 
@@ -186,6 +239,15 @@ determine the exact padding."
    (slime-repl-inputed-output-face :foreground red)
    (sldb-restartable-frame-line-face :foreground green)
 
+   ;; sly
+   (sly-error-face :underline error)
+   (sly-note-face :underline dark-cyan)
+   (sly-style-warning-face :underline warning)
+   (sly-warning-face :underline orange)
+   (sly-stickers-armed-face :foreground bg :background blue)
+   (sly-stickers-empty-face :foreground bg :background red)
+   (sly-stickers-recordings-face :foreground bg :background green)
+
    ;; dired+
    (diredp-deletion :foreground base0 :background red)
    (diredp-deletion-file-name :foreground red)
@@ -198,6 +260,40 @@ determine the exact padding."
 
    ;; lispy
    (lispy-face-hint :foreground dark-blue :background base0)
+
+   ;; diredp
+   (diredp-omit-file-name :strike-through nil)
+   (diredp-ignored-file-name :foreground base7)
+
+   ;; info+
+   (info-command-ref-item :foreground green :background base4)
+   (info-constant-ref-item :foreground red :background base4)
+   (info-double-quoted-name :forergound blue)
+   (info-file :foreground yellow  :background base4)
+   (info-function-ref-item :foreground blue :background base4)
+   (info-macro-ref-item :foreground yellow  :background base4)
+   (info-menu :foreground yellow)
+   (info-quoted-name :foreground green)
+   (info-reference-item :background base4)
+   (info-single-quote :foreground orange)
+   (info-special-form-ref-item :foreground yellow :background base4)
+   (info-string :foreground green)
+   (info-syntax-class-item :foreground teal :background base4)
+   (info-user-option-ref-item :foreground red :background base4)
+   (info-variable-ref-item :foreground orange :background base4)
+
+   ;; mingus
+   (mingus-album-face :foreground cyan :underline cyan)
+   (mingus-album-stale-face :foreground cyan)
+   (mingus-artist-face :foreground blue)
+   (mingus-current-song-props :foreground base3)
+   (mingus-directory-face :foreground yellow)
+   (mingus-mark-face :foreground red)
+   (mingus-pausing-face :foreground fg-alt)
+   (mingus-playing-face :foreground green)
+   (mingus-playlist-face :foreground orange)
+   (mingus-song-file-face :foreground teal)
+   (mingus-stopped-face :foreground vc-deleted)
 
    ;; override
    ((magit-header-line &override) :foreground base0)

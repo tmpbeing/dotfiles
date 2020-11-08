@@ -8,19 +8,7 @@
   (concat doom-private-dir "resources/prayer-bell.wav")
   "Sound used by org-pomodoro")
 
-(defvar +org-capture-bookmark-file
-  (expand-file-name "bookmarks.org" org-directory)
-  "The path to my bookmark.
-
-Is relative to 'org-directory', unless it is absolute")
-
-(after! org
-  (remove-hook 'org-mode-hook #'org-superstar-mode))
-
 (use-package! ob-http
-  :after org)
-
-(use-package! org-pomodoro
   :after org)
 
 (after! org-pomodoro
@@ -40,24 +28,18 @@ Is relative to 'org-directory', unless it is absolute")
 (use-package! ob-mermaid
   :after org
   :init
-  (setq ob-mermaid-cli-path "~/.local/node_modules/.bin/mmdc")
+  (setq ob-mermaid-cli-path "/usr/bin/mmdc")
   )
 
 (after! org
-  (setq org-bullets-bullet-list '("#")
+  (setq org-directory "~/Dropbox/org/"
+        org-default-notes-file (concat org-directory "notes.org")
+        org-bullets-bullet-list '("#")
         org-superstar-headline-bullets-list '("#")
         org-ellipsis " ▼ "
-        org-refile-target-verify-function '+org/custom-verify-target)
-
-  (appendq! org-capture-templates
-            '(("b" "Bookmark" entry
-               (file+headline +org-capture-bookmark-file "To read/Classify")
-               "* [[%x][%?]] %^g" :kill-buffer t)
-              ("z" "Pomodoro" entry ; Used for polybar integration
-               (file+headline +org-capture-todo-file "Inbox")
-               "* [ ] %?\n%i\n%a" :prepend t :pomodoro t)))
-
-  (add-hook 'org-capture-after-finalize-hook #'+org-pomodoro/start-pomodoro-on-capture)
+        org-archive-location (concat org-directory "archive.org::")
+        org-log-done 'time
+        +org-capture-journal-file concat org-directory "journal.org")
 
   (set-popup-rule! "^\\Org Agenda"
     :size 15
@@ -67,20 +49,6 @@ Is relative to 'org-directory', unless it is absolute")
     '((transient)))
 
   (add-hook 'org-clock-in-hook #'save-buffer)
-  (add-hook 'org-clock-out-hook #'save-buffer)
-
-  (map! :map org-mode-map
-        :localleader
-        "p" #'org-pomodoro
-        (:prefix ("c" . "clock")
-          "r" #'org-clock-report)))
-
-(map! :leader
-      (:prefix "n"
-        :desc "Org Agenda" :nvm "a" #'org-agenda-list
-        :desc "Org Todo" :nvm "o" #'+org/open-todo-file
-        :desc "Bookmarks" :nvm "b" #'+org/open-bookmarks)
-      (:when (featurep! :completion helm)
-        "X" #'helm-org-capture-templates))
+  (add-hook 'org-clock-out-hook #'save-buffer))
 
 ;;; +org.el ends here

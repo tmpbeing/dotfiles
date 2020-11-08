@@ -70,19 +70,19 @@ scrolling:
 font:
   # Normal (roman) font face
   normal:
-    family: JetBrains Mono
+    family: Iosevka
     # The `style` can be specified to pick a specific face.
     #style: Normal
 
   # Bold font face
   bold:
-    family: JetBrains Mono
+    family: Iosevka
     # The `style` can be specified to pick a specific face.
     #style: Bold
 
   # Italic font face
   italic:
-    family: JetBrains Mono
+    family: Iosevka
     # The `style` can be specified to pick a specific face.
     #style: Italic
 
@@ -113,34 +113,59 @@ debug:
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
 
-# Colors (Base16-faded)
-colors:
-  # Default colors
-  primary:
-    background: '0x2E3440'
-    foreground: '0xFFFFFF'
+schemes:
+  base16-faded: &faded
+    primary:
+      background: '0x2E3440'
+      foreground: '0xFFFFFF'
 
-  # Normal colors
-  normal:
-    black:   '0x2E3440'
-    red:     '0xB77A76'
-    green:   '0xB4BF86'
-    yellow:  '0xCBB079'
-    blue:    '0x83A2BE'
-    magenta: '0x958090'
-    cyan:    '0x7DAEA9'
-    white:   '0xC5C8C6'
+    normal:
+      black:   '0x2E3440'
+      red:     '0xB77A76'
+      green:   '0xB4BF86'
+      yellow:  '0xCBB079'
+      blue:    '0x83A2BE'
+      magenta: '0x958090'
+      cyan:    '0x7DAEA9'
+      white:   '0xC5C8C6'
 
-  # Bright colors
-  bright:
-    black:   '0x606778'
-    red:     '0xB77A76'
-    green:   '0xB4BF86'
-    yellow:  '0xCBB079'
-    blue:    '0x83A2BE'
-    magenta: '0x958090'
-    cyan:    '0x7DAEA9'
-    white:   '0xFFFFFF'
+    bright:
+      black:   '0x606778'
+      red:     '0xB77A76'
+      green:   '0xB4BF86'
+      yellow:  '0xCBB079'
+      blue:    '0x83A2BE'
+      magenta: '0x958090'
+      cyan:    '0x7DAEA9'
+      white:   '0xFFFFFF'
+
+  elly: &elly
+    primary:
+      background: "0x111A1F"
+      foreground: "0xC0C7CA"
+
+    normal:
+      black:   '0x111a1f'
+      red:     '0x8d7856'
+      green:   '0x798362'
+      yellow:  '0x9B9257'
+      blue:    '0x63768A'
+      magenta: '0x738C9C'
+      cyan:    '0x6998B3'
+      white:   '0xC0C7CA'
+
+    bright:
+      black:   '0x868B8D'
+      red:     '0x8d7856'
+      green:   '0x798362'
+      yellow:  '0x9B9257'
+      blue:    '0x63768A'
+      magenta: '0x738C9C'
+      cyan:    '0x6998B3'
+      white:   '0xC0C7CA'
+
+colors: *elly
+
 
 # Visual Bell
 #
@@ -163,7 +188,7 @@ colors:
 #   - Linear
 #
 # Specifying a `duration` of `0` will disable the visual bell.
-visual_bell:
+bell:
   animation: EaseOutExpo
   duration: 0
 
@@ -224,7 +249,7 @@ selection:
   # clipboard.
   save_to_clipboard: false
 
-dynamic_title: true
+window.dynamic_title: true
 
 cursor:
   # Cursor style

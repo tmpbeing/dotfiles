@@ -11,10 +11,10 @@
 
 ;; UI
 (setq
- doom-font (font-spec :family "SF Mono" :size 14)
+ doom-font (font-spec :family "JetBrains Mono" :size 14)
  doom-unicode-font (font-spec :family "DejaVu Sans" :size 14)
- doom-big-font (font-spec :family "SF Mono" :size 20)
- doom-theme 'doom-base16-faded
+ doom-big-font (font-spec :family "JetBrains Mono" :size 24)
+ doom-theme 'doom-rouge
  doom-gruvbox-dark-variant "hard"
  doom-modeline-window-width-limit 100
  doom-modeline-buffer-encoding nil
@@ -43,6 +43,15 @@
 ;;
 (evil-ex-define-cmd "W" 'evil-write)
 
+(after! ivy-posframe
+  (setf (alist-get t ivy-posframe-display-functions-alist)
+        #'ivy-posframe-display-at-frame-top-center)
+  (setf (alist-get 'swiper ivy-posframe-display-functions-alist)
+        #'ivy-posframe-display-at-frame-top-center)
+  (setq ivy-posframe-border-width 1
+        ivy-posframe-parameters (append ivy-posframe-parameters '((left-fringe . 3)
+                                                                  (right-fringe . 3)))))
+
 ;;
 ;; Languages
 ;;
@@ -61,6 +70,8 @@
 (setq lsp-python-ms-extra-paths (list "/home/snoop/code/ExtralityDockerAPI/services"))
 ;; (setq-hook! 'python-mode-hook flycheck-python-mypy-executable "/usr/bin/mypy")
 ;; (setq-hook! 'python-mode-hook flycheck-python-flake8-executable "/usr/bin/flake8")
+(lsp-register-custom-settings
+ `(("python.venvPath" "/home/snoop/.pyenv/versions/3.7.6/envs/global")))
 
 ;; Rust
 (setq company-racer-executable "/home/snoop/.cargo/bin/racer")

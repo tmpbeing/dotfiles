@@ -51,7 +51,7 @@
        fold                ; (nigh) universal code folding
        (format)            ; automated prettiness
        ;;god
-       ;;lispy             ; vim for lisp, for people who dont like vim
+       lispy               ; vim for lisp, for people who dont like vim
        multiple-cursors    ; editing in many places at once
        ;;parinfer          ; turn lisp into python, sort of
        rotate-text         ; cycle region at point between text candidates
@@ -112,7 +112,7 @@
        ;;csharp            ; unity, .NET, and mono shenanigans
        data                ; config/data formats
        ;;erlang            ; an elegant language for a more civilized age
-       ;;elixir            ; erlang done right
+       elixir              ; erlang done right
        ;;elm               ; care for a cup of TEA?
        emacs-lisp          ; drown in parentheses
        ;;ess               ; emacs speaks statistics
@@ -151,6 +151,7 @@
        ;;purescript        ; javascript, but functional
        (python             ; beautiful is better than ugly
         +lsp
+        +pyright
         +pyenv
         +poetry)
        ;;qt                ; the 'cutest' gui framework ever

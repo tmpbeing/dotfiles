@@ -9,3 +9,7 @@
 ;; Misc
 (package! mermaid-mode :recipe (:host github :repo "shen390s/mermaid-mode")) ;; edit mermaid diagrams
 (package! nov) ;; epub reader
+
+;; ;; Local dev
+;; (package! spelunk
+;;   :recipe (:local-repo "spelunk" :no-byte-compile t))
