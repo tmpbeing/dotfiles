@@ -39,7 +39,7 @@
         org-ellipsis " ▼ "
         org-archive-location (concat org-directory "archive.org::")
         org-log-done 'time
-        +org-capture-journal-file concat org-directory "journal.org")
+        +org-capture-journal-file (concat org-directory "journal.org")
 
   (set-popup-rule! "^\\Org Agenda"
     :size 15

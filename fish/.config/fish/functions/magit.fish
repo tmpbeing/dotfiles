@@ -1,3 +1,3 @@
 function magit
-	emacsclient -nw -e "(progn (magit-status) (delete-other-windows))"
+	emacsclient -nw --socket=main-emacs -e "(progn (magit-status) (delete-other-windows))"
 end

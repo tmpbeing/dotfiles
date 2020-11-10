@@ -1,3 +1,3 @@
 function ec
-    emacsclient -nc --frame-parameters='(quote (name . "main-emacs"))' -a "emacs"
+    emacsclient -nc --socket=main-emacs --frame-parameters='(quote (name . "main-emacs"))' -a "emacs"
 end

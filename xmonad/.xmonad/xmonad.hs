@@ -60,19 +60,19 @@ myConfig =
   dynamicProjects projects
     $                 fullscreenSupport
     $                 ewmh
-    $                 desktopConfig { borderWidth        = myBorderWidth
-                                    , focusFollowsMouse  = True
-                                    , focusedBorderColor = myFocusColor
-                                    , handleEventHook    = docksEventHook
-                                    , layoutHook         = myLayoutHook
-                                    , logHook            = myLogHook
-                                    , manageHook         = myManageHook
-                                    , modMask            = myModMask
-                                    , normalBorderColor  = myNormColor
-                                    , startupHook        = myStartupHook
-                                    , terminal           = myTerminal
-                                    , workspaces         = myWorkspaces
-                                    }
+    $ desktopConfig { borderWidth        = myBorderWidth
+                    , focusFollowsMouse  = True
+                    , focusedBorderColor = myFocusColor
+                    , handleEventHook = docksEventHook <+> fullscreenEventHook
+                    , layoutHook         = myLayoutHook
+                    , logHook            = myLogHook
+                    , manageHook         = myManageHook
+                    , modMask            = myModMask
+                    , normalBorderColor  = myNormColor
+                    , startupHook        = myStartupHook <+> ewmhDesktopsStartup
+                    , terminal           = myTerminal
+                    , workspaces         = myWorkspaces
+                    }
     `additionalKeysP` myKeys
 
 
@@ -110,7 +110,7 @@ myStartupHook :: X ()
 myStartupHook = do
   spawnOnce "feh --bg-scale /home/snoop/.config/wallpapers/mballs-wide.jpg"
   spawnOnce "picom --config $HOME/.config/picom/picom.conf -b"
-  spawnOnce "/home/snoop/.config/polybar/polybar-handler"
+  spawn "/home/snoop/.config/polybar/polybar-handler"
   spawnOnce "dunst"
   spawnOnce "redshift"
   setWMName "LG3D"
@@ -238,16 +238,22 @@ myKeys =
 projects :: [Project]
 projects =
   [ Project
-    { projectName      = "firefox"
+    { projectName      = "term"
+    , projectDirectory = "~/"
+    , projectStartHook = Just $ do
+                           spawn "alacritty -e tmux new-session -A -s main"
+    }
+  , Project
+    { projectName      = "web"
     , projectDirectory = "~/"
     , projectStartHook = Just $ do
                            spawn "firefox"
     }
   , Project
-    { projectName      = "editor"
+    { projectName      = "dev"
     , projectDirectory = "~/code"
     , projectStartHook = Just $ do
-                           spawn "emacsclient -nc"
+                           spawn "emacsclient -nc --socket=main-emacs"
     }
   , Project
     { projectName      = "chat"
@@ -258,7 +264,7 @@ projects =
                            spawn "discord"
     }
   , Project
-    { projectName      = "music"
+    { projectName      = "media"
     , projectDirectory = "~/"
     , projectStartHook = Just $ do
                            spawn "spotify"
@@ -269,6 +275,6 @@ projects =
     { projectName      = "org"
     , projectDirectory = "~/Dropbox/org"
     , projectStartHook = Just $ do
-                           spawn "emacsclient -nc"
+                           spawn "emacsclient -nc --socket=org-emacs"
     }
   ]

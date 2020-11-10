@@ -18,6 +18,7 @@
  doom-gruvbox-dark-variant "hard"
  doom-modeline-window-width-limit 100
  doom-modeline-buffer-encoding nil
+ focus-follows-mouse t
  scroll-conservatively 0
  show-trailing-whitespace t
  which-key-idle-delay 0.4)
@@ -34,9 +35,10 @@
 ;; Keybindings
 ;;
 (map! :ni "C-;" #'avy-goto-char-timer
+      :i "C-i" #'flyspell-auto-correct-previous-word
       (:map evil-window-map ;; Adding tmux split bindings
-        "\"" #'evil-window-split
-        "%"  #'evil-window-vsplit))
+       "\"" #'evil-window-split
+       "%"  #'evil-window-vsplit))
 
 ;;
 ;; Evil
@@ -65,13 +67,6 @@
   (add-to-list 'lsp-file-watch-ignored "[/\\\\]\\.ccls-cache$"))
 
 ;; Python
-(after! lsp-python-ms
-  (set-lsp-priority! 'mspyls 1))
-(setq lsp-python-ms-extra-paths (list "/home/snoop/code/ExtralityDockerAPI/services"))
-;; (setq-hook! 'python-mode-hook flycheck-python-mypy-executable "/usr/bin/mypy")
-;; (setq-hook! 'python-mode-hook flycheck-python-flake8-executable "/usr/bin/flake8")
-(lsp-register-custom-settings
- `(("python.venvPath" "/home/snoop/.pyenv/versions/3.7.6/envs/global")))
 
 ;; Rust
 (setq company-racer-executable "/home/snoop/.cargo/bin/racer")
