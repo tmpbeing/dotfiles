@@ -11,6 +11,7 @@
 
 ;; UI
 (setq
+ display-line-numbers-type 'relative
  doom-font (font-spec :family "JetBrains Mono" :size 14)
  doom-unicode-font (font-spec :family "DejaVu Sans" :size 14)
  doom-big-font (font-spec :family "JetBrains Mono" :size 24)
@@ -29,7 +30,7 @@
 (setq dired-omit-files "^\\.?#")
 
 ;; Projectile : ignore projects in /tmp/ and ~/.emacs.d/.local/
-(setq projectile-ignored-project-function #'+projectile/ignore-project-p)
+(setq projectile-ignored-project-function #'+projectile/ignore-project-fn)
 
 ;;
 ;; Keybindings
@@ -44,15 +45,30 @@
 ;; Evil
 ;;
 (evil-ex-define-cmd "W" 'evil-write)
+(after! evil-escape (evil-escape-mode -1)) ; Disable escape sequence
+(after! evil (setq evil-ex-substitute-global t ; I like my s/../.. to by global by default
+                   evil-vsplit-window-right t
+                   evil-split-window-below t) ; go to the right pane on split
+  )
 
+
+;;
+;; Ivy
+;;
+
+(setq +ivy-buffer-preview t)
+
+;; Ivy-posframe: Decorations, put it at the top
 (after! ivy-posframe
   (setf (alist-get t ivy-posframe-display-functions-alist)
         #'ivy-posframe-display-at-frame-top-center)
   (setf (alist-get 'swiper ivy-posframe-display-functions-alist)
         #'ivy-posframe-display-at-frame-top-center)
   (setq ivy-posframe-border-width 1
+        ivy-posframe-width 160
         ivy-posframe-parameters (append ivy-posframe-parameters '((left-fringe . 3)
-                                                                  (right-fringe . 3)))))
+                                                                  (right-fringe . 3))))
+  )
 
 ;;
 ;; Languages

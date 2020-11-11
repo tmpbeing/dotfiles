@@ -11,6 +11,9 @@
 (use-package! ob-http
   :after org)
 
+(use-package! ox-gfm
+  :after org)
+
 (after! org-pomodoro
   (setq org-pomodoro-manual-break t
         org-pomodoro-finished-sound +org-gong-sound
@@ -31,24 +34,30 @@
   (setq ob-mermaid-cli-path "/usr/bin/mmdc")
   )
 
-(after! org
-  (setq org-directory "~/Dropbox/org/"
-        org-default-notes-file (concat org-directory "notes.org")
-        org-bullets-bullet-list '("#")
-        org-superstar-headline-bullets-list '("#")
-        org-ellipsis " ▼ "
-        org-archive-location (concat org-directory "archive.org::")
-        org-log-done 'time
-        +org-capture-journal-file (concat org-directory "journal.org")
+(setq org-directory "~/Dropbox/org/"
+      org-default-notes-file (concat org-directory "notes.org")
+      org-bullets-bullet-list '("#")
+      org-superstar-headline-bullets-list '("#")
+      org-ellipsis " ▼ "
+      org-agenda-files (list (concat org-directory +org-capture-todo-file))
+      org-agenda-include-deadlines t
+      org-agenda-skip-deadline-if-done t
+      org-agenda-skip-scheduled-if-done t
+      org-archive-location (concat org-directory "archive.org::")
+      org-log-done 'time
+      org-startup-folded 'fold
+      org-use-property-inheritance t
+      org-list-allow-alphabetical t ; allows a) A) bullets
+      +org-capture-journal-file (concat org-directory "journal.org"))
 
-  (set-popup-rule! "^\\Org Agenda"
-    :size 15
-    :quit t
-    :select t
-    :parameters
-    '((transient)))
+(set-popup-rule! "^\\Org Agenda"
+  :size 15
+  :quit t
+  :select t
+  :parameters
+  '((transient)))
 
-  (add-hook 'org-clock-in-hook #'save-buffer)
-  (add-hook 'org-clock-out-hook #'save-buffer))
+(add-hook 'org-clock-in-hook #'save-buffer)
+(add-hook 'org-clock-out-hook #'save-buffer)
 
 ;;; +org.el ends here
