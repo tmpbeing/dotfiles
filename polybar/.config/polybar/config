@@ -79,7 +79,7 @@ modules-right = cpu memory wired battery date
 
 [module/ewmh]
 type = internal/xworkspaces
-pin-workspaces = true
+pin-workspaces = false
 enable-click = true
 enable-scroll = false
 

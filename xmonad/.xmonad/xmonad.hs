@@ -165,9 +165,10 @@ myKeys =
     ) -- Spawn the configured terminal emulator
   , ("M-d"  , spawn "rofi -modi 'run#ssh#window' -show run")
   , ("M-S-d", spawn "rofi -modi 'run#ssh#window' -show ssh")
-  , ( "M-S-w"
-    , spawn "rofi -modi 'run#ssh#window' -show window"
-    )
+  , ("M-S-w", spawn "rofi -modi 'run#ssh#window' -show window")
+  , ( "M-n"
+    , spawn "~/.emacs.d/bin/org-capture"
+    ) -- Emacs org-capture
 
     -- Windows
   , ( "M-q"
@@ -216,16 +217,6 @@ myKeys =
   , ( "M-f"
     , sendMessage (Toggle "Fullscreen") >> sendMessage ToggleStruts
     ) -- Toggles noborder/full
-        -- , ("M-S-<Space>", sendMessage ToggleStruts)         -- Toggles struts
-        -- , ("M-S-n", sendMessage $ MT.Toggle NOBORDERS)      -- Toggles noborder
-        -- , ("M-<KP_Multiply>", sendMessage (IncMasterN 1))   -- Increase number of clients in master pane
-        -- , ("M-<KP_Divide>", sendMessage (IncMasterN (-1)))  -- Decrease number of clients in master pane
-        -- , ("M-S-<KP_Multiply>", increaseLimit)              -- Increase number of windows
-        -- , ("M-S-<KP_Divide>", decreaseLimit)                -- Decrease number of windows
-        -- , ("M-h", sendMessage Shrink)                       -- Shrink horiz window width
-        -- , ("M-l", sendMessage Expand)                       -- Expand horiz window width
-        -- , ("M-C-j", sendMessage MirrorShrink)               -- Shrink vert window width
-        -- , ("M-C-k", sendMessage MirrorExpand)               -- Expand vert window width
 
       -- Workspaces
   , ( "M-."
@@ -275,6 +266,7 @@ projects =
     { projectName      = "org"
     , projectDirectory = "~/Dropbox/org"
     , projectStartHook = Just $ do
-                           spawn "emacsclient -nc --socket=org-emacs"
+      spawn
+        "emacsclient -nc --socket=org-emacs --eval '(+org/open-org-overview)'"
     }
   ]

@@ -17,3 +17,5 @@ fish/.config/fish/fishd.Castor
 fish/.config/fish/fishd.copernicus
 fish/.config/fish/fish_variables
 systemd/.config/systemd/user/default.target.wants/
+xmonad/.xmonad/*
+!xmonad/.xmonad/xmonad.hs
