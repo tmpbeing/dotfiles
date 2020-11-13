@@ -18,7 +18,6 @@ import           XMonad.Actions.RotSlaves
 import           XMonad.Actions.WithAll
 
 
-
 -- Config
 import           XMonad.Config.Desktop
 
@@ -27,6 +26,7 @@ import           XMonad.Hooks.EwmhDesktops
 import           XMonad.Hooks.FadeInactive
 import           XMonad.Hooks.ManageDocks
 import           XMonad.Hooks.ManageHelpers
+import           XMonad.Hooks.Place
 import           XMonad.Hooks.SetWMName
 
 
@@ -61,7 +61,7 @@ myConfig =
     $                 fullscreenSupport
     $                 ewmh
     $ desktopConfig { borderWidth        = myBorderWidth
-                    , focusFollowsMouse  = True
+                    , focusFollowsMouse  = myFocusFollowsMouse
                     , focusedBorderColor = myFocusColor
                     , handleEventHook = docksEventHook <+> fullscreenEventHook
                     , layoutHook         = myLayoutHook
@@ -101,6 +101,12 @@ myNormColor = "#798362"
 myFocusColor :: String
 myFocusColor = "#8d7856"
 
+myFocusFollowsMouse :: Bool
+myFocusFollowsMouse = False
+
+myClickJustFocuses :: Bool
+myClickJustFocuses = True
+
 myLogHook :: X ()
 myLogHook =
   historyHook <+> ewmhDesktopsLogHook <+> fadeInactiveLogHook fadeAmount
@@ -137,10 +143,11 @@ myManageHook =
       [ className =? "firefox" --> doShift "web"
       , className =? "slack" --> doShift "chat"
       , className =? "spotify" --> doShift "media"
-      , className =? "qbittorrent" --> doShift "misc"
+      , className =? "(?i)qittorrent" --> doShift "misc"
       , title =? "main-emacs" --> doShift "dev"
       , title =? "doom-capture" --> doFloat
       ]
+    <+> placeHook simpleSmart
     <+> manageDocks
     <+> (isFullscreen --> doFullFloat)
 
@@ -163,11 +170,11 @@ myKeys =
   , ( "M-<Return>"
     , spawn myTerminal
     ) -- Spawn the configured terminal emulator
-  , ("M-d"  , spawn "rofi -modi 'run#ssh#window' -show run")
-  , ("M-S-d", spawn "rofi -modi 'run#ssh#window' -show ssh")
-  , ("M-S-w", spawn "rofi -modi 'run#ssh#window' -show window")
+  , ("M-d"  , spawn "rofi -matching fuzzy -modi 'run#ssh#window' -show run")
+  , ("M-S-d", spawn "rofi -matching fuzzy -modi 'run#ssh#window' -show ssh")
+  , ("M-S-w", spawn "rofi -matching fuzzy -modi 'run#ssh#window' -show window")
   , ( "M-n"
-    , spawn "~/.emacs.d/bin/org-capture"
+    , spawn "~/.config/doom/org-capture"
     ) -- Emacs org-capture
 
     -- Windows
@@ -210,7 +217,7 @@ myKeys =
 
     -- Layouts
   , ( "M-<Tab>"
-    , sendMessage ToggleLayout
+    , sendMessage NextLayout
     )               -- Switch to next layout
         -- , ("M-C-M1-<Up>", sendMessage Arrange)              -- Float window
         -- , ("M-C-M1-<Down>", sendMessage DeArrange)

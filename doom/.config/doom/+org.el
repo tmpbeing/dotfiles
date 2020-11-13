@@ -40,6 +40,7 @@
       org-superstar-headline-bullets-list '("#")
       org-ellipsis " ▼ "
       org-agenda-files (list (concat org-directory +org-capture-todo-file))
+      org-agenda-inhibit-startup nil
       org-agenda-include-deadlines t
       org-agenda-skip-deadline-if-done t
       org-agenda-skip-scheduled-if-done t
@@ -57,7 +58,8 @@
   :parameters
   '((transient)))
 
-(add-hook 'org-clock-in-hook #'save-buffer)
-(add-hook 'org-clock-out-hook #'save-buffer)
+(add-hook! org-mode :append
+  (add-hook! after-save :append :local #'+org/reload-agenda-buffer-h))
+(add-hook! '(org-clock-in-hook org-clock-out-hook) #'save-buffer)
 
 ;;; +org.el ends here

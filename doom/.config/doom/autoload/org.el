@@ -20,4 +20,12 @@
   (+org/open-todo-file)
   (split-window-right)
   (let ((org-agenda-window-setup 'other-window))
-    (org-agenda nil "a")))
+    (org-agenda nil "n")))
+
+
+;;;###autoload
+(defun +org/reload-agenda-buffer-h ()
+  "Refresh all open org-agenda buffers in the current workspace"
+  (dolist (buffer (+workspace-buffer-list))
+    (with-current-buffer buffer (when (derived-mode-p 'org-agenda-mode)
+                                  (org-agenda-redo t)))))

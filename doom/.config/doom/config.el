@@ -20,11 +20,12 @@
  doom-modeline-window-width-limit 100
  doom-modeline-buffer-encoding nil
  focus-follows-mouse t
+ lsp-enable-symbol-highlighting nil
+ posframe-mouse-banish t
  scroll-conservatively 0
  show-trailing-whitespace t
  which-key-idle-delay 0.4)
 
-(setq lsp-enable-symbol-highlighting nil)
 
 ;; Show the . and .. in dired-mode
 (setq dired-omit-files "^\\.?#")
@@ -69,6 +70,7 @@
         ivy-posframe-parameters (append ivy-posframe-parameters '((left-fringe . 3)
                                                                   (right-fringe . 3))))
   )
+
 
 ;;
 ;; Languages
