@@ -36,6 +36,7 @@ import           XMonad.Layout.Fullscreen       ( fullscreenSupport
                                                 , fullscreenFull
                                                 )
 import           XMonad.Layout.ResizableTile
+import           XMonad.Layout.ThreeColumns
 import           XMonad.Layout.TwoPane
 
 -- Layout modifiers
@@ -90,7 +91,7 @@ myModMask :: KeyMask
 myModMask = mod4Mask
 
 myWorkspaces :: [String]
-myWorkspaces = ["term", "web", "dev", "chat", "media", "org", "misc"]
+myWorkspaces = ["main", "chat", "media", "org", "misc", "trash"]
 
 myBorderWidth :: Dimension
 myBorderWidth = 2
@@ -102,7 +103,7 @@ myFocusColor :: String
 myFocusColor = "#8d7856"
 
 myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = False
+myFocusFollowsMouse = True
 
 myClickJustFocuses :: Bool
 myClickJustFocuses = True
@@ -114,7 +115,7 @@ myLogHook =
 
 myStartupHook :: X ()
 myStartupHook = do
-  spawnOnce "feh --bg-scale /home/snoop/.config/wallpapers/mballs-wide.jpg"
+  spawn "feh --bg-scale /home/snoop/.config/wallpapers/mballs-wide.jpg"
   spawnOnce "picom --config $HOME/.config/picom/picom.conf -b"
   spawn "/home/snoop/.config/polybar/polybar-handler"
   spawnOnce "dunst"
@@ -131,20 +132,27 @@ myLayoutHook = layoutHints . avoidStruts . IfMax 1 single_window $ layouts
   single_window = renamed [Replace "Single"] $ noBorders $ avoidStruts $ Full
   full = renamed [Replace "Fullscreen"] $ noBorders (fullscreenFull Full)
   twoPanes =
-    renamed [Replace "Two Pane"] $ mySpacing 8 $ TwoPane (3 / 100) (1 / 2)
+    renamed [Replace "Two Panes"] $ mySpacing 8 $ TwoPane (3 / 100) (1 / 2)
+  threeColMid =
+    renamed [Replace "Three Columns Mid"] $ mySpacing 8 $ ThreeColMid
+      1
+      (3 / 100)
+      (60 / 100)
   tall = renamed [Replace "Tall"] $ mySpacing 8 $ ResizableTall 1
                                                                 (2 / 100)
                                                                 (1 / 2)
                                                                 []
-  layouts = tall ||| twoPanes ||| full ||| single_window
+  layouts = -- tall |||
+    twoPanes ||| threeColMid ||| full
+    -- ||| single_window
 
 myManageHook =
   composeAll
-      [ className =? "firefox" --> doShift "web"
+      [ className =? "firefox" --> doShift "main"
       , className =? "slack" --> doShift "chat"
       , className =? "spotify" --> doShift "media"
-      , className =? "(?i)qittorrent" --> doShift "misc"
-      , title =? "main-emacs" --> doShift "dev"
+      , className =? "qBittorrent" --> doShift "misc"
+      , title =? "main-emacs" --> doShift "main"
       , title =? "doom-capture" --> doFloat
       ]
     <+> placeHook simpleSmart
@@ -236,28 +244,19 @@ myKeys =
 projects :: [Project]
 projects =
   [ Project
-    { projectName      = "term"
+    { projectName      = "main"
     , projectDirectory = "~/"
     , projectStartHook = Just $ do
-                           spawn "alacritty -e tmux new-session -A -s main"
-    }
-  , Project
-    { projectName      = "web"
-    , projectDirectory = "~/"
-    , projectStartHook = Just $ do
-                           spawn "firefox"
-    }
-  , Project
-    { projectName      = "dev"
-    , projectDirectory = "~/code"
-    , projectStartHook = Just $ do
+                           sendMessage (Toggle "Three Columns Mid")
                            spawn "emacsclient -nc --socket=main-emacs"
+                           spawn "firefox"
+                           spawn "alacritty -e tmux new-session -A -s main"
     }
   , Project
     { projectName      = "chat"
     , projectDirectory = "~/"
     , projectStartHook = Just $ do
-                           sendMessage (Toggle "Two Pane")
+                           sendMessage (Toggle "Two Panes")
                            spawn "slack"
                            spawn "discord"
     }
