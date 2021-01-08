@@ -115,7 +115,7 @@
        data                ; config/data formats
        ;;(dart +flutter)
        erlang              ; an elegant language for a more civilized age
-       elixir              ; erlang done right
+       (elixir +lsp)       ; erlang done right
        ;;elm               ; care for a cup of TEA?
        emacs-lisp          ; drown in parentheses
        ;;ess               ; emacs speaks statistics

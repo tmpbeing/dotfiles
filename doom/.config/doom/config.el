@@ -12,16 +12,15 @@
 ;; UI
 (setq
  display-line-numbers-type 'relative
- doom-font (font-spec :family "JetBrains Mono" :size 14)
- doom-unicode-font (font-spec :family "DejaVu Sans" :size 14)
- doom-big-font (font-spec :family "JetBrains Mono" :size 24)
- doom-theme 'doom-rouge
+ doom-font (font-spec :family "Iosevka" :size 16)
+ doom-unicode-font (font-spec :family "DejaVu Sans" :size 16)
+ doom-big-font (font-spec :family "Iosevka" :size 24)
+ doom-theme 'doom-elly
  doom-gruvbox-dark-variant "hard"
  doom-modeline-window-width-limit 100
  doom-modeline-buffer-encoding nil
  focus-follows-mouse t
  lsp-enable-symbol-highlighting nil
- posframe-mouse-banish t
  scroll-conservatively 0
  show-trailing-whitespace t
  which-key-idle-delay 0.4)
@@ -68,7 +67,8 @@
   (setq ivy-posframe-border-width 1
         ivy-posframe-width 160
         ivy-posframe-parameters (append ivy-posframe-parameters '((left-fringe . 3)
-                                                                  (right-fringe . 3))))
+                                                                  (right-fringe . 3)))
+        posframe-mouse-banish t)
   )
 
 
