@@ -37,7 +37,7 @@ import           XMonad.Layout.Fullscreen       ( fullscreenSupport
                                                 )
 import           XMonad.Layout.ResizableTile
 import           XMonad.Layout.ThreeColumns
-import           XMonad.Layout.TwoPane
+import           XMonad.Layout.TwoPanePersistent
 
 -- Layout modifiers
 import           XMonad.Layout.IfMax            ( IfMax(..) )
@@ -131,8 +131,10 @@ myLayoutHook = layoutHints . avoidStruts . IfMax 1 single_window $ layouts
  where
   single_window = renamed [Replace "Single"] $ noBorders $ avoidStruts $ Full
   full = renamed [Replace "Fullscreen"] $ noBorders (fullscreenFull Full)
-  twoPanes =
-    renamed [Replace "Two Panes"] $ mySpacing 8 $ TwoPane (3 / 100) (1 / 2)
+  twoPanes = renamed [Replace "Two Panes"] $ mySpacing 8 $ TwoPanePersistent
+    Nothing
+    (3 / 100)
+    (1 / 2)
   threeColMid =
     renamed [Replace "Three Columns Mid"] $ mySpacing 8 $ ThreeColMid
       1
