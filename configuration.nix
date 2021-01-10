@@ -24,6 +24,7 @@
     efiSupport = true;
     enableCryptodisk = true;
     device = "nodev";
+    useOsProber = true;
   };
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -38,7 +39,7 @@
   # Options to optimize SDD lifetime, supposedly.
   fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
 
-  networking.hostName = "Auriga-linux"; # Define your hostname.
+  networking.hostName = "auriga-linux"; # Define your hostname.
   networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   time.timeZone = "Europe/Paris";
