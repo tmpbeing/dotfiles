@@ -7,8 +7,8 @@
     displayManager.lightdm.enable = true;
     videoDrivers = ["nvidia"];
     libinput.enable = true;
+    displayManager.defaultSession = "none+xmonad";
     windowManager = {
-      default = "xmonad";
       xmonad = {
         enable = true;
         enableContribAndExtras = true;
