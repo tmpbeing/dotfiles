@@ -15,10 +15,19 @@
       nixos-hardware.url = "github:nixos/nixos-hardware";
     };
 
-  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, ... }:
+  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, home-manager, ... }:
     let
       system = "x86_64-linux";
-      modules = [ ./configuration.nix ];
+      modules = [ 
+        ./configuration.nix 
+        ./zsh.nix
+        ./x.nix
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+        }
+      ];
 
 
       mkPkgs = pkgs: extraOverlays: import pkgs {

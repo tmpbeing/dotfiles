@@ -24,7 +24,7 @@
     efiSupport = true;
     enableCryptodisk = true;
     device = "nodev";
-    useOsProber = true;
+    useOSProber = true;
   };
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -83,7 +83,7 @@
   users.users.snoop = {
     description = "The primary user account";
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
     uid = 1000;
   };
 
@@ -127,5 +127,6 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "20.09"; # Did you read the comment?
 
+  #home-manager.users.snoop = ./home.nix;
 }
 
