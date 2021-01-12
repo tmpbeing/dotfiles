@@ -21,6 +21,7 @@
       modules = [ 
         ./options.nix
         ./configuration.nix 
+        ./emacs.nix
         ./zsh.nix
         ./x.nix
         home-manager.nixosModules.home-manager
