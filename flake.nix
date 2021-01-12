@@ -19,6 +19,7 @@
     let
       system = "x86_64-linux";
       modules = [ 
+        ./options.nix
         ./configuration.nix 
         ./zsh.nix
         ./x.nix
@@ -39,7 +40,7 @@
       uPkgs = mkPkgs nixpkgs-unstable [];
       
     in {
-      nixosConfigurations.auriga-linux = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.Auriga-linux = nixpkgs.lib.nixosSystem {
         inherit system;
         inherit modules;
       };

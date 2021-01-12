@@ -13,6 +13,7 @@
 
   # TODO: How to install for user ?
   environment.systemPackages = with pkgs; [
+    alacritty
     zsh
     nix-zsh-completions
     bat
