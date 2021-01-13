@@ -4,14 +4,14 @@
 with lib;
 {
   options = with types; {
-    user = mkOption { type attrs };
+    user = mkOption { type = attrs; };
 
     env = mkOption {
-      type = attrsOf {oneOf [ str path (listOf (either str path)) ]); 
+      type = attrsOf (oneOf [ str path (listOf (either str path)) ]); 
       apply = mapAttrs
         (n: v: if isList v
-               then concapMapStringSep ":" (x: toString x) v
-               else (toString v))
+               then concatMapStringsSep ":" (x: toString x) v
+               else (toString v));
       default = {};
     };
   };
@@ -20,6 +20,7 @@ with lib;
     # Usual user configuration, at top level so easily accessible
     user = {
       name = "snoop";
+      password = "RMS";
       description = "ain't nothing but a nerd thing";
       isNormalUser = true;
       extraGroups = [ "wheel" "docker" ];
@@ -27,18 +28,18 @@ with lib;
     };
     # Alias top-level user to a configured user
     users.users.${config.user.name} = mkAliasDefinitions options.user;
-  };
 
-  nix = let users = [ "root" config.user.name ]; in {
-    trustedUsers = users;
-    allowedUsers = users;
-  }
+    nix = let users = [ "root" config.user.name ]; in {
+      trustedUsers = users;
+      allowedUsers = users;
+    };
 
-  # TODO: Find out if/why this is needed
-  env.PATH = [ "$PATH" ];
+    # TODO: Find out if/why this is needed
+    env.PATH = [ "$PATH" ];
   
-  # Build environment from env options
-  environment.extraInit =
-    concatStringSep "\n"
-      (mapAttrsToList (n: v: "export ${n}=\"${v}\"") config.env);
-};
+    # Build environment from env options
+    environment.extraInit =
+      concatStringsSep "\n"
+        (mapAttrsToList (n: v: "export ${n}=\"${v}\"") config.env);
+    };
+}

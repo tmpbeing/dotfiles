@@ -1,8 +1,11 @@
-{ config, lib, pkgs, inputs, ...}
+{ config, lib, pkgs, inputs, ...}:
 
 with lib;
 {
   config = {
+    # Activate overlay providing emacsPgtkGcc
+    nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
+
     user.packages = with pkgs; [
       binutils # Needed for native-comp (provides 'as')
       emacsPgtkGcc
@@ -23,4 +26,4 @@ with lib;
 
     fonts.fonts = [ plgs.emacs-all-the-icons-fonts ];
   };
-};
+}

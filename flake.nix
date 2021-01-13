@@ -20,10 +20,11 @@
       system = "x86_64-linux";
       modules = [ 
         ./options.nix
-        ./configuration.nix 
-        ./emacs.nix
+        #./emacs.nix
         ./zsh.nix
         ./x.nix
+        ./tmux.nix
+        ./configuration.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
@@ -38,15 +39,16 @@
         overlays = extraOverlays;
       };
       pkgs = mkPkgs nixpkgs [ self.overlay ];
-      uPkgs = mkPkgs nixpkgs-unstable [];
+      unstable = mkPkgs nixpkgs-unstable [];
       
     in {
-      nixosConfigurations.Auriga-linux = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.auriga-linux = nixpkgs.lib.nixosSystem {
         inherit system;
         inherit modules;
       };
+      nixosModules = { emacs = import modules/emacs; };
       overlay = final: prev: {
-        unstable = uPkgs;
+        inherit unstable;
         my = self.packages."${system}";
       };
     };
