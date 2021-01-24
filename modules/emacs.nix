@@ -8,7 +8,7 @@ with lib;
 
     user.packages = with pkgs; [
       binutils # Needed for native-comp (provides 'as')
-      emacsPgtkGcc
+      emacsPgtkGccDoesNotExist
 
       git
       (ripgrep.override {withPCRE2 = true;}) # Ripgrep with more powerful regex engine
@@ -24,6 +24,6 @@ with lib;
     # TODO: Uncomment when properly setup. Adds doom bin to the path
     # env.PATH = [ "$XDG_CONFIG_HOME/emacs/bin" ];
 
-    fonts.fonts = [ plgs.emacs-all-the-icons-fonts ];
+    fonts.fonts = [ pkgs.emacs-all-the-icons-fonts ];
   };
 }
