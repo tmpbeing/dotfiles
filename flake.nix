@@ -17,13 +17,10 @@
 
   outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, home-manager, ... }:
     let
+      inherit (lib.my) mapModulesRec;
+
       system = "x86_64-linux";
       modules = [ 
-        ./options.nix
-        #./emacs.nix
-        ./zsh.nix
-        ./x.nix
-        ./tmux.nix
         ./configuration.nix
         home-manager.nixosModules.home-manager
         {
@@ -40,13 +37,18 @@
       };
       pkgs = mkPkgs nixpkgs [ self.overlay ];
       unstable = mkPkgs nixpkgs-unstable [];
+ 
+      lib = nixpkgs.lib.extend
+        (self: super: { my = import ./lib { inherit pkgs inputs; lib = self; }; });
       
     in {
+      lib = lib.my;
+
       nixosConfigurations.auriga-linux = nixpkgs.lib.nixosSystem {
         inherit system;
         inherit modules;
       };
-      nixosModules = { emacs = import modules/emacs; };
+      nixosModules = { dotfiles = import ./.;  } // mapModulesRec ./modules import;
       overlay = final: prev: {
         inherit unstable;
         my = self.packages."${system}";

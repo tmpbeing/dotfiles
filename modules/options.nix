@@ -21,7 +21,6 @@ with lib;
     user = {
       name = "snoop";
       password = "RMS";
-      description = "ain't nothing but a nerd thing";
       isNormalUser = true;
       extraGroups = [ "wheel" "docker" ];
       uid = 1000;

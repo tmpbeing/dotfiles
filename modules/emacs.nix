@@ -8,7 +8,7 @@ with lib;
 
     user.packages = with pkgs; [
       binutils # Needed for native-comp (provides 'as')
-      emacsPgtkGccDoesNotExist
+      emacsPgtkGcc
 
       git
       (ripgrep.override {withPCRE2 = true;}) # Ripgrep with more powerful regex engine
