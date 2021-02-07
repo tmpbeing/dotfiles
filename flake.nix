@@ -20,7 +20,9 @@
       inherit (lib.my) mapModulesRec;
 
       system = "x86_64-linux";
-      modules = [];
+      modules = [
+          ./.
+	];
 
 
       mkPkgs = pkgs: extraOverlays: import pkgs {
@@ -47,6 +49,7 @@
       nixosConfigurations.auriga-linux = nixpkgs.lib.nixosSystem {
         inherit system;
         inherit modules;
+        specialArgs = { inherit lib inputs; };
       };
     };
 }

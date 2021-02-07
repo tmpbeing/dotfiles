@@ -11,7 +11,7 @@ with lib.my;
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       inputs.home-manager.nixosMOdules.home-manager
-    ] ++ (mapModulesRec' (toString ./modules) import;
+    ] ++ (mapModulesRec' (toString ./modules) import);
 
   nix = {
     package = pkgs.nixFlakes;
