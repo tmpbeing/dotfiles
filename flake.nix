@@ -20,7 +20,7 @@
       inherit (lib.my) mapModulesRec;
 
       system = "x86_64-linux";
-      modules = [ ./configuration.nix ];
+      modules = [];
 
 
       mkPkgs = pkgs: extraOverlays: import pkgs {

@@ -2,13 +2,16 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ inputs, config, lib, pkgs, ... }:
 
+with lib;
+with lib.my;
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-    ];
+      inputs.home-manager.nixosMOdules.home-manager
+    ] ++ (mapModulesRec' (toString ./modules) import;
 
   nix = {
     package = pkgs.nixFlakes;
