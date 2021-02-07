@@ -8,6 +8,7 @@ with lib;
 
     user.packages = with pkgs; [
       binutils # Needed for native-comp (provides 'as')
+      gcc
       emacsPgtkGcc
 
       git
@@ -24,6 +25,6 @@ with lib;
     # TODO: Uncomment when properly setup. Adds doom bin to the path
     # env.PATH = [ "$XDG_CONFIG_HOME/emacs/bin" ];
 
-    fonts.fonts = [ pkgs.emacs-all-the-icons-fonts ];
+    fonts.fonts [ pkgs.emacs-all-the-icons-fonts ];
   };
 }

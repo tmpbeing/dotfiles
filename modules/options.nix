@@ -28,6 +28,10 @@ with lib;
     # Alias top-level user to a configured user
     users.users.${config.user.name} = mkAliasDefinitions options.user;
 
+    home-manager = {
+      useUserPackages = true;
+    }
+
     nix = let users = [ "root" config.user.name ]; in {
       trustedUsers = users;
       allowedUsers = users;

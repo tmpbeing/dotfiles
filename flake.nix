@@ -20,14 +20,7 @@
       inherit (lib.my) mapModulesRec;
 
       system = "x86_64-linux";
-      modules = [ 
-        ./configuration.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-        }
-      ];
+      modules = [ ./configuration.nix ];
 
 
       mkPkgs = pkgs: extraOverlays: import pkgs {
@@ -44,14 +37,16 @@
     in {
       lib = lib.my;
 
-      nixosConfigurations.auriga-linux = nixpkgs.lib.nixosSystem {
-        inherit system;
-        inherit modules;
-      };
-      nixosModules = { dotfiles = import ./.;  } // mapModulesRec ./modules import;
       overlay = final: prev: {
         inherit unstable;
         my = self.packages."${system}";
+      };
+
+      nixosModules = { dotfiles = import ./.;  } // mapModulesRec ./modules import;
+
+      nixosConfigurations.auriga-linux = nixpkgs.lib.nixosSystem {
+        inherit system;
+        inherit modules;
       };
     };
 }
