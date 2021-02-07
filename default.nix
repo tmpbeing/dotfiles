@@ -10,15 +10,30 @@ with lib.my;
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      inputs.home-manager.nixosMOdules.home-manager
+      inputs.home-manager.nixosModules.home-manager
     ] ++ (mapModulesRec' (toString ./modules) import);
 
-  nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
+  nix = 
+    let filteredInputs = filterAttrs (n: _: n != "self") inputs;
+        nixPathInputs = mapAttrsToList (n: v: "${n}=${v}") filteredInputs;
+        registryInputs = mapAttrs (_: v: { flake = v; }) filteredInputs;
+    in {
+      package = pkgs.nixFlakes;
+      extraOptions = ''
+        experimental-features = nix-command flakes
+      '';
+      nixPath = nixPathInputs ++ [
+        "nixpkgs-overlay=${dotFilesDir}/overlays"
+        "dotfiles=${dotFilesDir}"
+      ];
+      #binaryCaches = [
+      #  "https://nix-community.cachix.org"
+      #]
+      #binaryCachePublicKeys = [
+      #]
+      registry = registryInputs // { dotfiles.flake = inputs.self; };
+      useSandbox = true;
+    };
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.grub = {

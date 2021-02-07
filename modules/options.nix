@@ -30,7 +30,8 @@ with lib;
 
     home-manager = {
       useUserPackages = true;
-    }
+      useGlobalPkgs = true;
+    };
 
     nix = let users = [ "root" config.user.name ]; in {
       trustedUsers = users;
