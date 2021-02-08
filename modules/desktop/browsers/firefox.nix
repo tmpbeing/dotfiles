@@ -84,14 +84,14 @@ in {
         StartWithLastProfile=1
         Version=2
       '';
+
       "%{cfgPath}/{cfg.profileName}.default/user.js" =
         mkIf (cfg.settings != { } || cfg.extraConfig != "") {
           text = ''
-            ${concatStrings (mapAttrsToList (name:
-              value ''
-                user_pref("${name}", ${builtins.toJson value});
-              '') cfg.settings)}
-            ${cfg extraConfig}
+            ${concatStrings (mapAttrsToList (name: value: ''
+              user_pref("${name}", ${builtins.toJSON value});
+            '') cfg.settings)}
+            ${cfg.extraConfig}
           '';
         };
     };

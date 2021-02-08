@@ -137,6 +137,26 @@ with lib.my;
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "20.09"; # Did you read the comment?
 
-  #home-manager.users.snoop = ./home.nix;
+  # TODO: Move out to host files
+  location = { # TODO: Update these
+    latitude = 48.8;
+    longitude = 2.3;
+  };
+  modules = {
+    desktop = {
+      xmonad.enable = true;
+      apps = {
+        discord.enable = true;
+        rofi.enable = true;
+        slack.enable = true;
+      };
+      browsers.firefox.enable = true;
+      media = {
+        mpv.enable = true;
+        spotify.enable = true;
+        zathura.enable = true;
+      };
+    };
+  };
 }
 

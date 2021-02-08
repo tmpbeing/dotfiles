@@ -1,41 +1,42 @@
 {
   description = "My WIP flake-based nixos configuration.";
 
-  inputs =
-    {
-      nixpkgs.url = "nixpkgs/master";
-      nixpkgs-unstable.url = "nixpkgs/master";
+  inputs = {
+    nixpkgs.url = "nixpkgs/master";
+    nixpkgs-unstable.url = "nixpkgs/master";
 
-      home-manager = {
-        url = "github:rycee/home-manager/master";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
-
-      emacs-overlay.url = "github:nix-community/emacs-overlay";
-      nixos-hardware.url = "github:nixos/nixos-hardware";
+    home-manager = {
+      url = "github:rycee/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
-  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, home-manager, ... }:
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    nixos-hardware.url = "github:nixos/nixos-hardware";
+  };
+
+  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, ... }:
     let
       inherit (lib.my) mapModules mapModulesRec;
 
       system = "x86_64-linux";
-      modules = [
-          ./.
-	];
+      modules = [ ./. ];
 
-
-      mkPkgs = pkgs: extraOverlays: import pkgs {
-        inherit system;
-        config.allowUnfree = true;
-        overlays = extraOverlays ++ (lib.attrValues self.overlays);
-      };
+      mkPkgs = pkgs: extraOverlays:
+        import pkgs {
+          inherit system;
+          config.allowUnfree = true;
+          overlays = extraOverlays ++ (lib.attrValues self.overlays);
+        };
       pkgs = mkPkgs nixpkgs [ self.overlay ];
-      pkgs' = mkPkgs nixpkgs-unstable [];
- 
-      lib = nixpkgs.lib.extend
-        (self: super: { my = import ./lib { inherit pkgs inputs; lib = self; }; });
-      
+      pkgs' = mkPkgs nixpkgs-unstable [ ];
+
+      lib = nixpkgs.lib.extend (self: super: {
+        my = import ./lib {
+          inherit pkgs inputs;
+          lib = self;
+        };
+      });
+
     in {
       lib = lib.my;
 
@@ -46,9 +47,11 @@
 
       overlays = mapModules ./overlays import;
 
-      packages."${system}" = mapModules ./packages (p: pkgs.callPackage p {});
+      packages."${system}" = mapModules ./packages (p: pkgs.callPackage p { });
 
-      nixosModules = { dotfiles = import ./.;  } // mapModulesRec ./modules import;
+      nixosModules = {
+        dotfiles = import ./.;
+      } // mapModulesRec ./modules import;
 
       nixosConfigurations.auriga-linux = nixpkgs.lib.nixosSystem {
         inherit system;
