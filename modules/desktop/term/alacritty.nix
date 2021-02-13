@@ -10,7 +10,7 @@ in {
     user.packages = with pkgs; [ alacritty ];
 
     home.configFile = {
-      "alacritty/alacritty.yml".source = "${configDir}/alacritty/alacritty.tml";
+      "alacritty/alacritty.yml".source = "${configDir}/alacritty/alacritty.yml";
     };
   };
 }

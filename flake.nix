@@ -2,8 +2,9 @@
   description = "My WIP flake-based nixos configuration.";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/master";
-    nixpkgs-unstable.url = "nixpkgs/master";
+    nixpkgs.url = "nixpkgs/nixos-unstable"; # primary
+    nixpkgs-unstable.url = "nixpkgs/master"; # edge
+    nixpkgs-stable.url = "nixpkgs/nixos-20.09"; # stable
 
     home-manager = {
       url = "github:rycee/home-manager/master";
@@ -14,12 +15,11 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, nixpkgs-stable, ... }:
     let
       inherit (lib.my) mapModules mapModulesRec;
 
       system = "x86_64-linux";
-      modules = [ ./. ];
 
       mkPkgs = pkgs: extraOverlays:
         import pkgs {
@@ -28,7 +28,8 @@
           overlays = extraOverlays ++ (lib.attrValues self.overlays);
         };
       pkgs = mkPkgs nixpkgs [ self.overlay ];
-      pkgs' = mkPkgs nixpkgs-unstable [ ];
+      pkgsUnstable = mkPkgs nixpkgs-unstable [ ];
+      pkgsStable = mkPkgs nixpkgs-stable [ ];
 
       lib = nixpkgs.lib.extend (self: super: {
         my = import ./lib {
@@ -37,11 +38,19 @@
         };
       });
 
+      modules = [
+        {
+          nixpkgs.pkgs = pkgs;
+        }
+        ./.
+      ];
+
     in {
       lib = lib.my;
 
       overlay = final: prev: {
-        unstable = pkgs';
+        unstable = pkgsUnstable;
+        stable = pkgsStable;
         my = self.packages."${system}";
       };
 

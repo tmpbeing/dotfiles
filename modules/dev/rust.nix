@@ -12,8 +12,10 @@ in
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
       rustup
+      # TODO One mkIf ?
       (mkIf (config.modules.editors.emacs.enable)
-        rustfmt
+        rustfmt)
+      (mkIf (config.modules.editors.emacs.enable)
         unstable.rust-analyzer)
     ];
 

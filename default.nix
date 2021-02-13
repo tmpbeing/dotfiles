@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { inputs, config, lib, pkgs, ... }:
 
 with lib;
@@ -51,7 +47,7 @@ with lib.my;
     preLVM = true;
     allowDiscards = true;
   };
-  boot.kernelPackages = pkgs.linuxPackages_5_9;
+  boot.kernelPackages =  mkDefault pkgs.linuxPackages_5_10;
   # TODO: Needed ? in nvidia module ?
   boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
 

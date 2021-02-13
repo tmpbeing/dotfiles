@@ -77,6 +77,6 @@ in {
       '';
     };
 
-    system.userActivationScripts.cleanupZgen = "rm -fv $XDG_CACHE_HOME/zsh/*";
+    # system.userActivationScripts.cleanupZgen = "rm -fv $XDG_CACHE_HOME/zsh/*";
   };
 }

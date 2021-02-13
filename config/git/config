@@ -1,0 +1,30 @@
+[user]
+	email = marc@planelles.dev
+	name = tmpbeing
+
+[github]
+	user = tmpbeing
+
+[rebase]
+	autosquash = true
+
+[push]
+	default = current
+
+[alias]
+	ls = ls-files
+
+[url "https://github.com/"]
+	insteadOf = gh:
+
+[url "git@github.com:tmpbeing/"]
+	insteadOf = gh:/
+
+[url "https://gitlab.com/"]
+	insteadOf = gl:
+
+[url "https://gist.github.com/"]
+	insteadOf = gist:
+
+[url "https://bitbucket.org/"]
+	insteadOf = bb:

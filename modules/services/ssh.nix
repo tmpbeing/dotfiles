@@ -9,8 +9,8 @@ in {
   config = mkIf cfg.enable {
     services.openssh = {
       enable = true;
-      challengeResponseAuthentification = false;
-      passwordAuthentification = false;
+      challengeResponseAuthentication = false;
+      passwordAuthentication = false;
       startWhenNeeded = true;
     };
 

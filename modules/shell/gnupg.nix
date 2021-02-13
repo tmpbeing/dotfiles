@@ -14,6 +14,6 @@ in
 
     programs.gnupg.agent.enable = true;
 
-    users.packages = with pkgs; [ tomb ];
+    user.packages = with pkgs; [ tomb ];
   };
 }
