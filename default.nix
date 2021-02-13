@@ -52,6 +52,7 @@ with lib.my;
     allowDiscards = true;
   };
   boot.kernelPackages = pkgs.linuxPackages_5_9;
+  # TODO: Needed ? in nvidia module ?
   boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
 
   # Options to optimize SDD lifetime, supposedly.
@@ -90,10 +91,6 @@ with lib.my;
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -108,34 +105,8 @@ with lib.my;
     unzip
   ];
   nixpkgs.config.allowUnfree = true;
- 
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "20.09"; # Did you read the comment?
+  system.stateVersion = "20.09";
 
   # TODO: Move out to host files
   location = { # TODO: Update these
@@ -156,6 +127,41 @@ with lib.my;
         spotify.enable = true;
         zathura.enable = true;
       };
+      term.alacritty.enable = true;
+    };
+    dev = {
+      cc.enable = true;
+      elixir.enable = true;
+      python.enable = true;
+      rust.enable = true;
+      shell.enable = true;
+    };
+    editors = {
+      emacs.enable = true;
+      vim.enable = true;
+    };
+    hardware = {
+      audio.enable = true;
+      bluetooth.enable = true;
+      ergodox.enable = true;
+      fs.enable = true;
+      fs.ssd.enable = true;
+      nvidia.enable = true;
+      sensors.enable = true;
+      tablet.enable = true;
+    };
+    services = {
+      docker.enable = true;
+      dropbox.enable = true;
+      ssh.enable = true;
+    };
+    shell = {
+      bitwarden.enable = true;
+      direnv.enable = true;
+      git.enable = true;
+      gnupg.enable = true;
+      tmux.enable = true;
+      zsh.enable = true;
     };
   };
 }

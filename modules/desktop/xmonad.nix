@@ -21,7 +21,7 @@ in {
         displayManager = {
           defaultSession = "none+xmonad";
           lightdm.enable = true;
-          lightdm.greeters.mini.enable = true;
+          # lightdm.greeters.mini.enable = true;
         };
         windowManager = {
           xmonad = {
@@ -59,11 +59,13 @@ in {
 
     systemd.user.services."dunst" = {
       enable = true;
-      description = "";
+      description = "Dunst";
       wantedBy = [ "default.target" ];
-      serviceConfig.Restart = "always";
-      serviceConfig.RestartSec = 2;
-      serviceConfig.ExecStart = "${pkgs.dunst}/bin/dunst";
+      serviceConfig = {
+        Restart = "always";
+        RestartSec = 2;
+        ExecStart = "${pkgs.dunst}/bin/dunst";
+      };
     };
 
     home.configFile = {
