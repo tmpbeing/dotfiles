@@ -21,7 +21,8 @@ in {
         displayManager = {
           defaultSession = "none+xmonad";
           lightdm.enable = true;
-          # lightdm.greeters.mini.enable = true;
+          lightdm.greeters.mini.enable = true;
+          lightdm.greeters.mini.user = config.user.name;
         };
         windowManager = {
           xmonad = {
@@ -30,7 +31,13 @@ in {
           };
         };
       };
-      redshift.enable = true;
+      redshift = {
+        enable = true;
+        temperature = {
+          day = 4700;
+          night = 2000;
+        };
+      };
       picom = {
         enable = true;
         backend = "glx";

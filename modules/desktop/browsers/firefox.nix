@@ -85,7 +85,7 @@ in {
         Version=2
       '';
 
-      "${cfgPath}/{cfg.profileName}.default/user.js" =
+      "${cfgPath}/${cfg.profileName}.default/user.js" =
         mkIf (cfg.settings != { } || cfg.extraConfig != "") {
           text = ''
             ${concatStrings (mapAttrsToList (name: value: ''
@@ -94,6 +94,12 @@ in {
             ${cfg.extraConfig}
           '';
         };
+
+      "${cfgPath}/${cfg.profileName}.default/chrome/userChrome.css" =
+        mkIf (cfg.userChrome != "") { text = cfg.userChrome; };
+
+      "${cfgPath}/${cfg.profileName}.default/chrome/userContent.css" =
+        mkIf (cfg.userContent != "") { text = cfg.userContent; };
     };
   }]);
 }

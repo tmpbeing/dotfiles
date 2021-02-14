@@ -1,13 +1,10 @@
-{ options, config, lib, pkgs, inputs, ...}:
+{ options, config, lib, pkgs, inputs, ... }:
 
 with lib;
 with lib.my;
 let cfg = config.modules.editors.emacs;
-in
-{
-  options.modules.editors.emacs = {
-    enable = mkBoolOpt false;
-  };
+in {
+  options.modules.editors.emacs = { enable = mkBoolOpt false; };
 
   config = mkIf cfg.enable {
     # Activate overlay providing emacsPgtkGcc
@@ -19,7 +16,9 @@ in
 
       # Doom deps
       git
-      (ripgrep.override {withPCRE2 = true;}) # Ripgrep with more powerful regex engine
+      (ripgrep.override {
+        withPCRE2 = true;
+      }) # Ripgrep with more powerful regex engine
       gnutls
 
       # Options deps
@@ -31,9 +30,7 @@ in
 
       # Module deps
       # :checkers spell
-      (aspellWithDicts (ds: with ds; [
-        en en-computers en-science
-      ]))
+      (aspellWithDicts (ds: with ds; [ en en-computers en-science ]))
       # :checkers grammar
       languagetool
       # :tools editorconfig
@@ -47,5 +44,30 @@ in
     env.PATH = [ "$XDG_CONFIG_HOME/emacs/bin" ];
 
     fonts.fonts = [ pkgs.emacs-all-the-icons-fonts ];
+
+    # I use two daemons, one is dedicated to org-mode and the other one for everything else
+    systemd.user.services."emacs-main" = {
+      description = "Emacs text editor, main instance";
+      serviceConfig = {
+        Type = "forking";
+        ExecStart =
+          "${pkgs.bash}/bin/bash -c 'source ${config.system.build.setEnvironment}; exec ${pkgs.emacsPgtkGcc}/bin/emacs --fg-daemon=main-emacs'";
+        ExecStop =
+          "${pkgs.emacsPgtkGcc}/bin/emacs --socket=main-emacs --eval (kill-emacs)";
+        Restart = "on-failure";
+      };
+    };
+
+    systemd.user.services."emacs-org" = {
+      description = "Emacs text editor, main instance";
+      serviceConfig = {
+        Type = "forking";
+        ExecStart =
+          "${pkgs.bash}/bin/bash -c 'source ${config.system.build.setEnvironment}; exec ${pkgs.emacsPgtkGcc}/bin/emacs --fg-daemon=org-emacs'";
+        ExecStop =
+          "${pkgs.emacsPgtkGcc}/bin/emacs --socket=org-emacs --eval (kill-emacs)";
+        Restart = "on-failure";
+      };
+    };
   };
 }

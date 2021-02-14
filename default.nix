@@ -1,35 +1,33 @@
 { inputs, config, lib, pkgs, ... }:
 
 with lib;
-with lib.my;
-{
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.home-manager
-    ] ++ (mapModulesRec' (toString ./modules) import);
+with lib.my; {
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    inputs.home-manager.nixosModules.home-manager
+  ] ++ (mapModulesRec' (toString ./modules) import);
 
-  nix = 
-    let filteredInputs = filterAttrs (n: _: n != "self") inputs;
-        nixPathInputs = mapAttrsToList (n: v: "${n}=${v}") filteredInputs;
-        registryInputs = mapAttrs (_: v: { flake = v; }) filteredInputs;
-    in {
-      package = pkgs.nixFlakes;
-      extraOptions = ''
-        experimental-features = nix-command flakes
-      '';
-      nixPath = nixPathInputs ++ [
-        "nixpkgs-overlay=${dotFilesDir}/overlays"
-        "dotfiles=${dotFilesDir}"
-      ];
-      #binaryCaches = [
-      #  "https://nix-community.cachix.org"
-      #]
-      #binaryCachePublicKeys = [
-      #]
-      registry = registryInputs // { dotfiles.flake = inputs.self; };
-      useSandbox = true;
-    };
+  nix = let
+    filteredInputs = filterAttrs (n: _: n != "self") inputs;
+    nixPathInputs = mapAttrsToList (n: v: "${n}=${v}") filteredInputs;
+    registryInputs = mapAttrs (_: v: { flake = v; }) filteredInputs;
+  in {
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+    nixPath = nixPathInputs ++ [
+      "nixpkgs-overlay=${dotFilesDir}/overlays"
+      "dotfiles=${dotFilesDir}"
+    ];
+    #binaryCaches = [
+    #  "https://nix-community.cachix.org"
+    #]
+    #binaryCachePublicKeys = [
+    #]
+    registry = registryInputs // { dotfiles.flake = inputs.self; };
+    useSandbox = true;
+  };
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.grub = {
@@ -47,7 +45,7 @@ with lib.my;
     preLVM = true;
     allowDiscards = true;
   };
-  boot.kernelPackages =  mkDefault pkgs.linuxPackages_5_10;
+  boot.kernelPackages = mkDefault pkgs.linuxPackages_5_10;
   # TODO: Needed ? in nvidia module ?
   boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
 
@@ -55,7 +53,8 @@ with lib.my;
   fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
 
   networking.hostName = "auriga-linux"; # Define your hostname.
-  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.wireless.enable =
+    true; # Enables wireless support via wpa_supplicant.
 
   time.timeZone = "Europe/Paris";
 
@@ -78,8 +77,6 @@ with lib.my;
   #   keyMap = "us";
   # };
 
-  
-
   # Configure keymap in X11
   # services.xserver.layout = "us";
   # services.xserver.xkbOptions = "eurosign:e";
@@ -96,7 +93,7 @@ with lib.my;
     coreutils
     git
     gnumake
-    wget 
+    wget
     vim
     unzip
   ];
@@ -109,6 +106,21 @@ with lib.my;
     latitude = 48.8;
     longitude = 2.3;
   };
+  services.xserver.xrandrHeads = [
+    {
+      output = "DP-0";
+      primary = true;
+      monitorConfig = ''
+        Option "Mode" "5120x1440"
+      '';
+    }
+    {
+      output = "HDMI-0";
+      monitorConfig = ''
+        Option "Rotate" "Left"
+      '';
+    }
+  ];
   modules = {
     desktop = {
       xmonad.enable = true;
@@ -159,6 +171,7 @@ with lib.my;
       tmux.enable = true;
       zsh.enable = true;
     };
+    theme.active = "elly";
   };
 }
 

@@ -8,6 +8,7 @@
       iosevka
       merriweather
       jetbrains-mono
+      font-awesome-ttf
     ];
     fontconfig = {
       defaultFonts = {

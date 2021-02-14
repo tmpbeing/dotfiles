@@ -115,11 +115,12 @@ myLogHook =
 
 myStartupHook :: X ()
 myStartupHook = do
-  spawn "feh --bg-scale /home/snoop/.config/wallpapers/mballs-wide.jpg"
-  spawnOnce "picom --config $HOME/.config/picom/picom.conf -b"
-  spawn "/home/snoop/.config/polybar/polybar-handler"
-  spawnOnce "dunst"
-  spawnOnce "redshift"
+  -- Managed by nixOS now
+  -- spawn "feh --bg-scale /home/snoop/.config/wallpapers/mballs-wide.jpg"
+  -- spawnOnce "picom --config $HOME/.config/picom/picom.conf -b"
+  -- spawn "/home/snoop/.config/polybar/polybar-handler"
+  -- spawnOnce "dunst"
+  -- spawnOnce "redshift"
   setWMName "LG3D"
 
 

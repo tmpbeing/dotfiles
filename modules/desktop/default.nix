@@ -15,7 +15,7 @@ in {
         assertion = let srv = config.services;
         in srv.xserver.enable || !(anyAttrs
           (n: v: is Attrs v && anyAttrs (n: v: isAttrs v && v.enable) cfg));
-        message = "Can;t enable a destop app without a desktop environment";
+        message = "Can't enable a desktop app without a desktop environment";
       }
     ];
 
