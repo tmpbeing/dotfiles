@@ -75,8 +75,8 @@ in {
       };
     };
 
-    home.configFile = {
-      "xmonad" = {
+    home.file = {
+      ".xmonad" = {
         source = "${configDir}/xmonad";
         recursive = true;
       };

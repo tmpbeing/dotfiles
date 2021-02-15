@@ -121,6 +121,10 @@ with lib.my; {
     };
     dev = {
       cc.enable = true;
+      cloud = {
+        enable = true;
+        amazon.enable = true;
+      };
       elixir.enable = true;
       python.enable = true;
       rust.enable = true;

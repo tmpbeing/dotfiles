@@ -1,3 +1,7 @@
+# TODO Figure out why ZGEN_SOURCE is not set correctly otherwise
+export ZGEN_DIR="$XDG_CACHE_HOME/zgen"
+export ZGEN_SOURCE="$ZGEN_DIR/zgen.zsh"
+
 [ -d "$ZGEN_DIR" ] || git clone https://github.com/tarjoilija/zgen "$ZGEN_DIR"
 source $ZGEN_SOURCE
 if ! zgen saved; then

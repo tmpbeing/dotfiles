@@ -46,8 +46,10 @@ bind ^r refresh-client
 
 ### Behaviour
 # Use zsh shell
-# set-option -g default-shell /usr/bin/zsh
-# set-option -g default-command /usr/bin/zsh
+# set-option -g default-shell zsh
+# set-option -g default-command zsh
+set -g default-terminal "screen-256color"
+
 
 new-session # spawn session if attaching when none are running
 
@@ -65,4 +67,4 @@ set  -s focus-events on
 set  -g mouse on
 
 
-source $TMUX_HOME/extraInit
+source $TMUX_HOME/extraInit \; display message "LOADING EXTRAS"

@@ -58,6 +58,8 @@ modules-left = ewmh dunst alsa spotify
 modules-center =
 modules-right = redshift cpu memory wired date
 
+tray-position = right
+
 # [bar/bigscreen]
 # enable-ipc = true
 # monitor = ${env:MONITOR}

@@ -22,6 +22,9 @@ in {
         ProtectSystem = "full";
         Nice = 10;
       };
+      environment = {
+        DISPLAY = ":0";
+      };
     };
   };
 }
