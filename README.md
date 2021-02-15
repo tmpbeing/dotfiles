@@ -4,9 +4,7 @@ This is my flakes-based dotfiles for nixOS using xmonad , (doom-)emacs, alacritt
 
 # Acknowledgements and copyright
 
-TODO: Include link to hlissner dotfiles
-A large part of the nix specific configuration is inspired or directly copied from hlissner's configuration, subject to the following license :
+This repository is essentially a fork of [hlissner's dotfiles](https://github.com/hlissner/dotfiles/) that I've copied bit by bit so that I would understand the inner workings. Most credit goes to him.
 
-TODO: Include hlissner license
-TODO: Add my own MIT license
+TODO: License
 
