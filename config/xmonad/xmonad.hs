@@ -115,12 +115,7 @@ myLogHook =
 
 myStartupHook :: X ()
 myStartupHook = do
-  -- Managed by nixOS now
-  -- spawn "feh --bg-scale /home/snoop/.config/wallpapers/mballs-wide.jpg"
-  -- spawnOnce "picom --config $HOME/.config/picom/picom.conf -b"
-  -- spawn "/home/snoop/.config/polybar/polybar-handler"
-  -- spawnOnce "dunst"
-  -- spawnOnce "redshift"
+  spawn "/home/snoop/.config/polybar/polybar-handler"
   setWMName "LG3D"
 
 
@@ -261,7 +256,7 @@ projects =
     , projectStartHook = Just $ do
                            sendMessage (Toggle "Two Panes")
                            spawn "slack"
-                           spawn "discord"
+                           spawn "Discord"
     }
   , Project
     { projectName      = "media"

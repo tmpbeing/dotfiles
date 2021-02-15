@@ -46,8 +46,6 @@ with lib.my; {
     allowDiscards = true;
   };
   boot.kernelPackages = mkDefault pkgs.linuxPackages_5_10;
-  # TODO: Needed ? in nvidia module ?
-  boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
 
   # Options to optimize SDD lifetime, supposedly.
   fileSystems."/".options = [ "noatime" "nodiratime" "discard" ];
@@ -65,27 +63,6 @@ with lib.my; {
   networking.interfaces.enp39s0.useDHCP = true;
   networking.interfaces.enp42s0f1u6u4.useDHCP = true;
   networking.interfaces.wlo1.useDHCP = true;
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  # };
-
-  # Configure keymap in X11
-  # services.xserver.layout = "us";
-  # services.xserver.xkbOptions = "eurosign:e";
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -106,21 +83,26 @@ with lib.my; {
     latitude = 48.8;
     longitude = 2.3;
   };
-  services.xserver.xrandrHeads = [
-    {
-      output = "DP-0";
-      primary = true;
-      monitorConfig = ''
-        Option "Mode" "5120x1440"
-      '';
-    }
-    {
-      output = "HDMI-0";
-      monitorConfig = ''
-        Option "Rotate" "Left"
-      '';
-    }
-  ];
+  services.xserver = {
+    xrandrHeads = [
+      {
+        output = "DP-0";
+        primary = true;
+        monitorConfig = ''
+          Option "PreferredMode" "5120x1440"
+          Option "Position" "0 0"
+        '';
+      }
+      {
+        output = "HDMI-0";
+        monitorConfig = ''
+          Option "Rotate" "Left"
+          Option "PreferredMode" "1920x1080"
+          Option "Position" "5120 0"
+        '';
+      }
+    ];
+  };
   modules = {
     desktop = {
       xmonad.enable = true;

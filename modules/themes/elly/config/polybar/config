@@ -50,13 +50,13 @@ module-margin-right = 1
 bg = ${colors.bg-alt}
 fg = ${colors.fg}
 
-font-0 = "Overpass Mono:size=8;1"
+font-0 = "Iosevka:size=8;1"
 font-1 = "Pomicons:size=8;1"
 font-2 = "Font Awesome:size=8;1"
 
-modules-left = ewmh dunst volume spotify
+modules-left = ewmh dunst alsa spotify
 modules-center =
-modules-right = redshift cpu memory wired battery date
+modules-right = redshift cpu memory wired date
 
 # [bar/bigscreen]
 # enable-ipc = true
@@ -101,7 +101,7 @@ label-monitor = %name%
 label-monitor-padding = 1
 
 label-active = %name%
-label-active-overline = $(colors.red)
+label-active-overline = ${colors.red}
 label-active-fg = #ffffff
 label-active-bg = ${colors.bg}
 label-active-padding = 1
@@ -126,7 +126,7 @@ enable-scroll = false
 format = <label-state> <label-mode>
 
 label-focused = %name%
-label-focused-overline = $(colors.red)
+label-focused-overline = ${colors.red}
 label-focused-fg = #ffffff
 label-focused-bg = ${colors.bg}
 label-focused-padding = 1
@@ -141,7 +141,7 @@ label-visible-padding = 1
 
 label-mode-padding = 2
 label-mode-overline = ${colors.blue}
-label-mode-bg = $(colors.bg)
+label-mode-bg = ${colors.bg}
 
 [module/cpu]
 type = internal/cpu
@@ -192,8 +192,8 @@ animation-charging-4 = 
 animation-charging-fg = ${colors.fg}
 animation-charging-framerate = 750
 
-[module/volume]
-type = internal/volume
+[module/alsa]
+type = internal/alsa
 
 format-volume = <ramp-volume> <label-volume>
 label-volume = %percentage%%

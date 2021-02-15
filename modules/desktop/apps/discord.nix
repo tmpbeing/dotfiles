@@ -11,8 +11,7 @@ in
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
-      # TODO: unstable.discord, make it work
-      discord
+      unstable.discord
     ];
   };
 }

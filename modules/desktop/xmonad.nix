@@ -59,7 +59,7 @@ in {
         settings = {
           unredir-if-possible = true; # Might cause flicker
           glx-no-stencil = true;
-          xrander-sync-fence = true;
+          xrender-sync-fence = true;
         };
       };
     };

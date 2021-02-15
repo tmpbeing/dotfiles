@@ -51,11 +51,12 @@ in {
       serviceConfig = {
         Type = "forking";
         ExecStart =
-          "${pkgs.bash}/bin/bash -c 'source ${config.system.build.setEnvironment}; exec ${pkgs.emacsPgtkGcc}/bin/emacs --fg-daemon=main-emacs'";
+          "${pkgs.bash}/bin/bash -c 'source ${config.system.build.setEnvironment}; exec ${pkgs.emacsPgtkGcc}/bin/emacs --daemon=main-emacs'";
         ExecStop =
           "${pkgs.emacsPgtkGcc}/bin/emacs --socket=main-emacs --eval (kill-emacs)";
         Restart = "on-failure";
       };
+      wantedBy = [ "default.target" ];
     };
 
     systemd.user.services."emacs-org" = {
@@ -63,11 +64,12 @@ in {
       serviceConfig = {
         Type = "forking";
         ExecStart =
-          "${pkgs.bash}/bin/bash -c 'source ${config.system.build.setEnvironment}; exec ${pkgs.emacsPgtkGcc}/bin/emacs --fg-daemon=org-emacs'";
+          "${pkgs.bash}/bin/bash -c 'source ${config.system.build.setEnvironment}; exec ${pkgs.emacsPgtkGcc}/bin/emacs --daemon=org-emacs'";
         ExecStop =
           "${pkgs.emacsPgtkGcc}/bin/emacs --socket=org-emacs --eval (kill-emacs)";
         Restart = "on-failure";
       };
+      wantedBy = [ "default.target" ];
     };
   };
 }

@@ -59,7 +59,7 @@ in {
             "dunst/dunstrc".source = ./config/dunstrc;
           })
           (mkIf desktop.apps.rofi.enable {
-            "rofi/theme" = {
+            "rofi" = {
               source = ./config/rofi;
               recursive = true;
             };
