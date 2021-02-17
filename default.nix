@@ -96,9 +96,8 @@ with lib.my; {
       {
         output = "HDMI-0";
         monitorConfig = ''
-          Option "Rotate" "Left"
-          Option "PreferredMode" "1920x1080"
-          Option "Position" "5120 0"
+          Option "Rotate" "Right"
+          Option "LeftOf" "DP-0"
         '';
       }
     ];
@@ -110,6 +109,7 @@ with lib.my; {
         discord.enable = true;
         rofi.enable = true;
         slack.enable = true;
+        qbittorrent.enable = true;
       };
       browsers.firefox.enable = true;
       media = {

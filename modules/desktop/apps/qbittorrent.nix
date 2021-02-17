@@ -2,10 +2,10 @@
 
 with lib;
 with lib.my;
-let cfg = config.modules.desktop.apps.bittorrent;
+let cfg = config.modules.desktop.apps.qbittorrent;
 in
 {
-  options.modules.desktop.apps.bittorrent = {
+  options.modules.desktop.apps.qbittorrent = {
     enable = mkBoolOpt false;
   };
 

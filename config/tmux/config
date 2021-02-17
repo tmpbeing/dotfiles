@@ -1,3 +1,5 @@
+new-session # spawn session if attaching when none are running
+
 ### Prefix
 # Set prefix
 unbind C-b
@@ -50,9 +52,6 @@ bind ^r refresh-client
 # set-option -g default-command zsh
 set -g default-terminal "screen-256color"
 
-
-new-session # spawn session if attaching when none are running
-
 setw -g automatic-rename on
 set  -g renumber-windows on
 set  -g base-index 1
@@ -66,5 +65,6 @@ setw -g aggressive-resize off # Constrain window size to the max size of any cli
 set  -s focus-events on
 set  -g mouse on
 
-
-source $TMUX_HOME/extraInit \; display message "LOADING EXTRAS"
+# FIXME: Not being loaded
+source /home/snoop/.config/extraInit
+# source $TMUX_HOME/extraInit \; display message "LOADING EXTRAS"

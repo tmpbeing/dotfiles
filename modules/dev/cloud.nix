@@ -24,6 +24,7 @@ in {
           unstable.terraform
           unstable.kubectl
           unstable.kubernetes-helm
+          unstable.pulumi-bin
         ];
       };
     })
