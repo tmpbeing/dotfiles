@@ -10,6 +10,8 @@ in {
     sound.enable = true;
     hardware.pulseaudio.enable = true;
 
+    user.packages = with pkgs; [ pavucontrol ];
+
     # HACK to prevent ~/.esd_auth from being generated. Disables esound protocol module
     hardware.pulseaudio.configFile = let
       inherit (pkgs) runCommand pulseaudio;
