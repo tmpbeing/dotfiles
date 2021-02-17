@@ -76,7 +76,7 @@ with lib.my; {
   ];
   nixpkgs.config.allowUnfree = true;
 
-  system.stateVersion = "20.09";
+  system.stateVersion = "21.03";
 
   # TODO: Move out to host files
   location = { # TODO: Update these
