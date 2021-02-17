@@ -13,6 +13,7 @@ if ! zgen saved; then
   zgen load junegunn/fzf shell
   [ -z "$SSH_CONNECTION" ] && zgen load zdharma/fast-syntax-highlighting
   zgen load denysdovhan/spaceship-prompt spaceship
+  zgen load zsh-users/zsh-autosuggestions
   zgen save
 fi
 
