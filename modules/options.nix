@@ -60,7 +60,7 @@ with lib.my; {
     };
 
     # TODO: Find out if/why this is needed
-    env.PATH = [ "$PATH" ];
+    env.PATH = [ "$XDG_BIN_HOME" "$PATH" ];
 
     # Build environment from env options
     environment.extraInit = concatStringsSep "\n"
