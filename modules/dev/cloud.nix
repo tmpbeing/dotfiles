@@ -24,6 +24,8 @@ in {
           unstable.terraform
           unstable.kubectl
           unstable.kubernetes-helm
+          nodejs # For pulumi
+          nodePackages.typescript
           unstable.pulumi-bin
         ];
       };
