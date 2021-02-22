@@ -31,7 +31,7 @@ with lib.my; {
       password = "RMS";
       home = "/home/${config.user.name}";
       isNormalUser = true;
-      extraGroups = [ "wheel" "docker" ];
+      extraGroups = [ "wheel" ];
       uid = 1000;
     };
     # Alias top-level user to a configured user
