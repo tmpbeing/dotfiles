@@ -23,6 +23,9 @@
 [url "git@github.com:tmpbeing/"]
 	insteadOf = gh:/
 
+[url "git@github.com:Extrality/"]
+	insteadOf = ghe:/
+
 [url "https://gitlab.com/"]
 	insteadOf = gl:
 
