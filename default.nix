@@ -112,6 +112,10 @@ with lib.my; {
         qbittorrent.enable = true;
       };
       browsers.firefox.enable = true;
+      gaming.steam = {
+        enable = true;
+        hardware.enable = true;
+      };
       media = {
         mpv.enable = true;
         spotify.enable = true;
