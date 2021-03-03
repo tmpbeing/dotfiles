@@ -61,7 +61,6 @@ with lib.my; {
   # replicates the default behaviour.
   networking.useDHCP = false;
   networking.interfaces.enp39s0.useDHCP = true;
-  networking.interfaces.enp42s0f1u6u4.useDHCP = true;
   networking.interfaces.wlo1.useDHCP = true;
 
   # List packages installed in system profile. To search, run:
