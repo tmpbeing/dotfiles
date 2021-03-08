@@ -12,5 +12,8 @@ in {
     home.configFile = {
       "alacritty/alacritty.yml".source = "${configDir}/alacritty/alacritty.yml";
     };
+
+    # https://github.com/alacritty/alacritty/issues/4707
+    env.WINIT_X11_SCALE_FACTOR = "1";
   };
 }
