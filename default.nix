@@ -124,10 +124,7 @@ with lib.my; {
     };
     dev = {
       cc.enable = true;
-      cloud = {
-        enable = true;
-        amazon.enable = true;
-      };
+      database.enable = true;
       elixir.enable = true;
       python.enable = true;
       rust.enable = true;
@@ -147,8 +144,16 @@ with lib.my; {
       sensors.enable = true;
       tablet.enable = true;
     };
-    services = {
+    ops = {
+      cloud = {
+        enable = true;
+        amazon.enable = true;
+      };
       docker.enable = true;
+      kubernetes.enable = true;
+      terraform.enable = true;
+    };
+    services = {
       dropbox.enable = true;
       ssh.enable = true;
     };

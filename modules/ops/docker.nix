@@ -2,9 +2,9 @@
 
 with lib;
 with lib.my;
-let cfg = config.modules.services.docker;
+let cfg = config.modules.ops.docker;
 in {
-  options.modules.services.docker = { enable = mkBoolOpt false; };
+  options.modules.ops.docker = { enable = mkBoolOpt false; };
 
   config = mkIf cfg.enable {
     user.packages = with pkgs; [
