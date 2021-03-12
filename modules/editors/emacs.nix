@@ -53,7 +53,7 @@ in {
         ExecStart =
           "${pkgs.bash}/bin/bash -c 'source ${config.system.build.setEnvironment}; exec ${pkgs.emacsPgtkGcc}/bin/emacs --daemon=main-emacs'";
         ExecStop =
-          "${pkgs.emacsPgtkGcc}/bin/emacs --socket-name=main-emacs --eval (kill-emacs)";
+          "${pkgs.emacsPgtkGcc}/bin/emacsclient --socket-name=main-emacs --eval (kill-emacs)";
         Restart = "on-failure";
       };
       wantedBy = [ "default.target" ];
@@ -66,7 +66,7 @@ in {
         ExecStart =
           "${pkgs.bash}/bin/bash -c 'source ${config.system.build.setEnvironment}; exec ${pkgs.emacsPgtkGcc}/bin/emacs --daemon=org-emacs'";
         ExecStop =
-          "${pkgs.emacsPgtkGcc}/bin/emacs --socket-name=org-emacs --eval (kill-emacs)";
+          "${pkgs.emacsPgtkGcc}/bin/emacsclient --socket-name=org-emacs --eval (kill-emacs)";
         Restart = "on-failure";
       };
       wantedBy = [ "default.target" ];
