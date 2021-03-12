@@ -233,9 +233,9 @@ format-prefix-foreground = ${colors.fg}
 type = custom/script
 exec = ~/.config/polybar/modules/spotify.sh
 interval = 5
-click-left = playerctl previous
-click-right = playerctl next
-click-middle = playerctl play-pause
+click-left = playerctl --player=spotify previous
+click-right = playerctl --player=spotify next
+click-middle = playerctl --player=spotify play-pause
 
 [module/dunst]
 type = custom/ipc
