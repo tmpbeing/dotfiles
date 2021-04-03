@@ -10,12 +10,18 @@ in {
   };
   config = mkMerge [
     (mkIf cfg.enable {
-      user.packages = with pkgs; [ unstable.kubectl unstable.kubernetes-helm ];
+      user.packages = with pkgs; [
+        unstable.kubectl
+        unstable.kubernetes-helm
+        unstable.kubectx
+        unstable.stern
+      ];
     })
     (mkIf config.modules.ops.cloud.enable {
       user.packages = with pkgs; [
         nodejs # For pulumi
         nodePackages.typescript
+        nodePackages.prettier
         unstable.pulumi-bin
       ];
     })
