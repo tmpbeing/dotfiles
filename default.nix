@@ -126,6 +126,7 @@ with lib.my; {
       cc.enable = true;
       database.enable = true;
       elixir.enable = true;
+      go.enable = true;
       python.enable = true;
       rust.enable = true;
       shell.enable = true;
