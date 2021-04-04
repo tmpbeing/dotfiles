@@ -64,6 +64,12 @@ in {
               recursive = true;
             };
           })
+          (mkIf desktop.media.zathura.enable {
+            "zathura" = {
+              source = ./config/zathura;
+              recursive = true;
+            };
+          })
         ];
     })
   ]);
