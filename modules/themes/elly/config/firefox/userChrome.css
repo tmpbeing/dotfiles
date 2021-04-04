@@ -40,27 +40,31 @@
 
 /* flat theme /**/
 #nav-bar textbox {
-	color: #afafaf !important;
-	background-color: transparent !important;
+    color: #afafaf !important;
+    background-color: transparent !important;
 }
 #nav-bar textbox:hover {
-	background-color: transparent !important;
+    background-color: transparent !important;
 }
 #urlbar, .searchbar-textbox {
-	border: 0px !important;
-	height: 20px !important;
+    border: 0px !important;
+    height: 20px !important;
+    box-shadow: none !important;
+}
+#urlbar-background {
+    background-color: #282c34 !important;
 }
 #urlbar {
-	margin-left: 1px !important;
-	margin-right: 1px !important;
+    margin-left: 1px !important;
+    margin-right: 1px !important;
+}
+.urlbarView {
+    background-color: #282c34 !important;
 }
 /**/
 #nav-bar[id], #PersonalToolbar[id], #web-developer-toolbar[id], #navigator-toolbox[tabsontop="true"] > #nav-bar[id], #navigator-toolbox[tabsontop="true"]:not([customizing]) > #nav-bar[collapsed="true"][id] + toolbar, #navigator-toolbox[tabsontop="true"]:not([customizing]) > #nav-bar[collapsed="true"] + #customToolbars + #PersonalToolbar[id], #navigator-toolbox[tabsontop="false"] > #nav-bar[id], #navigator-toolbox[tabsontop="false"]:not([customizing]) > #nav-bar[collapsed="true"][id] + toolbar, #navigator-toolbox[tabsontop="false"]:not([customizing]) > #nav-bar[collapsed="true"] + #customToolbars + #PersonalToolbar[id] {
-	background-image: none !important;
-	background: #282c34 !important;
-}
-#urlbar, .searchbar-textbox {
-	box-shadow: none !important;
+    background-image: none !important;
+    background: #282c34 !important;
 }
 #urlbar .urlbar-input-box {
    text-align: center;
