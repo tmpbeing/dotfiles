@@ -15,6 +15,7 @@ in {
         unstable.kubernetes-helm
         unstable.kubectx
         unstable.stern
+        unstable.lens
       ];
     })
     (mkIf config.modules.ops.cloud.enable {
