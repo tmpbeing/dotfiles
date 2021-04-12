@@ -26,6 +26,7 @@ in {
         enable = true;
         autoPrune.enable = true;
         enableOnBoot = true;
+        enableNvidia = config.modules.hardware.nvidia.enable;
       };
     };
   };
