@@ -46,19 +46,6 @@ in {
     fonts.fonts = [ pkgs.emacs-all-the-icons-fonts ];
 
     # I use two daemons, one is dedicated to org-mode and the other one for everything else
-    systemd.user.services."emacs-main" = {
-      description = "Emacs text editor, main instance";
-      serviceConfig = {
-        Type = "forking";
-        ExecStart =
-          "${pkgs.bash}/bin/bash -c 'source ${config.system.build.setEnvironment}; exec ${pkgs.emacsPgtkGcc}/bin/emacs --daemon=main-emacs'";
-        ExecStop =
-          "${pkgs.emacsPgtkGcc}/bin/emacsclient --socket-name=main-emacs --eval (kill-emacs)";
-        Restart = "on-failure";
-      };
-      wantedBy = [ "default.target" ];
-    };
-
     systemd.user.services."emacs-org" = {
       description = "Emacs text editor, main instance";
       serviceConfig = {
