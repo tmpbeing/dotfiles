@@ -13,7 +13,6 @@ import           XMonad.Actions.DynamicProjects
 import           XMonad.Actions.GroupNavigation
 import           XMonad.Actions.MouseResize
 import           XMonad.Actions.Promote
-import           XMonad.Layout.Renamed
 import           XMonad.Actions.RotSlaves
 import           XMonad.Actions.WithAll
 
@@ -35,6 +34,7 @@ import           XMonad.Layout.Fullscreen       ( fullscreenSupport
                                                 , fullscreenManageHook
                                                 , fullscreenFull
                                                 )
+import           XMonad.Layout.PerScreen
 import           XMonad.Layout.ResizableTile
 import           XMonad.Layout.ThreeColumns
 import           XMonad.Layout.TwoPanePersistent
@@ -45,6 +45,7 @@ import           XMonad.Layout.LayoutHints
 import           XMonad.Layout.LayoutModifier
 import           XMonad.Layout.NoBorders
 import           XMonad.Layout.Spacing
+import           XMonad.Layout.Renamed
 import           XMonad.Layout.ToggleLayouts
 import           XMonad.Layout.WindowArranger   ( windowArrange
                                                 , WindowArrangerMsg(..)
@@ -84,8 +85,7 @@ myTerminal :: String
 myTerminal = "alacritty"
 
 myEditor :: String
-myEditor =
-  "emacsclient --frame-parameters='(quote (name . \"main-emacs\"))' -nc"
+myEditor = "emacs"
 
 myModMask :: KeyMask
 myModMask = mod4Mask
@@ -123,7 +123,7 @@ mySpacing
   :: Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
 mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
 
-myLayoutHook = layoutHints . avoidStruts . IfMax 1 single_window $ layouts
+myLayoutHook = layoutHints . avoidStruts . IfMax 1 single_window $ ifWider 1600 wideLayouts tallLayouts
  where
   single_window = renamed [Replace "Single"] $ noBorders $ avoidStruts $ Full
   full = renamed [Replace "Fullscreen"] $ noBorders (fullscreenFull Full)
@@ -136,13 +136,14 @@ myLayoutHook = layoutHints . avoidStruts . IfMax 1 single_window $ layouts
       1
       (3 / 100)
       (60 / 100)
-  tall = renamed [Replace "Tall"] $ mySpacing 8 $ ResizableTall 1
+  mirrored_tall = renamed [Replace "Tall"] $ mySpacing 8 $ Mirror $ ResizableTall 1
                                                                 (2 / 100)
                                                                 (1 / 2)
                                                                 []
-  layouts = -- tall |||
-    twoPanes ||| threeColMid ||| full
+  wideLayouts = threeColMid ||| twoPanes ||| full
     -- ||| single_window
+  tallLayouts = mirrored_tall ||| full
+
 
 myManageHook =
   composeAll
@@ -246,7 +247,7 @@ projects =
     , projectDirectory = "~/"
     , projectStartHook = Just $ do
                            sendMessage (Toggle "Three Columns Mid")
-                           spawn "emacsclient -nc --socket=main-emacs"
+                           spawn "emacs"
                            spawn "firefox"
                            spawn "alacritty -e tmux new-session -A -s main"
     }
