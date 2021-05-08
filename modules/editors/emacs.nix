@@ -10,9 +10,15 @@ in {
     # Activate overlay providing emacsPgtkGcc
     nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
 
+    home.programs.emacs = {
+      enable = true;
+      package = pkgs.emacsPgtk;
+      extraPackages = epkgs: [ epkgs.vterm ];
+    };
+
     user.packages = with pkgs; [
       binutils # Needed for native-comp (provides 'as')
-      emacsPgtkGcc
+      # emacsPgtkGcc
 
       # Doom deps
       git
