@@ -10,7 +10,9 @@ with lib.my; {
       file = mkOpt' attrs { } "Files to place directly in $HOME";
       configFile = mkOpt' attrs { } "Files to place in $XDG_CONFIG_HOME";
       dataFile = mkOpt' attrs { } "Files to place in $XDG_DATA_HOME";
+      programs = mkOpt' attrs { } "Programs to manage with home-manager";
     };
+
 
     env = mkOption {
       type = attrsOf (oneOf [ str path (listOf (either str path)) ]);
@@ -42,6 +44,7 @@ with lib.my; {
       useGlobalPkgs = true;
 
       users.${config.user.name} = {
+        programs = mkAliasDefinitions options.home.programs;
         home = {
           file = mkAliasDefinitions options.home.file;
           stateVersion = config.system.stateVersion;
