@@ -12,5 +12,11 @@ in {
       go-tools
       gopls
     ];
+
+    home.programs.go = {
+      enable = true;
+      goBin = ".local/bin.go";
+      extraGoPaths = [ "code/go" ];
+    };
   };
 }
