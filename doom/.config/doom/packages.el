@@ -15,8 +15,8 @@
 (package! nov) ;; epub reader
 
 ;; ;; Local dev
-(package! spelunk
-  :recipe (:local-repo "spelunk" :no-byte-compile t))
+;(package! spelunk
+;  :recipe (:local-repo "spelunk" :no-byte-compile t))
 
 
 ;; Package configuration
