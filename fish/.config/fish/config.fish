@@ -18,15 +18,6 @@ set -g man_underline -u brgreen
 source /home/snoop/.ssh/environment
 fish_ssh_agent
 
-# pyenv
-status --is-interactive; and source (pyenv init -|psub)
-status --is-interactive; and pyenv init - | source
-status --is-interactive; and pyenv virtualenv-init - | source
-
-# THEME PURE #
-set fish_function_path /home/snoop/.config/fish/functions/theme-pure/functions/ $fish_function_path
-source /home/snoop/.config/fish/functions/theme-pure/conf.d/pure.fish
-
-set pure_color_symbol_success green
-set pure_color_current_folder magenta
-set pure_color_git_branch yellow
+# fzf.fish options
+set fzf_fd_opts --hidden --exclude=.git
+set fzf_preview_dir_cmd exa --all --color=always

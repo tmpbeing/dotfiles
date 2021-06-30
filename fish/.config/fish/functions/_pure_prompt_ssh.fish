@@ -1,1 +1,5 @@
-/home/snoop/.config/fish/functions/theme-pure/functions/_pure_prompt_ssh.fish
+function _pure_prompt_ssh
+    if test "$SSH_CONNECTION" != ""
+        echo (_pure_user_at_host)
+    end
+end
