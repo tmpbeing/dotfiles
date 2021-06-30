@@ -270,6 +270,10 @@ set directory=~/.vim/tmp,.
 set undofile
 set undodir=~/.vim/tmp,.
 
+" Use system's python
+let g:python_host_prog = '/usr/bin/python'
+let g:python3_host_prog = '/usr/bin/python3'
+
 " }}}
 " Mapping {{{
 
