@@ -1,13 +1,25 @@
 ; vim:ft=dosini
 
 [colors]
-background-alt = #242933
-background     = #2E3440
-foreground     = #C5C8C6
-foreground-alt = #FFFFFF
-purple         = #958090
-orange         = #C19578
-blue           = #83A2BE
+black = ${xrdb:color0}
+bblack = ${xrdb:color8}
+red = ${xrdb:color1}
+bred = ${xrdb:color9}
+green = ${xrdb:color2}
+bgreen = ${xrdb:color10}
+yellow = ${xrdb:color3}
+byellow = ${xrdb:color11}
+blue = ${xrdb:color4}
+bblue = ${xrdb:color12}
+magenta = ${xrdb:color5}
+bmagenta = ${xrdb:color13}
+cyan = ${xrdb:color6}
+bcyan = ${xrdb:color14}
+white = ${xrdb:color7}
+bwhite = ${xrdb:color15}
+
+bg = ${xrdb:bg}
+fg = ${colors.magenta}
 
 [global/wm]
 margin-top = 0
@@ -15,14 +27,15 @@ margin-bottom = 0
 
 [bar/bar]
 enable-ipc = true
-monitor = eDP-1
+monitor = DP-0
+monitor-strict = true
 width = 100%
 height = 22
 offset-x = 0
 offset-y = 0
 
 overline-size = 1
-overline-color = ${colors.purple}
+overline-color = ${colors.red}
 underline-size = 1
 underline-color = #00f
 
@@ -34,48 +47,51 @@ padding-right = 3
 module-margin-left = 1
 module-margin-right = 1
 
-background = ${colors.background-alt}
-foreground = ${colors.foreground}
+bg = ${colors.bg-alt}
+fg = ${colors.fg}
 
-font-0 = "Overpass Mono:size=8;1"
+font-0 = "Iosevka:size=8;1"
 font-1 = "Pomicons:size=8;1"
 font-2 = "Font Awesome:size=8;1"
 
-modules-left = ewmh dunst volume spotify
+modules-left = ewmh dunst pulseaudio spotify
 modules-center =
-modules-right = cpu memory wired battery date
+modules-right = redshift cpu memory wired date
 
-[bar/bigscreen]
-enable-ipc = true
-monitor = DP-3
-width = 100%
-height = 22
-offset-x = 0
-offset-y = 0
+tray-position = right
 
-overline-size = 1
-overline-color = ${colors.purple}
-underline-size = 1
-underline-color = #00f
+# [bar/bigscreen]
+# enable-ipc = true
+# monitor = ${env:MONITOR}
+# monitor-strict = true
+# width = 100%
+# height = 22
+# offset-x = 0
+# offset-y = 0
 
-border-bottom-size = 2
-border-bottom-color = #333
+# overline-size = 1
+# overline-color = ${colors.red}
+# underline-size = 1
+# underline-color = #00f
 
-padding-left = 3
-padding-right = 3
-module-margin-left = 1
-module-margin-right = 1
+# border-bottom-size = 2
+# border-bottom-color = #333
 
-background = ${colors.background-alt}
-foreground = ${colors.foreground}
+# padding-left = 3
+# padding-right = 3
+# module-margin-left = 1
+# module-margin-right = 1
 
-font-0 = "Overpass Mono:size=10;1"
-font-1 = "Pomicons:size=10;3"
-font-2 = "Font Awesome:size=10;1"
+# bg = ${colors.bg-alt}
+# fg = ${colors.fg}
 
-modules-left = ewmh dunst volume spotify
-modules-center =
-modules-right = cpu memory wired battery date
+# font-0 = "Overpass Mono:size=10;1"
+# font-1 = "Pomicons:size=10;3"
+# font-2 = "Font Awesome:size=10;1"
+
+# modules-left = ewmh dunst volume spotify
+# modules-center =
+# modules-right = redshift cpu memory wired battery date
 
 [module/ewmh]
 type = internal/xworkspaces
@@ -87,16 +103,16 @@ label-monitor = %name%
 label-monitor-padding = 1
 
 label-active = %name%
-label-active-overline = $(colors.purple)
-label-active-foreground = #ffffff
-label-active-background = ${colors.background}
+label-active-overline = ${colors.red}
+label-active-fg = #ffffff
+label-active-bg = ${colors.bg}
 label-active-padding = 1
 
 label-occupied = %name%
 label-occupied-padding = 1
 
 label-urgent = %name%
-label-urgent-foreground = ${colors.purple}
+label-urgent-fg = ${colors.red}
 label-urgent-padding = 1
 
 label-empty = %name%
@@ -112,35 +128,35 @@ enable-scroll = false
 format = <label-state> <label-mode>
 
 label-focused = %name%
-label-focused-overline = $(colors.purple)
-label-focused-foreground = #ffffff
-label-focused-background = ${colors.background}
+label-focused-overline = ${colors.red}
+label-focused-fg = #ffffff
+label-focused-bg = ${colors.bg}
 label-focused-padding = 1
 
 label-unfocused = %name%
 label-unfocused-padding = 1
 
-label-urgent-foreground = ${colors.purple}
+label-urgent-fg = ${colors.red}
 label-urgent-padding = 1
 
 label-visible-padding = 1
 
 label-mode-padding = 2
 label-mode-overline = ${colors.blue}
-label-mode-background = $(colors.background)
+label-mode-bg = ${colors.bg}
 
 [module/cpu]
 type = internal/cpu
 interval = 2
 format-prefix = "CPU "
-format-prefix-foreground = ${colors.foreground}
+format-prefix-foreground = ${colors.fg}
 label = %percentage%%
 
 [module/memory]
 type = internal/memory
 interval = 3
 format-prefix = "MEM "
-format-prefix-foreground = ${colors.foreground}
+format-prefix-foreground = ${colors.fg}
 label = %percentage_used%%
 
 [module/wired]
@@ -161,25 +177,25 @@ format-charging = <animation-charging> <label-charging>
 format-discharging = <ramp-capacity> <label-discharging>
 
 format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground}
+format-full-prefix-fg = ${colors.fg}
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
-ramp-capacity-foreground = ${colors.orange}
+ramp-capacity-fg = ${colors.yellow}
 
 animation-charging-0 = 
 animation-charging-1 = 
 animation-charging-2 = 
 animation-charging-3 = 
 animation-charging-4 = 
-animation-charging-foreground = ${colors.foreground}
+animation-charging-fg = ${colors.fg}
 animation-charging-framerate = 750
 
-[module/volume]
-type = internal/volume
+[module/pulseaudio]
+type = internal/pulseaudio
 
 format-volume = <ramp-volume> <label-volume>
 label-volume = %percentage%%
@@ -187,10 +203,10 @@ label-volume = %percentage%%
 ramp-volume-0 = 
 ramp-volume-1 = 
 ramp-volume-2 = 
-ramp-volume-foreground = ${colors.foreground}
+ramp-volume-fg = ${colors.fg}
 
 label-muted =  MUTED
-format-muted-foreground = ${colors.foreground}
+format-muted-fg = ${colors.fg}
 
 [module/date]
 type = internal/date
@@ -199,30 +215,38 @@ time = "%H:%M"
 date = "%a %d %b"
 label = %time%, %date%
 format-prefix = " "
-format-prefix-foreground = ${colors.foreground}
+format-prefix-foreground = ${colors.fg}
 
-[module/pomodoro]
-type = custom/script
-exec = /home/snoop/.config/polybar/org-pomodoro.sh
-interval = 5
-double-click-left = /home/snoop/.config/polybar/org-pomodoro.sh end-or-restart
-click-middle = /home/snoop/.config/polybar/org-pomodoro.sh kill
-click-right = /home/snoop/.config/polybar/org-pomodoro.sh new
-scroll-up = /home/snoop/.config/polybar/org-pomodoro.sh toggle
-scroll-down = /home/snoop/.config/polybar/org-pomodoro.sh toggle
+# Custom scripts
+
+# [module/pomodoro]
+# type = custom/script
+# exec = /home/snoop/.config/polybar/org-pomodoro.sh
+# interval = 5
+# double-click-left = /home/snoop/.config/polybar/org-pomodoro.sh end-or-restart
+# click-middle = /home/snoop/.config/polybar/org-pomodoro.sh kill
+# click-right = /home/snoop/.config/polybar/org-pomodoro.sh new
+# scroll-up = /home/snoop/.config/polybar/org-pomodoro.sh toggle
+# scroll-down = /home/snoop/.config/polybar/org-pomodoro.sh toggle
 
 [module/spotify]
 type = custom/script
-exec = /home/snoop/.config/polybar/spotify.sh
+exec = ~/.config/polybar/modules/spotify.sh
 interval = 5
-click-left = playerctl previous
-click-right = playerctl next
-click-middle = playerctl play-pause
+click-left = playerctl --player=spotify previous
+click-right = playerctl --player=spotify next
+click-middle = playerctl --player=spotify play-pause
 
 [module/dunst]
 type = custom/ipc
 initial = 1
-format-foreground = ${colors.orange}
+format-foreground = ${colors.yellow}
 
 hook-0 = echo "%{A1:notify-send "DUNST_COMMAND_PAUSE" && polybar-msg hook dunst 2:}%{A}" &
 hook-1 = echo "%{A1:notify-send "DUNST_COMMAND_RESUME" && polybar-msg hook dunst 1:}%{A}" &
+
+[module/redshift]
+type = custom/script
+exec = ~/.config/polybar/modules/redshift
+exec-if = pgrep -x redshift
+interval = 60
