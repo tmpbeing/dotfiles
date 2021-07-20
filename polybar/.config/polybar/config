@@ -50,13 +50,13 @@ module-margin-right = 1
 bg = ${colors.bg-alt}
 fg = ${colors.fg}
 
-font-0 = "Iosevka:size=8;1"
-font-1 = "Pomicons:size=8;1"
+font-0 = "Pomicons:size=9;1"
+font-1 = "Iosevka:size=8;1"
 font-2 = "Font Awesome:size=8;1"
 
 modules-left = ewmh dunst pulseaudio spotify
 modules-center =
-modules-right = redshift cpu memory wired date
+modules-right = redshift pomodoro cpu memory wired date
 
 tray-position = right
 
@@ -219,15 +219,15 @@ format-prefix-foreground = ${colors.fg}
 
 # Custom scripts
 
-# [module/pomodoro]
-# type = custom/script
-# exec = /home/snoop/.config/polybar/org-pomodoro.sh
-# interval = 5
-# double-click-left = /home/snoop/.config/polybar/org-pomodoro.sh end-or-restart
-# click-middle = /home/snoop/.config/polybar/org-pomodoro.sh kill
-# click-right = /home/snoop/.config/polybar/org-pomodoro.sh new
-# scroll-up = /home/snoop/.config/polybar/org-pomodoro.sh toggle
-# scroll-down = /home/snoop/.config/polybar/org-pomodoro.sh toggle
+[module/pomodoro]
+type = custom/script
+exec = /home/snoop/.config/polybar/modules/org-pomodoro.sh
+interval = 5
+double-click-left = /home/snoop/.config/polybar/modules/org-pomodoro.sh end-or-restart
+click-middle = /home/snoop/.config/polybar/modules/org-pomodoro.sh kill
+click-right = /home/snoop/.config/polybar/modules/org-pomodoro.sh new
+scroll-up = /home/snoop/.config/polybar/modules/org-pomodoro.sh toggle
+scroll-down = /home/snoop/.config/polybar/modules/org-pomodoro.sh toggle
 
 [module/spotify]
 type = custom/script
