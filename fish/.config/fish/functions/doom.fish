@@ -1,3 +1,3 @@
 function doom
-	~/.emacs.d/bin/doom $argv
+    ~/.config/emacs/bin/doom $argv
 end
