@@ -11,7 +11,8 @@
 
 ;; UI
 (setq
- display-line-numbers-type 'relative
+ company-idle-delay 0.6
+ display-line-numbers-type t
  doom-font (font-spec :family "Iosevka" :size 16)
  doom-unicode-font (font-spec :family "DejaVu Sans" :size 16)
  doom-big-font (font-spec :family "Iosevka" :size 24)
@@ -50,7 +51,6 @@
                    evil-vsplit-window-right t
                    evil-split-window-below t) ; go to the right pane on split
   )
-
 
 ;;
 ;; Ivy
