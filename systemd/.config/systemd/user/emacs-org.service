@@ -3,9 +3,9 @@ Description=Emacs text editor, org-dedicated instance
 Documentation=info:emacs man:emacs(1) https://gnu.org/software/emacs/
 
 [Service]
-Type=notify
-ExecStart=/usr/bin/emacs --fg-daemon=org-emacs
-ExecStop=/usr/bin/emacsclient --socket=org-emacs --eval "(kill-emacs)"
+Type=forking
+ExecStart=/usr/bin/emacs --daemon=org-emacs
+ExecStop=/usr/bin/emacsclient --socket-name=org-emacs --eval "(kill-emacs)"
 # The location of the SSH auth socket varies by distribution, and some
 # set it from PAM, so don't override by default.
 # Environment=SSH_AUTH_SOCK=%t/keyring/ssh
