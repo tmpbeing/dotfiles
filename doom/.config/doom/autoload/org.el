@@ -78,7 +78,7 @@
         (if (or (eq +org-polybar/clock-format-style 'long)
                 (member state '(:short-break :long-break)))
             (format "%s %s" polybar-icon clock-timer-string)
-          (format "%s %s %s" polybar-icon clock-timer-string org-clock-current-task))))))
+          (format "%s %s %s" polybar-icon clock-timer-string (org-no-properties org-clock-current-task)))))))
 
 ;;;###autoload
 (defun +org-polybar/clock-format-style-toggle ()
