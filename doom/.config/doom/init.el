@@ -19,10 +19,11 @@
         +childframe)
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
-       (ivy                ; a search engine for love and life
-        +childframe
-        +icons
-        +prescient)
+       ;; (ivy                ; a search engine for love and life
+       ;;  +childframe
+       ;;  +icons
+       ;;  +prescient)
+       vertico
 
        :ui
        ;;deft              ; notational velocity for Emacs
