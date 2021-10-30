@@ -257,7 +257,7 @@ projects =
     , projectStartHook = Just $ do
                            sendMessage (Toggle "Two Panes")
                            spawn "slack"
-                           spawn "Discord"
+                           spawn "discord"
     }
   , Project
     { projectName      = "media"
