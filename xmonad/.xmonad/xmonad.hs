@@ -116,6 +116,7 @@ myLogHook =
 myStartupHook :: X ()
 myStartupHook = do
   spawn "/home/snoop/.config/polybar/polybar-handler"
+  spawnOnce "dunst"
   setWMName "LG3D"
 
 
