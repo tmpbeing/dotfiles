@@ -1,21 +1,39 @@
 #!/usr/bin/env bash
 
-pgrep -x redshift &> /dev/null
-if [[ $? -eq 0 ]]; then
-    temp=$(redshift -p 2>/dev/null | grep temp | cut -d' ' -f3)
-    temp=$(temp//K/)
-fi
+is_running() {
+    test $(systemctl --user is-active redshift) = "active"
+}
 
-test
+toggle_mode() {
+    if is_running ; then
+        systemctl --user stop redshift
+    else
+        systemctl --user start redshift
+    fi
+}
 
-icon=""
-if [[ -z $temp ]]; then
-    echo "%{F#65737E}$icon"       # Greyed out (not running)
-elif [[ $temp -ge 5000 ]]; then
-    echo "%{F#8FA1B3}$icon"       # Blue
-elif [[ $temp -ge 4000 ]]; then
-    echo "%{F#EBCB8B}$icon"       # Yellow
-else
-    echo "%{F#D08770}$icon"       # Orange
-fi
+print_icon() {
+    if [[ $? -eq 0 ]]; then
+        temp=$(redshift -p 2>/dev/null | grep temp | cut -d' ' -f3)
+        temp=${temp%"K"}
+    fi
 
+    icon=""
+    if [[ -z $temp ]]; then
+        echo "%{F#5A666B}$icon"       # Greyed out (not running)
+    elif [[ $temp -ge 5000 ]]; then
+        echo "%{F#6998B3}$icon"       # Blue
+    elif [[ $temp -ge 4000 ]]; then
+        echo "%{F#9B9257}$icon"       # Yellow
+    else
+        echo "%{F#948556}$icon"       # Orange
+    fi
+}
+
+
+case $1 in
+    toggle)
+        toggle_mode ;;
+    print)
+        print_icon ;;
+esac

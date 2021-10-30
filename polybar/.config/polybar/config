@@ -247,6 +247,7 @@ hook-1 = echo "%{A1:notify-send "DUNST_COMMAND_RESUME" && polybar-msg hook dunst
 
 [module/redshift]
 type = custom/script
-exec = ~/.config/polybar/modules/redshift
-exec-if = pgrep -x redshift
-interval = 60
+exec = ~/.config/polybar/modules/redshift print
+click-left = ~/.config/polybar/modules/redshift toggle
+#exec-if = pgrep -x redshift
+interval = 30
