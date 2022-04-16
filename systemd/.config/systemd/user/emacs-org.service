@@ -4,11 +4,9 @@ Documentation=info:emacs man:emacs(1) https://gnu.org/software/emacs/
 
 [Service]
 Type=forking
-ExecStart=/usr/bin/emacs --daemon=org-emacs
-ExecStop=/usr/bin/emacsclient --socket-name=org-emacs --eval "(kill-emacs)"
-# The location of the SSH auth socket varies by distribution, and some
-# set it from PAM, so don't override by default.
-# Environment=SSH_AUTH_SOCK=%t/keyring/ssh
+# The first opened frame after daemon startup is borked so we start and kill one immediatelly.
+ExecStart=sh -c '/usr/bin/emacs --daemon=org-emacs && emacsclient -c --eval "(delete-frame)"'
+ExecStop=/usr/bin/emacsclient --socket-name=org-emacs --no-wait --eval "(progn (setq kill-emacs-hook nil) (kill-emacs))"
 Restart=on-failure
 
 [Install]
