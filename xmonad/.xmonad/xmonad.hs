@@ -132,18 +132,20 @@ myLayoutHook = layoutHints . avoidStruts . IfMax 1 single_window $ ifWider 1600 
     Nothing
     (3 / 100)
     (1 / 2)
+  mirroredTwoPanes = Mirror $ twoPanes
   threeColMid =
     renamed [Replace "Three Columns Mid"] $ mySpacing 8 $ ThreeColMid
       1
       (3 / 100)
       (60 / 100)
-  mirrored_tall = renamed [Replace "Tall"] $ mySpacing 8 $ Mirror $ ResizableTall 1
+  mirroredTall = renamed [Replace "Tall"] $ mySpacing 8 $ Mirror $ ResizableTall 1
                                                                 (2 / 100)
                                                                 (1 / 2)
                                                                 []
+
   wideLayouts = threeColMid ||| twoPanes ||| full
     -- ||| single_window
-  tallLayouts = mirrored_tall ||| full
+  tallLayouts = mirroredTall ||| mirroredTwoPanes ||| full
 
 
 myManageHook =
