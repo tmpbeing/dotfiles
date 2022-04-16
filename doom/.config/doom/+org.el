@@ -8,18 +8,14 @@
   (concat doom-private-dir "resources/prayer-bell.wav")
   "Sound used by org-pomodoro")
 
+(defvar +org-capture-recipes (concat org-directory "recipes.org")
+  "Org file in which to store org-chef/capture recipes")
+
 (use-package! ob-http
   :after org)
 
 (use-package! ox-gfm
   :after org)
-
-(after! org-pomodoro
-  (setq org-pomodoro-manual-break t
-        org-pomodoro-finished-sound +org-gong-sound
-        org-pomodoro-overtime-sound +org-gong-sound
-        org-pomodoro-short-break-sound +org-bell-sound
-        org-pomodoro-long-break-sound +org-bell-sound))
 
 (use-package! ox-jekyll
   :after org
@@ -34,6 +30,57 @@
   (setq ob-mermaid-cli-path "/usr/bin/mmdc")
   )
 
+(use-package! doct
+  :commands doct
+  :config
+  ;; Add :icons to doct, full credit to tecosaur https://tecosaur.github.io/emacs-config/config.html#capture
+  (after! org-capture
+    (defun +doct-icon-declaration-to-icon (declaration)
+      "Convert :icon declaration to icon"
+      (let ((name (pop declaration))
+            (set  (intern (concat "all-the-icons-" (plist-get declaration :set))))
+            (face (intern (concat "all-the-icons-" (plist-get declaration :color))))
+            (v-adjust (or (plist-get declaration :v-adjust) 0.01)))
+        (apply set `(,name :face ,face :v-adjust ,v-adjust))))
+
+    (defun +doct-iconify-capture-templates (groups)
+      "Add declaration's :icon to each template group in GROUPS."
+      (let ((templates (doct-flatten-lists-in groups)))
+        (setq doct-templates (mapcar (lambda (template)
+                                       (when-let* ((props (nthcdr (if (= (length template) 4) 2 5) template))
+                                                   (spec (plist-get (plist-get props :doct) :icon)))
+                                         (setf (nth 1 template) (concat (+doct-icon-declaration-to-icon spec)
+                                                                        "\t"
+                                                                        (nth 1 template))))
+                                       template)
+                                     templates))))
+
+    (setq doct-after-conversion-functions '(+doct-iconify-capture-templates))
+    ))
+
+(use-package! org-chef
+  :commands (org-chef-insert-recipe org-chef-get-recipe-from-url))
+
+
+(after! org-capture
+  (setq org-capture-templates
+        (doct '(("Todo"
+                 :keys "t"
+                 :icon ("checklist" :set "octicon" :color "green")
+                 :file +org-capture-todo-file
+                 :prepend t
+                 :headline "Inbox"
+                 :type entry
+                 :template ("* TODO %?"
+                            "%i %a")
+                 )
+                ("Recipe"
+                 :keys "r"
+                 :icon ("spoon" :set "faicon" :color "dorange")
+                 :file +org-capture-recipes
+                 :headline "Unsorted"
+                 :template "%(org-chef-get-recipe-from-url)")))))
+
 (setq org-directory "~/Dropbox/org/"
       org-default-notes-file (concat org-directory "notes.org")
       org-bullets-bullet-list '("#")
@@ -44,7 +91,7 @@
       org-agenda-include-deadlines t
       org-agenda-skip-deadline-if-done t
       org-agenda-skip-scheduled-if-done t
-      org-archive-location (concat org-directory "archive.org::")
+      org-archive-location (concat org-directory "archive.org::datetree/")
       org-log-done 'time
       org-startup-folded 'fold
       org-use-property-inheritance t
@@ -61,5 +108,12 @@
 (add-hook! org-mode :append
   (add-hook! after-save :append :local #'+org/reload-agenda-buffer-h))
 (add-hook! '(org-clock-in-hook org-clock-out-hook) #'save-buffer)
+
+(after! org-pomodoro
+  (setq org-pomodoro-manual-break t
+        org-pomodoro-finished-sound +org-gong-sound
+        org-pomodoro-overtime-sound +org-gong-sound
+        org-pomodoro-short-break-sound +org-bell-sound
+        org-pomodoro-long-break-sound +org-bell-sound))
 
 ;;; +org.el ends here

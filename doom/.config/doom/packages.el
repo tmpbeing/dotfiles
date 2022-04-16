@@ -6,6 +6,8 @@
 (package! ox-gfm)
 (package! ox-jekyll :recipe (:host github :repo "tmpbeing/ox-jekyll-subtree")) ;; Org-file to jekyll blog
 (package! ob-mermaid) ;; draw diagrams in org-mode with mermaid-js
+(package! org-chef) ;; Import recipes from common sites into org-mode
+(package! doct) ;; Better capture template declaration
 
 ;; Languages
 (package! systemd)
