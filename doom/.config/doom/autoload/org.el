@@ -16,11 +16,9 @@
 (defun +org/open-org-overview ()
   "Switch to org project, opens the todo file in one split and org-agenda in another."
   (interactive)
-  (projectile-switch-project-by-name org-directory)
-  (+org/open-todo-file)
-  (split-window-right)
-  (let ((org-agenda-window-setup 'other-window))
-    (org-agenda nil "n")))
+  (let ((org-agenda-window-setup 'reorganize-frame)
+        (+workspaces-switch-project-function (lambda (_) (call-interactively #'+org/open-todo-file) (org-agenda nil "n"))))
+    (projectile-switch-project-by-name org-directory)))
 
 
 ;;;###autoload
