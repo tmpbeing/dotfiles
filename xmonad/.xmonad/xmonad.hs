@@ -91,7 +91,7 @@ myModMask :: KeyMask
 myModMask = mod4Mask
 
 myWorkspaces :: [String]
-myWorkspaces = ["main", "chat", "media", "org", "misc", "trash"]
+myWorkspaces = ["main", "chat", "media", "org", "misc", "trash", "music"]
 
 myBorderWidth :: Dimension
 myBorderWidth = 2
@@ -154,6 +154,9 @@ myManageHook =
       , className =? "slack" --> doShift "chat"
       , className =? "spotify" --> doShift "media"
       , className =? "qBittorrent" --> doShift "misc"
+      , className =? "REAPER" --> doShift "music"
+      , className =? "pigments.exe" --> doFloat
+      , className =? "yabridge-host.exe.so" --> doIgnore
       , title =? "main-emacs" --> doShift "main"
       , title =? "doom-capture" --> doFloat
       ]
@@ -276,5 +279,12 @@ projects =
     , projectStartHook = Just $ do
       spawn
         "emacsclient -nc --socket=org-emacs --eval '(+org/open-org-overview)'"
+    }
+  , Project
+    { projectName = "music"
+    , projectDirectory = "~/music"
+    , projectStartHook = Just $ do
+                           spawn "reaper"
+
     }
   ]
