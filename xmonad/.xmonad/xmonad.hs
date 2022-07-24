@@ -61,17 +61,17 @@ main = xmonad myConfig
 myConfig =
   dynamicProjects projects
     $                 fullscreenSupport
-    $                 ewmh
+    $                 ewmhFullscreen . ewmh
+    $                 docks
     $ desktopConfig { borderWidth        = myBorderWidth
                     , focusFollowsMouse  = myFocusFollowsMouse
                     , focusedBorderColor = myFocusColor
-                    , handleEventHook = docksEventHook <+> fullscreenEventHook
                     , layoutHook         = myLayoutHook
                     , logHook            = myLogHook
                     , manageHook         = myManageHook
                     , modMask            = myModMask
                     , normalBorderColor  = myNormColor
-                    , startupHook        = myStartupHook <+> ewmhDesktopsStartup
+                    , startupHook        = myStartupHook
                     , terminal           = myTerminal
                     , workspaces         = myWorkspaces
                     }
@@ -110,13 +110,14 @@ myClickJustFocuses = True
 
 myLogHook :: X ()
 myLogHook =
-  historyHook <+> ewmhDesktopsLogHook <+> fadeInactiveLogHook fadeAmount
+  historyHook <+> fadeInactiveLogHook fadeAmount
   where fadeAmount = 0.8
 
 myStartupHook :: X ()
 myStartupHook = do
   spawn "/home/snoop/.config/polybar/polybar-handler"
   spawnOnce "dunst"
+  spawnOnce "feh --bg-fill /home/snoop/.config/wallpapers/ultrawide/wallhaven-eydyx8.jpg"
   setWMName "LG3D"
 
 
@@ -157,6 +158,7 @@ myManageHook =
       , className =? "REAPER" --> doShift "music"
       , className =? "pigments.exe" --> doFloat
       , className =? "yabridge-host.exe.so" --> doIgnore
+      , className =? "battle.net.exe" --> doFloat
       , title =? "main-emacs" --> doShift "main"
       , title =? "doom-capture" --> doFloat
       ]
