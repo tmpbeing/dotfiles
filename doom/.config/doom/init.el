@@ -112,6 +112,7 @@
        taskrunner
        ;;terraform         ; infrastructure as code
        ;;tmux              ; an API for interacting with tmux
+       tree-sitter
        upload              ; map local to remote projects via ssh/ftp
 
        :lang
@@ -126,7 +127,9 @@
        ;;csharp            ; unity, .NET, and mono shenanigans
        ;;(dart +flutter)
        data                ; config/data formats
-       (elixir +lsp)       ; erlang done right
+       (elixir             ; erlang done right
+        +lsp
+        +tree-sitter)
        ;;elm               ; care for a cup of TEA?
        erlang              ; an elegant language for a more civilized age
        emacs-lisp          ; drown in parentheses
@@ -136,7 +139,9 @@
        ;;fsharp
        ;;fstar
        ;;gdscript
-       (go +lsp)           ; the hipster dialect
+       (go                 ; the hipster dialect
+        +lsp
+        +tree-sitter)
        (haskell +intero)   ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ;
@@ -144,11 +149,12 @@
        ;;+meghanada
        ;;+lsp)
        (javascript         ; all(hope(abandon(ye(who(enter(here))))))
-        +lsp)
+        +lsp
+        +tree-sitter)
        (json
         +lsp)
        ;;julia             ; a better, faster MATLAB
-       ;;kotlin            ; a better, slicker Java(Script)
+       ;(kotlin +lsp)      ; a better, slicker Java(Script)
        (latex)             ; writing papers in Emacs has never been so fun
        ;;+latexmk
        ;;+cdlatex
@@ -182,6 +188,7 @@
        (python             ; beautiful is better than ugly
         +lsp
         +pyright
+        +tree-sitter)
        ;;+pyenv
        ;;+cython
        ;;+conda
@@ -198,19 +205,20 @@
        ;;+chruby
        ;;+rails
        (rust               ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
-        +lsp)
-       (scala               ; java, but good
-        +lsp)
+        +lsp
+        +tree-sitter)
        ;;scheme
        (sh                 ; she sells (ba|z|fi)sh shells on the C xor
         +fish
-        +lsp)
+        +lsp
+        +tree-sitter)
        ;;sml
        ;;solidity          ; do you need a blockchain? No.
        ;;swift             ; who asked for emoji variables?
        ;;terra             ; Earth and Moon in alignment for performance.
        (web                ; the tubes
-        +lsp)
+        +lsp
+        +tree-sitter)
        (yaml
         +lsp)
        ;;zig
