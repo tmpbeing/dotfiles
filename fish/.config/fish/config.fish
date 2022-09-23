@@ -7,6 +7,7 @@ set -x MAIL42 mplanell@student.42.fr
 set -x USER42 mplanell
 set -x TASKRC $HOME/.config/taskrc
 set -gx PATH $PATH $HOME/.krew/bin
+set -gx PULUMI_SELF_MANAGED_STATE_GZIP 1
 
 # Colored Man Pages
 set -x MANPAGER "less -s -M +Gg"
