@@ -13,9 +13,9 @@
 (setq
  company-idle-delay 0.6
  display-line-numbers-type t
- doom-font (font-spec :family "Iosevka" :size 16)
+ doom-font (font-spec :family "Fantasque Sans Mono" :size 18)
  doom-unicode-font (font-spec :family "DejaVu Sans" :size 16)
- doom-big-font (font-spec :family "Iosevka" :size 24)
+ doom-big-font (font-spec :family "Fantasque Sans Mono" :size 26)
  doom-theme 'doom-elly
  doom-gruvbox-dark-variant "hard"
  doom-modeline-window-width-limit 100
