@@ -84,6 +84,10 @@
 (after! lsp-mode
   (add-to-list 'lsp-file-watch-ignored "[/\\\\]\\.ccls-cache$"))
 
+;; Lisp
+(after! lisp-mode
+  (setq sly-command-switch-to-existing-lisp 'always))
+
 ;; Python
 
 ;; Rust
