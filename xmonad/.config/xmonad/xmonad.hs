@@ -94,7 +94,7 @@ myWorkspaces :: [String]
 myWorkspaces = ["main", "chat", "media", "org", "misc", "trash", "music"]
 
 myBorderWidth :: Dimension
-myBorderWidth = 2
+myBorderWidth = 0
 
 myNormColor :: String
 myNormColor = "#798362"
@@ -129,17 +129,17 @@ myLayoutHook = layoutHints . avoidStruts . IfMax 1 single_window $ ifWider 1600 
  where
   single_window = renamed [Replace "Single"] $ noBorders $ avoidStruts $ Full
   full = renamed [Replace "Fullscreen"] $ noBorders (fullscreenFull Full)
-  twoPanes = renamed [Replace "Two Panes"] $ mySpacing 8 $ TwoPanePersistent
+  twoPanes = renamed [Replace "Two Panes"] $ mySpacing 0 $ TwoPanePersistent
     Nothing
     (3 / 100)
     (1 / 2)
   mirroredTwoPanes = Mirror $ twoPanes
   threeColMid =
-    renamed [Replace "Three Columns Mid"] $ mySpacing 8 $ ThreeColMid
+    renamed [Replace "Three Columns Mid"] $ mySpacing 0 $ ThreeColMid
       1
       (3 / 100)
       (60 / 100)
-  mirroredTall = renamed [Replace "Tall"] $ mySpacing 8 $ Mirror $ ResizableTall 1
+  mirroredTall = renamed [Replace "Tall"] $ mySpacing 0 $ Mirror $ ResizableTall 1
                                                                 (2 / 100)
                                                                 (1 / 2)
                                                                 []
