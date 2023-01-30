@@ -8,6 +8,7 @@
 (package! ob-mermaid) ;; draw diagrams in org-mode with mermaid-js
 (package! org-chef) ;; Import recipes from common sites into org-mode
 (package! doct) ;; Better capture template declaration
+(package! org-present)
 
 ;; Languages
 (package! systemd)

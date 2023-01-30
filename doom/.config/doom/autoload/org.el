@@ -108,3 +108,29 @@
 ;;                                         ; overtime -> finish
 ;;                                         ; else -> restart
 ;;        )
+
+;;;###autoload
+(defun +org-present/enter-presentation-h ()
+  (setq-local visual-fill-column-width 110
+              visual-fill-column-center-text t
+              header-line-format " "
+              org-hide-emphasis-markers t
+              display-line-numbers nil
+              face-remapping-alist '(header-line (:height 4.0)))
+  (visual-fill-column-mode 1)
+  (visual-line-mode 1)
+  (org-display-inline-images))
+
+;;;###autoload
+(defun +org-present/leave-presentation-h ()
+  (setq-local header-line-format nil
+              display-line-numbers t
+              face-remapping-alist '((header-line default)))
+  (visual-fill-column-mode 0)
+  (visual-line-mode nil))
+
+;;;###autoload
+(defun +org-present/prepare-slide-h (buffer-name heading)
+  (org-overview)
+  (org-show-entry)
+  (org-show-children))
