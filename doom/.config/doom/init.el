@@ -23,7 +23,8 @@
        ;;  +childframe
        ;;  +icons
        ;;  +prescient)
-       vertico
+       (vertico)
+       ;; +childframe)
 
        :ui
        ;;deft              ; notational velocity for Emacs
@@ -31,7 +32,6 @@
        doom-dashboard      ; a nifty splash screen for Emacs
        doom-quit           ; DOOM quit-message prompts when you quit Emacs
        ;;emoji
-       fill-column         ; a `fill-column' indicator
        hl-todo             ; highlight TODO/FIXME/NOTE tags
        ;;hydra
        indent-guides       ; highlighted indent columns
@@ -60,7 +60,7 @@
        (format             ; automated prettiness
         +onsave)
        ;;god
-       ;;lispy             ; vim for lisp, for people who dont like vim
+       lispy               ; vim for lisp, for people who dont like vim
        multiple-cursors    ; editing in many places at once
        ;;objed
        ;;parinfer          ; turn lisp into python, sort of
@@ -110,7 +110,7 @@
        ;;prodigy           ; FIXME managing external services & code builders
        rgb                 ; creating color strings
        taskrunner
-       ;;terraform         ; infrastructure as code
+       terraform           ; infrastructure as code
        ;;tmux              ; an API for interacting with tmux
        tree-sitter
        upload              ; map local to remote projects via ssh/ftp
@@ -120,8 +120,9 @@
        ;;beancount
        (cc                 ; C/C++/Obj-C madness
         +lsp)
-       ;;clojure           ; java with a lisp
-       common-lisp       ; if you've seen one lisp, you've seen them all
+       (clojure
+        +lsp)              ; java with a lisp
+       common-lisp         ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
        ;;crystal           ; ruby at the speed of c
        ;;csharp            ; unity, .NET, and mono shenanigans
@@ -179,7 +180,8 @@
         +pandoc
         +pomodoro
         ;;+pretty
-        +present)
+        +present
+        +roam2)
         ;;+roam)
        ;;perl              ; write code no one else can comprehend
        ;;php               ; perl's insecure younger brother
@@ -192,7 +194,7 @@
        ;;+pyenv
        ;;+cython
        ;;+conda
-        +poetry)
+       ;; +poetry)
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        ;;raku
@@ -207,6 +209,8 @@
        (rust               ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
         +lsp
         +tree-sitter)
+       ;;(scala            ; java, but good
+       ;; +lsp)
        ;;scheme
        (sh                 ; she sells (ba|z|fi)sh shells on the C xor
         +fish
@@ -221,7 +225,7 @@
         +tree-sitter)
        (yaml
         +lsp)
-       ;;zig
+       (zig +lsp)
 
        :email
        ;;(mu4e +gmail)
