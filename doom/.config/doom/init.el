@@ -23,8 +23,9 @@
        ;;  +childframe
        ;;  +icons
        ;;  +prescient)
-       (vertico)
-       ;; +childframe)
+       (vertico
+        +childframe
+        +icons)
 
        :ui
        ;;deft              ; notational velocity for Emacs
