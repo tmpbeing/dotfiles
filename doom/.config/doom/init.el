@@ -10,7 +10,7 @@
        (syntax
         +childframe)
        (spell
-        +flyspell
+        +flymake
         +aspell)
 
        :completion
@@ -24,7 +24,7 @@
        ;;  +icons
        ;;  +prescient)
        (vertico
-        +childframe
+        ;; +childframe
         +icons)
 
        :ui
@@ -76,8 +76,8 @@
        electric            ; smarter, keyword-based electric-indent
        (ibuffer             ; interactive buffer management
         +icons)
-       undo
-       ;; +tree)
+       (undo
+        +tree)
        vc                  ; version-control and Emacs, sitting in a tree
 
        :term
@@ -156,7 +156,7 @@
        (json
         +lsp)
        ;;julia             ; a better, faster MATLAB
-       ;(kotlin +lsp)      ; a better, slicker Java(Script)
+                                        ;(kotlin +lsp)      ; a better, slicker Java(Script)
        (latex)             ; writing papers in Emacs has never been so fun
        ;;+latexmk
        ;;+cdlatex
@@ -183,10 +183,10 @@
         ;;+pretty
         +present
         +roam2)
-        ;;+roam)
+       ;;+roam)
        ;;perl              ; write code no one else can comprehend
        ;;php               ; perl's insecure younger brother
-       ;;plantuml          ; diagrams for confusing people more
+       plantuml            ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
        (python             ; beautiful is better than ugly
         +lsp
@@ -197,7 +197,7 @@
        ;;+conda
        ;; +poetry)
        ;;qt                ; the 'cutest' gui framework ever
-       ;;racket            ; a DSL for DSLs
+       racket              ; a DSL for DSLs
        ;;raku
        rest                ; Emacs as a REST client
        rst                 ; ReST in peace
