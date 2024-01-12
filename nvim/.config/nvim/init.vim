@@ -263,12 +263,12 @@ set timeoutlen=1000
 set ttimeoutlen=10
 
 " Avoid backup files in working directory
-set backupdir=~/.vim/tmp,.
-set directory=~/.vim/tmp,.
+set backupdir=~/.cache/vim/tmp,.
+set directory=~/.cache/vim/tmp,.
 
 " Persistent undo across sessions
 set undofile
-set undodir=~/.vim/tmp,.
+set undodir=~/.cache/vim/tmp,.
 
 " Use system's python
 let g:python_host_prog = '/usr/bin/python'
