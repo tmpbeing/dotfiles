@@ -14,7 +14,7 @@ vim.o.clipboard = "unnamedplus"
 vim.o.backup = false
 vim.o.swapfile = false
 vim.o.undofile = true
-vim.o.undodir = os.getenv("HOME") .. "/cache/vim/undodir"
+vim.o.undodir = os.getenv("HOME") .. "/.cache/vim/undodir"
 
 -- Search is case insensitive unless a capital is used
 vim.o.ignorecase = true
