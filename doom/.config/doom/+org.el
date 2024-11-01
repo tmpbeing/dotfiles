@@ -38,8 +38,8 @@
     (defun +doct-icon-declaration-to-icon (declaration)
       "Convert :icon declaration to icon"
       (let ((name (pop declaration))
-            (set  (intern (concat "all-the-icons-" (plist-get declaration :set))))
-            (face (intern (concat "all-the-icons-" (plist-get declaration :color))))
+            (set  (intern (concat "nerd-icons-" (plist-get declaration :set))))
+            (face (intern (concat "nerd-icons-" (plist-get declaration :color))))
             (v-adjust (or (plist-get declaration :v-adjust) 0.01)))
         (apply set `(,name :face ,face :v-adjust ,v-adjust))))
 
@@ -71,7 +71,7 @@
   (setq org-capture-templates
         (doct '(("Todo"
                  :keys "t"
-                 :icon ("checklist" :set "octicon" :color "green")
+                 :icon ("nf-oct-checklist" :set "octicon" :color "green")
                  :file +org-capture-todo-file
                  :prepend t
                  :headline "Inbox"
@@ -81,7 +81,7 @@
                  )
                 ("Recipe"
                  :keys "r"
-                 :icon ("spoon" :set "faicon" :color "dorange")
+                 :icon ("nf-fa-spoon" :set "faicon" :color "dorange")
                  :file +org-capture-recipes
                  :headline "Unsorted"
                  :template "%(org-chef-get-recipe-from-url)")))))
