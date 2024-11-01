@@ -70,7 +70,7 @@ determine the exact padding."
    (constants      blue)
    (functions      red)
    (keywords       blue)
-   (methods        cyan)
+   (methods        red)
    (operators      blue)
    (type           yellow)
    (strings        teal)
