@@ -54,9 +54,9 @@ font-0 = "Pomicons:size=9;1"
 font-1 = "Iosevka:size=8;1"
 font-2 = "Font Awesome:size=8;1"
 
-modules-left = ewmh dunst pulseaudio spotify
+modules-left = ewmh dunst pulseaudio spotify xwindow
 modules-center =
-modules-right = redshift pomodoro cpu memory wired date
+modules-right = redshift pomodoro cpu memory wired wireless date
 
 tray-position = right
 
@@ -161,9 +161,17 @@ label = %percentage_used%%
 
 [module/wired]
 type = internal/network
-interface = wlo1
+interface = enp39s0
 format-connected = <label-connected>
-label-connected = %downspeed% - %upspeed%
+label-connected = ETH: %downspeed% - %upspeed%
+format-disconnected = <label-disconnected>
+label-disconnected = | NO INTERNET |
+
+[module/wireless]
+type = internal/network
+interface = wlan0
+format-connected = <label-connected>
+label-connected = %essid%: %downspeed% - %upspeed%
 format-disconnected = <label-disconnected>
 label-disconnected = | NO INTERNET |
 
@@ -251,3 +259,6 @@ exec = ~/.config/polybar/modules/redshift print
 click-left = ~/.config/polybar/modules/redshift toggle
 #exec-if = pgrep -x redshift
 interval = 30
+
+[module/xwindow]
+type = internal/xwindow
