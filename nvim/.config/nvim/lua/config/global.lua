@@ -19,5 +19,5 @@ vim.o.undodir = os.getenv("HOME") .. "/.cache/vim/undodir"
 -- Search is case insensitive unless a capital is used
 vim.o.ignorecase = true
 vim.o.smartcase = true
-
 vim.o.colorcolumn = "80"
+vim.o.termguicolors = false
