@@ -14,9 +14,13 @@
         +aspell)
 
        :completion
-       (company            ; the ultimate code completion backend
-        +auto
-        +childframe)
+       ;; (company            ; the ultimate code completion backend
+       ;;  +auto
+       ;;  +childframe)
+       (corfu
+        +icons
+        +orderless
+        +dabbrev)
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;; (ivy                ; a search engine for love and life
