@@ -16,6 +16,7 @@
 ;; Misc
 (package! mermaid-mode :recipe (:host github :repo "shen390s/mermaid-mode")) ;; edit mermaid diagrams
 (package! nov) ;; epub reader
+(package! org-media-note :recipe (:host github :repo "yuchen-lea/org-media-note"))
 
 ;; ;; Local dev
 ;(package! spelunk
