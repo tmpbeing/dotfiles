@@ -22,6 +22,7 @@ import           XMonad.Config.Desktop
 
 -- Hooks
 import           XMonad.Hooks.EwmhDesktops
+-- import           XMonad.Hooks.FloatConfigureReq  ( fixSteamFlicker )
 import           XMonad.Hooks.FadeInactive
 import           XMonad.Hooks.ManageDocks
 import           XMonad.Hooks.ManageHelpers
@@ -55,6 +56,7 @@ import           XMonad.Layout.WindowArranger   ( windowArrange
 -- Utilities
 import           XMonad.Util.EZConfig
 import           XMonad.Util.SpawnOnce
+-- import           XMonad.Util.Hacks              ( fixSteamFlicker, windowedFullscreenFixEventHook )
 
 main = xmonad myConfig
 
@@ -64,6 +66,7 @@ myConfig =
     $                 ewmhFullscreen . ewmh
     $                 docks
     $ desktopConfig { borderWidth        = myBorderWidth
+                    -- , handleEventHook    = myHandleEventHook
                     , focusFollowsMouse  = myFocusFollowsMouse
                     , focusedBorderColor = myFocusColor
                     , layoutHook         = myLayoutHook
@@ -118,6 +121,7 @@ myStartupHook = do
   spawn "/home/snoop/.config/polybar/polybar-handler"
   spawnOnce "dunst"
   spawnOnce "feh --bg-fill /home/snoop/.config/wallpapers/ultrawide/wallhaven-eydyx8.jpg"
+  spawnOnce "picom"
   setWMName "LG3D"
 
 
@@ -158,13 +162,22 @@ myManageHook =
       , className =? "REAPER" --> doShift "music"
       , className =? "pigments.exe" --> doFloat
       , className =? "yabridge-host.exe.so" --> doIgnore
+      , className =? "yabridge-host-32.exe.so" --> doIgnore
       , className =? "battle.net.exe" --> doFloat
+      , className =? "awakened-poe-trade" --> doCenterFloat
+      , className =? "tracktion download manager.exe" --> doIgnore
+      , title =? "Slate Audio Center" --> doFloat
       , title =? "main-emacs" --> doShift "main"
       , title =? "doom-capture" --> doFloat
       ]
-    <+> placeHook simpleSmart
+    <+> transience'
     <+> manageDocks
     <+> (isFullscreen --> doFullFloat)
+    <+> (isDialog --> doCenterFloat)
+    <+> placeHook simpleSmart
+
+-- myHandleEventHook =
+--   fixSteamFlicker <> windowedFullscreenFixEventHook
 
 
 -- Using EzConfig syntax
