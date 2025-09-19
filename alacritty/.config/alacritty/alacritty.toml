@@ -3,32 +3,70 @@
 animation = "EaseOutExpo"
 duration = 0
 
-[colors]
-draw_bold_text_with_bright_colors = true
-
-[colors.bright]
-black = "0x868B8D"
-blue = "0x63768A"
-cyan = "0x6998B3"
-green = "0x798362"
-magenta = "0x738C9C"
-red = "0x8d7856"
-white = "0xC0C7CA"
-yellow = "0x9B9257"
+# kanso zen
+[colors.primary]
+background = '#090E13'
+foreground = '#C5C9C7'
 
 [colors.normal]
-black = "0x111a1f"
-blue = "0x63768A"
-cyan = "0x6998B3"
-green = "0x798362"
-magenta = "0x738C9C"
-red = "0x8d7856"
-white = "0xC0C7CA"
-yellow = "0x9B9257"
+black = '#090E13'
+red = '#c4746e'
+green = '#8a9a7b'
+yellow = '#c4b28a'
+blue = '#8ba4b0'
+magenta = '#a292a3'
+cyan = '#8ea4a2'
+white = '#c8c093'
 
-[colors.primary]
-background = "0x111A1F"
-foreground = "0xC0C7CA"
+[colors.bright]
+black = '#A4A7A4'
+red = '#e46876'
+green = '#87a987'
+yellow = '#e6c384'
+blue = '#7fb4ca'
+magenta = '#938aa9'
+cyan = '#7aa89f'
+white = '#C5C9C7'
+
+[colors.selection]
+background = '#393B44'
+foreground = '#C5C9C7'
+
+# [[colors.indexed_colors]]
+# index = 16
+# color = '#b6927b'
+
+# [[colors.indexed_colors]]
+# index = 17
+# color = '#b98d7b'
+
+# elly
+# [colors]
+# draw_bold_text_with_bright_colors = true
+
+# [colors.bright]
+# black = "0x868B8D"
+# blue = "0x63768A"
+# cyan = "0x6998B3"
+# green = "0x798362"
+# magenta = "0x738C9C"
+# red = "0x8d7856"
+# white = "0xC0C7CA"
+# yellow = "0x9B9257"
+
+# [colors.normal]
+# black = "0x111a1f"
+# blue = "0x63768A"
+# cyan = "0x6998B3"
+# green = "0x798362"
+# magenta = "0x738C9C"
+# red = "0x8d7856"
+# white = "0xC0C7CA"
+# yellow = "0x9B9257"
+
+# [colors.primary]
+# background = "0x111A1F"
+# foreground = "0xC0C7CA"
 
 [cursor]
 style = "Block"
@@ -42,14 +80,13 @@ render_timer = false
 size = 12.0
 
 [font.normal]
-family = "FantasqueSansM Nerd Font"
-
+family = "TX02 Nerd Font"
 
 [font.bold]
-family = "FantasqueSansM Nerd Font"
+family = "TX02 Nerd Font"
 
 [font.italic]
-family = "FantasqueSansM Nerd Font"
+family = "TX02 Nerd Font"
 
 [font.glyph_offset]
 x = 0
