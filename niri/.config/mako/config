@@ -1,0 +1,19 @@
+layer=top
+font=TX02 Nerd Font
+outer-margin=10
+padding=8
+background-color=#090E13
+border-size=1
+border-radius=12
+border-color=#8ea4a2
+progress-color=source #c4b28a
+
+[urgency=low]
+border-color=#8ea4a2
+
+[urgency=normal]
+border-color=#a292a3
+
+[urgency=high]
+border-color=#c4746e
+default-timeout=0
