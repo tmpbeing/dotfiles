@@ -11,7 +11,7 @@
 
 ;; UI
 (setq
- company-idle-delay 0.6
+ company-idle-delay 0.3
  display-line-numbers-type t
  doom-font (font-spec :family "Fantasque Sans Mono" :size 18)
  doom-unicode-font (font-spec :family "DejaVu Sans" :size 16)
