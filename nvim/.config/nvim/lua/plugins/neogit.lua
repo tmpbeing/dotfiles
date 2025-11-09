@@ -8,9 +8,10 @@ return {
 		},
 		init = function ()
 			local wk = require("which-key")
-			wk.register({
-				["gg"] = { "<cmd>Neogit<cr>", "Neogit status" }
-			}, { prefix = "<leader>" })
+			wk.add({
+                {"<leader>g", group = "git"},
+                {"<leader>gg", "<cmd>Neogit<cr>", desc = "Neogit status"}
+            })
 		end
 	}
 }
