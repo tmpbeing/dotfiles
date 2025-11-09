@@ -1,7 +1,7 @@
 return {
 	{
 		"kuuote/elly.vim",
-		name = "elly",
+		enabled = false,
 		priority = 1000,
 		config = function ()
 			vim.cmd([[colorscheme elly]])
@@ -9,10 +9,22 @@ return {
 	},
 	{
 		"folke/tokyonight.nvim",
-		name = "tokyonight",
+		enabled = false,
 		priority = 1000,
-		-- config = function ()
-		-- 	vim.cmd([[colorscheme tokyonight-moon]])
-		-- end
+		config = function ()
+			vim.cmd([[colorscheme tokyonight-moon]])
+		end
+	},
+	{
+		"webhooked/kanso.nvim",
+		enabled = true,
+		lazy = false,
+		priority = 1000,
+		opts = {
+			background = { dark = "zen", light = "pearl"},
+		},
+		config = function ()
+			vim.cmd([[colorscheme kanso-zen]])
+		end
 	}
 }
