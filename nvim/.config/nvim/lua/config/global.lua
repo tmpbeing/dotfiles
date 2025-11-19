@@ -21,3 +21,15 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.colorcolumn = "80"
 vim.o.termguicolors = false
+
+vim.o.guifont ="TX02 Nerd Font:h12"
+
+vim.opt.grepprg = "rg --vimgrep"
+vim.opt.grepformat = "%f:%l:%c:%m"
+
+-- autoread changes
+vim.opt.autoread = true
+
+-- Reselect the visual selections
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")

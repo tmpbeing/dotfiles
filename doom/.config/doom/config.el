@@ -16,7 +16,7 @@
  doom-font (font-spec :family "Fantasque Sans Mono" :size 18)
  doom-unicode-font (font-spec :family "DejaVu Sans" :size 16)
  doom-big-font (font-spec :family "Fantasque Sans Mono" :size 26)
- doom-theme 'doom-elly
+ doom-theme 'doom-kanzo-zen
  doom-gruvbox-dark-variant "hard"
  doom-modeline-window-width-limit 100
  doom-modeline-buffer-encoding nil
