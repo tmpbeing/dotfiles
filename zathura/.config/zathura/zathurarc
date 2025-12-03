@@ -1,39 +1,77 @@
-# zathurarc-dark
+# # zathurarc-dark
 
-set font                        "Droid Sans Mono 8"
-set default-bg                  "#282828" #00
-set default-fg                  "#ebdbb2" #01
+# set font                        "Droid Sans Mono 8"
+# set default-bg                  "#282828" #00
+# set default-fg                  "#ebdbb2" #01
 
-set statusbar-fg                "#ebdbb2" #04
-set statusbar-bg                "#3C3836" #01
+# set statusbar-fg                "#ebdbb2" #04
+# set statusbar-bg                "#3C3836" #01
 
-set inputbar-bg                 "#282828" #00 currently not used
-set inputbar-fg                 "#ebdbb2" #02
+# set inputbar-bg                 "#282828" #00 currently not used
+# set inputbar-fg                 "#ebdbb2" #02
 
-set notification-error-bg       "#657056" #08
-set notification-error-fg       "#282828" #00
+# set notification-error-bg       "#657056" #08
+# set notification-error-fg       "#282828" #00
 
-set notification-warning-bg     "#4f473a" #08
-set notification-warning-fg     "#282828" #00
+# set notification-warning-bg     "#4f473a" #08
+# set notification-warning-fg     "#282828" #00
 
-set highlight-color             "#3C3836" #0A
-set highlight-active-color      "#ebdbb2" #0D
+# set highlight-color             "#3C3836" #0A
+# set highlight-active-color      "#ebdbb2" #0D
 
-set completion-highlight-fg     "#282828" #02
-set completion-highlight-bg     "#b16286" #0C
+# set completion-highlight-fg     "#282828" #02
+# set completion-highlight-bg     "#b16286" #0C
 
-set completion-bg               "#3C3836" #02
-set completion-fg               "#ebdbb2" #0C
+# set completion-bg               "#3C3836" #02
+# set completion-fg               "#ebdbb2" #0C
 
-set notification-bg             "#282828" #0B
-set notification-fg             "#4c544f" #00
+# set notification-bg             "#282828" #0B
+# set notification-fg             "#4c544f" #00
 
-set recolor-lightcolor          "#282828" #00
-set recolor-darkcolor           "#ebdbb2" #06
+# set recolor-lightcolor          "#282828" #00
+# set recolor-darkcolor           "#ebdbb2" #06
+# set recolor                     "true"
+
+# # setting recolor-keep true will keep any color your pdf has.
+# # if it is false, it'll just be black and white
+# set recolor-keephue             "false"
+
+# # Rest of your configs go here: 
+set font                        "DejaVuSansMono 8"
+set notification-error-bg       "#090E13"
+set notification-error-fg       "#C4746E"
+set notification-warning-bg     "#090E13"
+set notification-warning-fg     "#E6C384"
+set notification-bg             "#090E13"
+set notification-fg             "#C5C9C7"
+
+set completion-bg               "#090E13"
+set completion-fg               "#C5C9C7"
+set completion-group-bg         "#090E13"
+set completion-group-fg         "#C5C9C7"
+set completion-highlight-bg     "#7AA98F"
+set completion-highlight-fg     "#090E13"
+
+set index-bg                    "#090E13"
+set index-fg                    "#A4A7A4"
+set index-active-bg             "#A4A7A4"
+set index-active-fg             "#090E13"
+
+set inputbar-bg                 "#090E13"
+set inputbar-fg                 "#C5C9C7"
+
+set statusbar-bg                "#090E13"
+set statusbar-fg                "#C5C9C7"
+
+set highlight-color             "#E6C384"
+set highlight-active-color      "#C4746E"
+
+set default-bg                  "#090E13"
+set default-fg                  "#C5C9C7"
+set render-loading              "true"
+set render-loading-bg           "#090E13"
+set render-loading-fg           "#C5C9C7"
+
+set recolor-lightcolor          "#090E13"
+set recolor-darkcolor           "#C5C9C7"
 set recolor                     "true"
-
-# setting recolor-keep true will keep any color your pdf has.
-# if it is false, it'll just be black and white
-set recolor-keephue             "false"
-
-# Rest of your configs go here: 
