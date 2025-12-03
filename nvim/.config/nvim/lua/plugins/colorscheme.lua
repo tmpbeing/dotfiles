@@ -8,14 +8,6 @@ return {
 		end
 	},
 	{
-		"folke/tokyonight.nvim",
-		enabled = false,
-		priority = 1000,
-		config = function ()
-			vim.cmd([[colorscheme tokyonight-moon]])
-		end
-	},
-	{
 		"webhooked/kanso.nvim",
 		enabled = true,
 		lazy = false,
