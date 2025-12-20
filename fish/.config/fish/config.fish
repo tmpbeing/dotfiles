@@ -2,12 +2,12 @@ set fish_greeting ""
 set fish_home ~/.config/fish
 set -x EDITOR nvim
 set -x GIT_EDITOR nvim
-set -x PAGER less
 set -x MAIL42 mplanell@student.42.fr
 set -x USER42 mplanell
 set -x TASKRC $HOME/.config/taskrc
 set -gx PATH $PATH $HOME/.krew/bin
 set -gx PULUMI_SELF_MANAGED_STATE_GZIP 1
+set -gx MIX_OS_DEPS_COMPILE_PARTITION_COUNT 4
 
 # Colored Man Pages
 set -x MANPAGER "less -s -M +Gg"
