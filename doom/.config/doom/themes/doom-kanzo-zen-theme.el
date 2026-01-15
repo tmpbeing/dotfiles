@@ -166,6 +166,9 @@
 ;;;; Base theme face overrides
   (
 
+   ((font-lock-variable-name-face &override) :weight 'bold)
+   ((font-lock-keyword-face &override) :slant 'italic)
+   ((font-lock-function-call-face &override) :slant nil)
 ;;;; indent-guides
    (highlight-indent-guides-character-face :foreground base4)
    (highlight-indent-guides-top-character-face :foreground base4)
