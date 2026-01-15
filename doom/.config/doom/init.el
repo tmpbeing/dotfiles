@@ -41,8 +41,10 @@
        ;;hydra
        indent-guides       ; highlighted indent columns
        ;;ligatures
-       ;;minimap
-       modeline            ; snazzy, Atom-inspired modeline, plus API
+       minimap
+       (modeline
+        ;; +light
+        )            ; snazzy, Atom-inspired modeline, plus API
        nav-flash           ; blink the current line after jumping
        ;;neotree           ; a project drawer, like NERDTree for vim
        ophints             ; highlight the region an operation acts on
@@ -71,6 +73,9 @@
        ;;parinfer          ; turn lisp into python, sort of
        rotate-text         ; cycle region at point between text candidates
        snippets            ; my elves. They type so I don't have to
+       (whitespace
+        +guess
+        +trim)
        ;;word-wrap         ; soft wrapping with language-aware indent
 
        :emacs
@@ -80,6 +85,7 @@
        electric            ; smarter, keyword-based electric-indent
        (ibuffer             ; interactive buffer management
         +icons)
+       tramp
        (undo
         +tree)
        vc                  ; version-control and Emacs, sitting in a tree
@@ -93,6 +99,7 @@
        :tools
        ;;ansible
        ;;biblio
+       ;;collab
        (debugger +lsp)     ; FIXME stepping through code, to help you add bugs
        direnv
        (docker +lsp)
@@ -100,12 +107,12 @@
        ein                 ; tame Jupyter notebooks with emacs
        (eval               ; run code, run (also, repls)
         +overlay)
-       gist                ; interacting with github gists
        (lookup             ; helps you navigate your code and documentation
         ;;+dictionary
         ;;+offline
         +docsets)          ; ...or in Dash docsets locally
        lsp
+       llm
        (magit              ; a git porcelain for Emacs
         +forge)
        make                ; run make tasks from Emacs
@@ -176,6 +183,8 @@
        ;;ocaml             ; an objective camel
        (org                ; organize your plain life in plain text
         ;;+brain
+        ;;+contacts
+        ;;+crypt
         +dragndrop
         ;;+gnuplot
         ;;+hugo
@@ -183,6 +192,7 @@
         ;;+jupyter
         ;;+noter
         +pandoc
+        ;;+passwords
         +pomodoro
         ;;+pretty
         +present
@@ -192,10 +202,11 @@
        ;;php               ; perl's insecure younger brother
        plantuml            ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
-       (python             ; beautiful is better than ugly
+       (python                          ; beautiful is better than ugly
         +lsp
         +pyright
-        +tree-sitter)
+        +tree-sitter
+        +uv)
        ;;+pyenv
        ;;+cython
        ;;+conda
