@@ -115,6 +115,14 @@
   (setq sly-command-switch-to-existing-lisp 'always))
 
 ;; Python
+(set-formatter! 'project-ruff '("apheleia-from-project-root" "pyproject.toml"
+                                "ruff" "format" "--silent"
+                                (apheleia-formatters-fill-column "--line-length")
+                                "--stdin-filename" filepath "-")
+  :modes '(python-mode python-ts-mode))
+
+(after! python
+  (add-hook 'python-ts-mode-hook #'+python/apply-treesit-custom-rules))
 
 ;; Rust
 (setq company-racer-executable "/home/snoop/.cargo/bin/racer")
