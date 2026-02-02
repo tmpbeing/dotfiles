@@ -464,7 +464,7 @@ layer-rule {
     place-within-backdrop true
 }
 
-spawn-sh-at-startup "wlsunset -t 4000 -T 4600 -l 48.8 -L 2.3"
+spawn-sh-at-startup "wlsunset -t 3600 -T 4600 -l 48.8 -L 2.3"
 spawn-sh-at-startup "swww-daemon"
 
 binds {
