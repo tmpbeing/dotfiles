@@ -13,6 +13,12 @@
 ;; Languages
 (package! systemd)
 
+(package! elixir-ts-extras
+  :recipe (:host github :repo "wkirschbaum/elixir-ts-extras")
+  )
+;; elixir-ts-extras provides better testing functions for elixir
+(package! exunit :disable t)
+
 ;; Misc
 (package! mermaid-mode :recipe (:host github :repo "shen390s/mermaid-mode")) ;; edit mermaid diagrams
 (package! nov) ;; epub reader

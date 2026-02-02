@@ -84,6 +84,29 @@
 (after! lsp-mode
   (add-to-list 'lsp-file-watch-ignored "[/\\\\]\\.ccls-cache$"))
 
+;;  Elixir
+(use-package! elixir-ts-extras
+  :after elixir-ts-mode
+  :init
+  (setq! elixir-ts-extras-compilation-scroll-output t)
+  ;; (transient-define-prefix elixir-ts-extras-ash-menu ()
+  ;;   "Transient menu for running ash commands"
+  ;;   ["Database"
+  ;;    [("m ")]
+  ;;    ]
+  ;;   )
+  (map! :localleader
+        :map elixir-ts-mode-map
+        "x" #'elixir-ts-extras-mix-menu
+        :prefix ("t" . "test")
+        "t" #'elixir-ts-extras-test-menu
+        "s" #'elixir-ts-extras-test
+        "f" #'elixir-ts-extras-test-file
+        "a" #'elixir-ts-extras-test-all
+        "r" #'elixir-ts-extras-test-rerun
+        "k" #'elixir-ts-extras-test-stop))
+
+
 ;; Lisp
 (after! lisp-mode
   (setq sly-command-switch-to-existing-lisp 'always))
