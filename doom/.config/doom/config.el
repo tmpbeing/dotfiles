@@ -106,6 +106,9 @@
         "r" #'elixir-ts-extras-test-rerun
         "k" #'elixir-ts-extras-test-stop))
 
+;; https://github.com/doomemacs/doomemacs/issues/7537
+(add-to-list '+whitespace-guess-excluded-modes 'elixir)
+(add-to-list '+whitespace-guess-excluded-modes 'elixir-ts-mode)
 
 ;; Lisp
 (after! lisp-mode
