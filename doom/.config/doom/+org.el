@@ -61,12 +61,6 @@
 (use-package! org-chef
   :commands (org-chef-insert-recipe org-chef-get-recipe-from-url))
 
-(use-package! org-present
-  :init
-  (add-hook! 'org-present-mode-hook '+org-present/enter-presentation-h)
-  (add-hook! 'org-present-mode-quit-hook '+org-present/leave-presentation-h)
-  (add-hook! 'org-present-after-navigate-functions '+org-present/prepare-slide-h))
-
 (use-package! org-media-note
   :hook (org-mode . org-media-note-mode)
   :init

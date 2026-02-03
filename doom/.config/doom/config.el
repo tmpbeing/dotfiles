@@ -13,15 +13,17 @@
 (setq
  company-idle-delay 0.3
  display-line-numbers-type t
- doom-font (font-spec :family "Fantasque Sans Mono" :size 18)
- doom-unicode-font (font-spec :family "DejaVu Sans" :size 16)
- doom-big-font (font-spec :family "Fantasque Sans Mono" :size 26)
+ doom-font (font-spec :family "TX02 Nerd Font" :size 16)
+ doom-symbol-font (font-spec :family "TX02 Nerd Font" :size 16)
+ doom-big-font (font-spec :family "TX02 Nerd Font" :size 22)
  doom-theme 'doom-kanzo-zen
  doom-gruvbox-dark-variant "hard"
+ doom-catppuccin-dark-variant "mocha"
+ doom-gruvbox-material-dark-variant "hard"
  doom-modeline-window-width-limit 100
  doom-modeline-buffer-encoding nil
  focus-follows-mouse t
- lsp-enable-symbol-highlighting nil
+ lsp-enable-symbol-highlighting t
  scroll-conservatively 0
  show-trailing-whitespace t
  which-key-idle-delay 0.4)
@@ -47,29 +49,27 @@
 ;;
 (evil-ex-define-cmd "W" 'evil-write)
 (after! evil-escape (evil-escape-mode -1)) ; Disable escape sequence
-(after! evil (setq evil-ex-substitute-global t ; I like my s/../.. to by global by default
+(after! evil (setq evil-ex-substitute-global t ; I like my s/../.. to be global by default
                    evil-vsplit-window-right t
                    evil-split-window-below t) ; go to the right pane on split
   )
 
 ;;
-;; Ivy
+;; LSP
 ;;
+(after! lsp-ui
+  (setq lsp-ui-doc-enable nil
+        lsp-ui-sideline-enable t
+        lsp-ui-sideline-show-symbol nil
+        lsp-ui-sideline-show-code-actions t
+        lsp-ui-sideline-show-hover nil
+        lsp-ui-sideline-show-diagnostics t))
 
-(setq +ivy-buffer-preview t)
-
-;; Ivy-posframe: Decorations, put it at the top
-(after! ivy-posframe
-  (setf (alist-get t ivy-posframe-display-functions-alist)
-        #'ivy-posframe-display-at-frame-top-center)
-  (setf (alist-get 'swiper ivy-posframe-display-functions-alist)
-        #'ivy-posframe-display-at-frame-top-center)
-  (setq ivy-posframe-border-width 1
-        ivy-posframe-width 160
-        ivy-posframe-parameters (append ivy-posframe-parameters '((left-fringe . 3)
-                                                                  (right-fringe . 3)))
-        posframe-mouse-banish t)
-  )
+;;
+;; Magit and co
+;;
+(after! code-review
+  (setq code-review-auth-login-marker 'forge))
 
 
 ;;
@@ -124,11 +124,31 @@
 (after! python
   (add-hook 'python-ts-mode-hook #'+python/apply-treesit-custom-rules))
 
+
 ;; Rust
 (setq company-racer-executable "/home/snoop/.cargo/bin/racer")
 
-;;
+(after! gptel
+  (setq!
+   gptel-backend (gptel-make-gh-copilot "Copilot")))
+
+(use-package! mason
+  :config
+  (mason-setup))
+
+(use-package! difftastic
+  :after magit
+  :config
+  '(transient-append-suffix 'magit-diff '(-1 -1)
+     [("D" "Difftastic diff (dwim" difftastic-magit-diff)
+      ("S" "Difftastic show" difftastic-magit-show)]))
+
+(use-package! magit-todos
+  :after magit
+  :config (magit-todos-mode 1))
+
 ;; Modules
 ;;
 
 (load! "+org")
+(load! "+kubernetes")
