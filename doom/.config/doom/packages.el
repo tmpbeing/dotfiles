@@ -23,17 +23,19 @@
 
 ;; Misc
 (package! nov) ;; epub reader
-(package! night-owl-theme)
-(package! doom-moonfly-theme
-  :recipe (:host github
-           :repo "stackmystack/doom-moonfly-theme"))
 (package! kubernetes)
 (package! kubernetes-evil)
 (package! jj-mode :recipe (:host github :repo "bolivier/jj-mode.el"))
 (package! mason)
 (package! difftastic)
 (package! magit-todos)
+(package! atomic-chrome)
 
+;; Themes
+(package! night-owl-theme)
+(package! doom-moonfly-theme
+  :recipe (:host github
+           :repo "stackmystack/doom-moonfly-theme"))
 
 ;; Local dev
 

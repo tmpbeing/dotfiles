@@ -33,7 +33,8 @@
 (setq dired-omit-files "^\\.?#")
 
 ;; Projectile : ignore projects in /tmp/ and ~/.emacs.d/.local/
-(setq projectile-ignored-project-function #'+projectile/ignore-project-fn)
+(setq projectile-ignored-project-function #'+projectile/ignore-project-fn
+      projectile-project-search-path "~/code")
 
 ;;
 ;; Keybindings
@@ -41,23 +42,23 @@
 (map! :ni "C-;" #'avy-goto-char-timer
       :i "C-i" #'flyspell-auto-correct-previous-word
       (:map evil-window-map ;; Adding tmux split bindings
-       "\"" #'evil-window-split
-       "%"  #'evil-window-vsplit))
+            "\"" #'evil-window-split
+            "%"  #'evil-window-vsplit))
 
 ;;
 ;; Evil
 ;;
 (evil-ex-define-cmd "W" 'evil-write)
-(after! evil-escape (evil-escape-mode -1)) ; Disable escape sequence
-(after! evil (setq evil-ex-substitute-global t ; I like my s/../.. to be global by default
-                   evil-vsplit-window-right t
-                   evil-split-window-below t) ; go to the right pane on split
-  )
+(with-eval-after-load 'evil-escape (evil-escape-mode -1)) ; Disable escape sequence
+(with-eval-after-load 'evil (setq evil-ex-substitute-global t ; I like my s/../.. to be global by default
+                                  evil-vsplit-window-right t
+                                  evil-split-window-below t) ; go to the right pane on split
+                      )
 
 ;;
 ;; LSP
 ;;
-(after! lsp-ui
+(with-eval-after-load 'lsp-ui
   (setq lsp-ui-doc-enable nil
         lsp-ui-sideline-enable t
         lsp-ui-sideline-show-symbol nil
@@ -68,7 +69,7 @@
 ;;
 ;; Magit and co
 ;;
-(after! code-review
+(with-eval-after-load 'code-review
   (setq code-review-auth-login-marker 'forge))
 
 
@@ -77,18 +78,18 @@
 ;;
 
 ;; Cmake
-(after! cmake-mode
+(with-eval-after-load 'cmake-mode
   (setq cmake-tab-width 4))
 
 ;; CPP
-(after! lsp-mode
+(with-eval-after-load 'lsp-mode
   (add-to-list 'lsp-file-watch-ignored "[/\\\\]\\.ccls-cache$"))
 
 ;;  Elixir
 (use-package! elixir-ts-extras
   :after elixir-ts-mode
   :init
-  (setq! elixir-ts-extras-compilation-scroll-output t)
+  (setopt elixir-ts-extras-compilation-scroll-output t)
   ;; (transient-define-prefix elixir-ts-extras-ash-menu ()
   ;;   "Transient menu for running ash commands"
   ;;   ["Database"
@@ -111,8 +112,12 @@
 (add-to-list '+whitespace-guess-excluded-modes 'elixir-ts-mode)
 
 ;; Lisp
-(after! lisp-mode
+(with-eval-after-load 'lisp-mode
   (setq sly-command-switch-to-existing-lisp 'always))
+
+;; Ocaml
+;; (add-to-list 'load-path "/home/snoop/.opam/default/share/emacs/site-lisp")
+;; (require 'ocp-indent)
 
 ;; Python
 (set-formatter! 'project-ruff '("apheleia-from-project-root" "pyproject.toml"
@@ -121,15 +126,16 @@
                                 "--stdin-filename" filepath "-")
   :modes '(python-mode python-ts-mode))
 
-(after! python
+(with-eval-after-load 'python
   (add-hook 'python-ts-mode-hook #'+python/apply-treesit-custom-rules))
 
 
 ;; Rust
 (setq company-racer-executable "/home/snoop/.cargo/bin/racer")
 
-(after! gptel
-  (setq!
+;; Misc
+(with-eval-after-load 'gptel
+  (setopt
    gptel-backend (gptel-make-gh-copilot "Copilot")))
 
 (use-package! mason
@@ -146,6 +152,11 @@
 (use-package! magit-todos
   :after magit
   :config (magit-todos-mode 1))
+
+(use-package! atomic-chrome
+  :defer 3
+  :when (display-graphic-p)
+  :commands atomic-chrome-start-server)
 
 ;; Modules
 ;;
