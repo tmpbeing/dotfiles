@@ -21,3 +21,26 @@ cursor-color = #c5c9c7
 selection-background = #22262D
 selection-foreground = #c5c9c7
 
+font-family = JetbrainsMono Nerd Font
+font-style = Regular
+font-thicken = true
+font-size = 12
+adjust-cell-height = -5%
+
+window-padding-x = 8
+window-padding-y = 8
+window-padding-balance = true
+window-padding-color = background
+
+scrollback-limit = 100000000
+# scollbar = system
+
+shell-integration = detect
+shell-integration-features = true
+
+keybind = ctrl+shift+up=jump_to_prompt:-1
+keybind = ctrl+shift+down=jump_to_prompt:1
+
+gtk-single-instance = desktop
+
+copy-on-select = true
