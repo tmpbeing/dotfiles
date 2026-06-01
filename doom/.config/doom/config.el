@@ -13,9 +13,9 @@
 (setq
  company-idle-delay 0.3
  display-line-numbers-type t
- doom-font (font-spec :family "TX02 Nerd Font" :size 16)
- doom-symbol-font (font-spec :family "TX02 Nerd Font" :size 16)
- doom-big-font (font-spec :family "TX02 Nerd Font" :size 22)
+ doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 16)
+ doom-symbol-font (font-spec :family "JetBrainsMono Nerd Font" :size 16)
+ doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 22)
  doom-theme 'doom-kanzo-zen
  doom-gruvbox-dark-variant "hard"
  doom-catppuccin-dark-variant "mocha"
