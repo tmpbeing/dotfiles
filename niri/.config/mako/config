@@ -1,5 +1,5 @@
 layer=top
-font=TX02 Nerd Font
+font=JetBrainsMono Nerd Font
 outer-margin=10
 padding=8
 background-color=#090E13
@@ -7,6 +7,7 @@ border-size=1
 border-radius=12
 border-color=#8ea4a2
 progress-color=source #c4b28a
+default-timeout=5000
 
 [urgency=low]
 border-color=#8ea4a2

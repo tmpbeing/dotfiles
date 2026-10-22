@@ -106,11 +106,31 @@ input {
 }
 
 output "DP-1" {
-    mode "5120x1440@119.999"
+    mode "5120x2160@165.058"
     scale 1
     transform "normal"
     position x=0 y=0
-    variable-refresh-rate on-demand=true
+    focus-at-startup
+    // variable-refresh-rate on-demand=true
+}
+
+output "HDMI-A-1" {
+    transform "270"
+
+    hot-corners {
+        top-right
+    }
+    layout {
+        gaps 0
+        preset-column-widths {
+            proportion 1.0
+        }
+        default-column-width { proportion 1.0; }
+    }
+}
+
+output "Unknown-1" {
+    off
 }
 
 // Settings that influence how windows are positioned and sized.
@@ -411,7 +431,6 @@ window-rule {
     }
 }
 
-// TODO:
 window-rule {
     match app-id=r#"^Bitwarden$"#
 
@@ -433,17 +452,15 @@ window-rule {
     }
 }
 
-// Example: block out two password managers from screen capture.
-// (This example rule is commented out with a "/-" in front.)
-/-window-rule {
-    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
-    match app-id=r#"^org\.gnome\.World\.Secrets$"#
+window-rule {
+    match is-focused=false is-floating=false
 
-    block-out-from "screen-capture"
-
-    // Use this instead if you want them visible on third-party screenshot tools.
-    // block-out-from "screencast"
+    opacity 0.90
+    background-effect {
+        blur true
+    }
 }
+
 
 // enable rounded corners for all windows.
 window-rule {
@@ -464,8 +481,10 @@ layer-rule {
     place-within-backdrop true
 }
 
+// TODO: Manage these in nix ?
 spawn-sh-at-startup "wlsunset -t 3600 -T 4600 -l 48.8 -L 2.3"
-spawn-sh-at-startup "swww-daemon"
+spawn-sh-at-startup "awww-daemon"
+spawn-sh-at-startup "vicinae server"
 
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
@@ -484,7 +503,7 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" cooldown-ms=500 { spawn "alacritty"; }
-    Mod+D hotkey-overlay-title="Run an Application: fuzzel" cooldown-ms=100 { spawn "fuzzel"; }
+    Mod+D hotkey-overlay-title="Run an Application: vicinae" cooldown-ms=100 { spawn-sh "vicinae toggle"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
@@ -497,6 +516,12 @@ binds {
     XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
     XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+
+    XF86AudioPlay        allow-when-locked=true { spawn "playerctl play-pause"; }
+    XF86AudioPause       allow-when-locked=true { spawn "playerctl play-pause"; }
+    XF86AudioStop        allow-when-locked=true { spawn "playerctl stop"; }
+    XF86AudioPrev        allow-when-locked=true { spawn "playerctl previous"; }
+    XF86AudioNext        allow-when-locked=true { spawn "playerctl next"; }
 
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
@@ -761,3 +786,6 @@ gestures {
         max-speed 1500
     }
 }
+
+
+
