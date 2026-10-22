@@ -1,0 +1,1 @@
+/home/snoop/.fzf/shell/key-bindings.fish
